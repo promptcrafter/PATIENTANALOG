@@ -1,0 +1,916 @@
+/* ================================================================
+   PATIENT ANALOG - MOBILE OPTIMIZATIONS
+   Mobile-only styles (max-width queries)
+   Targets: Hero, Navigation, Cards, Touch targets, No horizontal scroll
+   ================================================================ */
+
+/* ================================================================
+   1. GLOBAL MOBILE FIXES - Prevent Horizontal Scrolling
+   ================================================================ */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  * {
+    max-width: 100vw !important;
+  }
+
+  /* Force all sections to respect viewport */
+  main, section, .container, .section {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Prevent any inline styles from causing overflow */
+  [style*="width: 120%"],
+  [style*="width:120%"] {
+    width: 100% !important;
+  }
+}
+
+/* ================================================================
+   2. NAVIGATION - Mobile Hamburger Menu
+   ================================================================ */
+@media (max-width: 768px) {
+  /* Nav bar - taller on mobile for touch */
+  nav, .navbar, .nav-bar, #main-nav, .sticky-nav {
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: auto !important;
+    padding: 8px 12px !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Nav content - allow wrapping */
+  .nav-content {
+    height: auto !important;
+    min-height: 40px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Logo - always visible */
+  .nav-logo, a[href="/"], nav .logo-text {
+    font-size: 0.9rem !important;
+    flex-shrink: 0 !important;
+    order: 1 !important;
+  }
+
+  /* Hide clocks on mobile */
+  .global-clocks, #global-clocks {
+    display: none !important;
+  }
+
+  /* Create hamburger button if not exists */
+  .nav-toggle, .hamburger, .mobile-menu-btn, #nav-toggle {
+    display: flex !important;
+    order: 3 !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    background: rgba(0, 200, 255, 0.1) !important;
+    border: 1px solid rgba(0, 200, 255, 0.3) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    z-index: 1000001 !important;
+  }
+
+  .nav-toggle span, .hamburger span {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    background: #00c8ff !important;
+    border-radius: 1px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Nav links - hidden by default on mobile */
+  .nav-links, #nav-links {
+    display: none !important;
+    position: fixed !important;
+    top: 56px !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(8, 12, 18, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 20px !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    z-index: 999998 !important;
+    max-height: calc(100vh - 56px) !important;
+    overflow-y: auto !important;
+    border-bottom: 1px solid rgba(0, 200, 255, 0.2) !important;
+  }
+
+  /* Show nav when active */
+  .nav-links.active, #nav-links.active,
+  .nav-links.show, #nav-links.show,
+  .nav-links[data-open="true"] {
+    display: flex !important;
+  }
+
+  /* Nav links - touch-friendly */
+  .nav-links a, .nav-link, #nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 14px 16px !important;
+    min-height: 48px !important;
+    font-size: 14px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    background: rgba(0, 200, 255, 0.05) !important;
+    border: 1px solid rgba(0, 200, 255, 0.15) !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .nav-links a:active, .nav-link:active {
+    background: rgba(0, 200, 255, 0.15) !important;
+    transform: scale(0.98) !important;
+  }
+
+  /* Hide live indicator on mobile nav */
+  .live-indicator, .live-dot {
+    display: none !important;
+  }
+}
+
+/* ================================================================
+   3. HERO SECTION - Mobile Optimization
+   ================================================================ */
+@media (max-width: 768px) {
+  /* Hero container */
+  .hero, #hero, section.hero {
+    min-height: 100vh !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin-top: 56px !important;
+    overflow: hidden !important;
+  }
+
+  /* Hero background image - CRITICAL: Fix 120% width causing horizontal scroll */
+  .hero > img,
+  .hero img[alt*="biotech"],
+  .hero img[alt*="Biotech"],
+  .hero img[src*="hero"],
+  .hero [style*="background"],
+  .hero > [style*="position: absolute"] > img,
+  img[style*="width: 120%"],
+  img[style*="width:120%"] {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: 100% !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Hero content container */
+  .hero-container,
+  .hero > [style*="position: absolute"][style*="bottom"] {
+    position: absolute !important;
+    bottom: 5% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Hero title - readable on mobile */
+  .hero h1,
+  .hero-title,
+  .hero [style*="font-size: clamp(3rem"],
+  .hero [style*="Patient Analog"] {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 8px !important;
+    letter-spacing: -1px !important;
+    text-shadow: 0 0 40px rgba(0,255,255,0.5), 0 2px 20px rgba(0,0,0,0.9) !important;
+  }
+
+  /* Hero subtitle */
+  .hero h2,
+  .hero-subtitle,
+  .hero [style*="FDA Modernization"] {
+    font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Hero description */
+  .hero p,
+  .hero-description {
+    font-size: clamp(0.8rem, 3vw, 0.95rem) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
+    max-width: 100% !important;
+  }
+
+  /* Hero stats line */
+  .hero [style*="436+ Research"],
+  .hero [style*="Research Links"] {
+    font-size: clamp(0.65rem, 2.5vw, 0.8rem) !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Hero CTA button - touch-friendly */
+  .hero-cta-pulse,
+  .hero a[href="/games.html"],
+  .hero .cta-button,
+  .hero [style*="Explore 45+ Free"] {
+    display: inline-block !important;
+    padding: 14px 24px !important;
+    min-height: 48px !important;
+    font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
+    border-radius: 50px !important;
+    text-align: center !important;
+    width: auto !important;
+    max-width: 90% !important;
+  }
+
+  /* Hide hero effect overlays on mobile for performance */
+  .hero-digital-grid,
+  .hero-electric-pulse,
+  .hero-gold-shimmer,
+  .hero-scanline,
+  .hero-particles,
+  .hero-lightning,
+  .hero-hdr-bloom {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* ================================================================
+   4. STATS BAR - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .stats-bar-slim,
+  .stats-bar-slim .container {
+    flex-wrap: wrap !important;
+    gap: 12px 20px !important;
+    padding: 16px 12px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .stats-bar-slim span {
+    font-size: 12px !important;
+  }
+
+  /* Hide separators on mobile */
+  .stats-bar-slim span[style*="color: rgba(255,255,255,0.3)"] {
+    display: none !important;
+  }
+}
+
+/* ================================================================
+   5. FEATURE CARDS - Stack on Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  /* All card grids - single column - CRITICAL: Override inline styles */
+  .features-section > .container > div,
+  [style*="grid-template-columns: repeat(auto-fit"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: repeat(4"],
+  div[style*="grid-template-columns"],
+  .domain-grid,
+  .programs-grid,
+  .glossary-grid,
+  .intel-grid,
+  .card-grid,
+  .games-grid,
+  .tech-gallery-card + .tech-gallery-card,
+  section.features-section div[style*="display: grid"],
+  .section div[style*="grid-template-columns: repeat"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Feature cards - full width, touch-friendly */
+  .features-section a,
+  .domain-card,
+  .program-card,
+  .stat-card,
+  .intel-card,
+  .tech-gallery-card,
+  .card,
+  .card-link,
+  [style*="border-radius: 16px"][style*="padding: 40px"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 24px 20px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Card text - readable */
+  .features-section h3,
+  .card-title,
+  .domain-card h3,
+  .intel-card h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .features-section p,
+  .card-description,
+  .domain-card p,
+  .intel-card p {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Card CTAs - touch targets */
+  .features-section span[style*="font-size: 0.9rem"],
+  .card-cta,
+  .card a {
+    padding: 12px 0 !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+}
+
+/* ================================================================
+   6. MARKET STATS SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .market-stats-section [style*="grid-template-columns"],
+  .market-stats-section > .container > div:last-child {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .market-stats-section [style*="text-align: center"][style*="padding: 30px"] {
+    padding: 20px 12px !important;
+  }
+
+  .market-stats-section [style*="font-size: 2.5rem"] {
+    font-size: 1.8rem !important;
+  }
+
+  .market-stats-section [style*="font-size: 0.9rem"] {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ================================================================
+   7. CORE TECHNOLOGIES SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .core-tech-section [style*="grid-template-columns: repeat(auto-fit, minmax(250px"],
+  .core-tech-section > .container > div:last-child {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .core-tech-section a[style*="padding: 35px"] {
+    padding: 24px 20px !important;
+  }
+
+  .core-tech-section [style*="width: 50px"][style*="height: 50px"] {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+/* ================================================================
+   8. 3D LAB SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  /* Note: .3d-lab-section is escaped as .\33 d-lab-section in CSS for class starting with number */
+  [class*="3d-lab"],
+  #3d-lab,
+  section[id="3d-lab"] {
+    padding: 60px 16px !important;
+  }
+
+  /* 3D model viewers - single column */
+  [class*="3d-lab"] [style*="grid-template-columns"],
+  #3d-lab [style*="grid-template-columns"],
+  section[id="3d-lab"] div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Lab model viewer - fit mobile */
+  .lab-model-viewer {
+    padding: 20px !important;
+  }
+
+  .interactive-3d-placeholder {
+    height: 200px !important;
+  }
+
+  /* Model controls - stack */
+  .model-controls {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .model-btn {
+    min-height: 44px !important;
+    padding: 12px 16px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Tech gallery - single column */
+  .3d-lab-section [style*="grid-template-columns: repeat(auto-fit, minmax(320px"],
+  #3d-lab .tech-gallery-card {
+    width: 100% !important;
+  }
+}
+
+/* ================================================================
+   9. INTELLIGENCE HUB / NEWS SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .intelligence-section,
+  #intelligence-hub {
+    padding: 60px 16px !important;
+  }
+
+  /* Intel grid - 2 columns on mobile */
+  .intel-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .intel-card {
+    padding: 16px !important;
+  }
+
+  .intel-card h3 {
+    font-size: 0.95rem !important;
+  }
+
+  .intel-card p {
+    font-size: 0.8rem !important;
+    display: none !important; /* Hide description on small mobile */
+  }
+
+  /* Intel CTA - stack buttons */
+  .intel-cta {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .intel-cta .btn {
+    width: 100% !important;
+    max-width: 300px !important;
+    min-height: 48px !important;
+    justify-content: center !important;
+  }
+
+  /* News grid - single column */
+  .news-category-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .news-box {
+    padding: 16px !important;
+  }
+
+  .news-headlines li {
+    padding: 10px 0 !important;
+    min-height: 44px !important;
+  }
+
+  .news-headlines a {
+    font-size: 0.85rem !important;
+  }
+
+  /* News live badge - wrap */
+  .news-live-badge {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  .news-live-badge .live-divider {
+    display: none !important;
+  }
+}
+
+/* ================================================================
+   10. GAMES SECTION - Mobile (Single Column)
+   ================================================================ */
+@media (max-width: 768px) {
+  .games-section,
+  #games {
+    padding: 60px 16px !important;
+  }
+
+  /* Force single column - CRITICAL: Override inline grid styles */
+  #games > .container > div,
+  .games-section [style*="grid-template-columns: repeat(3"],
+  .games-section [style*="display: grid"],
+  div[style*="display: grid"][style*="grid-template-columns: repeat(3"],
+  div[style*="grid-template-columns: repeat(3, 1fr)"],
+  section#games div[style*="grid"],
+  .games-section .container > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Game cards - touch-friendly */
+  #games a,
+  .games-section a[style*="display: block"] {
+    padding: 20px !important;
+    min-height: 100px !important;
+  }
+
+  #games h3,
+  .games-section h3 {
+    font-size: 1.1rem !important;
+  }
+
+  #games p,
+  .games-section p {
+    font-size: 0.85rem !important;
+  }
+
+  /* View all button */
+  .games-section .btn,
+  #games .btn {
+    width: 100% !important;
+    max-width: 280px !important;
+    min-height: 48px !important;
+    margin: 24px auto 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+/* ================================================================
+   11. NEWSLETTER SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .newsletter-section,
+  section[style*="Newsletter"],
+  section[style*="Get Updates"] {
+    padding: 60px 16px !important;
+  }
+
+  .newsletter-section form,
+  form[action*="web3forms"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .newsletter-section input[type="email"],
+  form input[type="email"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  .newsletter-section button[type="submit"],
+  form button[type="submit"] {
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+}
+
+/* ================================================================
+   12. CTA SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .cta-section,
+  .cta-box {
+    padding: 40px 20px !important;
+  }
+
+  .cta-box h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .cta-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .cta-buttons .btn {
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+}
+
+/* ================================================================
+   13. FOOTER - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  footer,
+  .site-footer,
+  #main-footer {
+    padding: 40px 16px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px 16px !important;
+  }
+
+  .footer-section h4 {
+    font-size: 0.9rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .footer-section a {
+    font-size: 0.85rem !important;
+    padding: 8px 0 !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 16px !important;
+    text-align: center !important;
+  }
+
+  .footer-legal {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  .footer-legal a {
+    min-height: 44px !important;
+    padding: 10px !important;
+  }
+}
+
+/* ================================================================
+   14. TOUCH TARGETS - Global 44px Minimum
+   ================================================================ */
+@media (max-width: 768px) {
+  /* All interactive elements */
+  a, button, input, select, textarea,
+  [role="button"], [onclick], [tabindex],
+  .btn, .cta, .link, .nav-link {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  /* Links in lists */
+  li a, ul a, nav a, .nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px !important;
+  }
+
+  /* Icon buttons */
+  button:has(svg), a:has(svg:only-child) {
+    padding: 10px !important;
+  }
+}
+
+/* ================================================================
+   15. NEWS SIDEBARS - Hide on Mobile
+   ================================================================ */
+@media (max-width: 1200px) {
+  .news-sidebar,
+  .news-sidebar.left,
+  .news-sidebar.right {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* ================================================================
+   16. LIVE TICKER - Mobile Optimization
+   ================================================================ */
+@media (max-width: 768px) {
+  #live-ticker,
+  .live-ticker-bar {
+    font-size: 10px !important;
+    padding: 6px 12px !important;
+    margin-top: 56px !important; /* Below mobile nav */
+  }
+
+  .live-ticker-inner {
+    gap: 8px !important;
+  }
+
+  .ticker-row-secondary {
+    display: none !important; /* Hide secondary row on mobile */
+  }
+
+  .live-ticker-status {
+    display: none !important; /* Hide time on mobile */
+  }
+}
+
+/* ================================================================
+   17. SECTION HEADERS - Mobile Typography
+   ================================================================ */
+@media (max-width: 768px) {
+  .section-header,
+  .section-header h2,
+  .section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    margin-bottom: 16px !important;
+  }
+
+  .section-description,
+  .section-header p {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    padding: 0 8px !important;
+  }
+
+  .section-label {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* ================================================================
+   18. HIERARCHY/PYRAMID SECTION - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  .hierarchy-section {
+    padding: 60px 16px !important;
+  }
+
+  .hierarchy-container {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .hierarchy-text h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .pyramid-visual {
+    height: 350px !important;
+  }
+
+  .pyramid-level {
+    transform: scale(0.85) !important;
+  }
+}
+
+/* ================================================================
+   19. MODALS & OVERLAYS - Mobile Full Screen
+   ================================================================ */
+@media (max-width: 768px) {
+  .modal,
+  .contact-modal,
+  [class*="modal"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 90vh !important;
+    margin: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+
+  .modal-content,
+  .contact-modal-content {
+    padding: 24px 20px 32px !important;
+  }
+}
+
+/* ================================================================
+   20. COOKIE BANNER - Mobile
+   ================================================================ */
+@media (max-width: 768px) {
+  #cookie-banner {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+
+  #cookie-banner p {
+    font-size: 13px !important;
+  }
+
+  .cookie-btns {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .cookie-btns button {
+    min-height: 44px !important;
+    padding: 12px 20px !important;
+  }
+}
+
+/* ================================================================
+   21. SMALL MOBILE ADJUSTMENTS (max-width: 480px)
+   ================================================================ */
+@media (max-width: 480px) {
+  /* Even more compact on very small screens */
+  .hero h1,
+  .hero-title {
+    font-size: clamp(1.8rem, 10vw, 2.5rem) !important;
+  }
+
+  .hero h2,
+  .hero-subtitle {
+    font-size: clamp(0.75rem, 4vw, 1rem) !important;
+  }
+
+  /* Intel grid - single column on very small */
+  .intel-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Market stats - single column */
+  .market-stats-section [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer - single column */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Smaller section padding */
+  .section, section {
+    padding: 40px 12px !important;
+  }
+}
+
+/* ================================================================
+   22. LANDSCAPE MOBILE FIXES
+   ================================================================ */
+@media (max-width: 896px) and (orientation: landscape) {
+  .hero, #hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding-bottom: 40px !important;
+  }
+
+  .hero-container {
+    position: relative !important;
+    bottom: auto !important;
+    padding-top: 80px !important;
+  }
+
+  /* Nav stays fixed */
+  nav, .nav-bar, #main-nav {
+    height: 48px !important;
+    min-height: 48px !important;
+  }
+}
+
+/* ================================================================
+   23. ACCESSIBILITY - Touch & Focus States
+   ================================================================ */
+@media (max-width: 768px) {
+  /* Visible focus states for touch users */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 3px solid #00c8ff !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Active states for touch feedback */
+  a:active,
+  button:active,
+  .btn:active,
+  .card:active {
+    transform: scale(0.98) !important;
+    opacity: 0.9 !important;
+  }
+}

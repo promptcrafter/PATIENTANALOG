@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬 Kenneth's AMAZING Biotech Adventure! 🚀</title>
+    <meta name="description" content="Kenneth builds incredible bio-systems! A fun, colorful puzzle game about biotechnology.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="game-styles.css">
+
+    <!-- EMERGENCY FIX: Force all buttons clickable -->
+    <style>
+        button, .menu-btn, .level-card, .collection-card, .category-btn, .era-tab, .back-btn {
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 9000 !important;
+        }
+        #menu-screen.active .menu-content,
+        #menu-screen.active .menu-buttons {
+            pointer-events: auto !important;
+            z-index: 9000 !important;
+        }
+        #loading-screen:not(.active) {
+            display: none !important;
+            pointer-events: none !important;
+        }
+        /* Kill any invisible overlays */
+        .screen::before, .screen::after {
+            pointer-events: none !important;
+        }
+        /* EMERGENCY: Ensure game grid is visible */
+        #game-screen.active {
+            display: flex !important;
+            opacity: 1 !important;
+        }
+        #game-screen .game-main {
+            display: flex !important;
+            flex: 1 !important;
+        }
+        #game-screen .grid-container {
+            display: flex !important;
+            flex: 1 !important;
+            min-height: 300px !important;
+        }
+        #game-screen .grid-wrapper {
+            min-width: 300px !important;
+            min-height: 300px !important;
+        }
+        #game-screen #game-grid {
+            display: grid !important;
+            min-width: 280px !important;
+            min-height: 280px !important;
+        }
+        .grid-cell {
+            min-width: 60px !important;
+            min-height: 60px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PARTICLE CANVAS - Background magic!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <canvas id="particle-canvas"></canvas>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         LOADING SCREEN - Kenneth's Lab is powering up!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="loading-screen" class="screen active">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="dna-helix">
+                    <div class="dna-strand strand-1"></div>
+                    <div class="dna-strand strand-2"></div>
+                    <div class="dna-base base-1"></div>
+                    <div class="dna-base base-2"></div>
+                    <div class="dna-base base-3"></div>
+                    <div class="dna-base base-4"></div>
+                </div>
+            </div>
+            <h1 class="loading-title">
+                <span class="title-kenneth">Kenneth's</span>
+                <span class="title-biotech">BIOTECH</span>
+                <span class="title-adventure">Adventure!</span>
+            </h1>
+            <div class="loading-bar-container">
+                <div class="loading-bar">
+                    <div id="loading-progress" class="loading-progress"></div>
+                    <div class="loading-glow"></div>
+                </div>
+                <div class="loading-bubbles">
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                </div>
+            </div>
+            <p id="loading-text" class="loading-text">Initializing bio-systems...</p>
+            <p id="loading-percent" class="loading-percent">0%</p>
+            <div class="loading-tips">
+                <p class="tip">💡 <span id="loading-tip">Tip: Connect matching ports to create powerful synergies!</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         MAIN MENU - Kenneth's Command Center!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="menu-screen" class="screen">
+        <div class="menu-background">
+            <div class="floating-cells">
+                <div class="cell cell-1"></div>
+                <div class="cell cell-2"></div>
+                <div class="cell cell-3"></div>
+                <div class="cell cell-4"></div>
+                <div class="cell cell-5"></div>
+            </div>
+        </div>
+        
+        <div class="menu-content">
+            <header class="menu-header">
+                <div class="logo-container">
+                    <div class="logo-icon">🧬</div>
+                    <h1 class="game-title">
+                        <span class="kenneth-name">Kenneth's</span>
+                        <span class="biotech-text">BIOTECH</span>
+                        <span class="adventure-text">Adventure!</span>
+                    </h1>
+                </div>
+                
+                <!-- Player Status Card -->
+                <div class="player-card">
+                    <div class="player-avatar">
+                        <div class="avatar-ring"></div>
+                        <span class="avatar-emoji">🧑‍🔬</span>
+                        <div class="level-badge" id="menu-level-badge">1</div>
+                    </div>
+                    <div class="player-info">
+                        <h2 class="player-name">Kenneth</h2>
+                        <p class="player-title" id="menu-player-title">Bio-Scientist</p>
+                        <div class="xp-bar-mini">
+                            <div class="xp-fill-mini" id="menu-xp-fill"></div>
+                        </div>
+                    </div>
+                    <div class="player-stats-mini">
+                        <div class="stat-mini">
+                            <span class="stat-icon">⭐</span>
+                            <span class="stat-value" id="menu-total-stars">0</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="stat-icon">🏆</span>
+                            <span class="stat-value" id="menu-high-score">0</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <nav class="menu-buttons">
+                <button class="menu-btn primary-btn" id="btn-play" data-action="play" onclick="console.log('PLAY clicked!'); window.gamePlay();">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">PLAY!</span>
+                    <span class="btn-subtitle">Continue your adventure</span>
+                    <div class="btn-particles"></div>
+                </button>
+
+                <button class="menu-btn secondary-btn" id="btn-levels" data-action="levels" onclick="window.gameShowScreen('levels');">
+                    <span class="btn-icon">🗺️</span>
+                    <span class="btn-text">Choose Level</span>
+                    <span class="btn-subtitle">Pick a mission</span>
+                </button>
+
+                <button class="menu-btn secondary-btn" id="btn-sandbox" data-action="sandbox" onclick="window.gameSandbox();">
+                    <span class="btn-icon">🔬</span>
+                    <span class="btn-text">Free Build</span>
+                    <span class="btn-subtitle">Create anything!</span>
+                </button>
+
+                <button class="menu-btn secondary-btn" id="btn-collection" data-action="collection" onclick="window.gameShowScreen('collection');">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-text">Bio-Collection</span>
+                    <span class="btn-subtitle">Your discoveries</span>
+                </button>
+
+                <button class="menu-btn secondary-btn" id="btn-tutorial" data-action="tutorial" onclick="window.gameShowScreen('tutorial');">
+                    <span class="btn-icon">📖</span>
+                    <span class="btn-text">How to Play</span>
+                    <span class="btn-subtitle">Learn the basics</span>
+                </button>
+
+                <button class="menu-btn icon-btn" id="btn-settings" data-action="settings" onclick="window.gameShowScreen('settings');">
+                    <span class="btn-icon">⚙️</span>
+                </button>
+            </nav>
+            
+            <footer class="menu-footer">
+                <p class="version">v2.0 ✨ Made with 💜 for Kenneth</p>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         LEVEL SELECT SCREEN - Choose Your Mission!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="levels-screen" class="screen">
+        <div class="screen-header">
+            <button class="back-btn" data-action="back-to-menu" onclick="window.gameShowScreen('menu');">
+                <span>←</span> Back
+            </button>
+            <h1 class="screen-title">🗺️ Choose Your Mission!</h1>
+            <div class="header-spacer"></div>
+        </div>
+        
+        <div class="levels-container">
+            <div class="era-tabs">
+                <button class="era-tab active" data-era="1">
+                    <span class="era-icon">🫀</span>
+                    <span class="era-name">Basic Organs</span>
+                </button>
+                <button class="era-tab" data-era="2">
+                    <span class="era-icon">🧫</span>
+                    <span class="era-name">Organoids</span>
+                    <span class="lock-icon">🔒</span>
+                </button>
+                <button class="era-tab" data-era="3">
+                    <span class="era-icon">🔬</span>
+                    <span class="era-name">MPS Systems</span>
+                    <span class="lock-icon">🔒</span>
+                </button>
+                <button class="era-tab" data-era="4">
+                    <span class="era-icon">🤖</span>
+                    <span class="era-name">Digital Twins</span>
+                    <span class="lock-icon">🔒</span>
+                </button>
+            </div>
+            
+            <div class="levels-grid" id="levels-grid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         GAME SCREEN - Kenneth's Laboratory!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="game-screen" class="screen">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <button class="game-btn icon-btn" id="btn-pause" title="Pause Game">
+                    <span>⏸️</span>
+                </button>
+                <div class="level-info">
+                    <span class="level-name" id="game-level-name">Level 1-1</span>
+                    <span class="level-subtitle" id="game-level-subtitle">Build a Heart System</span>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <div class="timer-display" id="timer-container">
+                    <div class="timer-icon">⏱️</div>
+                    <div class="timer-value" id="game-timer">3:00</div>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer-fill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="score-display">
+                    <div class="score-label">SCORE</div>
+                    <div class="score-value" id="game-score">0</div>
+                    <div class="combo-indicator" id="combo-indicator">
+                        <span class="combo-text">COMBO</span>
+                        <span class="combo-value" id="combo-value">x1.0</span>
+                    </div>
+                </div>
+                <div class="target-display">
+                    <div class="target-label">TARGET</div>
+                    <div class="target-value" id="game-target">1000</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Game Area -->
+        <main class="game-main">
+            <!-- Left Panel - Objectives & Tips -->
+            <aside class="game-sidebar left-sidebar">
+                <div class="objectives-panel">
+                    <h3 class="panel-title">🎯 Objectives</h3>
+                    <ul class="objectives-list" id="objectives-list">
+                        <!-- Dynamically populated -->
+                    </ul>
+                </div>
+                
+                <div class="tips-panel">
+                    <h3 class="panel-title">💡 Kenneth's Tips</h3>
+                    <div class="tip-content" id="current-tip">
+                        <p>Drag modules from the tray to the grid!</p>
+                    </div>
+                </div>
+                
+                <div class="power-ups-panel">
+                    <h3 class="panel-title">⚡ Power-Ups</h3>
+                    <div class="power-ups-grid">
+                        <button class="power-up-btn" data-power="hint" title="Get a Hint">
+                            <span class="power-icon">💡</span>
+                            <span class="power-count">3</span>
+                        </button>
+                        <button class="power-up-btn" data-power="undo" title="Undo Last Move">
+                            <span class="power-icon">↩️</span>
+                            <span class="power-count">5</span>
+                        </button>
+                        <button class="power-up-btn" data-power="boost" title="Score Boost">
+                            <span class="power-icon">🚀</span>
+                            <span class="power-count">2</span>
+                        </button>
+                        <button class="power-up-btn" data-power="time" title="Extra Time">
+                            <span class="power-icon">⏰</span>
+                            <span class="power-count">1</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Center - The Grid! -->
+            <div class="grid-container">
+                <div class="grid-wrapper">
+                    <div class="grid-background"></div>
+                    <div class="grid" id="game-grid">
+                        <!-- Grid cells generated by JS -->
+                    </div>
+                    <svg class="connections-layer" id="connections-svg">
+                        <!-- Connection lines drawn here -->
+                    </svg>
+                    <div class="grid-effects" id="grid-effects">
+                        <!-- Particle effects layer -->
+                    </div>
+                </div>
+                
+                <!-- Feedback Area -->
+                <div class="feedback-area" id="feedback-area">
+                    <!-- Encouragement messages appear here -->
+                </div>
+            </div>
+            
+            <!-- Right Panel - Module Info -->
+            <aside class="game-sidebar right-sidebar">
+                <div class="selected-module-panel" id="selected-module-panel">
+                    <h3 class="panel-title">📋 Module Info</h3>
+                    <div class="module-preview" id="module-preview">
+                        <p class="empty-state">Select a module to see details!</p>
+                    </div>
+                </div>
+                
+                <div class="synergy-panel">
+                    <h3 class="panel-title">✨ Active Synergies</h3>
+                    <div class="synergy-list" id="synergy-list">
+                        <p class="empty-state">Connect modules to create synergies!</p>
+                    </div>
+                </div>
+                
+                <div class="achievements-mini">
+                    <h3 class="panel-title">🏆 Recent</h3>
+                    <div class="recent-achievements" id="recent-achievements">
+                        <!-- Mini achievement icons -->
+                    </div>
+                </div>
+            </aside>
+        </main>
+        
+        <!-- Module Tray -->
+        <footer class="module-tray">
+            <div class="tray-header">
+                <h3 class="tray-title">🧬 Your Bio-Modules</h3>
+                <div class="tray-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="organs">🫀 Organs</button>
+                    <button class="filter-btn" data-filter="organoids">🧫 Organoids</button>
+                    <button class="filter-btn" data-filter="connectors">🔗 Connectors</button>
+                </div>
+            </div>
+            <div class="tray-scroll">
+                <div class="module-list" id="module-tray">
+                    <!-- Modules populated by JS -->
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TUTORIAL SCREEN - Learn with Kenneth!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tutorial-screen" class="screen">
+        <div class="tutorial-container">
+            <div class="tutorial-header">
+                <button class="back-btn" data-action="back-to-menu" onclick="window.gameShowScreen('menu');">← Back</button>
+                <h1>📖 How to Play</h1>
+                <div class="tutorial-progress">
+                    <span id="tutorial-step">1</span> / <span id="tutorial-total">6</span>
+                </div>
+            </div>
+            
+            <div class="tutorial-content" id="tutorial-content">
+                <!-- Tutorial steps rendered here -->
+            </div>
+            
+            <div class="tutorial-nav">
+                <button class="tutorial-btn" id="tutorial-prev">← Previous</button>
+                <div class="tutorial-dots" id="tutorial-dots"></div>
+                <button class="tutorial-btn primary" id="tutorial-next">Next →</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         COLLECTION SCREEN - Kenneth's Bio-Collection!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="collection-screen" class="screen">
+        <div class="screen-header">
+            <button class="back-btn" data-action="back-to-menu" onclick="window.gameShowScreen('menu');">← Back</button>
+            <h1 class="screen-title">📚 Kenneth's Bio-Collection</h1>
+            <div class="collection-stats">
+                <span id="collection-count">0</span> / <span id="collection-total">0</span> Discovered
+            </div>
+        </div>
+        
+        <div class="collection-container">
+            <div class="collection-categories">
+                <button class="category-btn active" data-category="all">🌟 All</button>
+                <button class="category-btn" data-category="organs">🫀 Organs</button>
+                <button class="category-btn" data-category="organoids">🧫 Organoids</button>
+                <button class="category-btn" data-category="mps">🔬 MPS</button>
+                <button class="category-btn" data-category="digital">💻 Digital</button>
+                <button class="category-btn" data-category="connectors">🔗 Connectors</button>
+            </div>
+            
+            <div class="collection-grid" id="collection-grid">
+                <!-- Module cards populated here -->
+            </div>
+        </div>
+        
+        <!-- Module Detail Modal -->
+        <div class="module-detail-modal" id="module-detail-modal">
+            <div class="modal-content">
+                <button class="modal-close" id="close-module-detail">×</button>
+                <div class="modal-body" id="module-detail-content">
+                    <!-- Module details -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SETTINGS SCREEN
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="settings-screen" class="screen">
+        <div class="settings-container">
+            <div class="screen-header">
+                <button class="back-btn" data-action="back-to-menu" onclick="window.gameShowScreen('menu');">← Back</button>
+                <h1 class="screen-title">⚙️ Settings</h1>
+                <div class="header-spacer"></div>
+            </div>
+            
+            <div class="settings-content">
+                <section class="settings-section">
+                    <h2>🔊 Sound</h2>
+                    <div class="setting-item">
+                        <label>Music Volume</label>
+                        <input type="range" id="music-volume" min="0" max="100" value="70">
+                        <span class="volume-value">70%</span>
+                    </div>
+                    <div class="setting-item">
+                        <label>Sound Effects</label>
+                        <input type="range" id="sfx-volume" min="0" max="100" value="80">
+                        <span class="volume-value">80%</span>
+                    </div>
+                </section>
+                
+                <section class="settings-section">
+                    <h2>🎨 Visuals</h2>
+                    <div class="setting-item">
+                        <label>Particle Effects</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="particles-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Screen Shake</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="shake-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>High Contrast Mode</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="contrast-toggle">
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Reduced Motion</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="motion-toggle">
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="settings-section">
+                    <h2>🎮 Gameplay</h2>
+                    <div class="setting-item">
+                        <label>Show Hints</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="hints-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Auto-Rotate Modules</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="autorotate-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="settings-section danger-zone">
+                    <h2>⚠️ Data</h2>
+                    <button class="danger-btn" id="reset-progress">Reset All Progress</button>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PAUSE MODAL
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="pause-modal" class="modal">
+        <div class="modal-content pause-content">
+            <h2>⏸️ Game Paused</h2>
+            <p class="pause-message">Take a break, Kenneth! The lab will wait for you. 🧬</p>
+            <div class="pause-stats">
+                <div class="pause-stat">
+                    <span class="stat-label">Current Score</span>
+                    <span class="stat-value" id="pause-score">0</span>
+                </div>
+                <div class="pause-stat">
+                    <span class="stat-label">Time Left</span>
+                    <span class="stat-value" id="pause-time">0:00</span>
+                </div>
+            </div>
+            <div class="pause-buttons">
+                <button class="modal-btn primary" id="resume-game">▶️ Resume</button>
+                <button class="modal-btn" id="restart-level">🔄 Restart</button>
+                <button class="modal-btn" id="quit-to-menu">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         LEVEL COMPLETE MODAL - CELEBRATION TIME!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="complete-modal" class="modal">
+        <div class="modal-content complete-content">
+            <div class="celebration-effects">
+                <div class="confetti-container" id="confetti-container"></div>
+                <div class="star-burst" id="star-burst"></div>
+            </div>
+            
+            <h2 class="complete-title" id="complete-title">🎉 AMAZING JOB, KENNETH! 🎉</h2>
+            
+            <div class="stars-display" id="stars-display">
+                <div class="star star-1">⭐</div>
+                <div class="star star-2">⭐</div>
+                <div class="star star-3">⭐</div>
+            </div>
+            
+            <div class="complete-message" id="complete-message">
+                You're a BRILLIANT Bio-Scientist!
+            </div>
+            
+            <div class="complete-stats">
+                <div class="complete-stat">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Final Score</span>
+                        <span class="stat-value" id="final-score">0</span>
+                    </div>
+                </div>
+                <div class="complete-stat">
+                    <div class="stat-icon">🔗</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Connections</span>
+                        <span class="stat-value" id="final-connections">0</span>
+                    </div>
+                </div>
+                <div class="complete-stat">
+                    <div class="stat-icon">✨</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Synergies</span>
+                        <span class="stat-value" id="final-synergies">0</span>
+                    </div>
+                </div>
+                <div class="complete-stat">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Time Bonus</span>
+                        <span class="stat-value" id="final-time-bonus">+0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="xp-reward">
+                <div class="xp-icon">✨</div>
+                <span class="xp-text">+<span id="xp-earned">100</span> XP</span>
+                <div class="xp-bar-reward">
+                    <div class="xp-fill-reward" id="xp-fill-reward"></div>
+                </div>
+            </div>
+            
+            <div class="unlocks-section" id="unlocks-section" style="display: none;">
+                <h3>🎁 New Unlocks!</h3>
+                <div class="unlocks-list" id="unlocks-list"></div>
+            </div>
+            
+            <div class="complete-buttons">
+                <button class="modal-btn" id="complete-menu">🏠 Menu</button>
+                <button class="modal-btn" id="complete-retry">🔄 Retry</button>
+                <button class="modal-btn primary" id="complete-next">Next Level ➡️</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         GAME OVER MODAL - Try Again!
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="gameover-modal" class="modal">
+        <div class="modal-content gameover-content">
+            <h2>⏰ Time's Up!</h2>
+            <p class="gameover-message">
+                Don't worry, Kenneth! Every scientist learns from trying. 
+                You've got this! 💪
+            </p>
+            
+            <div class="gameover-stats">
+                <div class="gameover-stat">
+                    <span class="stat-label">Score Reached</span>
+                    <span class="stat-value" id="gameover-score">0</span>
+                </div>
+                <div class="gameover-stat">
+                    <span class="stat-label">Target Was</span>
+                    <span class="stat-value" id="gameover-target">0</span>
+                </div>
+            </div>
+            
+            <div class="gameover-tip">
+                <span class="tip-icon">💡</span>
+                <p id="gameover-tip">Try connecting modules with matching port colors for bonus points!</p>
+            </div>
+            
+            <div class="gameover-buttons">
+                <button class="modal-btn" id="gameover-menu">🏠 Menu</button>
+                <button class="modal-btn primary" id="gameover-retry">🔄 Try Again!</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TOAST NOTIFICATIONS
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FLOATING ENCOURAGEMENT
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="floating-message" class="floating-message"></div>
+    
+    <!-- Scripts -->
+    <script src="constants.js"></script>
+    <script src="utils.js"></script>
+    <script src="audio-bridge.js"></script>
+    <script src="audio.js"></script>
+    <script src="state.js"></script>
+    <script src="modules-data.js"></script>
+    <script src="levels-data.js"></script>
+    <script src="renderer.js"></script>
+    <script src="particles.js"></script>
+    <script src="game-logic.js"></script>
+    <script src="ui-controller.js"></script>
+    <script src="tutorial.js"></script>
+    <script src="main.js"></script>
+
+    <!-- 🏆 PERMANENT TOP 3 LEADERBOARD 🏆 -->
+    <div id="leaderboard-display" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 99997; background: linear-gradient(145deg, rgba(20,10,40,0.95), rgba(40,20,80,0.95)); backdrop-filter: blur(15px); border-radius: 15px; padding: 12px 25px; font-family: 'Fredoka One', 'Nunito', sans-serif; border: 3px solid rgba(255,215,0,0.6); box-shadow: 0 0 40px rgba(255,215,0,0.4), inset 0 0 20px rgba(255,215,0,0.1); min-width: 280px;">
+        <div style="text-align: center; font-size: 16px; color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.7); margin-bottom: 10px; letter-spacing: 1px;">🏆 HALL OF FAME 🏆</div>
+        <div id="leaderboard-entries" style="font-size: 13px;">
+            <div id="leader-1" class="leader-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; background: linear-gradient(90deg, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); border-radius: 10px; margin-bottom: 6px; border: 1px solid rgba(255,215,0,0.5); animation: leaderGlow 2s ease-in-out infinite;">
+                <span style="color: #ffd700; font-weight: bold;">🥇 <span id="name-1">Kenneth</span></span>
+                <span style="color: #fff; font-weight: bold; font-size: 16px; text-shadow: 0 0 10px #ffd700;" id="score-1">0</span>
+            </div>
+            <div id="leader-2" class="leader-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; background: linear-gradient(90deg, rgba(192,192,192,0.3), rgba(192,192,192,0.1)); border-radius: 10px; margin-bottom: 6px; border: 1px solid rgba(192,192,192,0.4);">
+                <span style="color: #e0e0e0; font-weight: bold;">🥈 <span id="name-2">---</span></span>
+                <span style="color: #fff; font-weight: bold; font-size: 15px;" id="score-2">0</span>
+            </div>
+            <div id="leader-3" class="leader-entry" style="display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; background: linear-gradient(90deg, rgba(205,127,50,0.3), rgba(205,127,50,0.1)); border-radius: 10px; border: 1px solid rgba(205,127,50,0.4);">
+                <span style="color: #cd9b50; font-weight: bold;">🥉 <span id="name-3">---</span></span>
+                <span style="color: #fff; font-weight: bold; font-size: 14px;" id="score-3">0</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 8px; font-size: 10px; color: #888;">Beat the top score to claim your spot!</div>
+    </div>
+
+    <!-- KENNETH'S CONTROL PANEL -->
+    <div id="kenneth-controls" style="position: fixed; top: 50%; right: 20px; transform: translateY(-50%); background: linear-gradient(135deg, rgba(10,15,30,0.95), rgba(20,30,50,0.95)); padding: 20px; border-radius: 16px; z-index: 99999; font-family: 'Nunito', sans-serif; border: 2px solid #00f5ff; box-shadow: 0 0 30px rgba(0,245,255,0.3), inset 0 0 20px rgba(0,245,255,0.1); transition: all 0.3s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h4 style="margin: 0; color: #00f5ff; font-family: 'Fredoka One', cursive; font-size: 18px; text-shadow: 0 0 10px #00f5ff;">🧬 Kenneth's Lab 🧬</h4>
+            <button onclick="window.toggleControlPanel();" style="background: none; border: 1px solid #00f5ff; color: #00f5ff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;" title="Minimize">−</button>
+        </div>
+
+        <div id="control-panel-content">
+        <!-- Active Buddy Display -->
+        <div id="buddy-display" style="text-align: center; margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+            <div id="buddy-emoji" style="font-size: 3rem; cursor: pointer; animation: buddyBounce 1s ease-in-out infinite;" onclick="window.buddySpeak()">🐕</div>
+            <div id="buddy-speech" style="background: white; color: #333; padding: 8px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-top: 8px; position: relative;">Hi Kenneth! Let's do science!</div>
+            <div style="margin-top: 8px; display: flex; justify-content: center; gap: 5px;">
+                <span id="buddy-hearts">❤️❤️❤️🖤🖤</span>
+            </div>
+            <div style="font-size: 11px; color: #888; margin-top: 5px;">🦴 Treats: <span id="buddy-treats">10</span></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button onclick="window.gamePlay();" style="padding: 14px 28px; background: linear-gradient(135deg, #00f5ff, #ff00ff); color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: 800; font-size: 16px; font-family: 'Nunito', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.3); box-shadow: 0 4px 15px rgba(0,245,255,0.4); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 25px rgba(0,245,255,0.6)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(0,245,255,0.4)';">🚀 PLAY!</button>
+            <button onclick="window.gameShowScreen('levels');" style="padding: 12px 24px; background: linear-gradient(135deg, #1a2a4a, #2a3a5a); color: #fff; border: 2px solid #00f5ff; cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.background='linear-gradient(135deg, #2a3a5a, #3a4a6a)'; this.style.borderColor='#ff00ff';" onmouseout="this.style.background='linear-gradient(135deg, #1a2a4a, #2a3a5a)'; this.style.borderColor='#00f5ff';">🗺️ Choose Level</button>
+            <button onclick="window.showBuddies();" style="padding: 12px 24px; background: linear-gradient(135deg, #ff6b6b, #a855f7); color: #fff; border: 2px solid #ffd700; cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';">🐾 Lab Buddies</button>
+            <button onclick="window.gameShowScreen('tutorial');" style="padding: 12px 24px; background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; border: 2px solid #ffd700; cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';">📖 How to Play</button>
+            <button onclick="window.gameShowScreen('collection');" style="padding: 12px 24px; background: linear-gradient(135deg, #1a2a4a, #2a3a5a); color: #fff; border: 2px solid #00f5ff; cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.background='linear-gradient(135deg, #2a3a5a, #3a4a6a)'; this.style.borderColor='#ff00ff';" onmouseout="this.style.background='linear-gradient(135deg, #1a2a4a, #2a3a5a)'; this.style.borderColor='#00f5ff';">📚 Bio-Collection</button>
+            <button onclick="window.gameSandbox();" style="padding: 12px 24px; background: linear-gradient(135deg, #1a2a4a, #2a3a5a); color: #fff; border: 2px solid #00f5ff; cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.background='linear-gradient(135deg, #2a3a5a, #3a4a6a)'; this.style.borderColor='#ff00ff';" onmouseout="this.style.background='linear-gradient(135deg, #1a2a4a, #2a3a5a)'; this.style.borderColor='#00f5ff';">🔬 Free Build</button>
+            <button onclick="window.gameShowScreen('settings');" style="padding: 10px 20px; background: transparent; color: #888; border: 1px solid #444; cursor: pointer; border-radius: 8px; font-weight: 600; font-size: 12px; font-family: 'Nunito', sans-serif; transition: all 0.2s;" onmouseover="this.style.borderColor='#00f5ff'; this.style.color='#fff';" onmouseout="this.style.borderColor='#444'; this.style.color='#888';">⚙️ Settings</button>
+            <button onclick="window.showHelp();" style="padding: 10px 20px; background: linear-gradient(135deg, #00ff88, #00cc66); color: #000; border: none; cursor: pointer; border-radius: 8px; font-weight: 700; font-size: 12px; font-family: 'Nunito', sans-serif; transition: all 0.2s; margin-top: 5px;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';">❓ HELP</button>
+        </div>
+        </div><!-- end control-panel-content -->
+    </div>
+
+    <!-- Lab Buddies Modal -->
+    <div id="buddies-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100000; justify-content: center; align-items: center; font-family: 'Nunito', sans-serif;">
+        <div style="background: linear-gradient(135deg, #0a0a1a, #1a1a3a); border: 2px solid #00f5ff; border-radius: 20px; padding: 30px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,245,255,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: #00f5ff; font-family: 'Fredoka One', cursive; margin: 0;">🐾 Lab Buddies</h2>
+                <button onclick="window.closeBuddies();" style="background: none; border: none; color: #fff; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <div id="buddies-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;"></div>
+
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #333;">
+                <h3 style="color: #ffd700; margin-bottom: 15px;">Active Buddy Actions</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="window.feedBuddy();" style="padding: 12px 20px; background: linear-gradient(135deg, #ff6b6b, #ff8c00); color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">🦴 Feed Buddy</button>
+                    <button onclick="window.petBuddy();" style="padding: 12px 20px; background: linear-gradient(135deg, #a855f7, #ff00ff); color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">💜 Pet Buddy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOB - Kenneth's Best Friend Forever! MINI VERSION -->
+    <div id="bob-companion" style="position: fixed; bottom: 10px; left: 200px; z-index: 99998; font-family: 'Nunito', sans-serif;">
+        <div id="bob-speech" style="background: linear-gradient(135deg, #e8f5ff, #fff); color: #333; padding: 6px 10px; border-radius: 15px; font-size: 11px; font-weight: 700; margin-bottom: 5px; max-width: 120px; text-align: center; box-shadow: 0 2px 10px rgba(0,245,255,0.4); border: 2px solid #7fdbff; display: none; animation: speechPop 0.3s ease-out;">
+            Hi Kenneth! 💜
+        </div>
+        <div style="position: relative; width: 80px; height: 80px;" id="bob-container">
+            <!-- Animated Ring Around BOB -->
+            <div id="bob-ring" style="position: absolute; top: -4px; left: -4px; width: 88px; height: 88px; border-radius: 50%; border: 2px dashed #a855f7; animation: bobRingSpin 10s linear infinite; opacity: 0.6;"></div>
+
+            <!-- Floating Hearts Around BOB -->
+            <div class="bob-heart" style="position: absolute; animation: floatHeart 3s ease-in-out infinite; top: -5px; left: -8px; font-size: 10px;">💜</div>
+            <div class="bob-heart" style="position: absolute; animation: floatHeart 3s ease-in-out infinite 0.5s; top: 20px; right: -10px; font-size: 8px;">💖</div>
+
+            <!-- 3D BOB CUBE -->
+            <div id="bob-3d-scene" style="width: 80px; height: 80px; perspective: 400px; position: relative; z-index: 2;">
+                <div id="bob-cube" style="width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: bob3dRotate 8s ease-in-out infinite; cursor: pointer;" onclick="window.bobSpeak()">
+                    <!-- Front Face -->
+                    <div class="bob-face" style="position: absolute; width: 80px; height: 80px; backface-visibility: hidden; transform: rotateY(0deg) translateZ(40px);">
+                        <img src="bob-front2.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #7fdbff; box-shadow: 0 0 15px rgba(127,219,255,0.6);">
+                    </div>
+                    <!-- Right Face (Side) -->
+                    <div class="bob-face" style="position: absolute; width: 80px; height: 80px; backface-visibility: hidden; transform: rotateY(90deg) translateZ(40px);">
+                        <img src="bob-side.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.6);">
+                    </div>
+                    <!-- Back Face -->
+                    <div class="bob-face" style="position: absolute; width: 80px; height: 80px; backface-visibility: hidden; transform: rotateY(180deg) translateZ(40px);">
+                        <img src="bob-front.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #ff69b4; box-shadow: 0 0 15px rgba(255,105,180,0.6);">
+                    </div>
+                    <!-- Left Face (Side mirrored) -->
+                    <div class="bob-face" style="position: absolute; width: 80px; height: 80px; backface-visibility: hidden; transform: rotateY(270deg) translateZ(40px);">
+                        <img src="bob-side.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #00f5ff; box-shadow: 0 0 15px rgba(0,245,255,0.6); transform: scaleX(-1);">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name Tag with Animation -->
+            <div id="bob-nametag" style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #a855f7, #ff69b4); color: white; padding: 2px 8px; border-radius: 8px; font-size: 9px; font-weight: 800; font-family: 'Fredoka One', cursive; white-space: nowrap; box-shadow: 0 2px 8px rgba(168,85,247,0.6); z-index: 5;">BOB 💜</div>
+
+            <!-- Sparkle -->
+            <div style="position: absolute; top: -5px; right: -5px; font-size: 12px; animation: sparkleFloat 2s ease-in-out infinite; z-index: 6;">✨</div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes buddyBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+        @keyframes buddyEat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.3) rotate(-10deg); }
+            50% { transform: scale(0.9) rotate(5deg); }
+            75% { transform: scale(1.2) rotate(-5deg); }
+        }
+        @keyframes buddyHappy {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.2) translateY(-10px); }
+        }
+        @keyframes buddyParticle {
+            0% { transform: translate(-50%, -50%) rotate(0deg) translateX(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) rotate(calc(var(--angle))) translateX(var(--dist)); opacity: 0; }
+        }
+        @keyframes bobBounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            25% { transform: translateY(-15px) rotate(2deg); }
+            50% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-20px) rotate(3deg); }
+        }
+        /* 3D BOB ROTATION */
+        @keyframes bob3dRotate {
+            0% { transform: rotateY(0deg) translateY(0px); }
+            12% { transform: rotateY(0deg) translateY(-15px); }
+            25% { transform: rotateY(90deg) translateY(0px); }
+            37% { transform: rotateY(90deg) translateY(-15px); }
+            50% { transform: rotateY(180deg) translateY(0px); }
+            62% { transform: rotateY(180deg) translateY(-15px); }
+            75% { transform: rotateY(270deg) translateY(0px); }
+            87% { transform: rotateY(270deg) translateY(-15px); }
+            100% { transform: rotateY(360deg) translateY(0px); }
+        }
+        #bob-cube:hover {
+            animation-play-state: paused;
+            transform: rotateY(var(--hover-rotation, 0deg)) scale(1.1);
+        }
+        .bob-face img {
+            transition: all 0.3s ease;
+        }
+        .bob-face img:hover {
+            box-shadow: 0 0 80px rgba(255,255,255,0.8) !important;
+        }
+        @keyframes bobGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        @keyframes bobRingSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+        }
+        @keyframes sparkleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            25% { transform: translateY(-10px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-5px) rotate(180deg) scale(0.9); opacity: 0.7; }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.2); }
+        }
+        @keyframes nametagPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+        @keyframes speechPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.5; transform: scale(1.2) rotate(180deg); }
+        }
+        @keyframes particleRise {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) translateX(var(--x)) scale(0); opacity: 0; }
+        }
+        .bob-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #a855f7, #ff69b4);
+            border-radius: 50%;
+            bottom: 50px;
+            left: 50%;
+            animation: particleRise 3s ease-out infinite;
+            animation-delay: var(--delay);
+            z-index: 1;
+        }
+        .bob-heart {
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        /* Cool background effects for the game */
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Screen transition effects */
+        .screen {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .screen:not(.active) {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .screen.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Button hover effects */
+        .menu-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
+        }
+
+        /* Grid cell glow effect */
+        .grid-cell:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+        }
+
+        /* Module card effects */
+        .collection-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           MEGA COOL SPECIAL EFFECTS! ✨
+           ═══════════════════════════════════════════════════════════════════════ */
+
+        /* Glowing text effect */
+        .game-title, .screen-title, .loading-title {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+
+        /* Neon button glow */
+        .menu-btn.primary-btn {
+            box-shadow: 0 0 20px rgba(0,245,255,0.5), 0 0 40px rgba(0,245,255,0.3), inset 0 0 20px rgba(0,245,255,0.1);
+            animation: neonPulse 2s ease-in-out infinite;
+        }
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0,245,255,0.5), 0 0 40px rgba(0,245,255,0.3); }
+            50% { box-shadow: 0 0 30px rgba(0,245,255,0.8), 0 0 60px rgba(0,245,255,0.5), 0 0 80px rgba(255,0,255,0.3); }
+        }
+
+        /* Floating animation for UI elements */
+        .player-card {
+            animation: floatUI 4s ease-in-out infinite;
+        }
+        @keyframes floatUI {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Rainbow border effect */
+        @keyframes rainbowBorder {
+            0% { border-color: #ff0000; }
+            16% { border-color: #ff9900; }
+            33% { border-color: #ffff00; }
+            50% { border-color: #00ff00; }
+            66% { border-color: #0099ff; }
+            83% { border-color: #9900ff; }
+            100% { border-color: #ff0000; }
+        }
+
+        /* Level card hover effects */
+        .level-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .level-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,245,255,0.4);
+        }
+        .level-card:active {
+            transform: scale(0.95);
+        }
+
+        /* Ripple effect on click */
+        .menu-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: inherit;
+        }
+        .menu-btn:active::after {
+            opacity: 1;
+            animation: ripple 0.6s ease-out;
+        }
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Glitch effect for special text */
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 1px); }
+            94% { transform: translate(2px, -1px); }
+            96% { transform: translate(-1px, -1px); }
+            98% { transform: translate(1px, 1px); }
+        }
+
+        /* Shine effect for cards */
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .collection-card:hover::before {
+            left: 100%;
+        }
+
+        /* Pulsing stars */
+        .star {
+            animation: starPulse 1s ease-in-out infinite;
+        }
+        .star:nth-child(2) { animation-delay: 0.2s; }
+        .star:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.2); filter: brightness(1.5); }
+        }
+
+        /* Loading bar glow */
+        .loading-progress {
+            box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+        }
+
+        /* Control panel glow effect */
+        #kenneth-controls {
+            animation: controlPanelGlow 3s ease-in-out infinite;
+        }
+        @keyframes controlPanelGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0,245,255,0.3), inset 0 0 20px rgba(0,245,255,0.1); }
+            50% { box-shadow: 0 0 50px rgba(0,245,255,0.5), 0 0 80px rgba(255,0,255,0.2), inset 0 0 30px rgba(0,245,255,0.2); }
+        }
+
+        /* Buddy display special effects */
+        #buddy-display {
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Era tab effects */
+        .era-tab {
+            transition: all 0.3s ease;
+        }
+        .era-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,245,255,0.3);
+        }
+        .era-tab.active {
+            animation: activeTab 2s ease-in-out infinite;
+        }
+        @keyframes activeTab {
+            0%, 100% { box-shadow: 0 0 10px rgba(0,245,255,0.5); }
+            50% { box-shadow: 0 0 25px rgba(0,245,255,0.8), 0 0 40px rgba(255,0,255,0.3); }
+        }
+
+        /* DNA animation for loading */
+        .dna-helix {
+            animation: dnaFloat 2s ease-in-out infinite;
+        }
+        @keyframes dnaFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        /* Combo indicator flash */
+        #combo-indicator {
+            transition: all 0.2s ease;
+        }
+        #combo-indicator.active {
+            animation: comboFlash 0.5s ease-out;
+        }
+        @keyframes comboFlash {
+            0% { transform: scale(1.5); filter: brightness(2); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        /* Power-up button effects */
+        .power-up-btn {
+            transition: all 0.3s ease;
+        }
+        .power-up-btn:hover {
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(0,245,255,0.4);
+        }
+        .power-up-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Achievement unlock animation */
+        @keyframes achievementUnlock {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* Confetti burst */
+        @keyframes confettiBurst {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-200px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Leaderboard effects */
+        @keyframes leaderGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+            50% { box-shadow: 0 0 25px rgba(255,215,0,0.6), 0 0 40px rgba(255,215,0,0.3); }
+        }
+        @keyframes newHighScore {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1) rotate(-2deg); }
+            50% { transform: scale(1.15) rotate(2deg); }
+            75% { transform: scale(1.1) rotate(-1deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .leader-entry {
+            transition: all 0.3s ease;
+        }
+        .leader-entry:hover {
+            transform: translateX(5px);
+        }
+        #leaderboard-display {
+            animation: leaderboardFloat 4s ease-in-out infinite;
+        }
+        @keyframes leaderboardFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+    </style>
+    <script>
+        // ═══════════════════════════════════════════════════════════════════════
+        // 🏆 PERMANENT LEADERBOARD SYSTEM 🏆
+        // ═══════════════════════════════════════════════════════════════════════
+
+        var LEADERBOARD_KEY = 'kenneth_biotech_leaderboard';
+
+        window.getLeaderboard = function() {
+            try {
+                var data = localStorage.getItem(LEADERBOARD_KEY);
+                if (data) {
+                    return JSON.parse(data);
+                }
+            } catch(e) {
+                console.error('Error loading leaderboard:', e);
+            }
+            // Default leaderboard
+            return [
+                { name: 'Kenneth', score: 1000 },
+                { name: '---', score: 0 },
+                { name: '---', score: 0 }
+            ];
+        };
+
+        window.saveLeaderboard = function(leaderboard) {
+            try {
+                localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+            } catch(e) {
+                console.error('Error saving leaderboard:', e);
+            }
+        };
+
+        window.updateLeaderboardDisplay = function() {
+            var leaderboard = window.getLeaderboard();
+            for (var i = 0; i < 3; i++) {
+                var entry = leaderboard[i] || { name: '---', score: 0 };
+                var nameEl = document.getElementById('name-' + (i + 1));
+                var scoreEl = document.getElementById('score-' + (i + 1));
+                if (nameEl) nameEl.textContent = entry.name;
+                if (scoreEl) scoreEl.textContent = entry.score.toLocaleString();
+            }
+        };
+
+        window.checkHighScore = function(newScore, playerName) {
+            playerName = playerName || 'Kenneth';
+            var leaderboard = window.getLeaderboard();
+            var position = -1;
+
+            // Check if this score makes the top 3
+            for (var i = 0; i < 3; i++) {
+                if (newScore > (leaderboard[i]?.score || 0)) {
+                    position = i;
+                    break;
+                }
+            }
+
+            if (position >= 0) {
+                // Insert new score
+                leaderboard.splice(position, 0, { name: playerName, score: newScore });
+                // Keep only top 3
+                leaderboard = leaderboard.slice(0, 3);
+                window.saveLeaderboard(leaderboard);
+                window.updateLeaderboardDisplay();
+
+                // Celebrate!
+                window.celebrateHighScore(position);
+                return position + 1; // Return 1st, 2nd, or 3rd place
+            }
+            return 0; // Not on leaderboard
+        };
+
+        window.celebrateHighScore = function(position) {
+            var leaderboard = document.getElementById('leaderboard-display');
+            var entryEl = document.getElementById('leader-' + (position + 1));
+
+            // Flash the leaderboard
+            leaderboard.style.animation = 'none';
+            setTimeout(function() {
+                leaderboard.style.animation = 'newHighScore 0.5s ease-in-out 3';
+            }, 10);
+            setTimeout(function() {
+                leaderboard.style.animation = 'leaderboardFloat 4s ease-in-out infinite';
+            }, 1600);
+
+            // Flash the entry
+            if (entryEl) {
+                entryEl.style.animation = 'none';
+                setTimeout(function() {
+                    entryEl.style.animation = 'leaderGlow 0.3s ease-in-out 6';
+                }, 10);
+            }
+
+            // Create confetti
+            window.createLeaderboardConfetti();
+
+            // BOB celebrates too!
+            if (window.bobCelebrate) {
+                window.bobCelebrate();
+            }
+        };
+
+        window.createLeaderboardConfetti = function() {
+            var confettiColors = ['🎉', '🌟', '⭐', '✨', '🏆', '💫', '🥇'];
+            for (var i = 0; i < 20; i++) {
+                var confetti = document.createElement('div');
+                confetti.textContent = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.cssText = 'position: fixed; font-size: ' + (20 + Math.random() * 20) + 'px; left: ' + (20 + Math.random() * 60) + '%; top: 20%; pointer-events: none; animation: confettiBurst ' + (1 + Math.random()) + 's ease-out forwards; z-index: 100001;';
+                document.body.appendChild(confetti);
+                setTimeout(function(el) { el.remove(); }, 2000, confetti);
+            }
+        };
+
+        // Initialize leaderboard on load
+        window.addEventListener('load', function() {
+            setTimeout(window.updateLeaderboardDisplay, 500);
+        });
+
+        // Hook into game completion to check for high scores
+        window.addEventListener('levelComplete', function(e) {
+            if (e.detail && e.detail.score) {
+                window.checkHighScore(e.detail.score, 'Kenneth');
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // GLOBAL GAME FUNCTIONS - Work regardless of KennethGame loading
+        // ═══════════════════════════════════════════════════════════════════════
+
+        window.gameShowScreen = function(screenId) {
+            console.log('[GameControl] Showing screen:', screenId);
+            // Hide all screens by removing active class only (let CSS handle display)
+            document.querySelectorAll('.screen').forEach(function(s) {
+                s.classList.remove('active');
+            });
+            // Show requested screen
+            var screen = document.getElementById(screenId + '-screen');
+            if (screen) {
+                screen.classList.add('active');
+            }
+            // Also try KennethGame.UI if available for proper initialization
+            if (window.KennethGame && KennethGame.UI && KennethGame.UI.showScreen) {
+                try { 
+                    KennethGame.UI.showScreen(screenId); 
+                } catch(e) { 
+                    console.log('KennethGame UI error (non-fatal):', e); 
+                }
+            }
+        };
+
+        window.gamePlay = function() {
+            console.log('[GameControl] Starting game!');
+            // Show game screen first
+            window.gameShowScreen('game');
+
+            // Then try to start the level
+            if (window.KennethGame && KennethGame.Logic && KennethGame.Logic.startLevel) {
+                try {
+                    console.log('[GameControl] Calling KennethGame.Logic.startLevel...');
+                    KennethGame.Logic.startLevel('1-1');
+                    console.log('[GameControl] Level started successfully');
+                } catch(e) {
+                    console.error('[GameControl] Error starting level:', e);
+                    // Fallback: create a simple grid manually
+                    window.createFallbackGrid();
+                }
+            } else if (window.KennethGame && KennethGame.UI && KennethGame.UI.startLevel) {
+                try { KennethGame.UI.startLevel('1-1'); } catch(e) { console.error('UI.startLevel error:', e); }
+            } else {
+                console.log('[GameControl] KennethGame not available, creating fallback grid');
+                window.createFallbackGrid();
+            }
+        };
+
+        // Fallback grid creation if game logic fails
+        window.createFallbackGrid = function() {
+            var grid = document.getElementById('game-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            grid.style.gridTemplateColumns = 'repeat(4, 70px)';
+            grid.style.gridTemplateRows = 'repeat(4, 70px)';
+
+            for (var i = 0; i < 16; i++) {
+                var cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.style.cssText = 'width: 70px; height: 70px; background: rgba(0,245,255,0.1); border: 2px solid rgba(0,245,255,0.3); border-radius: 8px;';
+                grid.appendChild(cell);
+            }
+            console.log('[GameControl] Fallback grid created with 16 cells');
+        };
+
+        window.gameSandbox = function() {
+            console.log('[GameControl] Starting sandbox!');
+            if (window.KennethGame && KennethGame.UI && KennethGame.UI.startSandbox) {
+                try { KennethGame.UI.startSandbox(); } catch(e) { console.log('KennethGame error:', e); }
+            } else {
+                window.gameShowScreen('game');
+            }
+        };
+
+        window.showHelp = function() {
+            console.log('[GameControl] Showing help!');
+            window.gameShowScreen('tutorial');
+            // Also show an alert as backup
+            if (!document.getElementById('tutorial-screen')) {
+                alert('📖 HOW TO PLAY:\n\n1. Drag bio-modules from the tray to the grid\n2. Connect matching ports (same color)\n3. Create synergies for bonus points!\n4. Beat the target score before time runs out!\n\n🎯 Tips:\n- Hearts connect to blood vessels\n- Lungs connect to hearts\n- Matching ports = more points!');
+            }
+        };
+
+        // Toggle control panel collapse
+        window.controlPanelCollapsed = false;
+        window.toggleControlPanel = function() {
+            var panel = document.getElementById('kenneth-controls');
+            var content = document.getElementById('control-panel-content');
+            var btn = panel.querySelector('button');
+
+            window.controlPanelCollapsed = !window.controlPanelCollapsed;
+
+            if (window.controlPanelCollapsed) {
+                panel.style.padding = '10px';
+                panel.style.width = 'auto';
+                if (content) content.style.display = 'none';
+                btn.textContent = '+';
+                btn.title = 'Expand';
+            } else {
+                panel.style.padding = '20px';
+                if (content) content.style.display = 'block';
+                btn.textContent = '−';
+                btn.title = 'Minimize';
+            }
+        };
+
+        // ═══════════════════════════════════════════════════════════════════════
+
+        // EMERGENCY FIX: Direct button handlers
+        window.addEventListener('load', function() {
+            console.log('EMERGENCY FIX: Attaching direct handlers...');
+
+            // Force remove loading screen after 3 seconds
+            setTimeout(function() {
+                var loading = document.getElementById('loading-screen');
+                if (loading) {
+                    loading.classList.remove('active');
+                    loading.style.display = 'none';
+                }
+            }, 3000);
+
+            // Direct button handlers that bypass all other code
+            setTimeout(function() {
+                var btnPlay = document.getElementById('btn-play');
+                var btnLevels = document.getElementById('btn-levels');
+                var btnSandbox = document.getElementById('btn-sandbox');
+                var btnCollection = document.getElementById('btn-collection');
+                var btnTutorial = document.getElementById('btn-tutorial');
+                var btnSettings = document.getElementById('btn-settings');
+
+                if (btnPlay) {
+                    btnPlay.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('PLAY clicked via direct handler!');
+                        window.gamePlay();
+                    }, true);
+                }
+                if (btnLevels) {
+                    btnLevels.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('LEVELS clicked via direct handler!');
+                        window.gameShowScreen('levels');
+                    }, true);
+                }
+                if (btnSandbox) {
+                    btnSandbox.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('SANDBOX clicked via direct handler!');
+                        window.gameSandbox();
+                    }, true);
+                }
+                if (btnCollection) {
+                    btnCollection.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('COLLECTION clicked via direct handler!');
+                        window.gameShowScreen('collection');
+                    }, true);
+                }
+                if (btnTutorial) {
+                    btnTutorial.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('TUTORIAL clicked via direct handler!');
+                        window.gameShowScreen('tutorial');
+                    }, true);
+                }
+                if (btnSettings) {
+                    btnSettings.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        console.log('SETTINGS clicked via direct handler!');
+                        window.gameShowScreen('settings');
+                    }, true);
+                }
+                console.log('EMERGENCY FIX: Direct handlers attached!');
+            }, 2000);
+
+            // Debug status
+            var status = document.getElementById('debug-status');
+            var checks = [
+                ['CONSTANTS', !!KennethGame.CONSTANTS],
+                ['Utils', !!KennethGame.Utils],
+                ['State', !!KennethGame.State],
+                ['UI', !!KennethGame.UI],
+                ['UI.showScreen', !!(KennethGame.UI && KennethGame.UI.showScreen)],
+                ['UI.startLevel', !!(KennethGame.UI && KennethGame.UI.startLevel)],
+                ['Logic', !!KennethGame.Logic],
+                ['Audio', !!KennethGame.Audio],
+                ['Particles', !!KennethGame.Particles]
+            ];
+            var html = '';
+            checks.forEach(function(c) {
+                html += '<div style="color:' + (c[1] ? '#0f0' : '#f00') + '">' + (c[1] ? '✓' : '✗') + ' ' + c[0] + '</div>';
+            });
+            status.innerHTML = html;
+            console.log('DEBUG: Module Status', checks);
+
+            // Initialize buddy display after short delay
+            setTimeout(function() {
+                window.updateBuddyDisplay();
+            }, 2500);
+        });
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // LAB BUDDIES FUNCTIONS 🐾
+        // ═══════════════════════════════════════════════════════════════════════
+
+        window.updateBuddyDisplay = function() {
+            if (!KennethGame.State) return;
+
+            var buddy = KennethGame.State.getActiveBuddy();
+            var treats = KennethGame.State.getTreats();
+
+            document.getElementById('buddy-emoji').textContent = buddy.emoji;
+            document.getElementById('buddy-treats').textContent = treats;
+
+            // Update hearts
+            var hearts = '';
+            for (var i = 0; i < 5; i++) {
+                hearts += i < buddy.happiness ? '❤️' : '🖤';
+            }
+            document.getElementById('buddy-hearts').textContent = hearts;
+        };
+
+        window.buddySpeak = function() {
+            if (!KennethGame.State) return;
+
+            var phrase = KennethGame.State.getBuddyPhrase();
+            document.getElementById('buddy-speech').textContent = phrase;
+
+            // Bounce animation
+            var emoji = document.getElementById('buddy-emoji');
+            emoji.style.animation = 'none';
+            setTimeout(function() { emoji.style.animation = 'buddyBounce 0.3s ease-in-out 3'; }, 10);
+            setTimeout(function() { emoji.style.animation = 'buddyBounce 1s ease-in-out infinite'; }, 1000);
+        };
+
+        window.showBuddies = function() {
+            var modal = document.getElementById('buddies-modal');
+            modal.style.display = 'flex';
+            window.renderBuddiesGrid();
+        };
+
+        window.closeBuddies = function() {
+            document.getElementById('buddies-modal').style.display = 'none';
+        };
+
+        window.renderBuddiesGrid = function() {
+            var grid = document.getElementById('buddies-grid');
+            grid.innerHTML = '';
+
+            // Default buddies if KennethGame not available
+            var defaultBuddies = {
+                puppy: { emoji: '🐕', name: 'Beaker', title: 'Lab Puppy', ability: 'Extra time', color: '#ff9500', unlockStars: 0 },
+                cat: { emoji: '🐱', name: 'Catalyst', title: 'Science Cat', ability: 'Hint boost', color: '#a855f7', unlockStars: 10 },
+                hamster: { emoji: '🐹', name: 'Pipette', title: 'Lab Hamster', ability: 'Combo boost', color: '#ff69b4', unlockStars: 25 },
+                owl: { emoji: '🦉', name: 'Newton', title: 'Wise Owl', ability: 'Score bonus', color: '#00d4ff', unlockStars: 50 },
+                bunny: { emoji: '🐰', name: 'Bunsen', title: 'Lab Bunny', ability: 'Extra lives', color: '#00ff88', unlockStars: 100 }
+            };
+
+            var buddies = (window.KennethGame && KennethGame.CONSTANTS && KennethGame.CONSTANTS.LAB_BUDDIES) || defaultBuddies;
+            var player = (window.KennethGame && KennethGame.State && KennethGame.State.getPlayer) ? KennethGame.State.getPlayer() : { buddies: {}, activeBuddy: 'puppy' };
+            var totalStars = (window.KennethGame && KennethGame.State && KennethGame.State.getTotalStars) ? KennethGame.State.getTotalStars() : 0;
+
+            Object.keys(buddies).forEach(function(id) {
+                var buddy = buddies[id];
+                var state = (player.buddies && player.buddies[id]) || { unlocked: id === 'puppy', level: 1 };
+                var isUnlocked = state.unlocked || totalStars >= buddy.unlockStars;
+                var isActive = player.activeBuddy === id;
+
+                var card = document.createElement('div');
+                card.style.cssText = 'background: ' + (isActive ? 'linear-gradient(135deg, #2a3a5a, #3a4a6a)' : 'rgba(20,30,50,0.8)') + '; border: 2px solid ' + (isActive ? '#ffd700' : (isUnlocked ? buddy.color : '#444')) + '; border-radius: 12px; padding: 15px; text-align: center; cursor: ' + (isUnlocked ? 'pointer' : 'not-allowed') + '; opacity: ' + (isUnlocked ? '1' : '0.5') + '; transition: all 0.2s;';
+
+                card.innerHTML = '<div style="font-size: 2.5rem; margin-bottom: 8px;">' + buddy.emoji + '</div>' +
+                    '<div style="color: #fff; font-weight: 700; font-size: 14px;">' + buddy.name + '</div>' +
+                    '<div style="color: ' + buddy.color + '; font-size: 11px;">' + buddy.title + '</div>' +
+                    '<div style="color: #888; font-size: 10px; margin-top: 5px;">✨ ' + buddy.ability + '</div>' +
+                    (isUnlocked ? '<div style="color: #00ff88; font-size: 10px; margin-top: 5px;">Lv.' + (state.level || 1) + '</div>' : '<div style="color: #ffd700; font-size: 10px; margin-top: 5px;">🔒 ' + buddy.unlockStars + ' stars</div>');
+
+                if (isUnlocked) {
+                    card.onclick = function() {
+                        if (window.KennethGame && KennethGame.State && KennethGame.State.selectBuddy) {
+                            KennethGame.State.selectBuddy(id);
+                        }
+                        // Update the buddy display emoji
+                        var buddyEmoji = document.getElementById('buddy-emoji');
+                        if (buddyEmoji) buddyEmoji.textContent = buddy.emoji;
+                        window.updateBuddyDisplay && window.updateBuddyDisplay();
+                        window.renderBuddiesGrid();
+                        window.buddySpeak && window.buddySpeak();
+                    };
+                }
+
+                grid.appendChild(card);
+            });
+        };
+
+        window.feedBuddy = function() {
+            console.log('[BuddyAction] Feed Buddy clicked!');
+            var success = false;
+
+            // Try to use KennethGame.State if available
+            if (window.KennethGame && KennethGame.State && KennethGame.State.feedBuddy) {
+                success = KennethGame.State.feedBuddy();
+            } else {
+                // Fallback - just show effects
+                success = true;
+            }
+
+            if (success) {
+                if (window.updateBuddyDisplay) window.updateBuddyDisplay();
+                document.getElementById('buddy-speech').textContent = "Yum! Thank you, Kenneth! 🦴";
+                // Create treat particle effect
+                if (window.createBuddyEffect) window.createBuddyEffect('🦴', '#ff9500');
+                // Bounce the buddy
+                var emoji = document.getElementById('buddy-emoji');
+                if (emoji) {
+                    emoji.style.animation = 'none';
+                    setTimeout(function() { emoji.style.animation = 'buddyEat 0.5s ease-in-out 3'; }, 10);
+                    setTimeout(function() { emoji.style.animation = 'buddyBounce 1s ease-in-out infinite'; }, 1600);
+                }
+            } else {
+                document.getElementById('buddy-speech').textContent = "No treats left! Earn more by playing! 🥺";
+                if (window.createBuddyEffect) window.createBuddyEffect('😢', '#888');
+            }
+            if (window.closeBuddies) window.closeBuddies();
+        };
+
+        window.petBuddy = function() {
+            console.log('[BuddyAction] Pet Buddy clicked!');
+
+            // Try to use KennethGame.State if available
+            if (window.KennethGame && KennethGame.State && KennethGame.State.petBuddy) {
+                KennethGame.State.petBuddy();
+            }
+
+            if (window.updateBuddyDisplay) window.updateBuddyDisplay();
+            var phrases = ["*happy noises* 💜", "I love you, Kenneth!", "Best friends forever! 💖", "That feels nice! 😊", "*purrs happily*", "More pets please! 🥰"];
+            var speechEl = document.getElementById('buddy-speech');
+            if (speechEl) speechEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+            // Create heart particle effect
+            if (window.createBuddyEffect) window.createBuddyEffect('💖', '#ff69b4');
+            // Happy bounce
+            var emoji = document.getElementById('buddy-emoji');
+            if (emoji) {
+                emoji.style.animation = 'none';
+                setTimeout(function() { emoji.style.animation = 'buddyHappy 0.3s ease-in-out 5'; }, 10);
+                setTimeout(function() { emoji.style.animation = 'buddyBounce 1s ease-in-out infinite'; }, 1600);
+            }
+            if (window.closeBuddies) window.closeBuddies();
+        };
+
+        // Create particle effects for buddy actions
+        window.createBuddyEffect = function(emoji, color) {
+            var display = document.getElementById('buddy-display');
+            for (var i = 0; i < 8; i++) {
+                var particle = document.createElement('div');
+                particle.textContent = emoji;
+                particle.style.cssText = 'position: absolute; font-size: ' + (16 + Math.random() * 12) + 'px; left: 50%; top: 50%; pointer-events: none; animation: buddyParticle 1s ease-out forwards; --angle: ' + (i * 45) + 'deg; --dist: ' + (40 + Math.random() * 30) + 'px; z-index: 100;';
+                display.appendChild(particle);
+                setTimeout(function(el) { el.remove(); }, 1000, particle);
+            }
+        };
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // BOB - Kenneth's Best Friend Forever! 💜
+        // ═══════════════════════════════════════════════════════════════════════
+
+        var bobPhrases = [
+            "You're amazing, Kenneth! 💜",
+            "BOB believes in you!",
+            "Let's do science together!",
+            "You're the BEST scientist!",
+            "BOB loves Kenneth forever!",
+            "Keep going, you got this!",
+            "*happy fluffy noises* 🥰",
+            "BOB is so proud of you!",
+            "Science is fun with Kenneth!",
+            "You make BOB so happy!",
+            "Best friends forever! 💖",
+            "BOB thinks you're super smart!",
+            "*gives you a big fluffy hug*",
+            "Kenneth + BOB = Best Team!",
+            "You're doing incredible!",
+            "BOB cheers for Kenneth! 🎉",
+            "You're my favorite person! 💜",
+            "BOB will always be here for you!",
+            "*wiggles with excitement*",
+            "Kenneth is the best at biotech!",
+            "We're going to learn SO much!",
+            "BOB is your #1 fan! 🌟",
+            "*bounces happily*",
+            "You can do ANYTHING!",
+            "BOB sends fluffy hugs! 🤗",
+            "Science superstar Kenneth! ⭐",
+            "Let's discover something NEW!",
+            "BOB thinks you're wonderful!",
+            "*squishes with happiness*",
+            "Dream big, Kenneth! 🚀"
+        ];
+
+        var bobCelebrationPhrases = [
+            "WOW KENNETH! YOU DID IT! 🎉",
+            "AMAZING! BOB IS SO PROUD! 💜",
+            "YOU'RE A GENIUS! 🧠✨",
+            "*does a happy dance* 🕺",
+            "INCREDIBLE WORK! 🌟🌟🌟",
+            "KENNETH YOU'RE THE BEST! 🏆"
+        ];
+
+        window.bobSpeak = function(celebration) {
+            var speech = document.getElementById('bob-speech');
+            var phrases = celebration ? bobCelebrationPhrases : bobPhrases;
+            var phrase = phrases[Math.floor(Math.random() * phrases.length)];
+            speech.textContent = phrase;
+            speech.style.display = 'block';
+
+            // Super bounce animation on the cube
+            var bob = document.getElementById('bob-cube');
+            if (bob) {
+                bob.style.animation = 'none';
+                setTimeout(function() {
+                    bob.style.animation = celebration ? 'bobCelebrate 0.5s ease-in-out 5, bob3dRotate 8s ease-in-out infinite' : 'bobBounce 0.5s ease-in-out 3, bob3dRotate 8s ease-in-out infinite';
+                }, 10);
+                setTimeout(function() {
+                    bob.style.animation = 'bob3dRotate 8s ease-in-out infinite';
+                }, celebration ? 2500 : 1500);
+            }
+
+            // Create extra sparkles on celebration
+            if (celebration) {
+                window.createBobSparkles();
+            }
+
+            // Hide speech after 4 seconds
+            clearTimeout(window.bobSpeechTimeout);
+            window.bobSpeechTimeout = setTimeout(function() {
+                speech.style.display = 'none';
+            }, celebration ? 6000 : 4000);
+        };
+
+        window.bobCelebrate = function() {
+            window.bobSpeak(true);
+        };
+
+        window.createBobSparkles = function() {
+            var container = document.getElementById('bob-container');
+            for (var i = 0; i < 10; i++) {
+                var sparkle = document.createElement('div');
+                sparkle.textContent = ['✨', '🌟', '⭐', '💜', '💖', '🎉'][Math.floor(Math.random() * 6)];
+                sparkle.style.cssText = 'position: absolute; font-size: ' + (20 + Math.random() * 20) + 'px; left: ' + (Math.random() * 280) + 'px; top: ' + (Math.random() * 280) + 'px; animation: celebrationSparkle 1s ease-out forwards; z-index: 10;';
+                container.appendChild(sparkle);
+                setTimeout(function(el) { el.remove(); }, 1000, sparkle);
+            }
+        };
+
+        // Add celebration sparkle animation
+        var celebrationStyle = document.createElement('style');
+        celebrationStyle.textContent = '@keyframes celebrationSparkle { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 50% { transform: scale(1.5) rotate(180deg); opacity: 1; } 100% { transform: scale(2) rotate(360deg) translateY(-50px); opacity: 0; } } @keyframes bobCelebrate { 0%, 100% { transform: scale(1) rotate(0deg); } 25% { transform: scale(1.2) rotate(-15deg); } 50% { transform: scale(1.1) rotate(15deg); } 75% { transform: scale(1.2) rotate(-10deg); } }';
+        document.head.appendChild(celebrationStyle);
+
+        // BOB says hi when page loads
+        setTimeout(function() {
+            window.bobSpeak();
+        }, 3000);
+
+        // BOB randomly cheers Kenneth on
+        setInterval(function() {
+            if (Math.random() < 0.25) { // 25% chance every 45 seconds
+                window.bobSpeak();
+            }
+        }, 45000);
+
+        // BOB notices when Kenneth completes something
+        window.addEventListener('levelComplete', function() {
+            window.bobCelebrate();
+        });
+    </script>
+</body>
+</html>

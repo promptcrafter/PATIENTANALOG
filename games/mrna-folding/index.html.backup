@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mRNA Folding Simulator | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; --amber: #ffaa00; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; }
+    .stat-value { font-size: 1.5rem; font-weight: bold; color: var(--emerald); }
+    .stat-label { font-size: 11px; color: #666; }
+    .sequence-display {
+      background: rgba(0,20,40,0.8); border: 1px solid rgba(0,85,255,0.3);
+      border-radius: 12px; padding: 20px; margin-bottom: 20px;
+    }
+    .sequence { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+    .base {
+      width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-weight: bold; cursor: pointer; transition: all 0.2s;
+    }
+    .base:hover { transform: scale(1.1); }
+    .base.A { background: rgba(255,51,102,0.3); border: 2px solid var(--crimson); color: var(--crimson); }
+    .base.U { background: rgba(0,85,255,0.3); border: 2px solid var(--sapphire); color: var(--sapphire); }
+    .base.G { background: rgba(0,204,102,0.3); border: 2px solid var(--emerald); color: var(--emerald); }
+    .base.C { background: rgba(255,170,0,0.3); border: 2px solid var(--amber); color: var(--amber); }
+    .base.selected { box-shadow: 0 0 15px white; transform: scale(1.1); }
+    .base.bonded { opacity: 0.5; }
+    .bonds { margin-top: 15px; font-size: 13px; color: #888; }
+    .hint { color: #666; font-size: 13px; margin: 20px 0; }
+    .btn { padding: 10px 20px; background: var(--sapphire); color: white; border: none; border-radius: 8px; cursor: pointer; margin: 5px; }
+    .message { min-height: 24px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧬 mRNA Folding Simulator</h1>
+    <p class="subtitle">Form base pairs to create stable secondary structures!</p>
+
+    <div class="stats">
+      <div><div class="stat-value" id="stability">0</div><div class="stat-label">Stability (kcal/mol)</div></div>
+      <div><div class="stat-value" id="bonds">0</div><div class="stat-label">Bonds Formed</div></div>
+    </div>
+
+    <div class="sequence-display">
+      <p style="margin-bottom: 15px; font-size: 14px;">Click two complementary bases to form a bond (A-U, G-C)</p>
+      <div class="sequence" id="sequence"></div>
+      <div class="bonds" id="bondList">Bonds: none</div>
+    </div>
+
+    <div class="hint">RNA pairing: A↔U and G↔C</div>
+    <button class="btn" onclick="resetGame()">Reset</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const rnaSequence = ['A', 'U', 'G', 'C', 'G', 'A', 'U', 'C', 'A', 'G', 'U', 'C'];
+    const pairs = { A: 'U', U: 'A', G: 'C', C: 'G' };
+    let selected = null;
+    let bonds = [];
+    let bonded = new Set();
+
+    function init() {
+      const seq = document.getElementById('sequence');
+      seq.innerHTML = '';
+      rnaSequence.forEach((base, i) => {
+        const el = document.createElement('div');
+        el.className = `base ${base}`;
+        el.textContent = base;
+        el.dataset.index = i;
+        el.onclick = () => selectBase(el, i);
+        seq.appendChild(el);
+      });
+    }
+
+    function selectBase(el, index) {
+      if (bonded.has(index)) return;
+
+      if (selected === null) {
+        el.classList.add('selected');
+        selected = { el, index, base: rnaSequence[index] };
+      } else if (selected.index === index) {
+        el.classList.remove('selected');
+        selected = null;
+      } else {
+        const msg = document.getElementById('message');
+        if (pairs[selected.base] === rnaSequence[index]) {
+          // Valid bond
+          selected.el.classList.remove('selected');
+          selected.el.classList.add('bonded');
+          el.classList.add('bonded');
+          bonded.add(selected.index);
+          bonded.add(index);
+          bonds.push([selected.index, index]);
+
+          const stability = bonds.length * -2.5;
+          document.getElementById('stability').textContent = stability.toFixed(1);
+          document.getElementById('bonds').textContent = bonds.length;
+          document.getElementById('bondList').textContent = `Bonds: ${bonds.map(b => `${b[0]+1}-${b[1]+1}`).join(', ')}`;
+
+          msg.textContent = '✓ Bond formed!';
+          msg.style.color = '#00cc66';
+        } else {
+          msg.textContent = '✗ Invalid pair! A↔U and G↔C only.';
+          msg.style.color = '#ff3366';
+          selected.el.classList.remove('selected');
+        }
+        selected = null;
+      }
+    }
+
+    function resetGame() {
+      selected = null;
+      bonds = [];
+      bonded = new Set();
+      document.getElementById('stability').textContent = '0';
+      document.getElementById('bonds').textContent = '0';
+      document.getElementById('bondList').textContent = 'Bonds: none';
+      document.getElementById('message').textContent = '';
+      init();
+    }
+
+    init();
+  </script>
+</body>
+</html>

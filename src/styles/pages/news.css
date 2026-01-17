@@ -1,0 +1,852 @@
+/* ═══════════════════════════════════════════════════════════════
+   NEWS PAGE - FILING CABINET STYLE
+   Premium sci-fi filing cabinet with visible folder tabs
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Filing Cabinet Container */
+.filing-cabinet {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Status Bar - Breaking/Recent/Archive */
+.news-status-bar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  background: rgba(0, 15, 40, 0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.breaking {
+  background: rgba(255, 0, 68, 0.15);
+  border: 1px solid rgba(255, 0, 68, 0.4);
+  color: #ff0044;
+}
+
+.status-indicator.breaking::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #ff0044;
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.status-indicator.recent {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+}
+
+.status-indicator.archive {
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid rgba(255, 170, 0, 0.3);
+  color: #ffaa00;
+}
+
+.status-indicator:hover {
+  transform: translateY(-2px);
+}
+
+.status-indicator.active {
+  box-shadow: 0 0 15px currentColor;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Category Folder Tabs */
+.folder-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 10;
+}
+
+.folder-tab {
+  position: relative;
+  padding: 12px 20px 14px;
+  background: linear-gradient(180deg, rgba(20, 40, 80, 0.9) 0%, rgba(10, 25, 50, 0.95) 100%);
+  border: 1px solid var(--glass-border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(224, 242, 254, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.folder-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s ease;
+}
+
+.folder-tab:hover {
+  background: linear-gradient(180deg, rgba(30, 60, 100, 0.95) 0%, rgba(15, 35, 70, 0.98) 100%);
+  color: rgba(224, 242, 254, 0.9);
+  transform: translateY(-2px);
+}
+
+.folder-tab.active {
+  background: linear-gradient(180deg, rgba(0, 30, 70, 0.98) 0%, rgba(0, 20, 50, 1) 100%);
+  color: #ffffff;
+  z-index: 20;
+}
+
+.folder-tab.active::before {
+  background: var(--tab-color, #00d4ff);
+}
+
+.folder-tab .tab-icon {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 5px;
+  border-radius: 3px;
+  background: var(--tab-color, #00d4ff);
+  color: #000;
+}
+
+.folder-tab .tab-count {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(224, 242, 254, 0.5);
+}
+
+/* Category-specific tab colors */
+.folder-tab[data-category="chip"] { --tab-color: #00c8ff; }
+.folder-tab[data-category="organoid"] { --tab-color: #8b5cf6; }
+.folder-tab[data-category="digital"] { --tab-color: #3b82f6; }
+.folder-tab[data-category="regulatory"] { --tab-color: #f59e0b; }
+.folder-tab[data-category="pharma"] { --tab-color: #00e5a0; }
+.folder-tab[data-category="industry"] { --tab-color: #f97316; }
+.folder-tab[data-category="research"] { --tab-color: #ec4899; }
+.folder-tab[data-category="tech"] { --tab-color: #84cc16; }
+.folder-tab[data-category="ai"] { --tab-color: #a855f7; }
+.folder-tab[data-category="clinical"] { --tab-color: #ef4444; }
+
+/* Filing Drawer - Main Content Area */
+.filing-drawer {
+  background: linear-gradient(180deg, rgba(0, 20, 50, 0.98) 0%, rgba(0, 15, 40, 0.95) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: 0 12px 12px 12px;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.filing-drawer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(0, 30, 80, 0.3) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Drawer Header */
+.drawer-header {
+  padding: 25px 30px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.drawer-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.drawer-title .category-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.drawer-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.drawer-control {
+  padding: 8px 14px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: rgba(224, 242, 254, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.drawer-control:hover {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+}
+
+.drawer-control.active {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+/* News Cards Grid */
+.news-files {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* File Card - Individual News Item */
+.file-card {
+  background: linear-gradient(135deg, rgba(10, 30, 60, 0.8) 0%, rgba(5, 20, 45, 0.9) 100%);
+  border: 1px solid rgba(0, 153, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--file-color, #00d4ff);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.file-card:hover {
+  transform: translateY(-4px) translateX(4px);
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.file-card:hover::before {
+  opacity: 1;
+}
+
+.file-card.breaking::after {
+  content: 'BREAKING';
+  position: absolute;
+  top: 10px;
+  right: -25px;
+  background: #ff0044;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  letter-spacing: 1px;
+  padding: 3px 30px;
+  transform: rotate(45deg);
+}
+
+.file-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.file-category {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--file-color, #00d4ff);
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.file-date {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  color: rgba(224, 242, 254, 0.5);
+}
+
+.file-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.file-source {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: rgba(224, 242, 254, 0.5);
+}
+
+.file-source-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+}
+
+/* Category-specific file colors */
+.file-card[data-category="chip"] { --file-color: #00c8ff; }
+.file-card[data-category="organoid"] { --file-color: #8b5cf6; }
+.file-card[data-category="digital"] { --file-color: #3b82f6; }
+.file-card[data-category="regulatory"] { --file-color: #f59e0b; }
+.file-card[data-category="pharma"] { --file-color: #00e5a0; }
+.file-card[data-category="industry"] { --file-color: #f97316; }
+.file-card[data-category="research"] { --file-color: #ec4899; }
+.file-card[data-category="tech"] { --file-color: #84cc16; }
+.file-card[data-category="ai"] { --file-color: #a855f7; }
+.file-card[data-category="clinical"] { --file-color: #ef4444; }
+
+/* Empty State */
+.empty-drawer {
+  text-align: center;
+  padding: 80px 40px;
+  color: rgba(224, 242, 254, 0.5);
+}
+
+.empty-drawer-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.empty-drawer-text {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+}
+
+/* Loading State */
+.drawer-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  gap: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 212, 255, 0.2);
+  border-top-color: #00d4ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Category Overview Cards */
+.category-overview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.category-card {
+  background: linear-gradient(135deg, rgba(10, 30, 60, 0.7) 0%, rgba(5, 20, 45, 0.8) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--cat-color, #00d4ff);
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--cat-color, #00d4ff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.category-card .cat-icon {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: var(--cat-color, #00d4ff);
+  color: #000;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.category-card .cat-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.category-card .cat-count {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--cat-color, #00d4ff);
+}
+
+.category-card .cat-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  color: rgba(224, 242, 254, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Category card colors */
+.category-card[data-category="chip"] { --cat-color: #00c8ff; }
+.category-card[data-category="organoid"] { --cat-color: #8b5cf6; }
+.category-card[data-category="digital"] { --cat-color: #3b82f6; }
+.category-card[data-category="regulatory"] { --cat-color: #f59e0b; }
+.category-card[data-category="pharma"] { --cat-color: #00e5a0; }
+.category-card[data-category="industry"] { --cat-color: #f97316; }
+.category-card[data-category="research"] { --cat-color: #ec4899; }
+.category-card[data-category="tech"] { --cat-color: #84cc16; }
+.category-card[data-category="ai"] { --cat-color: #a855f7; }
+.category-card[data-category="clinical"] { --cat-color: #ef4444; }
+
+/* Research Section */
+.research-section {
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.research-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.research-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.research-title .pub-badge {
+  background: #ec4899;
+  color: #000;
+  font-size: 9px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* Footer */
+.news-footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 40px;
+}
+
+.news-footer-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  color: rgba(224, 242, 254, 0.5);
+  margin-bottom: 15px;
+}
+
+.news-footer .refresh-btn {
+  background: linear-gradient(180deg, #00d4ff 0%, #0066ff 50%, #004499 100%);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #003366, 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.news-footer .refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #003366, 0 8px 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .category-overview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .folder-tabs {
+    gap: 2px;
+  }
+
+  .folder-tab {
+    padding: 10px 14px 12px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .category-overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .news-files {
+    grid-template-columns: 1fr;
+  }
+
+  .drawer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .folder-tabs {
+    flex-direction: column;
+  }
+
+  .folder-tab {
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 4px;
+  }
+
+  .folder-tab.active {
+    border-radius: 8px;
+  }
+
+  .filing-drawer {
+    border-radius: 12px;
+  }
+
+  .category-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .news-status-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .status-indicator {
+    justify-content: center;
+  }
+}
+
+/* Legacy styles for backward compatibility */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 1200px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.news-column {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  transition: all 0.3s ease;
+}
+
+.news-column:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Category-specific colors */
+.news-chip { border-color: rgba(0, 200, 255, 0.4); }
+.news-chip .news-column-title { color: #00c8ff; }
+.news-chip:hover { border-color: #00c8ff; box-shadow: 0 0 20px rgba(0, 200, 255, 0.2); }
+
+.news-organoid { border-color: rgba(139, 92, 246, 0.4); }
+.news-organoid .news-column-title { color: #8b5cf6; }
+.news-organoid:hover { border-color: #8b5cf6; box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+
+.news-digital { border-color: rgba(59, 130, 246, 0.4); }
+.news-digital .news-column-title { color: #3b82f6; }
+.news-digital:hover { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+
+.news-regulatory { border-color: rgba(245, 158, 11, 0.4); }
+.news-regulatory .news-column-title { color: #f59e0b; }
+.news-regulatory:hover { border-color: #f59e0b; box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+
+.news-pharma { border-color: rgba(16, 185, 129, 0.4); }
+.news-pharma .news-column-title { color: #00e5a0; }
+.news-pharma:hover { border-color: #00e5a0; box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+
+.news-industry { border-color: rgba(249, 115, 22, 0.4); }
+.news-industry .news-column-title { color: #f97316; }
+.news-industry:hover { border-color: #f97316; box-shadow: 0 0 20px rgba(249, 115, 22, 0.2); }
+
+.news-research { border-color: rgba(236, 72, 153, 0.4); }
+.news-research .news-column-title { color: #ec4899; }
+.news-research:hover { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.2); }
+
+.news-tech { border-color: rgba(132, 204, 22, 0.4); }
+.news-tech .news-column-title { color: #84cc16; }
+.news-tech:hover { border-color: #84cc16; box-shadow: 0 0 20px rgba(132, 204, 22, 0.2); }
+
+.news-ai { border-color: rgba(168, 85, 247, 0.4); }
+.news-ai .news-column-title { color: #a855f7; }
+.news-ai:hover { border-color: #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }
+
+.news-clinical { border-color: rgba(239, 68, 68, 0.4); }
+.news-clinical .news-column-title { color: #ef4444; }
+.news-clinical:hover { border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+
+/* News icon badge */
+.news-icon {
+  display: inline-block;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: currentColor;
+  color: var(--bg-primary);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.news-chip .news-icon { background: #00c8ff; color: #0a0f1a; }
+.news-organoid .news-icon { background: #8b5cf6; color: #0a0f1a; }
+.news-digital .news-icon { background: #3b82f6; color: #0a0f1a; }
+.news-regulatory .news-icon { background: #f59e0b; color: #0a0f1a; }
+.news-pharma .news-icon { background: #00e5a0; color: #0a0f1a; }
+.news-industry .news-icon { background: #f97316; color: #0a0f1a; }
+.news-research .news-icon { background: #ec4899; color: #0a0f1a; }
+.news-tech .news-icon { background: #84cc16; color: #0a0f1a; }
+.news-ai .news-icon { background: #a855f7; color: #0a0f1a; }
+.news-clinical .news-icon { background: #ef4444; color: #0a0f1a; }
+
+.news-column-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.news-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.feed-item {
+  display: block;
+  padding: var(--space-3);
+  background: var(--color-gray-900);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.feed-item:hover {
+  background: var(--color-gray-800);
+  transform: translateX(4px);
+}
+
+.feed-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feed-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Research Feed */
+.research-feed {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+.research-item {
+  display: block;
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.research-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.research-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.research-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Curated Footer Section */
+.curated-footer {
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--space-8);
+}
+
+.curated-block {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+.curated-text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.curated-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.curated-links span {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.curated-link {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.curated-link:hover {
+  color: #00d4ff;
+  text-decoration: underline;
+}
+
+.curated-copyright {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  opacity: 0.7;
+}

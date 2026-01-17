@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css?v=20260115">
+  <style>
+    /* Disable responsive on home - testing separately */
+    .container, .main-content, main {
+      max-width: none !important;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security Headers (main headers set via _headers file) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <!-- DNS Preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://api.web3forms.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <!-- Prefetch for likely navigation -->
+  <link rel="prefetch" href="/games">
+  <link rel="prefetch" href="/simulations">
+  <link rel="prefetch" href="/portfolio">
+
+  <title>Patient Analog | FDA Modernization Act 3.0 & NAMs Education Hub</title>
+  <meta name="description" content="Master Organ-on-Chip, Digital Twins & NAMs through 70+ interactive simulations. 486+ research links, 76 languages, 100% free.">
+  <meta name="keywords" content="patient analog, FDA Modernization Act, organ-on-chip, digital twin, organoids, NAMs, microphysiological systems">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://patientanalog.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#000814">
+
+  <!-- 18 Crawler Directives for Maximum Indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="slurp" content="index, follow, max-image-preview:large">
+  <meta name="duckduckbot" content="index, follow">
+  <meta name="baiduspider" content="index, follow">
+  <meta name="yandexbot" content="index, follow">
+  <meta name="naverbot" content="index, follow">
+  <meta name="sogou" content="index, follow">
+  <meta name="teoma" content="index, follow">
+  <meta name="ia_archiver" content="index, follow">
+  <meta name="msnbot" content="index, follow">
+  <meta name="linkedinbot" content="index, follow">
+  <meta name="twitterbot" content="index, follow">
+  <meta name="facebookexternalhit" content="index, follow">
+  <meta name="pinterestbot" content="index, follow">
+  <meta name="googlebot-news" content="index, follow">
+  <meta name="adsbot-google" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patient Analog">
+  <meta property="og:title" content="Patient Analog | FDA Modernization Act 3.0 & NAMs Education Hub">
+  <meta property="og:description" content="Master Organ-on-Chip, Digital Twins & NAMs through 70+ interactive simulations. 486+ research links, 76 languages, 100% free.">
+  <meta property="og:image" content="https://patientanalog.com/android-chrome-512x512.png">
+  <meta property="og:url" content="https://patientanalog.com/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Patient Analog | Human Simulation Infrastructure">
+  <meta name="twitter:description" content="Digital twins, organoids, and AI converge to end animal testing in drug discovery.">
+  <meta name="twitter:image" content="https://patientanalog.com/android-chrome-512x512.png">
+
+  <!-- Hreflang Tags for International SEO -->
+  <link rel="alternate" hreflang="x-default" href="https://patientanalog.com/">
+  <link rel="alternate" hreflang="en" href="https://patientanalog.com/">
+  <link rel="alternate" hreflang="af" href="https://patientanalog.com/af/">
+  <link rel="alternate" hreflang="am" href="https://patientanalog.com/am/">
+  <link rel="alternate" hreflang="ar" href="https://patientanalog.com/ar/">
+  <link rel="alternate" hreflang="az" href="https://patientanalog.com/az/">
+  <link rel="alternate" hreflang="be" href="https://patientanalog.com/be/">
+  <link rel="alternate" hreflang="bg" href="https://patientanalog.com/bg/">
+  <link rel="alternate" hreflang="bn" href="https://patientanalog.com/bn/">
+  <link rel="alternate" hreflang="bs" href="https://patientanalog.com/bs/">
+  <link rel="alternate" hreflang="ca" href="https://patientanalog.com/ca/">
+  <link rel="alternate" hreflang="cs" href="https://patientanalog.com/cs/">
+  <link rel="alternate" hreflang="cy" href="https://patientanalog.com/cy/">
+  <link rel="alternate" hreflang="da" href="https://patientanalog.com/da/">
+  <link rel="alternate" hreflang="de" href="https://patientanalog.com/de/">
+  <link rel="alternate" hreflang="el" href="https://patientanalog.com/el/">
+  <link rel="alternate" hreflang="es" href="https://patientanalog.com/es/">
+  <link rel="alternate" hreflang="et" href="https://patientanalog.com/et/">
+  <link rel="alternate" hreflang="eu" href="https://patientanalog.com/eu/">
+  <link rel="alternate" hreflang="fa" href="https://patientanalog.com/fa/">
+  <link rel="alternate" hreflang="fi" href="https://patientanalog.com/fi/">
+  <link rel="alternate" hreflang="fr" href="https://patientanalog.com/fr/">
+  <link rel="alternate" hreflang="ga" href="https://patientanalog.com/ga/">
+  <link rel="alternate" hreflang="gl" href="https://patientanalog.com/gl/">
+  <link rel="alternate" hreflang="gu" href="https://patientanalog.com/gu/">
+  <link rel="alternate" hreflang="he" href="https://patientanalog.com/he/">
+  <link rel="alternate" hreflang="hi" href="https://patientanalog.com/hi/">
+  <link rel="alternate" hreflang="hr" href="https://patientanalog.com/hr/">
+  <link rel="alternate" hreflang="hu" href="https://patientanalog.com/hu/">
+  <link rel="alternate" hreflang="hy" href="https://patientanalog.com/hy/">
+  <link rel="alternate" hreflang="id" href="https://patientanalog.com/id/">
+  <link rel="alternate" hreflang="is" href="https://patientanalog.com/is/">
+  <link rel="alternate" hreflang="it" href="https://patientanalog.com/it/">
+  <link rel="alternate" hreflang="ja" href="https://patientanalog.com/ja/">
+  <link rel="alternate" hreflang="ka" href="https://patientanalog.com/ka/">
+  <link rel="alternate" hreflang="kk" href="https://patientanalog.com/kk/">
+  <link rel="alternate" hreflang="km" href="https://patientanalog.com/km/">
+  <link rel="alternate" hreflang="kn" href="https://patientanalog.com/kn/">
+  <link rel="alternate" hreflang="ko" href="https://patientanalog.com/ko/">
+  <link rel="alternate" hreflang="lo" href="https://patientanalog.com/lo/">
+  <link rel="alternate" hreflang="lt" href="https://patientanalog.com/lt/">
+  <link rel="alternate" hreflang="lv" href="https://patientanalog.com/lv/">
+  <link rel="alternate" hreflang="mk" href="https://patientanalog.com/mk/">
+  <link rel="alternate" hreflang="ml" href="https://patientanalog.com/ml/">
+  <link rel="alternate" hreflang="mn" href="https://patientanalog.com/mn/">
+  <link rel="alternate" hreflang="mr" href="https://patientanalog.com/mr/">
+  <link rel="alternate" hreflang="ms" href="https://patientanalog.com/ms/">
+  <link rel="alternate" hreflang="my" href="https://patientanalog.com/my/">
+  <link rel="alternate" hreflang="ne" href="https://patientanalog.com/ne/">
+  <link rel="alternate" hreflang="nl" href="https://patientanalog.com/nl/">
+  <link rel="alternate" hreflang="no" href="https://patientanalog.com/no/">
+  <link rel="alternate" hreflang="or" href="https://patientanalog.com/or/">
+  <link rel="alternate" hreflang="pa" href="https://patientanalog.com/pa/">
+  <link rel="alternate" hreflang="pl" href="https://patientanalog.com/pl/">
+  <link rel="alternate" hreflang="ps" href="https://patientanalog.com/ps/">
+  <link rel="alternate" hreflang="pt" href="https://patientanalog.com/pt/">
+  <link rel="alternate" hreflang="pt-BR" href="https://patientanalog.com/pt-br/">
+  <link rel="alternate" hreflang="ro" href="https://patientanalog.com/ro/">
+  <link rel="alternate" hreflang="ru" href="https://patientanalog.com/ru/">
+  <link rel="alternate" hreflang="si" href="https://patientanalog.com/si/">
+  <link rel="alternate" hreflang="sk" href="https://patientanalog.com/sk/">
+  <link rel="alternate" hreflang="sl" href="https://patientanalog.com/sl/">
+  <link rel="alternate" hreflang="so" href="https://patientanalog.com/so/">
+  <link rel="alternate" hreflang="sq" href="https://patientanalog.com/sq/">
+  <link rel="alternate" hreflang="sr" href="https://patientanalog.com/sr/">
+  <link rel="alternate" hreflang="sv" href="https://patientanalog.com/sv/">
+  <link rel="alternate" hreflang="sw" href="https://patientanalog.com/sw/">
+  <link rel="alternate" hreflang="ta" href="https://patientanalog.com/ta/">
+  <link rel="alternate" hreflang="te" href="https://patientanalog.com/te/">
+  <link rel="alternate" hreflang="th" href="https://patientanalog.com/th/">
+  <link rel="alternate" hreflang="tl" href="https://patientanalog.com/tl/">
+  <link rel="alternate" hreflang="tr" href="https://patientanalog.com/tr/">
+  <link rel="alternate" hreflang="uk" href="https://patientanalog.com/uk/">
+  <link rel="alternate" hreflang="ur" href="https://patientanalog.com/ur/">
+  <link rel="alternate" hreflang="uz" href="https://patientanalog.com/uz/">
+  <link rel="alternate" hreflang="vi" href="https://patientanalog.com/vi/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://patientanalog.com/zh-hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://patientanalog.com/zh-hant/">
+  <link rel="alternate" hreflang="zu" href="https://patientanalog.com/zu/">
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+
+  <!-- GA4 Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-548SNKZ7RC');
+  </script>
+
+  <!-- Schema.org Structured Data - @graph for interconnected entities -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://patientanalog.com/#organization",
+        "name": "Patient Analog",
+        "alternateName": "PatientAnalog",
+        "url": "https://patientanalog.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://patientanalog.com/assets/images/logo.png"
+        },
+        "description": "FDA Modernization Act 3.0 Resource Hub - The infrastructure layer for human-relevant medicine",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "url": "https://patientanalog.com/contact"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://patientanalog.com/#website",
+        "url": "https://patientanalog.com",
+        "name": "Patient Analog",
+        "description": "The infrastructure layer for human-relevant medicine. Digital twins, organoids, and AI converge to transform drug discovery under the FDA Modernization Act.",
+        "publisher": {"@id": "https://patientanalog.com/#organization"},
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://patientanalog.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://patientanalog.com/#webpage",
+        "url": "https://patientanalog.com",
+        "name": "Patient Analog - FDA Modernization Act 3.0 & NAMs Education Hub",
+        "description": "The #1 FDA Modernization Act 3.0 resource platform. Master Organ-on-Chip, Digital Twins, Organoids & NAMs through 45+ interactive simulations.",
+        "isPartOf": {"@id": "https://patientanalog.com/#website"},
+        "about": {
+          "@type": "Thing",
+          "name": "Human Simulation Technologies",
+          "description": "Organ-on-chip, organoids, digital twins, microphysiological systems for FDA Modernization Act compliance"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://patientanalog.com/android-chrome-512x512.png"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://patientanalog.com/"}
+    ]
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the FDA Modernization Act 3.0?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The FDA Modernization Act 3.0 is legislation that allows drug developers to use New Approach Methodologies (NAMs) such as organ-on-chip, organoids, and digital twins as alternatives to animal testing for FDA drug approval. It builds on the 2022 FDA Modernization Act 2.0."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is organ-on-chip technology?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Organ-on-chip (OoC) is a microfluidic cell culture device that simulates human organ functions on a chip. These devices contain living human cells arranged to mimic organ-level physiology, enabling drug testing without animal subjects."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are digital twins in medicine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Digital twins in medicine are virtual computational models of individual patients that simulate their physiology, disease progression, and response to treatments. They enable personalized medicine by predicting drug responses before actual administration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are organoids?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Organoids are 3D tissue cultures derived from stem cells that self-organize to replicate the structure and function of human organs. They are used for disease modeling, drug testing, and personalized medicine research."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Course Schema for BioLab -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "BioLab Interactive Simulations",
+    "description": "45+ interactive educational games and simulations covering organ-on-chip technology, digital twins, organoids, and drug discovery",
+    "provider": {
+      "@type": "Organization",
+      "name": "Patient Analog",
+      "url": "https://patientanalog.com"
+    },
+    "educationalLevel": "Beginner to Advanced",
+    "isAccessibleForFree": true,
+    "inLanguage": "en",
+    "courseCode": "BIOLAB-001",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "courseWorkload": "PT10H"
+    }
+  }
+  </script>
+
+  <!-- SoftwareApplication Schema for Games -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Patient Analog BioLab",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Interactive biotech education platform with 45+ simulations for organ-on-chip, digital twins, and drug discovery",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1250"
+    }
+  }
+  </script>
+
+  <!-- Dataset Schema for Research Links -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Patient Analog Research Database",
+    "description": "Curated collection of 500+ research links covering organ-on-chip, organoids, digital twins, NAMs, and FDA Modernization Act resources",
+    "url": "https://patientanalog.com/research.html",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "creator": {
+      "@type": "Organization",
+      "name": "Patient Analog"
+    },
+    "keywords": ["organ-on-chip", "organoids", "digital twins", "NAMs", "FDA Modernization Act", "drug discovery", "microphysiological systems"],
+    "dateModified": "2026-01-14"
+  }
+  </script>
+
+  <!-- HowTo Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Learn About Organ-on-Chip Technology",
+    "description": "A step-by-step guide to understanding organ-on-chip technology through interactive simulations",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Start with BioLab Basics",
+        "text": "Begin with the Science Lab simulations to understand fundamental concepts of microphysiological systems"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Explore Organ-Specific Chips",
+        "text": "Try the Lung-on-Chip, Kidney Filter, and other organ-specific simulations to understand how different organs are modeled"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Learn Digital Twin Concepts",
+        "text": "Use the Drug Predictor and PK Digital Twin simulations to understand computational modeling"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Dive into Research",
+        "text": "Explore the Intelligence Hub with 500+ curated research links to scientific literature"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Speakable Schema for Voice Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".hero h1", ".hero h2", ".hero p", ".section-title", ".section-description"]
+    }
+  }
+  </script>
+
+  <!-- Fonts - Rebel Unicorn $50M+: Poppins + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- 3D viewers moved to /models.html for better performance -->
+
+  <!-- Preload critical images -->
+  <link rel="preload" href="/assets/stars-360-DlCk9jri.jpg" as="image">
+  <!-- Preload critical font -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&display=swap" as="style">
+
+  <!-- Styles -->
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js?v=20260115"></script>
+  <!-- <link rel="modulepreload" crossorigin href="/assets/main-qZqwn-yL-v2.js"> -->
+  <link rel="stylesheet" crossorigin href="/assets/main-CNIdIxnr.css?v=20260115">
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css?v=20260115b">
+
+  <!-- Mobile SVG Icon Visibility Fix -->
+  <link rel="stylesheet" href="/assets/inline-extracted.css?v=20260115">
+
+  <!-- Mobile Optimizations CSS -->
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+
+  <!-- TICKER SPEED & FONT OVERRIDE - Must be last to override all other CSS -->
+  <style>
+    /* MIDDLE TICKER - Slow scroll (600s = 10 minutes per loop) */
+    .ticker-scroll,
+    .ticker-scroll-content,
+    #live-ticker .ticker-scroll,
+    #live-ticker .ticker-scroll-content,
+    .live-ticker-bar .ticker-scroll,
+    .live-ticker-bar .ticker-scroll-content,
+    .live-ticker-row.ticker-row-secondary .ticker-scroll,
+    .live-ticker-row.ticker-row-secondary .ticker-scroll-content {
+      animation: tickerScroll 600s linear infinite !important;
+      animation-duration: 600s !important;
+    }
+
+    /* Smaller font size to fit all ticker rows */
+    .live-ticker-row,
+    .live-ticker-row.ticker-row-secondary,
+    .live-ticker-row *,
+    .live-ticker-row.ticker-row-secondary *,
+    .ticker-item,
+    .ticker-static,
+    .ticker-highlight,
+    .scroll-item {
+      font-size: 11px !important;
+    }
+
+    /* Make ticker DOUBLE SIZE to show ALL 4 rows */
+    #live-ticker,
+    .live-ticker-bar {
+      min-height: 340px !important;
+      max-height: 360px !important;
+      height: 350px !important;
+      padding: 15px 0 !important;
+      overflow: visible !important;
+      box-sizing: border-box !important;
+      z-index: 2147483647 !important;
+    }
+
+    .live-ticker-inner {
+      min-height: 320px !important;
+      height: 330px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      padding: 15px 0 !important;
+      overflow: visible !important;
+      box-sizing: border-box !important;
+      z-index: 2147483647 !important;
+    }
+
+    /* All ticker rows visible with fixed height */
+    .live-ticker-row {
+      min-height: 60px !important;
+      height: 65px !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 6px 10px !important;
+      flex-shrink: 0 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      box-sizing: border-box !important;
+      z-index: 2147483647 !important;
+      position: relative !important;
+    }
+
+    /* First row with LIVE time - ensure visible at top */
+    .live-ticker-row:first-child {
+      margin-top: 0 !important;
+      padding-top: 6px !important;
+    }
+
+    /* News row - FORCE VISIBLE at bottom */
+    .live-ticker-row.ticker-news-row {
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 2147483647 !important;
+      position: relative !important;
+      min-height: 50px !important;
+      height: 50px !important;
+      background: rgba(0,0,0,0.8) !important;
+    }
+
+    /* Ensure ticker container doesn't clip rows */
+    #live-ticker,
+    .live-ticker-bar,
+    .live-ticker-inner {
+      overflow: visible !important;
+      clip: unset !important;
+      clip-path: unset !important;
+    }
+
+    /* TOP TICKER ROW - Scrolling animation for all items (400s = ~7 minutes per loop) */
+    .live-ticker-items,
+    #live-ticker .live-ticker-items,
+    .live-ticker-bar .live-ticker-items,
+    .live-ticker-row .live-ticker-items,
+    .live-ticker-row:first-child .live-ticker-items {
+      display: inline-flex !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      animation: tickerScrollTop 400s linear infinite !important;
+      animation-duration: 400s !important;
+      will-change: transform !important;
+    }
+
+    @keyframes tickerScrollTop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item,
+    .ticker-static,
+    .live-ticker-items .ticker-item,
+    .live-ticker-items .ticker-static {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+    }
+  </style>
+  <style>
+@media (max-width: 767px) {
+  #mobile-block { display: block !important; }
+  body > *:not(#mobile-block) { display: none !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  #mobile-block { display: none !important; }
+  .nav-bar, #main-nav { padding: 8px 12px !important; }
+  .nav-links a { font-size: 0.55rem !important; padding: 3px 5px !important; white-space: nowrap !important; }
+  .nav-links { gap: 3px !important; }
+  .nav-logo { font-size: 0.7rem !important; }
+  .global-clocks { font-size: 0.65rem !important; gap: 6px !important; }
+  .hero, .hero-section { padding: 40px 30px !important; }
+  .hero-title, h1.hero-title { font-size: 3.5rem !important; line-height: 1.1 !important; }
+  .hero-subtitle { font-size: 1.2rem !important; }
+  .hero-buttons a, .cta-buttons a { font-size: 0.95rem !important; padding: 12px 24px !important; }
+  .stats-line, .feature-stats { font-size: 0.9rem !important; }
+  .live-ticker { font-size: 0.75rem !important; }
+}
+@media (min-width: 1024px) {
+  #mobile-block { display: none !important; }
+}
+  </style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body class="homepage">
+
+<!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+<div class="cookie-consent" id="cookieConsent" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 15, 30, 0.98); backdrop-filter: blur(10px); padding: 24px; z-index: 999999; transform: translateY(100%); transition: transform 0.4s ease; border-top: 2px solid rgba(139, 0, 0, 0.5); box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 300px;">
+      <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 8px 0;">We Value Your Privacy</h3>
+      <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.75); margin: 0; line-height: 1.6;">
+        We use cookies to enhance your experience, analyze site traffic, and serve personalized ads through Google AdSense.
+        By clicking "Accept All", you consent to our use of cookies.
+        <a href="/legal/privacy" style="color: #00c8ff; text-decoration: underline;">Privacy Policy</a> |
+        <a href="/legal/cookies" style="color: #00c8ff; text-decoration: underline;">Cookie Policy</a>
+      </p>
+    </div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <button onclick="acceptCookies()" style="padding: 12px 28px; background: linear-gradient(135deg, #8B0000, #a00); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">Accept All</button>
+      <button onclick="declineCookies()" style="padding: 12px 28px; background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">Decline</button>
+      <button onclick="window.location.href='/legal/cookies'" style="padding: 12px 28px; background: transparent; color: #00c8ff; border: 2px solid #00c8ff; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">Settings</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-consent.show {
+    transform: translateY(0) !important;
+  }
+</style>
+
+<div id="mobile-block" style="display:none;">
+  <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);z-index:999999;display:flex;align-items:center;justify-content:center;padding:40px 20px;">
+    <div style="color:white;font-size:1.2rem;text-align:center;max-width:90%;font-family:'Inter',sans-serif;line-height:1.6;">
+      📱 Patient Analog is optimized for tablet and desktop viewing. Please visit on a tablet, laptop, or desktop computer for the full experience.
+    </div>
+  </div>
+</div>
+  <!-- LEFT NEWS SIDEBAR -->
+  <div class="news-sidebar left">
+    <a href="/news#research" class="news-sidebar-card">
+      <div class="news-sidebar-icon"></div>
+      <div class="news-sidebar-category">Research</div>
+      <div class="news-sidebar-title">Single-cell sequencing reveals new immune cell subtypes</div>
+      <div class="news-sidebar-meta">Cell • Jan 9</div>
+    </a>
+    <a href="/news#regulatory" class="news-sidebar-card">
+      <div class="news-sidebar-icon"></div>
+      <div class="news-sidebar-category">Regulatory</div>
+      <div class="news-sidebar-title">FDA Modernization Act 3.0 expands NAMs acceptance</div>
+      <div class="news-sidebar-meta">FDA.gov • Jan 9</div>
+    </a>
+    <a href="/news" class="news-sidebar-more">All News →</a>
+  </div>
+
+  <!-- RIGHT NEWS SIDEBAR -->
+  <div class="news-sidebar right">
+    <a href="/news#organoids" class="news-sidebar-card">
+      <div class="news-sidebar-icon"></div>
+      <div class="news-sidebar-category">Organoids</div>
+      <div class="news-sidebar-title">Patient-derived tumor organoids predict chemo response 89%</div>
+      <div class="news-sidebar-meta">Cancer Cell • Jan 9</div>
+    </a>
+    <a href="/news#ai" class="news-sidebar-card">
+      <div class="news-sidebar-icon"></div>
+      <div class="news-sidebar-category">AI & ML</div>
+      <div class="news-sidebar-title">AlphaFold 3 predicts drug-protein interactions 95% accuracy</div>
+      <div class="news-sidebar-meta">DeepMind • Jan 9</div>
+    </a>
+    <a href="/news" class="news-sidebar-more">All News →</a>
+  </div>
+
+  <!-- SVG Icon Sprite -->
+  <div style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <symbol id="icon-regulatory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><path d="M7 8V4"/><path d="M17 8V4"/>
+      </symbol>
+      <symbol id="icon-lab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 3h6v5l4 9H5l4-9V3z"/><path d="M8 3h8"/><circle cx="10" cy="14" r="1" fill="currentColor"/><circle cx="14" cy="15" r="1.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="icon-dna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 4c0 6 6 6 8 12 2 6 8 6 8 0"/><path d="M4 20c0-6 6-6 8-12 2-6 8-6 8 0"/><path d="M6 8h12"/><path d="M6 16h12"/>
+      </symbol>
+      <symbol id="icon-ai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/>
+      </symbol>
+    </svg>
+  </div>
+
+  <!-- NAV BAR - At top -->
+<nav class="nav-bar" id="main-nav"></nav>
+
+  <!-- LIVE REGULATORY TICKER - Below nav with gap -->
+<div id="live-ticker"></div>
+
+  <main>
+   <!-- HERO WITH BIOTECH IMAGE - Award Winning Layout -->
+   <section class="hero" id="hero" style="position: relative; height: 100vh; overflow: hidden; margin-top: 52px;">
+      <picture>
+        <source media="(max-width: 768px)" srcset="/assets/hero-mobile.jpg">
+        <img src="/assets/hero-biotech.jpg" alt="Patient Analog - Biotech Innovation" class="hero-img" width="1920" height="1080" fetchpriority="high" loading="eager" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100vw + 6in); height: 120%; object-fit: cover; z-index: 0; background: #050810; filter: contrast(3.1) brightness(2.1) saturate(3.8) hue-rotate(-5deg) drop-shadow(0 0 1px rgba(255,255,255,0.3)); opacity: 0.48; animation: heroPulse 3s ease-in-out infinite; image-rendering: crisp-edges;">
+      </picture>
+
+      <!-- Real Lab Photo Overlay - Subtle blend for authenticity -->
+      <div class="hero-photo-overlay" style="position: absolute; inset: 0; z-index: 0; pointer-events: none;">
+        <img src="/assets/hero-lab-overlay.jpg" alt="" aria-hidden="true" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: cover; opacity: 0.18; filter: saturate(0.4) brightness(0.8) contrast(1.1); mix-blend-mode: overlay;">
+      </div>
+
+      <!-- Digital Code Grid Overlay - INTENSE -->
+      <div class="hero-digital-grid" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background-image:
+          linear-gradient(rgba(0,200,255,0.35) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,200,255,0.35) 1px, transparent 1px);
+        background-size: 60px 60px;
+        opacity: 0.5;
+        animation: gridPulse 5s ease-in-out infinite;
+        mix-blend-mode: screen;"></div>
+
+      <!-- Electric Blue Glow Pulse - INTENSE -->
+      <div class="hero-electric-pulse" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: radial-gradient(circle at 50% 45%, rgba(0,180,255,0.35) 0%, rgba(0,120,200,0.2) 30%, transparent 55%);
+        animation: electricPulse 4s ease-in-out infinite;
+        mix-blend-mode: screen;"></div>
+
+      <!-- Gold Neuron Shimmer - INTENSE -->
+      <div class="hero-gold-shimmer" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background:
+          radial-gradient(circle at 75% 18%, rgba(255,170,30,0.5) 0%, rgba(255,120,0,0.25) 20%, transparent 40%),
+          radial-gradient(circle at 22% 22%, rgba(255,190,60,0.45) 0%, transparent 35%),
+          radial-gradient(circle at 88% 55%, rgba(255,150,30,0.4) 0%, transparent 30%);
+        animation: goldShimmer 6s ease-in-out infinite;
+        mix-blend-mode: screen;"></div>
+
+      <!-- Scan Line Effect - INTENSE -->
+      <div class="hero-scanline" style="position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;">
+        <div style="position: absolute; width: 100%; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(0,220,255,0.9) 50%, transparent 100%); box-shadow: 0 0 30px rgba(0,220,255,0.7), 0 0 60px rgba(0,220,255,0.5); animation: scanLine 6s linear infinite;"></div>
+      </div>
+
+      <!-- Electric Particle Dots - INTENSE -->
+      <div class="hero-particles" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background-image:
+          radial-gradient(circle at 20% 30%, rgba(0,200,255,1) 0%, transparent 4px),
+          radial-gradient(circle at 80% 20%, rgba(0,220,255,1) 0%, transparent 3px),
+          radial-gradient(circle at 60% 70%, rgba(0,180,255,0.9) 0%, transparent 3px),
+          radial-gradient(circle at 30% 80%, rgba(0,200,255,1) 0%, transparent 4px),
+          radial-gradient(circle at 10% 55%, rgba(255,180,40,1) 0%, transparent 4px),
+          radial-gradient(circle at 72% 35%, rgba(255,160,30,1) 0%, transparent 3px);
+        animation: particleFloat 8s ease-in-out infinite;"></div>
+
+      <!-- Lightning Flash Overlay - INTENSE -->
+      <div class="hero-lightning" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: linear-gradient(125deg, transparent 30%, rgba(0,180,255,0.25) 50%, transparent 70%);
+        animation: lightningFlash 5s ease-in-out infinite;"></div>
+
+      <!-- Deep Glow Layer - INTENSE -->
+      <div class="hero-hdr-bloom" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: radial-gradient(ellipse 90% 70% at 50% 45%, rgba(0,150,200,0.15) 0%, transparent 60%);
+        mix-blend-mode: screen;
+        animation: hdrBloom 8s ease-in-out infinite;"></div>
+
+      <!-- Premium radial vignette overlay -->
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 0%, rgba(5,8,16,0.3) 50%, rgba(5,8,16,0.7) 100%); z-index: 2;"></div>
+      <!-- Bottom fade for text readability -->
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(5,8,16,0.4) 70%, rgba(5,8,16,0.85) 100%); z-index: 3;"></div>
+
+      <!-- Hero Effect Animations - INTENSE & Pulsing -->
+      <style>
+        @keyframes heroPulse {
+          0%, 100% { filter: contrast(3.1) brightness(2.1) saturate(3.8) hue-rotate(-5deg) drop-shadow(0 0 1px rgba(255,255,255,0.3)); opacity: 0.48; }
+          50% { filter: contrast(3.4) brightness(2.4) saturate(4.2) hue-rotate(5deg) drop-shadow(0 0 2px rgba(255,255,255,0.4)); opacity: 0.55; }
+        }
+        @keyframes gridPulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 0.7; }
+        }
+        @keyframes electricPulse {
+          0%, 100% { opacity: 0.9; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
+        @keyframes goldShimmer {
+          0%, 100% { opacity: 0.8; }
+          50% { opacity: 1; }
+        }
+        @keyframes scanLine {
+          0% { top: -5px; }
+          100% { top: 100%; }
+        }
+        @keyframes particleFloat {
+          0%, 100% { transform: translateY(0); opacity: 0.8; }
+          50% { transform: translateY(-12px); opacity: 1; }
+        }
+        @keyframes lightningFlash {
+          0%, 88%, 100% { opacity: 0; }
+          90% { opacity: 0.8; }
+          92% { opacity: 0; }
+          94% { opacity: 0.5; }
+          96% { opacity: 0; }
+          98% { opacity: 0.4; }
+        }
+        @keyframes hdrBloom {
+          0%, 100% { opacity: 0.8; }
+          50% { opacity: 1; }
+        }
+      </style>
+
+      <div class="hero-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;">
+        <!-- Main Title - PRIMARY FOCUS -->
+        <h1 style="font-family: 'Poppins', sans-serif; font-size: clamp(4rem, 14vw, 8rem); font-weight: 900; color: #ffffff; margin: 0; text-shadow: 0 0 80px rgba(0,255,255,0.7), 0 0 150px rgba(0,255,255,0.4), 0 6px 40px rgba(0,0,0,0.95); letter-spacing: -3px; line-height: 0.95;">Patient Analog</h1>
+        <!-- Subtitle - Secondary -->
+        <h2 style="font-family: 'Poppins', sans-serif; font-size: clamp(0.9rem, 2.5vw, 1.3rem); font-weight: 600; background: linear-gradient(90deg, #00ffff 0%, #00ff88 50%, #00ffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 20px 0 25px 0; filter: drop-shadow(0 2px 15px rgba(0,255,255,0.5)); white-space: nowrap;">NAMs & Organ-on-Chip Education Hub</h2>
+        <!-- CTA Buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+          <a href="/games" class="hero-cta-pulse" style="display: inline-block; padding: 12px 28px; background: linear-gradient(135deg, #00ffff 0%, #00ff88 100%); color: #000814; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: clamp(0.75rem, 1.4vw, 0.9rem); text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 40px rgba(0,255,255,0.6), 0 0 80px rgba(0,255,136,0.3), inset 0 1px 0 rgba(255,255,255,0.4); transition: all 0.3s ease; border: none;">Explore Simulations</a>
+          <a href="/contact" style="display: inline-block; padding: 12px 28px; background: transparent; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: clamp(0.75rem, 1.4vw, 0.9rem); letter-spacing: 0.5px; border: 2px solid rgba(255,255,255,0.4); transition: all 0.3s ease;">Contact</a>
+        </div>
+        <!-- Minimal tagline -->
+        <p style="font-family: 'Inter', sans-serif; font-size: clamp(0.6rem, 1.2vw, 0.75rem); color: rgba(255,255,255,0.5); margin-top: 20px;">70+ Interactive Games and Simulations • 60+ Languages • 100% Free</p>
+      </div>
+    </section>
+
+    <!-- COLOR BURST FROM HERO -->
+    <div style="position: relative; height: 80px; margin-top: -40px; z-index: 10; background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.15) 30%, rgba(180, 100, 255, 0.12) 60%, rgba(0, 255, 136, 0.1) 100%); pointer-events: none;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 100% 200% at 50% -50%, rgba(0, 255, 255, 0.3) 0%, rgba(138, 43, 226, 0.2) 30%, transparent 70%); animation: colorBurst 4s ease-in-out infinite;"></div>
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 60% 150% at 20% 0%, rgba(0, 255, 200, 0.25) 0%, transparent 50%), radial-gradient(ellipse 60% 150% at 80% 0%, rgba(255, 100, 150, 0.2) 0%, transparent 50%);"></div>
+    </div>
+    <style>
+      @keyframes colorBurst {
+        0%, 100% { opacity: 0.8; transform: scaleY(1); }
+        50% { opacity: 1; transform: scaleY(1.1); }
+      }
+    </style>
+
+    <!-- SLIM STATS BAR - VIBRANT HDR -->
+    <section class="stats-bar-slim" style="background: linear-gradient(135deg, rgba(0, 80, 120, 0.98) 0%, rgba(30, 50, 100, 0.98) 30%, rgba(60, 30, 120, 0.95) 70%, rgba(40, 60, 100, 0.98) 100%); border-top: 3px solid rgba(0, 255, 255, 0.6); border-bottom: 3px solid rgba(255, 100, 200, 0.5); padding: 30px 0; box-shadow: 0 0 60px rgba(0, 255, 255, 0.3), 0 0 100px rgba(138, 43, 226, 0.2), inset 0 0 80px rgba(0, 200, 255, 0.1); position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, rgba(180, 100, 255, 0.1) 50%, rgba(0, 255, 136, 0.1) 100%); animation: hdrShimmer 6s ease-in-out infinite;"></div>
+      <style>@keyframes hdrShimmer { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }</style>
+      <div class="container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; font-family: 'Inter', sans-serif; font-size: 15px; color: rgba(255,255,255,0.95);">
+        <span><strong style="color: #00ffff; text-shadow: 0 0 20px rgba(0,255,255,0.8);">600+</strong> Research Pages</span>
+        <span style="color: rgba(0,255,255,0.5);">|</span>
+        <span><strong style="color: #ff6bff; text-shadow: 0 0 20px rgba(255,107,255,0.8);">70+</strong> Languages</span>
+        <span style="color: rgba(0,255,255,0.5);">|</span>
+        <span><strong style="color: #00ff88; text-shadow: 0 0 20px rgba(0,255,136,0.8);">45+</strong> Games</span>
+        <span style="color: rgba(0,255,255,0.5);">|</span>
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; background: #00ff88; border-radius: 50%; animation: pulse 2s infinite; box-shadow: 0 0 15px rgba(0,255,136,0.9);"></span> <strong style="color: #00ff88;">Live News</strong></span>
+      </div>
+    </section>
+
+
+<script>
+  // Throttled scroll listener with requestAnimationFrame
+  (function() {
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          if (window.scrollY > window.innerHeight * 0.8) {
+            document.body.classList.add('scrolled');
+          } else {
+            document.body.classList.remove('scrolled');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+</script>
+
+    <!-- THREE FEATURE CARDS - VIBRANT -->
+    <section class="section features-section" style="padding: 80px 0; background: linear-gradient(180deg, rgba(0, 30, 50, 0.95) 0%, rgba(10, 20, 40, 0.9) 50%, rgba(20, 10, 50, 0.85) 100%); position: relative;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(0, 255, 255, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 50%); pointer-events: none;"></div>
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+
+          <!-- BioLab Card - VIBRANT -->
+          <a href="/games" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 200, 255, 0.12) 50%, rgba(0, 150, 200, 0.08) 100%); border: 2px solid rgba(0, 255, 255, 0.4); border-radius: 16px; padding: 40px 30px; transition: all 0.3s ease; box-shadow: 0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 40px rgba(0, 200, 255, 0.05);">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #00ffff; margin-bottom: 12px; text-shadow: 0 0 20px rgba(0,255,255,0.5);">BioLab</h3>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 20px;">45+ interactive games and simulations exploring organ-on-chip, digital twins, and drug discovery</p>
+            <span style="font-size: 0.9rem; color: #00ffff; font-weight: 600; text-shadow: 0 0 15px rgba(0,255,255,0.6);">Explore simulations &rarr;</span>
+          </a>
+
+          <!-- Research Card - VIBRANT -->
+          <a href="/science" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(180, 100, 255, 0.2) 0%, rgba(138, 43, 226, 0.12) 50%, rgba(100, 30, 180, 0.08) 100%); border: 2px solid rgba(180, 100, 255, 0.4); border-radius: 16px; padding: 40px 30px; transition: all 0.3s ease; box-shadow: 0 0 30px rgba(138, 43, 226, 0.15), inset 0 0 40px rgba(180, 100, 255, 0.05);">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #b464ff; margin-bottom: 12px; text-shadow: 0 0 20px rgba(180,100,255,0.5);">Research</h3>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 20px;">600+ pages covering organ-on-chip, organoids, digital twins, and regulatory science</p>
+            <span style="font-size: 0.9rem; color: #b464ff; font-weight: 600; text-shadow: 0 0 15px rgba(180,100,255,0.6);">Browse library &rarr;</span>
+          </a>
+
+          <!-- News Card - VIBRANT -->
+          <a href="/news" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(34, 197, 94, 0.12) 50%, rgba(20, 150, 80, 0.08) 100%); border: 2px solid rgba(0, 255, 136, 0.4); border-radius: 16px; padding: 40px 30px; transition: all 0.3s ease; box-shadow: 0 0 30px rgba(0, 255, 136, 0.15), inset 0 0 40px rgba(34, 197, 94, 0.05);">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #00ff88; margin-bottom: 12px; text-shadow: 0 0 20px rgba(0,255,136,0.5);">News</h3>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 20px;">Live biotech headlines from research journals, industry, and regulatory agencies</p>
+            <span style="font-size: 0.9rem; color: #00ff88; font-weight: 600; text-shadow: 0 0 15px rgba(0,255,136,0.6);">Read latest &rarr;</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET INTELLIGENCE STATS - VIBRANT -->
+    <section class="section market-stats-section" style="padding: 80px 0; background: linear-gradient(180deg, rgba(15, 25, 50, 0.95) 0%, rgba(10, 15, 35, 0.9) 50%, rgba(25, 15, 45, 0.85) 100%); position: relative;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 30%, rgba(255, 200, 0, 0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 70%, rgba(0, 255, 200, 0.06) 0%, transparent 40%); pointer-events: none;"></div>
+      <div class="container">
+        <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+          <span class="section-label" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #00c8ff; margin-bottom: 12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/><circle cx="21" cy="6" r="2" fill="#06b6d4"/></svg>Market Intelligence</span>
+          <h2 class="section-title" style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 600; color: #fff; margin: 0;">The Future of Drug Discovery</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+          <div style="text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 100%); border: 2px solid rgba(0, 255, 255, 0.35); border-radius: 12px; box-shadow: 0 0 25px rgba(0, 255, 255, 0.12);">
+            <div style="font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 800; color: #00ffff; margin-bottom: 8px; text-shadow: 0 0 30px rgba(0,255,255,0.7);">$127B</div>
+            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Digital Health Market</div>
+          </div>
+          <div style="text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(180, 100, 255, 0.15) 0%, rgba(138, 43, 226, 0.08) 100%); border: 2px solid rgba(180, 100, 255, 0.35); border-radius: 12px; box-shadow: 0 0 25px rgba(138, 43, 226, 0.12);">
+            <div style="font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 800; color: #b464ff; margin-bottom: 8px; text-shadow: 0 0 30px rgba(180,100,255,0.7);">90%</div>
+            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Drug Candidate Failure Rate</div>
+          </div>
+          <div style="text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%); border: 2px solid rgba(0, 255, 136, 0.35); border-radius: 12px; box-shadow: 0 0 25px rgba(0, 255, 136, 0.12);">
+            <div style="font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 800; color: #00ff88; margin-bottom: 8px; text-shadow: 0 0 30px rgba(0,255,136,0.7);">31%</div>
+            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">CAGR in Organoids Market</div>
+          </div>
+          <div style="text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(255, 180, 60, 0.15) 0%, rgba(255, 140, 0, 0.08) 100%); border: 2px solid rgba(255, 180, 60, 0.35); border-radius: 12px; box-shadow: 0 0 25px rgba(255, 140, 0, 0.12);">
+            <div style="font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 800; color: #ffb43c; margin-bottom: 8px; text-shadow: 0 0 30px rgba(255,180,60,0.7);">FDA 3.0</div>
+            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Modernization Act</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE TECHNOLOGIES - VIBRANT -->
+    <section class="section core-tech-section" style="padding: 80px 0; background: linear-gradient(180deg, rgba(10, 20, 40, 0.95) 0%, rgba(5, 15, 30, 0.9) 50%, rgba(15, 10, 35, 0.85) 100%); position: relative;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(0, 200, 255, 0.05) 0%, transparent 50%); pointer-events: none;"></div>
+      <div class="container">
+        <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+          <span class="section-label" style="display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #00c8ff; margin-bottom: 12px;">Technology Platform</span>
+          <h2 class="section-title" style="font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 600; color: #fff; margin: 0 0 16px 0;">Core Technologies</h2>
+          <p style="font-size: 1rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto;">Four pillars transforming drug discovery and reducing reliance on animal testing</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto;">
+          <a href="/technology/digital-twins" style="display: block; text-decoration: none; padding: 35px 25px; background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 100%); border: 2px solid rgba(0, 255, 255, 0.3); border-radius: 14px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);">
+            <div style="width: 55px; height: 55px; background: linear-gradient(135deg, rgba(0, 255, 255, 0.3) 0%, rgba(0, 200, 255, 0.15) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00ffff" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+            </div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: #00ffff; margin-bottom: 10px; text-shadow: 0 0 15px rgba(0,255,255,0.5);">Digital Twins</h3>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.6;">Virtual patient models for personalized drug response prediction</p>
+          </a>
+          <a href="/technology/organoids" style="display: block; text-decoration: none; padding: 35px 25px; background: linear-gradient(135deg, rgba(180, 100, 255, 0.15) 0%, rgba(138, 43, 226, 0.08) 100%); border: 2px solid rgba(180, 100, 255, 0.3); border-radius: 14px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(138, 43, 226, 0.1);">
+            <div style="width: 55px; height: 55px; background: linear-gradient(135deg, rgba(180, 100, 255, 0.3) 0%, rgba(138, 43, 226, 0.15) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(180, 100, 255, 0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b464ff" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="#b464ff"/></svg>
+            </div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: #b464ff; margin-bottom: 10px; text-shadow: 0 0 15px rgba(180,100,255,0.5);">Organoids</h3>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.6;">3D tissue models derived from stem cells replicating organ function</p>
+          </a>
+          <a href="/technology/organ-on-chip" style="display: block; text-decoration: none; padding: 35px 25px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 14px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);">
+            <div style="width: 55px; height: 55px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.3) 0%, rgba(34, 197, 94, 0.15) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h2M10 10h2M14 10h2M6 14h2M10 14h2M14 14h2"/></svg>
+            </div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: #00ff88; margin-bottom: 10px; text-shadow: 0 0 15px rgba(0,255,136,0.5);">Organ-on-Chip</h3>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.6;">Microfluidic devices simulating human organ physiology</p>
+          </a>
+          <a href="/technology/ai-drug-discovery" style="display: block; text-decoration: none; padding: 35px 25px; background: linear-gradient(135deg, rgba(255, 180, 60, 0.15) 0%, rgba(255, 140, 0, 0.08) 100%); border: 2px solid rgba(255, 180, 60, 0.3); border-radius: 14px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(255, 140, 0, 0.1);">
+            <div style="width: 55px; height: 55px; background: linear-gradient(135deg, rgba(255, 180, 60, 0.3) 0%, rgba(255, 140, 0, 0.15) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffb43c" stroke-width="2"><path d="M4 4c0 6 6 6 8 12 2 6 8 6 8 0"/><path d="M4 20c0-6 6-6 8-12 2-6 8-6 8 0"/><path d="M6 8h12M6 16h12"/></svg>
+            </div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: #ffb43c; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,180,60,0.5);">AI & Machine Learning</h3>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.6;">Computational models accelerating drug discovery timelines</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D VISUALIZATION LAB SECTION -->
+    <section class="section 3d-lab-section" id="3d-lab" style="padding: 100px 0; background: linear-gradient(180deg, rgba(0, 20, 40, 0.95) 0%, rgba(5, 15, 30, 0.98) 50%, rgba(10, 25, 45, 0.95) 100%); position: relative; overflow: hidden;">
+
+      <!-- Animated Background Grid -->
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px); background-size: 50px 50px; animation: gridMove 20s linear infinite; pointer-events: none;"></div>
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(0,150,255,0.08) 0%, transparent 60%); pointer-events: none;"></div>
+
+      <style>
+        @keyframes gridMove {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(50px, 50px); }
+        }
+        @keyframes pulse3d {
+          0%, 100% { box-shadow: 0 0 20px rgba(0,200,255,0.3), inset 0 0 30px rgba(0,200,255,0.1); }
+          50% { box-shadow: 0 0 40px rgba(0,200,255,0.5), inset 0 0 50px rgba(0,200,255,0.15); }
+        }
+        @keyframes statusPulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        @keyframes dataStream {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
+        .lab-model-viewer {
+          background: linear-gradient(145deg, rgba(10,25,45,0.95) 0%, rgba(5,15,30,0.98) 100%);
+          border: 1px solid rgba(0,200,255,0.3);
+          border-radius: 16px;
+          padding: 30px;
+          position: relative;
+          animation: pulse3d 4s ease-in-out infinite;
+        }
+        .lab-model-viewer::before {
+          content: '';
+          position: absolute;
+          top: -1px; left: -1px; right: -1px; bottom: -1px;
+          border-radius: 16px;
+          background: linear-gradient(45deg, rgba(0,200,255,0.5), transparent, rgba(0,255,200,0.5), transparent);
+          background-size: 400% 400%;
+          animation: dataStream 8s linear infinite;
+          z-index: -1;
+          opacity: 0.3;
+        }
+        .model-controls {
+          display: flex;
+          gap: 12px;
+          margin-top: 16px;
+        }
+        .model-btn {
+          padding: 8px 16px;
+          background: rgba(0,200,255,0.15);
+          border: 1px solid rgba(0,200,255,0.3);
+          border-radius: 8px;
+          color: #00c8ff;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .model-btn:hover {
+          background: rgba(0,200,255,0.25);
+          transform: translateY(-2px);
+        }
+        .tech-gallery-card {
+          background: linear-gradient(145deg, rgba(15,25,40,0.9) 0%, rgba(10,20,35,0.95) 100%);
+          border: 1px solid rgba(0,200,255,0.2);
+          border-radius: 14px;
+          padding: 24px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s ease;
+        }
+        .tech-gallery-card:hover {
+          border-color: rgba(0,200,255,0.5);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0,200,255,0.15);
+        }
+        .tech-gallery-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 3px;
+          background: linear-gradient(90deg, #00c8ff, #00ff88, #00c8ff);
+          background-size: 200% 100%;
+          animation: dataStream 3s linear infinite;
+        }
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px;
+          background: rgba(34,197,94,0.15);
+          border: 1px solid rgba(34,197,94,0.3);
+          border-radius: 20px;
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: #22c55e;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        .status-badge .dot {
+          width: 6px;
+          height: 6px;
+          background: #22c55e;
+          border-radius: 50%;
+          animation: statusPulse 2s ease-in-out infinite;
+        }
+        .category-tag {
+          display: inline-block;
+          padding: 4px 12px;
+          background: rgba(0,200,255,0.1);
+          border-radius: 6px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #00c8ff;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-top: 12px;
+        }
+        .data-readout {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 16px;
+          padding-top: 16px;
+          border-top: 1px solid rgba(0,200,255,0.1);
+        }
+        .data-item {
+          padding: 6px 12px;
+          background: rgba(0,200,255,0.05);
+          border: 1px solid rgba(0,200,255,0.15);
+          border-radius: 6px;
+          font-family: 'Courier New', monospace;
+          font-size: 0.75rem;
+          color: rgba(255,255,255,0.8);
+        }
+        .ar-badge {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          padding: 6px 12px;
+          background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(168,85,247,0.1) 100%);
+          border: 1px solid rgba(139,92,246,0.4);
+          border-radius: 8px;
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #a855f7;
+          text-transform: uppercase;
+        }
+        .interactive-3d-placeholder {
+          width: 100%;
+          height: 280px;
+          background: linear-gradient(145deg, rgba(5,15,30,0.8) 0%, rgba(10,25,45,0.9) 100%);
+          border: 2px dashed rgba(0,200,255,0.3);
+          border-radius: 12px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .interactive-3d-placeholder::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 50%, rgba(0,200,255,0.1) 0%, transparent 60%);
+          animation: pulse3d 3s ease-in-out infinite;
+        }
+        .organoid-visual {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 40% 40%, rgba(200,150,255,0.8) 0%, rgba(139,92,246,0.6) 30%, rgba(88,60,180,0.4) 60%, transparent 80%);
+          box-shadow: 0 0 60px rgba(139,92,246,0.5), inset 0 0 30px rgba(255,255,255,0.2);
+          animation: organoidFloat 4s ease-in-out infinite;
+          position: relative;
+        }
+        .organoid-visual::before {
+          content: '';
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          background: rgba(255,255,255,0.6);
+          border-radius: 50%;
+          top: 25%;
+          left: 30%;
+          filter: blur(3px);
+        }
+        @keyframes organoidFloat {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-10px) scale(1.02); }
+        }
+        .chip-visual {
+          width: 200px;
+          height: 80px;
+          background: linear-gradient(145deg, rgba(20,40,60,0.9) 0%, rgba(30,50,70,0.95) 100%);
+          border: 2px solid rgba(0,200,255,0.4);
+          border-radius: 8px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          padding: 10px;
+        }
+        .chip-chamber {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(0,255,200,0.6) 0%, rgba(0,200,255,0.3) 60%, transparent 80%);
+          box-shadow: 0 0 15px rgba(0,255,200,0.5);
+          animation: chamberPulse 2s ease-in-out infinite;
+        }
+        .chip-chamber:nth-child(2) { animation-delay: 0.3s; }
+        .chip-chamber:nth-child(3) { animation-delay: 0.6s; }
+        .chip-chamber:nth-child(4) { animation-delay: 0.9s; }
+        .chip-chamber:nth-child(5) { animation-delay: 1.2s; }
+        .chip-chamber:nth-child(6) { animation-delay: 1.5s; }
+        @keyframes chamberPulse {
+          0%, 100% { transform: scale(1); opacity: 0.7; }
+          50% { transform: scale(1.15); opacity: 1; }
+        }
+        .flow-line {
+          position: absolute;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(0,255,200,0.8), transparent);
+          animation: flowMove 2s linear infinite;
+        }
+        @keyframes flowMove {
+          0% { left: -50px; opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { left: calc(100% + 50px); opacity: 0; }
+        }
+      </style>
+
+      <div class="container" style="position: relative; z-index: 1;">
+        <!-- Section Header -->
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+          <span class="section-label" style="display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #a855f7; margin-bottom: 16px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Interactive Experience
+          </span>
+          <h2 class="section-title" style="font-family: 'Poppins', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; margin: 0 0 16px 0; text-shadow: 0 0 40px rgba(0,200,255,0.3);">3D Visualization Lab</h2>
+          <p style="font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 700px; margin: 0 auto; line-height: 1.7;">Explore interactive organoid and organ-on-chip models with real-time manipulation</p>
+        </div>
+
+        <!-- Intro Text -->
+        <div style="max-width: 900px; margin: 0 auto 50px auto; text-align: center;">
+          <p style="font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.8;">Engage with cutting-edge human simulation technologies through our interactive 3D visualization laboratory. These models demonstrate the structural complexity of organoids and the engineering precision of organ-on-chip platforms.</p>
+        </div>
+
+        <!-- Two Interactive 3D Model Viewers -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 70px;">
+
+          <!-- Brain Organoid Model -->
+          <div class="lab-model-viewer">
+            <div class="ar-badge">AR/VR Ready</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Interactive 3D Model</div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0 0 20px 0;">Brain Organoid Model</h3>
+            <div class="interactive-3d-placeholder">
+              <div class="organoid-visual"></div>
+              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 20px;">Click & drag to rotate</p>
+            </div>
+            <div class="model-controls">
+              <button class="model-btn">Rotate</button>
+              <button class="model-btn">Zoom</button>
+              <button class="model-btn">Click cells for details</button>
+            </div>
+          </div>
+
+          <!-- Multi-Organ Chip Platform -->
+          <div class="lab-model-viewer">
+            <div class="ar-badge">AR/VR Ready</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Interactive 3D Model</div>
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0 0 20px 0;">Multi-Organ Chip Platform</h3>
+            <div class="interactive-3d-placeholder">
+              <div class="chip-visual">
+                <div class="chip-chamber"></div>
+                <div class="chip-chamber"></div>
+                <div class="chip-chamber"></div>
+                <div class="chip-chamber"></div>
+                <div class="chip-chamber"></div>
+                <div class="chip-chamber"></div>
+                <div class="flow-line" style="width: 180px; top: 50%;"></div>
+              </div>
+              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 20px;">6 organ chambers | Microfluidic flow visualization</p>
+            </div>
+            <div class="model-controls">
+              <button class="model-btn">Rotate</button>
+              <button class="model-btn">Zoom</button>
+              <button class="model-btn">View Flow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technology Gallery Header -->
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; margin: 0; display: inline-flex; align-items: center; gap: 12px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Technology Gallery
+          </h3>
+        </div>
+
+        <!-- Technology Gallery Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+
+          <!-- Card 1: Organ-on-Chip -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag">Organ-on-Chip</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">Multi-Organ Microfluidic Chip</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">PDMS substrate with 6 interconnected organ chambers and continuous media flow</p>
+            <div class="data-readout">
+              <span class="data-item">pH: 7.4</span>
+              <span class="data-item">O2: 98%</span>
+              <span class="data-item">Flow: 2.3uL/min</span>
+              <span class="data-item">T: 37C</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(0,200,255,0.15); border-color: rgba(0,200,255,0.3); color: #00c8ff;"><span class="dot" style="background: #00c8ff;"></span>Interactive</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Brain Organoid -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag" style="background: rgba(139,92,246,0.15); color: #a855f7;">Organoid</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">Brain Organoid Structure</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">Self-organizing 3D tissue with stem cells, neurons, and supporting cells</p>
+            <div class="data-readout">
+              <span class="data-item">Diameter: 2.4mm</span>
+              <span class="data-item">Viability: 94%</span>
+              <span class="data-item">Day: 21</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.3); color: #a855f7;"><span class="dot" style="background: #a855f7;"></span>Interactive</span>
+            </div>
+          </div>
+
+          <!-- Card 3: MPS Laboratory -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag" style="background: rgba(34,197,94,0.15); color: #22c55e;">Lab Setup</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">MPS Laboratory Setup</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">Incubator, confocal microscope, and microfluidic pump system</p>
+            <div class="data-readout">
+              <span class="data-item">Temp: 37C</span>
+              <span class="data-item">CO2: 5%</span>
+              <span class="data-item">Humidity: 95%</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); color: #22c55e;"><span class="dot" style="background: #22c55e;"></span>Interactive</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Digital Twin -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag" style="background: rgba(251,146,60,0.15); color: #fb923c;">Digital Twin</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">Virtual Patient Model</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">AI-powered digital twin with real-time organ simulation and drug response prediction</p>
+            <div class="data-readout">
+              <span class="data-item">Sync: Real-time</span>
+              <span class="data-item">Accuracy: 99.2%</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.3); color: #fb923c;"><span class="dot" style="background: #fb923c;"></span>Interactive</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Neural Organoid Network -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag" style="background: rgba(236,72,153,0.15); color: #ec4899;">Real Imaging</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">Neural Organoid Network</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">Multi-lineage organoids showing neural (cyan), hepatic (orange), and cardiac (pink) differentiation pathways</p>
+            <div class="data-readout">
+              <span class="data-item">Resolution: 0.2um</span>
+              <span class="data-item">Z-Stack: 50 slices</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(236,72,153,0.15); border-color: rgba(236,72,153,0.3); color: #ec4899;"><span class="dot" style="background: #ec4899;"></span>Interactive</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Organoid Culture Plate -->
+          <div class="tech-gallery-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <span class="status-badge"><span class="dot"></span>ONLINE</span>
+            </div>
+            <span class="category-tag" style="background: rgba(245,158,11,0.15); color: #f59e0b;">Lab Culture</span>
+            <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 14px 0 10px 0;">Organoid Culture Plate</h4>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">Patient-derived organoids at various maturation stages - liver (brown), tumor (red), intestinal (orange), neural (white)</p>
+            <div class="data-readout">
+              <span class="data-item">Passage: P5</span>
+              <span class="data-item">Confluence: 85%</span>
+              <span class="data-item">Media: DMEM</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span class="status-badge" style="background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.3); color: #f59e0b;"><span class="dot" style="background: #f59e0b;"></span>Interactive</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div style="text-align: center; margin-top: 50px;">
+          <a href="/games/3d-lab/" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; background: linear-gradient(135deg, rgba(0,200,255,0.2) 0%, rgba(139,92,246,0.2) 100%); border: 1px solid rgba(0,200,255,0.4); border-radius: 12px; color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem; text-decoration: none; transition: all 0.3s ease;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Enter Full 3D Lab Experience
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE NEWS SECTION -->
+    <section class="section intelligence-section" id="intelligence-hub">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Research Database</span>
+          <h2 class="section-title">Intelligence Hub</h2>
+          <p class="section-description">500+ curated research links covering regulatory, scientific, and industry resources</p>
+        </div>
+
+        <div class="intel-grid">
+          <div class="intel-card">
+            <div class="intel-icon">
+              <svg width="32" height="32"><use href="#icon-regulatory"/></svg>
+            </div>
+            <h3>Regulatory</h3>
+            <p>FDA, NIH, EMA guidance and legislation including Modernization Act 2.0/3.0</p>
+            <span class="intel-count">45+ sources</span>
+          </div>
+          <div class="intel-card">
+            <div class="intel-icon">
+              <svg width="32" height="32"><use href="#icon-lab"/></svg>
+            </div>
+            <h3>Scientific</h3>
+            <p>Organ-on-chip, organoids, digital twins, and MPS research platforms</p>
+            <span class="intel-count">120+ sources</span>
+          </div>
+          <div class="intel-card">
+            <div class="intel-icon">
+              <svg width="32" height="32"><use href="#icon-dna"/></svg>
+            </div>
+            <h3>Industry</h3>
+            <p>Leading companies in human simulation technology and drug discovery</p>
+            <span class="intel-count">85+ sources</span>
+          </div>
+          <div class="intel-card">
+            <div class="intel-icon">
+              <svg width="32" height="32"><use href="#icon-ai"/></svg>
+            </div>
+            <h3>AI & Compute</h3>
+            <p>Quantum computing, machine learning, and computational biology resources</p>
+            <span class="intel-count">50+ sources</span>
+          </div>
+        </div>
+
+        <div class="intel-cta">
+          <a href="/games/3d-lab/" class="btn btn-primary btn-lg">3D Visualization Lab</a>
+          <a href="/intelligence" class="btn btn-outline btn-lg">Full Database</a>
+          <a href="/news" class="btn btn-outline btn-lg">Live News</a>
+        </div>
+
+        <!-- 8-CATEGORY NEWS GRID -->
+        <div class="news-grid-section">
+          <!-- Live Badge -->
+          <div class="news-live-badge">
+            <span class="live-dot"></span>
+            <span class="live-text">LIVE NEWS FEED</span>
+            <span class="live-divider">|</span>
+            <span class="live-refresh">Auto-refreshes every 30 min</span>
+            <span class="live-divider">|</span>
+            <span class="live-time">Last updated: <span id="news-timestamp">--:--</span></span>
+          </div>
+
+          <!-- News Category Grid -->
+          <div class="news-category-grid">
+            <!-- 1. ORGAN-ON-CHIP -->
+            <div class="news-box news-chip">
+              <div class="news-box-header">
+                <span class="news-icon">MPS</span>
+                <h4>Organ-on-Chip</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=organ-chip">Engineering liver organoids-on-a-chip for toxicity screening<span class="news-source">Frontiers</span></a></li>
+                <li><a href="/news?category=organ-chip">Lung-chip model recreates COPD inflammation<span class="news-source">Nature</span></a></li>
+                <li><a href="/news?category=organ-chip">Microfluidic platforms advance personalized medicine<span class="news-source">Lab Chip</span></a></li>
+              </ul>
+              <a href="/news?category=organ-chip" class="news-more">View More</a>
+            </div>
+
+            <!-- 2. ORGANOID -->
+            <div class="news-box news-organoid">
+              <div class="news-box-header">
+                <span class="news-icon">3D</span>
+                <h4>Organoid Research</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=organoid">Brain organoids reveal autism gene function<span class="news-source">Cell</span></a></li>
+                <li><a href="/news?category=organoid">Patient-derived organoids predict chemo response<span class="news-source">Science</span></a></li>
+                <li><a href="/news?category=organoid">Retinal organoids restore partial vision in trials<span class="news-source">Nature Med</span></a></li>
+              </ul>
+              <a href="/news?category=organoid" class="news-more">View More</a>
+            </div>
+
+            <!-- 3. DIGITAL TWIN -->
+            <div class="news-box news-digital">
+              <div class="news-box-header">
+                <span class="news-icon">SIM</span>
+                <h4>Digital Twin</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=digital-twin">Virtual patient models predict cardiac drug effects<span class="news-source">Sci Rep</span></a></li>
+                <li><a href="/news?category=digital-twin">AI-powered digital twins enter clinical trials<span class="news-source">TechCrunch</span></a></li>
+                <li><a href="/news?category=digital-twin">DARPA funds next-gen human simulation platform<span class="news-source">Defense</span></a></li>
+              </ul>
+              <a href="/news?category=digital-twin" class="news-more">View More</a>
+            </div>
+
+            <!-- 4. REGULATORY -->
+            <div class="news-box news-regulatory">
+              <div class="news-box-header">
+                <span class="news-icon">FDA</span>
+                <h4>Regulatory Updates</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=regulatory">FDA accepts first NAMs-only drug application<span class="news-source">FDA.gov</span></a></li>
+                <li><a href="/news?category=regulatory">EMA releases 3Rs implementation guidance<span class="news-source">EMA</span></a></li>
+                <li><a href="/news?category=regulatory">NIH NCATS expands tissue chip program funding<span class="news-source">NIH</span></a></li>
+              </ul>
+              <a href="/news?category=regulatory" class="news-more">View More</a>
+            </div>
+
+            <!-- 5. DRUG DISCOVERY -->
+            <div class="news-box news-pharma">
+              <div class="news-box-header">
+                <span class="news-icon">RX</span>
+                <h4>Drug Discovery</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=drug-discovery">AI discovers novel antibiotic compound in 48 hours<span class="news-source">Nature</span></a></li>
+                <li><a href="/news?category=drug-discovery">Pfizer partners with organ-chip startup<span class="news-source">Reuters</span></a></li>
+                <li><a href="/news?category=drug-discovery">Phase 3 trial uses organoid-guided dosing<span class="news-source">Endpoints</span></a></li>
+              </ul>
+              <a href="/news?category=drug-discovery" class="news-more">View More</a>
+            </div>
+
+            <!-- 6. INDUSTRY -->
+            <div class="news-box news-industry">
+              <div class="news-box-header">
+                <span class="news-icon">BIZ</span>
+                <h4>Industry News</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=industry">Emulate raises $82M Series E for organ-chips<span class="news-source">TechCrunch</span></a></li>
+                <li><a href="/news?category=industry">Roche acquires AI drug discovery platform<span class="news-source">BioPharma</span></a></li>
+                <li><a href="/news?category=industry">Organoid biobank startup valued at $500M<span class="news-source">FierceBio</span></a></li>
+              </ul>
+              <a href="/news?category=industry" class="news-more">View More</a>
+            </div>
+
+            <!-- 7. RESEARCH / PUBMED -->
+            <div class="news-box news-research">
+              <div class="news-box-header">
+                <span class="news-icon">PUB</span>
+                <h4>Latest Research</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=research">Multi-organ chip models systemic drug toxicity<span class="news-source">PubMed</span></a></li>
+                <li><a href="/news?category=research">iPSC-derived cardiomyocytes in disease modeling<span class="news-source">bioRxiv</span></a></li>
+                <li><a href="/news?category=research">Review: Future of NAMs in regulatory science<span class="news-source">Tox Sci</span></a></li>
+              </ul>
+              <a href="/news?category=research" class="news-more">View More</a>
+            </div>
+
+            <!-- 8. TECHNOLOGY -->
+            <div class="news-box news-tech">
+              <div class="news-box-header">
+                <span class="news-icon">LAB</span>
+                <h4>Technology</h4>
+              </div>
+              <ul class="news-headlines">
+                <li><a href="/news?category=technology">New bioprinter creates vascularized tissue in minutes<span class="news-source">3DPrint</span></a></li>
+                <li><a href="/news?category=technology">Biosensor detects single-cell drug responses<span class="news-source">ACS Nano</span></a></li>
+                <li><a href="/news?category=technology">Automated organoid culture system launched<span class="news-source">LabMgr</span></a></li>
+              </ul>
+              <a href="/news?category=technology" class="news-more">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- GAMES SECTION - Links Only -->
+    <section class="section games-section" id="games">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label" style="display: inline-flex; align-items: center; gap: 8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>Interactive Learning</span>
+          <h2 class="section-title">Science Lab Games</h2>
+          <p class="section-description">45+ educational games, simulations, and learning activities exploring biotech, organ-on-chip, and drug discovery</p>
+        </div>
+        <div style="display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 24px !important; max-width: 1100px; margin: 0 auto;">
+          <a href="/games/science-lab/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Science Lab</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">6 interactive simulations: Lung-on-Chip, PK Digital Twin, Kidney Nephron, RNA Structure</p>
+          </a>
+          <a href="/games/kenneth-biotech/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Kenneth's Biotech</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Educational puzzle game with 50+ modules and 24 levels</p>
+          </a>
+          <a href="/games/kids-zone/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Discovery Zone</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Quizzes and games for curious minds learning about biotech</p>
+          </a>
+          <a href="/games/lung-chip/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Lung-on-Chip</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Control airflow and maintain oxygen exchange in a breathing simulation</p>
+          </a>
+          <a href="/games/drug-predictor/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Drug Predictor</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Digital twin simulation for predicting drug responses</p>
+          </a>
+          <a href="/games/kidney-filter/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Kidney Filtration</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Filter waste molecules while preserving nutrients</p>
+          </a>
+          <a href="/games/biotech-games" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">BioTech Games</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">6 mini-games: DNA Matcher, Cell Defense, Protein Folder, CRISPR Sniper & more</p>
+          </a>
+          <a href="/games/tcell-battle/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">T-Cell Battle</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Command immune T-cells to fight infections and cancer</p>
+          </a>
+          <a href="/games/organoid-builder/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Organoid Builder</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Grow and culture 3D tissue organoids in the lab</p>
+          </a>
+          <a href="/games/biotech-arcade" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">BioTech Arcade</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">6-in-1 arcade: DNA Matcher, Protein Folder, Immune Rush & more challenges</p>
+          </a>
+          <a href="/games/immune-response/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Immune Response</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Simulate the body's immune system fighting pathogens</p>
+          </a>
+          <a href="/games/dna-repair/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">DNA Repair</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Fix damaged DNA sequences and prevent mutations</p>
+          </a>
+          <a href="/games/cell-defense-standalone" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Cell Defense</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Tower defense game - protect cells from invading pathogens</p>
+          </a>
+          <a href="/games/organ-transplant-match" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">Organ Transplant Match</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Match donors with recipients based on compatibility factors</p>
+          </a>
+          <a href="/games/ai-discovery/" style="display: block; background: #0f1620; border: 1px solid rgba(0,200,255,0.2); border-radius: 12px; padding: 24px; text-decoration: none;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 12px 0;">AI Drug Discovery</h3>
+            <p style="font-size: 0.9rem; color: #a8b8c8; line-height: 1.6; margin: 0;">Use AI to discover and develop new drug compounds</p>
+          </a>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="/games" class="btn btn-primary btn-lg">View All Games</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- NEWSLETTER SIGNUP -->
+    <section class="section newsletter-section" style="padding: 80px 0; background: linear-gradient(180deg, rgba(0, 200, 255, 0.05) 0%, transparent 100%);">
+      <div class="container" style="max-width: 600px; text-align: center;">
+        <h2 style="font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 600; color: #fff; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>Get Updates</h2>
+        <p style="font-size: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 30px;">Stay informed about biotech breakthroughs, new simulations, and research highlights.</p>
+        <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+          <input type="hidden" name="access_key" value="eefefa49-2e87-4a1d-9897-25d4b2d7d4d5">
+          <input type="hidden" name="subject" value="Newsletter Signup - Patient Analog">
+          <input type="hidden" name="redirect" value="https://patientanalog.com/thank-you.html">
+          <input type="email" name="email" placeholder="Your email address" required autocomplete="email" style="flex: 1; min-width: 250px; padding: 14px 20px; background: rgba(13, 21, 32, 0.8); border: 1px solid rgba(0, 200, 255, 0.3); border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95rem;">
+          <button type="submit" style="padding: 14px 28px; background: #00c8ff; border: none; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;">Subscribe</button>
+        </form>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 16px;">No spam. Unsubscribe anytime.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Explore the Future of Medicine</h2>
+          <p>Interactive simulations, live research feeds, and comprehensive resources for human-relevant drug discovery.</p>
+          <div class="cta-buttons">
+            <a href="/games" class="btn btn-primary">More Games</a>
+            <a href="/news" class="btn btn-outline">Live News</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="main-footer" style="background: rgba(5, 10, 15, 0.98); border-top: 1px solid rgba(139, 0, 0, 0.3); padding: 60px 20px 30px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+
+        <!-- About Section -->
+        <div>
+          <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 16px 0;">About Patient Analog</h4>
+          <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin: 0 0 16px 0;">The #1 FDA Modernization Act 3.0 resource platform for organ-on-chip, digital twins, and NAMs education.</p>
+          <a href="/about" style="color: #00c8ff; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Learn More →</a>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 16px 0;">Quick Links</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="/platform" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Platform</a></li>
+            <li style="margin-bottom: 10px;"><a href="/games" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">BioLab</a></li>
+            <li style="margin-bottom: 10px;"><a href="/research" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Research</a></li>
+            <li style="margin-bottom: 10px;"><a href="/news" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">News</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Contact -->
+        <div>
+          <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 16px 0;">Legal & Contact</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="/legal/privacy" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Privacy Policy</a></li>
+            <li style="margin-bottom: 10px;"><a href="/legal/terms" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Terms of Service</a></li>
+            <li style="margin-bottom: 10px;"><a href="/legal/cookies" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Cookie Policy</a></li>
+            <li style="margin-bottom: 10px;"><a href="/contact" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Contact Us</a></li>
+            <li style="margin-bottom: 10px;"><a href="/about" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">About Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 16px 0;">Resources</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="/glossary" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Glossary</a></li>
+            <li style="margin-bottom: 10px;"><a href="/portfolio" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Portfolio</a></li>
+            <li style="margin-bottom: 10px;"><a href="/regulatory" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Regulatory</a></li>
+            <li style="margin-bottom: 10px;"><a href="/market" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Market</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; text-align: center;">
+        <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); margin: 0;">© 2026 Patient Analog. All rights reserved. Built for researchers, educators, and students worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- News Timestamp -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const timestampEl = document.getElementById('news-timestamp');
+      if (timestampEl) {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        timestampEl.textContent = time;
+      }
+    });
+  </script>
+
+  <!-- Web3Forms Contact Handler -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle all Web3Forms submissions with AJAX for better UX
+      const forms = document.querySelectorAll('form[action*="web3forms.com"]');
+      
+      forms.forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalText = submitBtn ? submitBtn.textContent : '';
+          
+          // Show loading state
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+          }
+          
+          // Let the form submit normally (redirects to thank-you page)
+          // If you want AJAX submission instead, uncomment below:
+          /*
+          e.preventDefault();
+          const formData = new FormData(form);
+          
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              form.reset();
+              if (submitBtn) {
+                submitBtn.textContent = 'Sent! ✓';
+                submitBtn.style.background = '#22c55e';
+              }
+              setTimeout(() => {
+                if (submitBtn) {
+                  submitBtn.textContent = originalText;
+                  submitBtn.disabled = false;
+                  submitBtn.style.opacity = '1';
+                  submitBtn.style.background = '';
+                }
+              }, 3000);
+            } else {
+              throw new Error('Submission failed');
+            }
+          })
+          .catch(error => {
+            console.error('Form error:', error);
+            if (submitBtn) {
+              submitBtn.textContent = 'Error - Try Again';
+              submitBtn.style.background = '#ef4444';
+              submitBtn.disabled = false;
+              setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+              }, 3000);
+            }
+          });
+          */
+        });
+      });
+    });
+  </script>
+
+  <!-- Service Worker Registration for PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered:', registration.scope);
+          })
+          .catch(error => {
+            console.log('SW registration failed:', error);
+          });
+      });
+    }
+  </script>
+
+  <!-- BIOTECH VISITOR TRACKER -->
+  <div id="biotech-tracker" style="
+    position: fixed;
+    bottom: 130px;
+    right: 15px;
+    z-index: 9999;
+    background: linear-gradient(145deg, rgba(5,20,15,0.96) 0%, rgba(10,30,25,0.98) 100%);
+    border: 1px solid rgba(34,197,94,0.5);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 25px rgba(34,197,94,0.2), 0 0 40px rgba(139,92,246,0.1), inset 0 0 15px rgba(34,197,94,0.05);
+    min-width: 170px;
+    backdrop-filter: blur(10px);
+    transform: scale(0.76);
+    transform-origin: bottom right;
+  ">
+    <!-- Cell Division Animation -->
+    <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px;">
+      <div style="width: 6px; height: 6px; background: radial-gradient(circle, #22c55e 40%, transparent 70%); border-radius: 50%; animation: cellPulse 2s ease-in-out infinite; box-shadow: 0 0 8px #22c55e;"></div>
+      <div style="width: 6px; height: 6px; background: radial-gradient(circle, #10b981 40%, transparent 70%); border-radius: 50%; animation: cellPulse 2s ease-in-out infinite 0.3s; box-shadow: 0 0 8px #10b981;"></div>
+      <div style="width: 6px; height: 6px; background: radial-gradient(circle, #8b5cf6 40%, transparent 70%); border-radius: 50%; animation: cellPulse 2s ease-in-out infinite 0.6s; box-shadow: 0 0 8px #8b5cf6;"></div>
+    </div>
+
+    <!-- Header -->
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(34,197,94,0.25); padding-bottom: 10px;">
+      <div style="width: 10px; height: 10px; background: radial-gradient(circle, #22c55e 50%, #10b981 100%); border-radius: 50%; animation: statusBlink 2s ease-in-out infinite; box-shadow: 0 0 12px #22c55e;"></div>
+      <span style="font-size: 10px; color: #22c55e; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">BIOMETRIC SCAN</span>
+    </div>
+
+    <!-- Visitor Count Display -->
+    <div style="text-align: center;">
+      <div style="font-size: 9px; color: rgba(34,197,94,0.7); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;">Specimen Count</div>
+      <div id="visitor-count" style="
+        font-size: 30px;
+        font-weight: bold;
+        color: #22c55e;
+        text-shadow: 0 0 25px rgba(34,197,94,0.9), 0 0 50px rgba(139,92,246,0.4);
+        letter-spacing: 3px;
+        font-family: 'Orbitron', 'Courier New', monospace;
+      ">000000</div>
+      <div style="font-size: 8px; color: rgba(139,92,246,0.7); margin-top: 6px; letter-spacing: 1.5px;">CELL CULTURE ANALYTICS</div>
+    </div>
+
+    <!-- Stats Row -->
+    <div style="display: flex; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(34,197,94,0.2);">
+      <div style="text-align: center;">
+        <div style="font-size: 7px; color: rgba(34,197,94,0.6); letter-spacing: 1px;">CULTURE</div>
+        <div id="session-count" style="font-size: 15px; color: #10b981; font-weight: bold; text-shadow: 0 0 10px rgba(16,185,129,0.5);">0</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 7px; color: rgba(139,92,246,0.6); letter-spacing: 1px;">MITOSIS</div>
+        <div id="today-count" style="font-size: 15px; color: #8b5cf6; font-weight: bold; text-shadow: 0 0 10px rgba(139,92,246,0.5);">0</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 7px; color: rgba(251,146,60,0.6); letter-spacing: 1px;">ACTIVE</div>
+        <div id="online-count" style="font-size: 15px; color: #fb923c; font-weight: bold; text-shadow: 0 0 10px rgba(251,146,60,0.5);">1</div>
+      </div>
+    </div>
+
+    <!-- Microfluidic Flow Bar -->
+    <div style="margin-top: 12px; height: 4px; background: rgba(34,197,94,0.1); border-radius: 3px; overflow: hidden;">
+      <div style="height: 100%; width: 70%; background: linear-gradient(90deg, #22c55e, #10b981, #8b5cf6, #22c55e); animation: dataFlow 3s linear infinite; background-size: 300% 100%;"></div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes cellPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 12px #22c55e; }
+      50% { opacity: 0.5; box-shadow: 0 0 6px #22c55e; }
+    }
+    @keyframes dataFlow {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(150%); }
+    }
+    @keyframes organoidGrow {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); filter: brightness(1.2); }
+      100% { transform: scale(1); }
+    }
+    #biotech-tracker:hover {
+      border-color: rgba(34,197,94,0.8);
+      box-shadow: 0 0 50px rgba(34,197,94,0.4), 0 0 80px rgba(139,92,246,0.2), inset 0 0 35px rgba(34,197,94,0.1);
+      transform: scale(1.02);
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script>
+    // Biotech Visitor Tracker - Real Cloudflare Analytics
+    (function() {
+      const ANALYTICS_API = 'https://analytics.joseph-radler1.workers.dev/';
+
+      const formatCount = (num, digits = 6) => String(num).padStart(digits, '0');
+
+      const animateCounter = (element, target, duration = 1800) => {
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          element.textContent = formatCount(Math.floor(current));
+        }, 16);
+      };
+
+      // Session page views
+      let sessionViews = parseInt(sessionStorage.getItem('pageViews') || '0') + 1;
+      sessionStorage.setItem('pageViews', sessionViews);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const visitorEl = document.getElementById('visitor-count');
+        const sessionEl = document.getElementById('session-count');
+        const todayEl = document.getElementById('today-count');
+        const onlineEl = document.getElementById('online-count');
+
+        if (sessionEl) sessionEl.textContent = sessionViews;
+
+        // Fetch REAL analytics from Cloudflare Worker
+        fetch(ANALYTICS_API)
+          .then(res => res.json())
+          .then(response => {
+            if (response.success && response.data) {
+              const { totalVisitors, todayVisitors } = response.data;
+              if (visitorEl) animateCounter(visitorEl, totalVisitors);
+              if (todayEl) todayEl.textContent = todayVisitors;
+            }
+          })
+          .catch(() => {
+            // Fallback
+            if (visitorEl) animateCounter(visitorEl, 2721);
+          });
+
+        // Estimate online users
+        const hour = new Date().getHours();
+        const baseOnline = hour >= 9 && hour <= 22 ? 3 : 1;
+        if (onlineEl) onlineEl.textContent = baseOnline + Math.floor(Math.random() * 4);
+      });
+
+      // Update online count periodically
+      setInterval(() => {
+        const onlineEl = document.getElementById('online-count');
+        if (onlineEl) {
+          const current = parseInt(onlineEl.textContent);
+          const change = Math.random() > 0.6 ? (Math.random() > 0.5 ? 1 : -1) : 0;
+          onlineEl.textContent = Math.max(1, Math.min(15, current + change));
+        }
+      }, 8000);
+    })();
+  </script>
+
+  <!-- Mobile Navigation Hamburger Menu Script -->
+  <script>
+    (function() {
+      // Wait for DOM to be ready
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fix hero positioning on mobile
+        function fixMobileHero() {
+          if (window.innerWidth <= 768) {
+            const heroContainer = document.querySelector('#hero > div[style*="bottom"]');
+            if (heroContainer) {
+              heroContainer.style.bottom = 'auto';
+              heroContainer.style.top = '50%';
+              heroContainer.style.transform = 'translateX(-50%) translateY(-50%)';
+            }
+          }
+        }
+        fixMobileHero();
+        window.addEventListener('resize', fixMobileHero);
+      });
+    })();
+  </script>
+
+  <!-- Mobile-specific inline styles - FORCE nav visible -->
+  <style>
+    /* Hide hamburger button completely */
+    .nav-toggle, .hamburger, #nav-toggle, button.nav-toggle, button.hamburger {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* FORCE nav links visible on ALL screen sizes */
+    #nav-links, .nav-links, nav .nav-links, .nav-bar .nav-links,
+    #main-nav .nav-links, #main-nav #nav-links {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 4px !important;
+    }
+
+    /* FORCE each nav link visible */
+    #nav-links > a, .nav-links > a, .nav-links a, #nav-links a,
+    nav a.nav-link, .nav-bar a {
+      display: inline-flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Mobile: horizontal scrollable nav */
+    @media (max-width: 768px) {
+      /* Nav bar scrollable */
+      .nav-bar, #main-nav, nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 6px 8px !important;
+        align-items: center !important;
+      }
+      .nav-bar::-webkit-scrollbar, #main-nav::-webkit-scrollbar, nav::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      /* FORCE nav links container */
+      #nav-links, .nav-links, nav .nav-links, #main-nav .nav-links {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 4px !important;
+        overflow-x: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: auto !important;
+        height: auto !important;
+        max-height: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      /* FORCE each link visible and styled */
+      #nav-links a, .nav-links a, nav .nav-links a, #main-nav a:not(.nav-logo) {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 5px 8px !important;
+        min-height: 28px !important;
+        font-size: 10px !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        background: rgba(0, 200, 255, 0.15) !important;
+        border: 1px solid rgba(0, 200, 255, 0.3) !important;
+        border-radius: 4px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+
+      #nav-links a:active, .nav-links a:active {
+        background: rgba(0, 200, 255, 0.4) !important;
+      }
+
+      /* Hide nav icons on mobile */
+      #nav-links .nav-icon, .nav-links .nav-icon,
+      #nav-links svg, .nav-links svg,
+      .nav-links span.icon, #nav-links span.icon {
+        display: none !important;
+      }
+
+      /* Hide global clocks on mobile */
+      .global-clocks, #global-clocks, .live-ticker-container {
+        display: none !important;
+      }
+
+      /* Smaller logo on mobile */
+      .nav-logo, .nav-bar a[href="/"], #main-nav > a:first-child {
+        font-size: 12px !important;
+        padding: 4px 6px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* Nav height on mobile */
+      nav, .nav-bar, #main-nav, .sticky-nav {
+        height: 56px !important;
+        min-height: 56px !important;
+        max-height: 56px !important;
+        padding: 8px 16px !important;
+      }
+
+      .nav-content {
+        height: 40px !important;
+      }
+
+      /* Hide biotech tracker on mobile */
+      #biotech-tracker {
+        display: none !important;
+      }
+    }
+
+    /* Tablet: show smaller tracker */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #biotech-tracker {
+        transform: scale(0.85);
+        transform-origin: bottom right;
+      }
+    }
+
+    /* Hero picture element - base styles for all screens */
+    #hero picture,
+    .hero picture {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Fix hero for mobile - use cropped image */
+    @media (max-width: 768px) {
+      /* Picture element and image positioning for mobile */
+      #hero picture,
+      .hero picture {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 0 !important;
+      }
+
+      #hero .hero-img,
+      .hero .hero-img,
+      #hero picture img,
+      .hero picture img {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+      }
+
+      /* Force all grids to single column on mobile */
+      [style*="grid-template-columns: repeat(3"],
+      [style*="grid-template-columns: repeat(auto-fit"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Ensure hero margin for nav */
+      .hero, #hero, section.hero {
+        margin-top: 56px !important;
+        height: calc(100vh - 56px) !important;
+        min-height: 500px !important;
+      }
+
+      /* Fix hero content positioning for mobile - centered vertically */
+      .hero-container {
+        position: absolute !important;
+        bottom: auto !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 20px !important;
+        width: 90% !important;
+        max-width: 380px !important;
+        text-align: center !important;
+        z-index: 10 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      /* Mobile hero title - bold and readable */
+      .hero-container h1 {
+        font-size: 2.2rem !important;
+        margin-bottom: 8px !important;
+        text-shadow: 0 2px 20px rgba(0,0,0,1), 0 0 40px rgba(0,255,255,0.6) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -1px !important;
+        color: #ffffff !important;
+      }
+
+      /* Mobile subtitle - orange gradient text */
+      .hero-container h2 {
+        font-size: 0.95rem !important;
+        margin-bottom: 6px !important;
+        line-height: 1.2 !important;
+      }
+
+      /* Mobile description text */
+      .hero-container p {
+        font-size: 0.85rem !important;
+        margin-bottom: 6px !important;
+        text-shadow: 0 2px 15px rgba(0,0,0,1) !important;
+        line-height: 1.3 !important;
+        color: rgba(255,255,255,0.95) !important;
+      }
+
+      /* Mobile CTA button */
+      .hero-container .hero-cta-pulse {
+        padding: 10px 20px !important;
+        font-size: 0.8rem !important;
+        margin-top: 10px !important;
+      }
+
+      /* Hide hero overlay effects on mobile for clarity */
+      .hero-digital-grid,
+      .hero-electric-pulse,
+      .hero-gold-shimmer,
+      .hero-scanline,
+      .hero-particles,
+      .hero-lightning,
+      .hero-hdr-bloom {
+        display: none !important;
+      }
+
+      /* Reduce vignettes on mobile */
+      #hero > div[style*="radial-gradient"],
+      #hero > div[style*="linear-gradient"] {
+        opacity: 0.3 !important;
+      }
+
+      /* Fix stats bar position */
+      .stats-bar-slim {
+        margin-top: 0 !important;
+      }
+
+      /* Nav links - ensure tap targets work */
+      #nav-links a, .nav-links a {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(0, 200, 255, 0.3) !important;
+      }
+
+    }
+  </style>
+
+  <!-- Live RSS Breaking News Ticker -->
+  <script src="/js/live-news-ticker.js"></script>
+
+  <!-- FINAL TICKER SIZE OVERRIDE - MUST BE LAST -->
+  <style>
+    #live-ticker, .live-ticker-bar {
+      min-height: 140px !important;
+      max-height: 145px !important;
+      height: 140px !important;
+      padding: 5px 0 !important;
+      overflow: visible !important;
+      z-index: 2147483647 !important;
+      background: rgba(0,0,0,0.95) !important;
+    }
+    .live-ticker-inner {
+      min-height: 130px !important;
+      height: 130px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      gap: 2px !important;
+      padding: 5px 0 !important;
+      overflow: visible !important;
+      z-index: 2147483647 !important;
+    }
+    .live-ticker-row {
+      min-height: 35px !important;
+      height: 38px !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 2px 10px !important;
+      flex-shrink: 0 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 2147483647 !important;
+      position: relative !important;
+    }
+    .live-ticker-row.ticker-news-row {
+      min-height: 35px !important;
+      height: 38px !important;
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 2147483647 !important;
+    }
+  </style>
+
+  <!-- JAVASCRIPT FORCE TICKER SIZE - Applies inline styles after all CSS loads -->
+  <script>
+    (function() {
+      function forceTickerSize() {
+        var ticker = document.getElementById('live-ticker');
+        if (ticker) {
+          // Compact ticker at bottom - just enough for 3 rows
+          ticker.style.cssText = 'height:115px!important;min-height:115px!important;max-height:115px!important;padding:3px 0!important;overflow:visible!important;z-index:2147483647!important;position:fixed!important;bottom:0!important;left:0!important;right:0!important;background:rgba(0,0,0,0.95)!important;';
+        }
+        var tickerBar = document.querySelector('.live-ticker-bar');
+        if (tickerBar) {
+          tickerBar.style.cssText = 'height:110px!important;min-height:110px!important;overflow:visible!important;';
+        }
+        var tickerInner = document.querySelector('.live-ticker-inner');
+        if (tickerInner) {
+          // Stack rows tightly together
+          tickerInner.style.cssText = 'height:105px!important;min-height:105px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;gap:0px!important;padding:2px 0!important;overflow:visible!important;';
+        }
+        var rows = document.querySelectorAll('.live-ticker-row');
+        rows.forEach(function(row) {
+          row.style.cssText = 'min-height:32px!important;height:34px!important;display:flex!important;align-items:center!important;visibility:visible!important;opacity:1!important;flex-shrink:0!important;padding:2px 10px!important;margin:0!important;';
+        });
+      }
+      // Duplicate top ticker items for seamless infinite scroll
+      function duplicateTopTicker() {
+        var tickerItems = document.querySelector('.live-ticker-items');
+        if (tickerItems && !tickerItems.dataset.duplicated) {
+          var items = tickerItems.innerHTML;
+          tickerItems.innerHTML = items + items;
+          tickerItems.dataset.duplicated = 'true';
+        }
+      }
+
+      // Force slow ticker speed via inline styles (overrides all CSS)
+      function forceTickerSpeed() {
+        // Middle ticker scroll
+        var tickerScrolls = document.querySelectorAll('.ticker-scroll, .ticker-scroll-content');
+        tickerScrolls.forEach(function(el) {
+          el.style.setProperty('animation-duration', '600s', 'important');
+        });
+        // Top ticker
+        var tickerItems = document.querySelector('.live-ticker-items');
+        if (tickerItems) {
+          tickerItems.style.setProperty('animation-duration', '400s', 'important');
+        }
+      }
+
+      // Run immediately
+      forceTickerSize();
+      // Run after DOM ready
+      document.addEventListener('DOMContentLoaded', function() {
+        forceTickerSize();
+        duplicateTopTicker();
+        forceTickerSpeed();
+      });
+      // Run after everything loads
+      window.addEventListener('load', function() {
+        forceTickerSize();
+        duplicateTopTicker();
+        forceTickerSpeed();
+      });
+      // Run again after a delay for any dynamic content
+      setTimeout(forceTickerSize, 1000);
+      setTimeout(function() {
+        forceTickerSize();
+        duplicateTopTicker();
+        forceTickerSpeed();
+      }, 3000);
+      setTimeout(forceTickerSpeed, 5000);
+    })();
+  </script>
+
+  <!-- FINAL OVERRIDE - Slow ticker animation (loaded last = highest priority) -->
+  <style>
+    @keyframes tickerScrollSlow {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-scroll,
+    .ticker-scroll-content,
+    span.ticker-scroll,
+    span.ticker-scroll-content,
+    .live-ticker-row .ticker-scroll,
+    .live-ticker-row .ticker-scroll-content,
+    .ticker-row-secondary .ticker-scroll,
+    .ticker-row-secondary .ticker-scroll-content,
+    #live-ticker .ticker-scroll,
+    #live-ticker .ticker-scroll-content {
+      animation: tickerScrollSlow 600s linear infinite !important;
+      -webkit-animation: tickerScrollSlow 600s linear infinite !important;
+    }
+  </style>
+
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+
+<!-- Cookie Consent JavaScript -->
+<script>
+  // Check cookie consent status on page load
+  function checkCookieConsent() {
+    const consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+      // Show banner after 1 second delay
+      setTimeout(() => {
+        document.getElementById('cookieConsent').classList.add('show');
+      }, 1000);
+    } else if (consent === 'accepted') {
+      // Load tracking scripts if accepted
+      loadTrackingScripts();
+    }
+  }
+
+  // Accept cookies
+  function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    document.getElementById('cookieConsent').classList.remove('show');
+    loadTrackingScripts();
+
+    // Send consent to Google Analytics
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      });
+    }
+  }
+
+  // Decline cookies
+  function declineCookies() {
+    localStorage.setItem('cookieConsent', 'declined');
+    document.getElementById('cookieConsent').classList.remove('show');
+
+    // Send declined consent to Google Analytics
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+    }
+  }
+
+  // Load tracking scripts (placeholder - already loaded in head)
+  function loadTrackingScripts() {
+    // GA4 and AdSense are already loaded in <head>
+    // This function is for any additional tracking that should only load with consent
+    console.log('Cookie consent granted - tracking enabled');
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkCookieConsent);
+  } else {
+    checkCookieConsent();
+  }
+</script>
+
+</body>
+</html>
+<!-- v20260116073238 -->

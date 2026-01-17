@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNAPSE - Powered by SynapChip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+  <!-- GA4 Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+    <!-- Global Audio Manager (must load before game engine) -->
+    <script src="js/audio-manager.js" defer></script>
+    <!-- AAA Game Engine for enhanced effects -->
+    <script src="js/aaa-game-engine.js" defer></script>
+    <link rel="stylesheet" href="game-styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Press Start 2P', monospace;
+            background: linear-gradient(135deg, var(--game-bg-modal) 0%, var(--game-bg-purple-black) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Canvas overlay for enhanced effects */
+        #effectsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        .game-container {
+            width: 90vw;
+            height: 50vh;
+            max-width: 1400px;
+            background: linear-gradient(135deg, var(--game-bg-deep-blue) 0%, var(--game-bg-navy-deep) 100%);
+            border: 8px solid var(--game-green);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.8), inset 0 0 30px rgba(0, 255, 136, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px dashed var(--game-magenta);
+        }
+
+        .title {
+            font-size: 24px;
+            color: var(--game-green);
+            text-shadow: 3px 3px 0px var(--game-magenta);
+            letter-spacing: 3px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            color: var(--game-cyan-electric);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--game-gold);
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            color: var(--game-pink-light);
+            font-weight: bold;
+        }
+
+        .game-board {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .neuron {
+            background: radial-gradient(ellipse at 30% 30%, var(--game-bg-mid-purple) 0%, var(--game-bg-purple) 40%, var(--game-bg-dark-blue) 100%);
+            border: 4px solid var(--game-green);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: var(--game-green);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 20px rgba(0, 255, 136, 0.3),
+                inset 0 0 15px rgba(0, 255, 136, 0.1),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+        }
+
+        .neuron::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 25%;
+            height: 15%;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(3px);
+        }
+
+        .neuron::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 255, 136, 0.05) 100%);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .neuron:hover {
+            border-color: var(--game-pink-light);
+            box-shadow:
+                0 0 30px rgba(255, 107, 157, 0.6),
+                0 0 60px rgba(255, 107, 157, 0.3),
+                inset 0 0 20px rgba(255, 107, 157, 0.2);
+            transform: scale(1.05);
+        }
+
+        .neuron.active {
+            background: radial-gradient(ellipse at 30% 30%, var(--game-green) 0%, var(--game-cyan-electric) 50%, var(--game-cyan-dark) 100%);
+            border-color: var(--game-gold);
+            box-shadow:
+                0 0 40px rgba(0, 255, 136, 1),
+                0 0 80px rgba(0, 255, 136, 0.6),
+                0 0 120px rgba(0, 85, 255, 0.4),
+                inset 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: pulse-neuron 0.3s ease-out, glow-expand 0.3s ease-out;
+            color: var(--game-black);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes pulse-neuron {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes glow-expand {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            50% { box-shadow: 0 0 60px rgba(0, 255, 136, 1), 0 0 100px rgba(0, 85, 255, 0.8); }
+            100% { box-shadow: 0 0 40px rgba(0, 255, 136, 1), 0 0 80px rgba(0, 255, 136, 0.6); }
+        }
+
+        .neuron.hit {
+            animation: hit-success 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 0 50px rgba(255, 215, 0, 1),
+                0 0 100px rgba(0, 255, 136, 0.8);
+        }
+
+        @keyframes hit-success {
+            0% { transform: scale(1.4); border-color: var(--game-gold); filter: brightness(1.5); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); border-color: var(--game-green); filter: brightness(1); }
+        }
+
+        .neuron.miss {
+            animation: hit-miss 0.4s ease-out;
+            border-color: var(--game-red-bright);
+            background: radial-gradient(ellipse at 30% 30%, var(--game-rose) 0%, var(--game-red-bright) 50%, var(--game-red-crimson) 100%);
+            box-shadow:
+                0 0 40px rgba(255, 0, 51, 0.8),
+                0 0 80px rgba(255, 0, 51, 0.4);
+        }
+
+        @keyframes hit-miss {
+            0% { transform: scale(0.85) rotate(-8deg); filter: brightness(1.3); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(0.95) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--game-cyan-electric);
+            padding: 10px;
+            background: rgba(0, 85, 255, 0.1);
+            border: 2px solid var(--game-cyan-electric);
+            border-radius: 4px;
+        }
+
+        .footer-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-right {
+            text-align: right;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .start-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--game-pink-light) 0%, var(--game-magenta) 100%);
+            border: 3px solid var(--game-gold);
+            color: var(--game-black);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+        }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 107, 157, 1);
+        }
+
+        .start-btn:active {
+            transform: scale(0.95);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--game-bg-deep-blue) 0%, var(--game-bg-navy-deep) 100%);
+            border: 6px solid var(--game-gold);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+        }
+
+        .modal-title {
+            font-size: 32px;
+            color: var(--game-gold);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px var(--game-magenta);
+        }
+
+        .modal-text {
+            font-size: 16px;
+            color: var(--game-green);
+            margin-bottom: 15px;
+        }
+
+        .modal-button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--game-green) 0%, var(--game-cyan-electric) 100%);
+            border: 3px solid var(--game-gold);
+            color: var(--game-black);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1500;
+            font-weight: bold;
+        }
+
+        @keyframes float-up {
+            to { transform: translateY(-100px) scale(0); opacity: 0; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+            20%, 40%, 60%, 80% { transform: translateX(4px); }
+        }
+    </style>
+    <script src="/js/cookie-consent.js" defer></script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://patientanalog.com/synapse-game/">
+    <meta property="og:title" content="SYNAPSE - Powered by SynapChip">
+    <meta property="og:description" content="Learn about SYNAPSE - Powered by SynapChip - comprehensive research and analysis from Patient Analog, the definitive resource for human simulation technologies.">
+    <meta property="og:image" content="https://patientanalog.com/og-preview.png">
+    <meta property="og:site_name" content="Patient Analog - Human Simulation Technologies">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://patientanalog.com/synapse-game/">
+    <meta name="twitter:title" content="SYNAPSE - Powered by SynapChip">
+    <meta name="twitter:description" content="Learn about SYNAPSE - Powered by SynapChip - comprehensive research and analysis from Patient Analog, the definitive resource for human simulation technologies.">
+    <meta name="twitter:image" content="https://patientanalog.com/og-preview.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SYNAPSE - Powered by SynapChip",
+        "description": "Learn about SYNAPSE - Powered by SynapChip - comprehensive research and analysis from Patient Analog, the definitive resource for human simulation technologies.",
+        "author": {
+            "@type": "Organization",
+            "name": "Patient Analog",
+            "url": "https://patientanalog.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Patient Analog - Human Simulation Technologies",
+            "url": "https://patientanalog.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://patientanalog.com/favicon-512.png"
+            }
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-01-07",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://patientanalog.com/synapse-game/"
+        }
+    }
+    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Effects Canvas for particles and visual effects -->
+    <canvas id="effectsCanvas"></canvas>
+
+    <div class="game-container">
+        <div class="header">
+            <div class="title">SYNAPSE</div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">SEQUENCE</div>
+                    <div class="stat-value" id="level">1</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">MISSES</div>
+                    <div class="stat-value" id="misses">0/5</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard"></div>
+
+        <div class="footer">
+            <div class="footer-left">
+                <button class="start-btn" id="startBtn">START GAME</button>
+                <button class="start-btn" id="resetBtn" style="background: linear-gradient(135deg, var(--game-cyan-electric) 0%, var(--game-green) 100%); display: none;">RESET</button>
+            </div>
+            <div class="footer-right">
+                <div>Powered by SynapChip</div>
+                <div style="margin-top: 4px;">v2.0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("?? SYNAPSE v3 - Enhanced Edition");
+
+        // === EFFECTS CANVAS SETUP ===
+        const effectsCanvas = document.getElementById('effectsCanvas');
+        const effectsCtx = effectsCanvas.getContext('2d');
+
+        function resizeEffectsCanvas() {
+            effectsCanvas.width = window.innerWidth;
+            effectsCanvas.height = window.innerHeight;
+        }
+        resizeEffectsCanvas();
+        window.addEventListener('resize', resizeEffectsCanvas);
+
+        // Particle system for canvas effects
+        const canvasParticles = [];
+
+        function addCanvasParticle(x, y, color, count = 8) {
+            for (let i = 0; i < count; i++) {
+                const angle = (Math.PI * 2 * i) / count;
+                const speed = 3 + Math.random() * 3;
+                canvasParticles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 1,
+                    color: color,
+                    size: 4 + Math.random() * 4
+                });
+            }
+        }
+
+        function updateCanvasEffects() {
+            effectsCtx.clearRect(0, 0, effectsCanvas.width, effectsCanvas.height);
+
+            // Update and draw particles
+            for (let i = canvasParticles.length - 1; i >= 0; i--) {
+                const p = canvasParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.15; // gravity
+                p.life -= 0.025;
+                p.vx *= 0.98;
+
+                if (p.life <= 0) {
+                    canvasParticles.splice(i, 1);
+                    continue;
+                }
+
+                // Draw particle with glow
+                effectsCtx.save();
+                effectsCtx.globalAlpha = p.life;
+                effectsCtx.shadowBlur = 15;
+                effectsCtx.shadowColor = p.color;
+                effectsCtx.fillStyle = p.color;
+                effectsCtx.beginPath();
+                effectsCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                effectsCtx.fill();
+                effectsCtx.restore();
+            }
+
+            requestAnimationFrame(updateCanvasEffects);
+        }
+        updateCanvasEffects();
+
+        // === AUDIO SETUP - Uses shared AudioManager if available ===
+        let audioCtx = null;
+        let masterGain = null;
+
+        // Check if in iframe - default to muted unless parent has sound enabled
+        const isInIframe = window.parent !== window;
+        let _soundDisabled = isInIframe;
+        try {
+            if (isInIframe) {
+                // Check parent's AudioManager or localStorage (note: key uses underscore, not hyphen)
+                const parentSound = window.parent.localStorage.getItem('pa_sound_enabled');
+                _soundDisabled = parentSound !== 'true';
+            } else {
+                // Not in iframe, check own localStorage
+                const localSound = localStorage.getItem('pa_sound_enabled');
+                _soundDisabled = localSound === 'false';
+            }
+        } catch(e) { _soundDisabled = false; } // Default to sound enabled if we can't check
+
+        function getAudioContext() {
+            // Don't create audio if disabled
+            if (_soundDisabled) return null;
+
+            if (window.AudioManager && window.AudioManager.getContext) {
+                audioCtx = window.AudioManager.getContext();
+                masterGain = window.AudioManager.getMasterGain();
+                return audioCtx;
+            }
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                masterGain = audioCtx.createGain();
+                masterGain.connect(audioCtx.destination);
+            }
+            return audioCtx;
+        }
+
+        function getAudioDestination() {
+            if (!getAudioContext()) return null;
+            return masterGain || audioCtx.destination;
+        }
+
+        function isSoundEnabled() {
+            if (_soundDisabled) return false;
+            if (window.AudioManager) {
+                return window.AudioManager.isEnabled();
+            }
+            return true;
+        }
+
+        // DON'T initialize audio on load - wait for user interaction
+        // getAudioContext(); // REMOVED - was causing auto-play
+
+        const NEURON_FREQS = [330, 440, 550, 660, 770, 880]; // More musical frequencies
+        const TONE_DURATION = 0.35;
+        const SILENCE_DURATION = 0.35;
+
+        const gameState = {
+            score: 0,
+            level: 1,
+            misses: 0,
+            maxMisses: 5,
+            gameActive: false,
+            playingSequence: false,
+            sequence: [],
+            currentInputIndex: 0,
+            baseSpeed: 500,
+            currentSpeed: 500,
+            chiptuneActive: false,
+            comboCount: 0,
+            lastScore: 0
+        };
+
+        const neurons = [];
+        const gameBoard = document.getElementById('gameBoard');
+
+        console.log("? BUILDING 6-NEURON GRID...");
+        for (let i = 0; i < 6; i++) {
+            const neuron = document.createElement('div');
+            neuron.className = 'neuron';
+            neuron.id = `neuron-${i}`;
+            neuron.textContent = i + 1;
+            neuron.addEventListener('click', (e) => handleNeuronClick(i, e));
+            neuron.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                handleNeuronClick(i, { clientX: touch.clientX, clientY: touch.clientY });
+            }, { passive: false });
+            gameBoard.appendChild(neuron);
+            neurons.push({ el: neuron, id: i });
+        }
+        console.log("? Grid created - 6 neurons");
+
+        // Enhanced tone with layered synthesis
+        function playTone(neuronId, duration = TONE_DURATION) {
+            if (!isSoundEnabled()) return;
+
+            const freq = NEURON_FREQS[neuronId];
+
+            // Use AAA Engine if available
+            if (window.AAAEngine && window.AAAEngine.Sound) {
+                window.AAAEngine.Sound.effects.neuronFire(freq);
+                return;
+            }
+
+            // Fallback to enhanced local audio
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+
+                // Main oscillator
+                const osc1 = ctx.createOscillator();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(freq, now);
+
+                // Harmonic oscillator
+                const osc2 = ctx.createOscillator();
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(freq * 1.5, now);
+
+                // Sub bass
+                const osc3 = ctx.createOscillator();
+                osc3.type = 'sine';
+                osc3.frequency.setValueAtTime(freq * 0.5, now);
+
+                // Gains
+                const gain1 = ctx.createGain();
+                gain1.gain.setValueAtTime(0.3, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+                const gain2 = ctx.createGain();
+                gain2.gain.setValueAtTime(0.12, now);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+                const gain3 = ctx.createGain();
+                gain3.gain.setValueAtTime(0.08, now);
+                gain3.gain.exponentialRampToValueAtTime(0.001, now + duration * 0.8);
+
+                osc1.connect(gain1);
+                osc2.connect(gain2);
+                osc3.connect(gain3);
+                const dest = getAudioDestination();
+                gain1.connect(dest);
+                gain2.connect(dest);
+                gain3.connect(dest);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc3.start(now);
+                osc1.stop(now + duration);
+                osc2.stop(now + duration);
+                osc3.stop(now + duration);
+            } catch(e) {}
+        }
+
+        function playErrorSound() {
+            if (!isSoundEnabled()) return;
+
+            if (window.AAAEngine && window.AAAEngine.Sound) {
+                window.AAAEngine.Sound.effects.error();
+                return;
+            }
+
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.exponentialRampToValueAtTime(80, now + 0.3);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.connect(gain);
+                gain.connect(getAudioDestination());
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } catch(e) {}
+        }
+
+        function playSuccessChime() {
+            if (!isSoundEnabled()) return;
+
+            if (window.AAAEngine && window.AAAEngine.Sound) {
+                window.AAAEngine.Sound.effects.success();
+                return;
+            }
+
+            const ctx = getAudioContext();
+            const notes = [523, 659, 784];
+            notes.forEach((freq, i) => {
+                setTimeout(() => {
+                    const now = ctx.currentTime;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.connect(gain);
+                    gain.connect(getAudioDestination());
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }, i * 80);
+            });
+        }
+
+        function activateNeuron(neuronId) {
+            const neuronEl = neurons[neuronId].el;
+            const rect = neuronEl.getBoundingClientRect();
+
+            neurons[neuronId].el.classList.add('active');
+            playTone(neuronId, TONE_DURATION);
+
+            // Add canvas particles at neuron center
+            addCanvasParticle(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2,
+                'var(--game-green)',
+                6
+            );
+
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    neurons[neuronId].el.classList.remove('active');
+                    setTimeout(resolve, SILENCE_DURATION * 1000);
+                }, TONE_DURATION * 1000);
+            });
+        }
+
+        async function playSequence() {
+            console.log("?? Playing sequence " + gameState.level + " @ " + gameState.currentSpeed + "ms");
+            gameState.playingSequence = true;
+            gameState.currentInputIndex = 0;
+
+            // Brief pause before sequence
+            await new Promise(r => setTimeout(r, 400));
+
+            for (let i = 0; i < gameState.sequence.length; i++) {
+                await activateNeuron(gameState.sequence[i]);
+            }
+
+            gameState.playingSequence = false;
+            console.log("? Sequence ready - YOUR TURN!");
+        }
+
+        function handleNeuronClick(neuronId, e) {
+            if (!gameState.gameActive || gameState.playingSequence) return;
+
+            const expectedId = gameState.sequence[gameState.currentInputIndex];
+            const rect = neurons[neuronId].el.getBoundingClientRect();
+            const clickX = e.clientX || (rect.left + rect.width / 2);
+            const clickY = e.clientY || (rect.top + rect.height / 2);
+
+            playTone(neuronId, TONE_DURATION);
+
+            if (neuronId === expectedId) {
+                console.log("? CORRECT");
+                neurons[neuronId].el.classList.add('hit');
+                gameState.comboCount++;
+
+                // Combo bonus scoring
+                const comboMultiplier = Math.min(gameState.comboCount, 5);
+                const points = 10 * gameState.level * comboMultiplier;
+                gameState.score += points;
+
+                // Canvas particle burst
+                addCanvasParticle(clickX, clickY, 'var(--game-green)', 12);
+                createParticle(clickX, clickY, '+' + points, 'var(--game-gold)');
+
+                gameState.currentInputIndex++;
+                setTimeout(() => neurons[neuronId].el.classList.remove('hit'), 300);
+
+                if (gameState.currentInputIndex >= gameState.sequence.length) {
+                    console.log("?? SEQUENCE COMPLETE!");
+                    playSuccessChime();
+
+                    // Big celebration burst
+                    for (let i = 0; i < 6; i++) {
+                        const nr = neurons[i].el.getBoundingClientRect();
+                        addCanvasParticle(
+                            nr.left + nr.width / 2,
+                            nr.top + nr.height / 2,
+                            ['var(--game-green)', 'var(--game-gold)', 'var(--game-cyan-electric)'][i % 3],
+                            8
+                        );
+                    }
+
+                    setTimeout(() => nextSequence(), 800);
+                }
+            } else {
+                console.log("? WRONG - Miss " + (gameState.misses + 1));
+                neurons[neuronId].el.classList.add('miss');
+                gameState.misses++;
+                gameState.comboCount = 0;
+
+                gameState.currentSpeed = Math.max(150, gameState.currentSpeed - 80);
+                console.log("?? Speed increased: " + gameState.currentSpeed + "ms");
+
+                // Error effects
+                addCanvasParticle(clickX, clickY, 'var(--game-red-bright)', 15);
+                createParticle(clickX, clickY, '?', 'var(--game-red-bright)');
+                playErrorSound();
+                screenShake();
+
+                setTimeout(() => neurons[neuronId].el.classList.remove('miss'), 400);
+
+                if (gameState.misses >= gameState.maxMisses) {
+                    setTimeout(() => endGame(), 600);
+                } else {
+                    gameState.currentInputIndex = 0;
+                    setTimeout(() => playSequence(), 1000);
+                }
+            }
+
+            updateUI();
+        }
+
+        function nextSequence() {
+            const newNeuron = Math.floor(Math.random() * 6);
+            gameState.sequence.push(newNeuron);
+            gameState.level++;
+            console.log("?? New sequence length: " + gameState.sequence.length);
+            updateUI();
+            setTimeout(() => playSequence(), 600);
+        }
+
+        function createParticle(x, y, text, color) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.textContent = text;
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.color = color;
+            p.style.fontSize = '28px';
+            p.style.textShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+            p.style.animation = 'float-up 1s ease-out forwards';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 1000);
+        }
+
+        function screenShake() {
+            const container = document.querySelector('.game-container');
+            if (window.AAAEngine && window.AAAEngine.Canvas2D) {
+                window.AAAEngine.Canvas2D.shake(container, 12, 400);
+            } else {
+                container.style.animation = 'shake 0.4s';
+                setTimeout(() => { container.style.animation = ''; }, 400);
+            }
+        }
+
+        function updateUI() {
+            const scoreEl = document.getElementById('score');
+            const newScore = gameState.score;
+
+            // Animated score update
+            if (window.AAAEngine && window.AAAEngine.Canvas2D && gameState.lastScore !== newScore) {
+                window.AAAEngine.Canvas2D.animateScore(scoreEl, gameState.lastScore, newScore, 300);
+            } else {
+                scoreEl.textContent = newScore;
+            }
+            gameState.lastScore = newScore;
+
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('misses').textContent = gameState.misses + '/5';
+        }
+
+        function playChiptune() {
+            if (!gameState.chiptuneActive || !isSoundEnabled()) return;
+
+            const baseFreq = 330;
+            const melody = [baseFreq, baseFreq * 1.2, baseFreq * 1.5, baseFreq * 1.25, baseFreq * 0.75];
+            const noteDuration = (gameState.currentSpeed / 1000) * 0.5;
+
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(melody[Math.floor(Math.random() * melody.length)], now);
+                gain.gain.setValueAtTime(0.06, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + noteDuration);
+
+                osc.connect(gain);
+                gain.connect(getAudioDestination());
+                osc.start(now);
+                osc.stop(now + noteDuration);
+            } catch(e) {}
+
+            setTimeout(playChiptune, gameState.currentSpeed / 2);
+        }
+
+        function startGame() {
+            console.log("?? GAME START!");
+
+            // Resume audio context on user interaction
+            const ctx = getAudioContext();
+            if (ctx && ctx.state === 'suspended') {
+                ctx.resume();
+            }
+            if (window.AAAEngine && window.AAAEngine.Sound) {
+                window.AAAEngine.Sound.init();
+                window.AAAEngine.Sound.resume();
+            }
+
+            gameState.gameActive = true;
+            gameState.score = 0;
+            gameState.lastScore = 0;
+            gameState.level = 1;
+            gameState.misses = 0;
+            gameState.comboCount = 0;
+            gameState.currentSpeed = gameState.baseSpeed;
+            gameState.sequence = [
+                Math.floor(Math.random() * 6),
+                Math.floor(Math.random() * 6),
+                Math.floor(Math.random() * 6)
+            ];
+            gameState.chiptuneActive = true;
+
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('resetBtn').style.display = 'block';
+
+            // Start burst effect
+            const container = document.querySelector('.game-container');
+            const rect = container.getBoundingClientRect();
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    addCanvasParticle(
+                        rect.left + Math.random() * rect.width,
+                        rect.top + Math.random() * rect.height,
+                        ['var(--game-green)', 'var(--game-cyan-electric)', 'var(--game-gold)'][Math.floor(Math.random() * 3)],
+                        4
+                    );
+                }, i * 50);
+            }
+
+            updateUI();
+            playChiptune();
+            setTimeout(() => playSequence(), 800);
+        }
+
+        function endGame() {
+            console.log("?? GAME OVER - Score: " + gameState.score);
+            gameState.gameActive = false;
+            gameState.chiptuneActive = false;
+
+            neurons.forEach(n => n.el.classList.remove('active', 'hit', 'miss'));
+
+            // Play game over sound
+            if (window.AAAEngine && window.AAAEngine.Sound) {
+                window.AAAEngine.Sound.effects.crisisWarning();
+            }
+
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">GAME OVER</div>
+                    <div class="modal-text">FINAL SCORE: ${gameState.score.toLocaleString()}</div>
+                    <div class="modal-text">SEQUENCES: ${gameState.level}</div>
+                    <div class="modal-text">BEST COMBO: ${gameState.comboCount}x</div>
+                    <div class="modal-text" style="font-size: 10px; margin-top: 10px;">SPEED: ${gameState.currentSpeed}ms</div>
+                    <button class="modal-button" onclick="location.reload()">PLAY AGAIN</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Celebration particles in modal
+            setTimeout(() => {
+                const modalRect = modal.querySelector('.modal-content').getBoundingClientRect();
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        addCanvasParticle(
+                            modalRect.left + Math.random() * modalRect.width,
+                            modalRect.top + modalRect.height / 2,
+                            ['var(--game-gold)', 'var(--game-pink-light)', 'var(--game-cyan-electric)'][Math.floor(Math.random() * 3)],
+                            5
+                        );
+                    }, i * 30);
+                }
+            }, 200);
+        }
+
+        document.getElementById('startBtn').addEventListener('click', startGame);
+        document.getElementById('resetBtn').addEventListener('click', () => location.reload());
+
+        console.log("? SYNAPSE v3 READY - Enhanced with AAA Engine");
+    </script>
+</body>
+</html>

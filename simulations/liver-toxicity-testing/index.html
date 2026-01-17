@@ -1,0 +1,817 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+    <title>Liver Toxicity Testing | Patient Analog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0a0a 0%, #3d1a1a 50%, #5d2a2a 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #ff4444, #ffaa44, #ff8844);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 68, 68, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 170, 68, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #ff8844;
+            opacity: 0.9;
+        }
+
+        .key-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 136, 68, 0.4);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff4444, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #ff8844;
+        }
+
+        .main-display {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        #canvas-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 68, 68, 0.4);
+            min-height: 600px;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 136, 68, 0.4);
+        }
+
+        .control-section {
+            margin-bottom: 25px;
+        }
+
+        .control-section h3 {
+            color: #ff8844;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid rgba(255, 136, 68, 0.3);
+            padding-bottom: 8px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3d1a1a, #5d2a2a);
+            color: #fff;
+            border: 2px solid #ff8844;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            border-color: #ff4444;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+            transform: translateY(-2px);
+        }
+
+        button.active {
+            background: linear-gradient(135deg, #ff4444, #ff8844);
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 136, 68, 0.8);
+        }
+
+        .slider-group {
+            margin-bottom: 15px;
+        }
+
+        .slider-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff8844;
+            font-size: 0.9em;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 136, 68, 0.2);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #ff4444, #ffaa44);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 136, 68, 0.8);
+        }
+
+        .test-results {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 136, 68, 0.3);
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff8844;
+        }
+
+        .result-label {
+            font-size: 0.85em;
+            color: #ff8844;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .result-value.safe {
+            color: #44ff44;
+        }
+
+        .result-value.warning {
+            color: #ffaa44;
+        }
+
+        .result-value.danger {
+            color: #ff4444;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #44ff44, #ffaa44, #ff4444);
+            transition: width 0.3s ease;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: 2px solid #ff8844;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 1024px) {
+            .main-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+          body { overflow-x: hidden; }
+          canvas, #gameCanvas, .game-canvas, #simulationCanvas {
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            touch-action: none;
+          }
+          button, .btn, .sim-btn, .control-btn {
+            min-height: 48px !important;
+            min-width: 48px !important;
+            padding: 12px 24px !important;
+            font-size: 16px !important;
+          }
+          .simulation-container, .sim-container, .container {
+            width: 100% !important;
+            max-width: 100vw !important;
+            padding: 10px !important;
+          }
+          .controls, .control-panel {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+          }
+          input[type="range"] {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+          h1, .title { font-size: 1.5rem !important; }
+          h2 { font-size: 1.2rem !important; }
+          .info-panel, .stats-panel {
+            font-size: 14px !important;
+          }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+    <div class="container">
+        <header>
+            <h1>🫀 Liver Toxicity Testing</h1>
+            <p class="subtitle">Drug-Induced Liver Injury (DILI) Prediction System</p>
+        </header>
+
+        <div class="key-stats">
+            <div class="stat-card">
+                <div class="stat-number">87%</div>
+                <div class="stat-label">DILI Prediction Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30%</div>
+                <div class="stat-label">Drug Failures Prevented</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$2B</div>
+                <div class="stat-label">Annual Savings Potential</div>
+            </div>
+        </div>
+
+        <div class="main-display">
+            <div id="canvas-container">
+                <canvas id="liver-canvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-section">
+                    <h3>Drug Compound Selection</h3>
+                    <select id="drug-select" onchange="selectDrug(this.value)">
+                        <option value="">Select a compound...</option>
+                        <option value="acetaminophen">Acetaminophen (Tylenol)</option>
+                        <option value="ibuprofen">Ibuprofen</option>
+                        <option value="aspirin">Aspirin</option>
+                        <option value="amoxicillin">Amoxicillin</option>
+                        <option value="simvastatin">Simvastatin (Statin)</option>
+                        <option value="methotrexate">Methotrexate</option>
+                        <option value="isoniazid">Isoniazid</option>
+                        <option value="valproic-acid">Valproic Acid</option>
+                    </select>
+                </div>
+
+                <div class="control-section">
+                    <h3>Exposure Parameters</h3>
+                    <div class="slider-group">
+                        <label>Dose Concentration: <span id="dose-val">0</span> μM</label>
+                        <input type="range" id="dose" min="0" max="200" value="0" 
+                               oninput="updateDose(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Exposure Time: <span id="time-val">0</span> hours</label>
+                        <input type="range" id="time" min="0" max="72" value="0" 
+                               oninput="updateTime(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>CYP450 Activity: <span id="cyp-val">100</span>%</label>
+                        <input type="range" id="cyp450" min="0" max="200" value="100" 
+                               oninput="updateCYP450(this.value)">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Test Protocols</h3>
+                    <button onclick="runTest('atp')"><span>🔋 ATP Depletion</span></button>
+                    <button onclick="runTest('ros')"><span>⚡ ROS Generation</span></button>
+                    <button onclick="runTest('membrane')"><span>🧬 Membrane Integrity</span></button>
+                    <button onclick="runTest('enzyme')"><span>🧪 Enzyme Release</span></button>
+                </div>
+
+                <div class="control-section">
+                    <button onclick="resetSimulation()"><span>🔄 Reset System</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-results">
+            <h3 style="color: #ff8844; margin-bottom: 20px;">Hepatotoxicity Assessment</h3>
+            <div class="result-item">
+                <div class="result-label">DILI Risk Score</div>
+                <div class="result-value" id="dili-score">--</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="dili-progress" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Hepatocyte Viability</div>
+                <div class="result-value safe" id="viability">100%</div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">ALT/AST Elevation</div>
+                <div class="result-value safe" id="alt-ast">Normal</div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Mitochondrial Function</div>
+                <div class="result-value safe" id="mito-function">Optimal</div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Bile Acid Transport</div>
+                <div class="result-value safe" id="bile-transport">Normal</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, liver;
+        let hepatocytes = [];
+        let toxicParticles = [];
+        let currentDrug = null;
+        let dose = 0;
+        let exposureTime = 0;
+        let cyp450Activity = 100;
+        let toxicityLevel = 0;
+
+        const drugData = {
+            acetaminophen: {
+                name: "Acetaminophen",
+                toxicDose: 150,
+                color: 0xff4444,
+                cypDependent: true,
+                mechanism: "Mitochondrial damage via NAPQI"
+            },
+            ibuprofen: {
+                name: "Ibuprofen",
+                toxicDose: 200,
+                color: 0xffaa44,
+                cypDependent: false,
+                mechanism: "Oxidative stress"
+            },
+            aspirin: {
+                name: "Aspirin",
+                toxicDose: 180,
+                color: 0xff8844,
+                cypDependent: false,
+                mechanism: "Mitochondrial dysfunction"
+            },
+            amoxicillin: {
+                name: "Amoxicillin",
+                toxicDose: 150,
+                color: 0x44ff88,
+                cypDependent: false,
+                mechanism: "Immune-mediated"
+            },
+            simvastatin: {
+                name: "Simvastatin",
+                toxicDose: 100,
+                color: 0xff44ff,
+                cypDependent: true,
+                mechanism: "CYP3A4 metabolism"
+            },
+            methotrexate: {
+                name: "Methotrexate",
+                toxicDose: 80,
+                color: 0xff0044,
+                cypDependent: false,
+                mechanism: "Folate antagonism"
+            },
+            isoniazid: {
+                name: "Isoniazid",
+                toxicDose: 120,
+                color: 0xff6644,
+                cypDependent: true,
+                mechanism: "Toxic metabolite formation"
+            },
+            "valproic-acid": {
+                name: "Valproic Acid",
+                toxicDose: 110,
+                color: 0xff8800,
+                cypDependent: true,
+                mechanism: "Mitochondrial beta-oxidation"
+            }
+        };
+
+        function init() {
+            const canvas = document.getElementById('liver-canvas');
+            const container = document.getElementById('canvas-container');
+
+            scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0x1a0a0a, 10, 50);
+
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 20;
+
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setClearColor(0x1a0a0a, 1);
+
+            createLiver();
+            createHepatocytes(40);
+            addLighting();
+
+            window.addEventListener('resize', onWindowResize);
+            animate();
+        }
+
+        function createLiver() {
+            const geometry = new THREE.DodecahedronGeometry(5, 1);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x884422,
+                emissive: 0x442211,
+                transparent: true,
+                opacity: 0.5,
+                shininess: 60
+            });
+            liver = new THREE.Mesh(geometry, material);
+            scene.add(liver);
+        }
+
+        function createHepatocytes(count) {
+            hepatocytes.forEach(h => scene.remove(h));
+            hepatocytes = [];
+
+            for (let i = 0; i < count; i++) {
+                const geometry = new THREE.OctahedronGeometry(0.2, 0);
+                const material = new THREE.MeshPhongMaterial({
+                    color: 0xff8844,
+                    emissive: 0x884422,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                const cell = new THREE.Mesh(geometry, material);
+
+                const phi = Math.acos(-1 + (2 * i) / count);
+                const theta = Math.sqrt(count * Math.PI) * phi;
+                const radius = 5.5 + Math.random() * 1;
+
+                cell.position.x = radius * Math.cos(theta) * Math.sin(phi);
+                cell.position.y = radius * Math.sin(theta) * Math.sin(phi);
+                cell.position.z = radius * Math.cos(phi);
+
+                cell.userData = {
+                    health: 100,
+                    phase: Math.random() * Math.PI * 2
+                };
+
+                scene.add(cell);
+                hepatocytes.push(cell);
+            }
+        }
+
+        function addLighting() {
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0xff8844, 1.5, 100);
+            pointLight1.position.set(10, 10, 10);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xff4444, 1, 100);
+            pointLight2.position.set(-10, -10, 10);
+            scene.add(pointLight2);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.001;
+
+            if (liver) {
+                liver.rotation.y += 0.003;
+                liver.rotation.x += 0.001;
+                
+                const breathe = Math.sin(time * 0.8) * 0.05;
+                liver.scale.set(1 + breathe, 1 + breathe, 1 + breathe);
+
+                const healthColor = toxicityLevel < 30 ? 0x884422 : 
+                                   toxicityLevel < 60 ? 0x884422 :
+                                   0x442211;
+                liver.material.color.setHex(healthColor);
+            }
+
+            hepatocytes.forEach((cell, i) => {
+                cell.rotation.x += 0.01;
+                cell.rotation.y += 0.01;
+
+                const pulse = Math.sin(time * 3 + cell.userData.phase) * 0.2;
+                cell.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
+
+                if (cell.userData.health < 50) {
+                    cell.material.color.setHex(0xff4444);
+                    cell.material.opacity = 0.5 + cell.userData.health / 100;
+                }
+            });
+
+            toxicParticles.forEach((particle, i) => {
+                particle.position.y -= 0.05;
+                particle.rotation.x += 0.05;
+                particle.rotation.z += 0.03;
+
+                if (particle.position.y < -10) {
+                    scene.remove(particle);
+                    toxicParticles.splice(i, 1);
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        function selectDrug(drugId) {
+            if (!drugId) return;
+            currentDrug = drugData[drugId];
+            updateToxicity();
+        }
+
+        function updateDose(value) {
+            dose = parseInt(value);
+            document.getElementById('dose-val').textContent = value;
+            updateToxicity();
+        }
+
+        function updateTime(value) {
+            exposureTime = parseInt(value);
+            document.getElementById('time-val').textContent = value;
+            updateToxicity();
+        }
+
+        function updateCYP450(value) {
+            cyp450Activity = parseInt(value);
+            document.getElementById('cyp-val').textContent = value;
+            updateToxicity();
+        }
+
+        function updateToxicity() {
+            if (!currentDrug) return;
+
+            let baseToxicity = (dose / currentDrug.toxicDose) * 100;
+            
+            if (currentDrug.cypDependent) {
+                baseToxicity *= (cyp450Activity / 100);
+            }
+
+            const timeFactor = Math.min(exposureTime / 48, 1);
+            toxicityLevel = Math.min(baseToxicity * (0.3 + timeFactor * 0.7), 100);
+
+            updateResults();
+            createToxicParticles();
+        }
+
+        function updateResults() {
+            const viability = Math.max(0, 100 - toxicityLevel);
+            document.getElementById('viability').textContent = viability.toFixed(1) + '%';
+            document.getElementById('viability').className = 'result-value ' + 
+                (viability > 80 ? 'safe' : viability > 50 ? 'warning' : 'danger');
+
+            const diliRisk = toxicityLevel < 30 ? 'Low Risk' : 
+                            toxicityLevel < 60 ? 'Moderate Risk' : 'High Risk';
+            document.getElementById('dili-score').textContent = diliRisk;
+            document.getElementById('dili-score').className = 'result-value ' + 
+                (toxicityLevel < 30 ? 'safe' : toxicityLevel < 60 ? 'warning' : 'danger');
+            document.getElementById('dili-progress').style.width = toxicityLevel + '%';
+
+            const altAst = toxicityLevel < 30 ? 'Normal' : 
+                          toxicityLevel < 60 ? 'Elevated (2-3x)' : 'Severely Elevated (>5x)';
+            document.getElementById('alt-ast').textContent = altAst;
+            document.getElementById('alt-ast').className = 'result-value ' + 
+                (toxicityLevel < 30 ? 'safe' : toxicityLevel < 60 ? 'warning' : 'danger');
+
+            const mitoFunction = toxicityLevel < 30 ? 'Optimal' : 
+                                toxicityLevel < 60 ? 'Impaired' : 'Critical';
+            document.getElementById('mito-function').textContent = mitoFunction;
+            document.getElementById('mito-function').className = 'result-value ' + 
+                (toxicityLevel < 30 ? 'safe' : toxicityLevel < 60 ? 'warning' : 'danger');
+
+            const bileTransport = toxicityLevel < 30 ? 'Normal' : 
+                                 toxicityLevel < 60 ? 'Reduced' : 'Severely Impaired';
+            document.getElementById('bile-transport').textContent = bileTransport;
+            document.getElementById('bile-transport').className = 'result-value ' + 
+                (toxicityLevel < 30 ? 'safe' : toxicityLevel < 60 ? 'warning' : 'danger');
+
+            hepatocytes.forEach(cell => {
+                cell.userData.health = viability;
+            });
+        }
+
+        function createToxicParticles() {
+            if (toxicityLevel < 20) return;
+            if (Math.random() > 0.05) return;
+
+            const geometry = new THREE.TetrahedronGeometry(0.1, 0);
+            const material = new THREE.MeshPhongMaterial({
+                color: currentDrug ? currentDrug.color : 0xff4444,
+                emissive: currentDrug ? currentDrug.color : 0xff4444,
+                transparent: true,
+                opacity: 0.6
+            });
+            const particle = new THREE.Mesh(geometry, material);
+            
+            particle.position.set(
+                (Math.random() - 0.5) * 10,
+                8,
+                (Math.random() - 0.5) * 10
+            );
+
+            scene.add(particle);
+            toxicParticles.push(particle);
+        }
+
+        function runTest(testType) {
+            const tests = {
+                atp: 'ATP Depletion Test',
+                ros: 'Reactive Oxygen Species',
+                membrane: 'Membrane Integrity',
+                enzyme: 'Enzyme Release (ALT/AST)'
+            };
+            alert(`Running ${tests[testType]} - Results updated in assessment panel`);
+            updateResults();
+        }
+
+        function resetSimulation() {
+            currentDrug = null;
+            dose = 0;
+            exposureTime = 0;
+            cyp450Activity = 100;
+            toxicityLevel = 0;
+            
+            document.getElementById('drug-select').value = '';
+            document.getElementById('dose').value = 0;
+            document.getElementById('time').value = 0;
+            document.getElementById('cyp450').value = 100;
+            
+            updateDose(0);
+            updateTime(0);
+            updateCYP450(100);
+            
+            document.getElementById('dili-score').textContent = '--';
+            document.getElementById('viability').textContent = '100%';
+            document.getElementById('alt-ast').textContent = 'Normal';
+            document.getElementById('mito-function').textContent = 'Optimal';
+            document.getElementById('bile-transport').textContent = 'Normal';
+            document.getElementById('dili-progress').style.width = '0%';
+
+            toxicParticles.forEach(p => scene.remove(p));
+            toxicParticles = [];
+            
+            hepatocytes.forEach(cell => {
+                cell.userData.health = 100;
+                cell.material.color.setHex(0xff8844);
+                cell.material.opacity = 0.8;
+            });
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        init();
+
+        /* ===== MOBILE TOUCH SUPPORT ===== */
+        (function() {
+          if (!/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
+          document.querySelectorAll('canvas').forEach(function(canvas) {
+            canvas.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchmove', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchend', function(e) {
+              e.preventDefault();
+              canvas.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+            }, {passive: false});
+          });
+        })();
+        /* ===== END MOBILE TOUCH SUPPORT ===== */
+    </script>
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

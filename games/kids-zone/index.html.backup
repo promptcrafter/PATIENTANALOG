@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Science Discovery Zone | Patient Analog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #000814;
+      --bg-abyss: #001029;
+      --sapphire: #0055ff;
+      --emerald: #00cc66;
+      --amber: #ffaa00;
+      --crimson: #ff3366;
+      --text-primary: #ffffff;
+      --text-secondary: #a0aec0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--bg-void), var(--bg-abyss));
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; text-align: center; margin-bottom: 10px; }
+    .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 30px; }
+    .stats-bar {
+      display: flex; justify-content: center; gap: 40px; margin-bottom: 40px;
+      background: rgba(0,85,255,0.1); border: 1px solid rgba(0,85,255,0.3);
+      border-radius: 12px; padding: 15px 30px;
+    }
+    .stat { text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--sapphire); }
+    .stat-label { font-size: 12px; color: var(--text-secondary); }
+    .topics-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px; margin-bottom: 40px;
+    }
+    .topic-card {
+      background: rgba(0,20,50,0.8); border: 1px solid rgba(0,85,255,0.2);
+      border-radius: 16px; padding: 24px; transition: all 0.3s;
+    }
+    .topic-card:hover { border-color: var(--sapphire); transform: translateY(-4px); }
+    .topic-icon { font-size: 48px; margin-bottom: 15px; }
+    .topic-title { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; margin-bottom: 10px; }
+    .topic-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 15px; }
+    .fun-fact { background: rgba(0,204,102,0.1); border-left: 3px solid var(--emerald); padding: 10px 15px; font-size: 13px; border-radius: 0 8px 8px 0; margin-bottom: 15px; }
+    .quiz-btn {
+      background: var(--sapphire); color: white; border: none; padding: 10px 20px;
+      border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%;
+      transition: background 0.2s;
+    }
+    .quiz-btn:hover { background: #0066ff; }
+    .quiz-section {
+      background: rgba(0,20,50,0.8); border: 1px solid rgba(0,85,255,0.2);
+      border-radius: 16px; padding: 30px; margin-bottom: 30px;
+    }
+    .quiz-question { font-size: 1.2rem; margin-bottom: 20px; }
+    .quiz-answers { display: grid; gap: 10px; }
+    .answer-btn {
+      background: rgba(0,85,255,0.1); border: 1px solid rgba(0,85,255,0.3);
+      color: white; padding: 15px; border-radius: 8px; cursor: pointer;
+      text-align: left; transition: all 0.2s;
+    }
+    .answer-btn:hover { background: rgba(0,85,255,0.2); border-color: var(--sapphire); }
+    .answer-btn.correct { background: rgba(0,204,102,0.3); border-color: var(--emerald); }
+    .answer-btn.wrong { background: rgba(255,51,102,0.3); border-color: var(--crimson); }
+    .matching-game { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .match-card {
+      aspect-ratio: 1; background: rgba(0,85,255,0.15); border: 1px solid rgba(0,85,255,0.3);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 24px; cursor: pointer; transition: all 0.3s;
+    }
+    .match-card:hover { border-color: var(--sapphire); }
+    .match-card.flipped { background: var(--sapphire); }
+    .match-card.matched { background: var(--emerald); border-color: var(--emerald); }
+    .leaderboard {
+      background: rgba(0,20,50,0.8); border: 1px solid rgba(255,170,0,0.3);
+      border-radius: 16px; padding: 24px;
+    }
+    .leaderboard h3 { color: var(--amber); margin-bottom: 15px; }
+    .leader-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Science Discovery Zone</h1>
+    <p class="subtitle">Learn about amazing technologies that help scientists create medicines without testing on animals!</p>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="score">0</div>
+        <div class="stat-label">Your Score</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="highscore">0</div>
+        <div class="stat-label">High Score</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="completed">0/6</div>
+        <div class="stat-label">Completed</div>
+      </div>
+    </div>
+
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="topic-icon">🔬</div>
+        <h3 class="topic-title">Organ-on-a-Chip</h3>
+        <p class="topic-desc">A tiny chip (smaller than your thumb!) that has real human cells inside. The cells act just like organs in your body!</p>
+        <div class="fun-fact">These chips can breathe, pump, and even get "sick" like real organs!</div>
+        <button class="quiz-btn" onclick="startQuiz('organ-chip')">Take the Quiz!</button>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">🧫</div>
+        <h3 class="topic-title">Organoids</h3>
+        <p class="topic-desc">Mini organs grown from stem cells! They're like tiny 3D balls made of real human cells that organize themselves.</p>
+        <div class="fun-fact">Brain organoids can even make electrical signals like a real brain!</div>
+        <button class="quiz-btn" onclick="startQuiz('organoids')">Take the Quiz!</button>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">💻</div>
+        <h3 class="topic-title">Digital Twins</h3>
+        <p class="topic-desc">A computer copy of a real person! Scientists can test medicines on the digital twin to see what might happen.</p>
+        <div class="fun-fact">Digital twins can simulate how your body responds to medicine!</div>
+        <button class="quiz-btn" onclick="startQuiz('digital-twins')">Take the Quiz!</button>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">🧬</div>
+        <h3 class="topic-title">iPSC Stem Cells</h3>
+        <p class="topic-desc">Scientists can turn a regular skin cell back into a "super cell" that can become ANY type of cell!</p>
+        <div class="fun-fact">The scientist who discovered this won a Nobel Prize in 2012!</div>
+        <button class="quiz-btn" onclick="startQuiz('stem-cells')">Take the Quiz!</button>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">⚛️</div>
+        <h3 class="topic-title">Quantum Computers</h3>
+        <p class="topic-desc">Super-powerful computers that use quantum physics to solve problems regular computers can't!</p>
+        <div class="fun-fact">A quantum computer can try millions of medicine combinations at once!</div>
+        <button class="quiz-btn" onclick="startQuiz('quantum')">Take the Quiz!</button>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">🫀</div>
+        <h3 class="topic-title">Body-on-a-Chip</h3>
+        <p class="topic-desc">Multiple organ-chips connected together to act like a whole human body!</p>
+        <div class="fun-fact">One body-on-chip can replace testing on hundreds of animals!</div>
+        <button class="quiz-btn" onclick="startQuiz('body-chip')">Take the Quiz!</button>
+      </div>
+    </div>
+
+    <!-- Interactive Games Section -->
+    <h3 style="margin: 40px 0 20px; color: var(--amber);">🎮 Interactive Games</h3>
+    <div class="topics-grid" style="margin-bottom: 30px;">
+      <a href="cell-detective.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">🔬</div>
+        <h3 class="topic-title">Cell Detective</h3>
+        <p class="topic-desc">Find all the parts of a cell! Match the names to the pictures.</p>
+      </a>
+      <a href="dna-decoder.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">🧬</div>
+        <h3 class="topic-title">DNA Decoder</h3>
+        <p class="topic-desc">Use the DNA code to discover which protein gets made!</p>
+      </a>
+      <a href="body-builder.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">🫀</div>
+        <h3 class="topic-title">Body Builder</h3>
+        <p class="topic-desc">Put the organs in the right place to build a healthy body!</p>
+      </a>
+      <a href="dna-basics.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">📖</div>
+        <h3 class="topic-title">DNA Basics</h3>
+        <p class="topic-desc">Learn how the four letters of DNA work as a recipe book for life!</p>
+      </a>
+      <a href="body-systems.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">❤️</div>
+        <h3 class="topic-title">Body Systems</h3>
+        <p class="topic-desc">Explore how your heart pumps, lungs breathe, and brain thinks!</p>
+      </a>
+      <a href="what-are-cells.html" class="topic-card" style="text-decoration: none;">
+        <div class="topic-icon">🔭</div>
+        <h3 class="topic-title">What are Cells?</h3>
+        <p class="topic-desc">Learn about the tiny building blocks that make up your whole body!</p>
+      </a>
+    </div>
+
+    <div class="quiz-section" id="quiz-area" style="display: none;">
+      <h3 id="quiz-title">Quiz</h3>
+      <p class="quiz-question" id="quiz-question"></p>
+      <div class="quiz-answers" id="quiz-answers"></div>
+    </div>
+
+    <h3 style="margin-bottom: 15px;">Cell Matching Game</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 15px;">Moves: <span id="moves">0</span></p>
+    <div class="matching-game" id="matching-game"></div>
+
+    <div class="leaderboard" style="margin-top: 40px;">
+      <h3>🏆 Science Champions</h3>
+      <div class="leader-row"><span>🥇 —</span><span>—</span></div>
+      <div class="leader-row"><span>🥈 —</span><span>—</span></div>
+      <div class="leader-row"><span>🥉 —</span><span>—</span></div>
+    </div>
+  </div>
+
+  <script>
+    // Game State
+    let score = 0;
+    let highScore = localStorage.getItem('kidsZoneHighScore') || 0;
+    let completed = 0;
+    document.getElementById('highscore').textContent = highScore;
+
+    // Quiz Data
+    const quizzes = {
+      'organ-chip': [
+        { q: "What is an organ-on-a-chip?", a: ["A tiny device with real human cells", "A computer chip", "A video game", "A robot"], correct: 0 },
+        { q: "What can organ chips replace?", a: ["Animal testing", "Doctors", "Hospitals", "Medicine"], correct: 0 }
+      ],
+      'organoids': [
+        { q: "What are organoids made from?", a: ["Stem cells", "Plastic", "Metal", "Paper"], correct: 0 },
+        { q: "What is an organoid?", a: ["A mini organ grown in a lab", "A tiny robot", "A video game", "A space station"], correct: 0 }
+      ],
+      'digital-twins': [
+        { q: "What is a digital twin?", a: ["A computer model of your body", "A robot clone", "A twin sibling", "A video game character"], correct: 0 }
+      ],
+      'stem-cells': [
+        { q: "What's special about stem cells?", a: ["They can become any cell type", "They glow", "They're very big", "They can fly"], correct: 0 }
+      ],
+      'quantum': [
+        { q: "What can quantum computers do?", a: ["Process millions of options at once", "Make coffee", "Travel in time", "Read minds"], correct: 0 }
+      ],
+      'body-chip': [
+        { q: "What is a body-on-a-chip?", a: ["Multiple organ chips connected", "A robot body", "A video game", "A spaceship"], correct: 0 }
+      ]
+    };
+
+    let currentQuiz = null;
+    let questionIndex = 0;
+
+    function startQuiz(topic) {
+      currentQuiz = quizzes[topic];
+      questionIndex = 0;
+      document.getElementById('quiz-area').style.display = 'block';
+      document.getElementById('quiz-title').textContent = topic.replace('-', ' ').toUpperCase() + ' Quiz';
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (questionIndex >= currentQuiz.length) {
+        document.getElementById('quiz-area').innerHTML = '<h3>Quiz Complete! 🎉</h3><p>Great job learning about science!</p>';
+        completed++;
+        document.getElementById('completed').textContent = completed + '/6';
+        return;
+      }
+      const q = currentQuiz[questionIndex];
+      document.getElementById('quiz-question').textContent = q.q;
+      const answersDiv = document.getElementById('quiz-answers');
+      answersDiv.innerHTML = '';
+      q.a.forEach((ans, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.textContent = ans;
+        btn.onclick = () => checkAnswer(i, q.correct, btn);
+        answersDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct, btn) {
+      const btns = document.querySelectorAll('.answer-btn');
+      btns.forEach((b, i) => {
+        b.disabled = true;
+        if (i === correct) b.classList.add('correct');
+        else if (i === selected) b.classList.add('wrong');
+      });
+      if (selected === correct) {
+        score += 10;
+        document.getElementById('score').textContent = score;
+        if (score > highScore) {
+          highScore = score;
+          localStorage.setItem('kidsZoneHighScore', highScore);
+          document.getElementById('highscore').textContent = highScore;
+        }
+      }
+      setTimeout(() => { questionIndex++; showQuestion(); }, 1500);
+    }
+
+    // Matching Game
+    const cellEmojis = ['🧬', '🔬', '🧫', '💊', '🫀', '🧠'];
+    const cards = [...cellEmojis, ...cellEmojis].sort(() => Math.random() - 0.5);
+    let flipped = [];
+    let matched = [];
+    let moves = 0;
+
+    const gameDiv = document.getElementById('matching-game');
+    cards.forEach((emoji, i) => {
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.dataset.index = i;
+      card.dataset.emoji = emoji;
+      card.textContent = '❓';
+      card.onclick = () => flipCard(card);
+      gameDiv.appendChild(card);
+    });
+
+    function flipCard(card) {
+      if (flipped.length >= 2 || flipped.includes(card) || matched.includes(card.dataset.index)) return;
+      card.textContent = card.dataset.emoji;
+      card.classList.add('flipped');
+      flipped.push(card);
+      if (flipped.length === 2) {
+        moves++;
+        document.getElementById('moves').textContent = moves;
+        if (flipped[0].dataset.emoji === flipped[1].dataset.emoji) {
+          flipped.forEach(c => { c.classList.add('matched'); matched.push(c.dataset.index); });
+          score += 20;
+          document.getElementById('score').textContent = score;
+          flipped = [];
+        } else {
+          setTimeout(() => {
+            flipped.forEach(c => { c.textContent = '❓'; c.classList.remove('flipped'); });
+            flipped = [];
+          }, 1000);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

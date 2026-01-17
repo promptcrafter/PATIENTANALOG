@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organ Transplant Match | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --cyan: #00e5ff; --green: #00cc66; --red: #ff3366; --yellow: #ffaa00; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: system-ui, sans-serif; background: var(--bg); color: white; 
+      min-height: 100vh; padding: 20px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 10px; text-align: center; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; text-align: center; }
+    
+    .controls { 
+      background: rgba(0,229,255,0.1); border: 2px solid var(--cyan); 
+      border-radius: 12px; padding: 15px; margin-bottom: 20px; text-align: center;
+    }
+    
+    .score-board { 
+      display: flex; justify-content: space-around; margin-bottom: 30px;
+      font-size: 1.3rem; font-weight: bold;
+    }
+    
+    .game-area {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+    
+    .column {
+      flex: 1;
+      background: rgba(0,229,255,0.05);
+      border: 2px solid rgba(0,229,255,0.3);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    
+    .column-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: var(--cyan);
+    }
+    
+    .card {
+      background: rgba(0,20,40,0.8);
+      border: 3px solid;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .card:hover {
+      transform: scale(1.05) translateX(10px);
+    }
+    
+    .card.selected {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px currentColor;
+      animation: pulse-card 0.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-card {
+      0%, 100% { box-shadow: 0 0 20px currentColor; }
+      50% { box-shadow: 0 0 40px currentColor; }
+    }
+    
+    .card.matched {
+      opacity: 0.4;
+      pointer-events: none;
+      filter: grayscale(0.8);
+    }
+    
+    .card-icon {
+      font-size: 64px;
+      margin-bottom: 10px;
+    }
+    
+    .card-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .card-detail {
+      font-size: 12px;
+      color: #888;
+    }
+    
+    /* Donor cards (left) */
+    .donor {
+      border-color: var(--cyan);
+    }
+    
+    /* Recipient cards (right) */
+    .recipient {
+      border-color: var(--green);
+    }
+    
+    .message {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      min-height: 40px;
+      margin: 20px 0;
+    }
+    
+    .hint {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      padding: 10px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px;
+    }
+    
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--yellow);
+      animation: arrow-pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes arrow-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+  <div class="container">
+    <h1>🫀 ORGAN TRANSPLANT MATCH</h1>
+    <p class="subtitle">Match organs with compatible recipients! Blood type must match!</p>
+    
+    <div class="controls">
+      🖱️ <strong>CLICK</strong> donor → <strong>CLICK</strong> recipient to match<br>
+      ⌨️ <strong>NUMBER KEYS 1-5</strong> to select donor → <strong>A-E</strong> to select recipient<br>
+      💡 <strong>Match blood types:</strong> O→All • A→A/AB • B→B/AB • AB→AB only
+    </div>
+    
+    <div class="score-board">
+      <div>
+        <div style="color: var(--green);" id="score">0</div>
+        <div style="font-size: 11px; color: #666;">SCORE</div>
+      </div>
+      <div>
+        <div style="color: var(--cyan);" id="matches">0/5</div>
+        <div style="font-size: 11px; color: #666;">MATCHES</div>
+      </div>
+      <div>
+        <div style="color: var(--yellow);" id="lives">3</div>
+        <div style="font-size: 11px; color: #666;">LIVES</div>
+      </div>
+    </div>
+    
+    <div class="game-area">
+      <div class="column">
+        <div class="column-title">🩸 ORGAN DONORS</div>
+        <div id="donors"></div>
+      </div>
+      
+      <div class="arrow">→</div>
+      
+      <div class="column">
+        <div class="column-title">🏥 RECIPIENTS</div>
+        <div id="recipients"></div>
+      </div>
+    </div>
+    
+    <div class="message" id="message" style="color: var(--cyan);">Select a donor organ, then select matching recipient!</div>
+    <div class="hint">💡 O- is universal donor • AB+ is universal recipient • Match carefully!</div>
+  </div>
+
+  <script>
+    // Organ data with UNIQUE emojis
+    const donors = [
+      { id: 1, icon: '❤️', name: 'Heart', blood: 'O-', detail: 'Universal Donor', key: '1' },
+      { id: 2, icon: '🫁', name: 'Lung', blood: 'A+', detail: 'Type A Compatible', key: '2' },
+      { id: 3, icon: '🫘', name: 'Kidney', blood: 'B-', detail: 'Type B Compatible', key: '3' },
+      { id: 4, icon: '🫀', name: 'Liver', blood: 'AB+', detail: 'Universal Recipient', key: '4' },
+      { id: 5, icon: '🧠', name: 'Tissue', blood: 'A-', detail: 'Type A Compatible', key: '5' }
+    ];
+    
+    const recipients = [
+      { id: 'a', icon: '👤', name: 'Patient A', blood: 'O-', detail: 'Needs O- only', key: 'a' },
+      { id: 'b', icon: '👥', name: 'Patient B', blood: 'A+', detail: 'Needs O/A', key: 'b' },
+      { id: 'c', icon: '👨', name: 'Patient C', blood: 'B-', detail: 'Needs O-/B-', key: 'c' },
+      { id: 'd', icon: '👩', name: 'Patient D', blood: 'AB+', detail: 'Universal Recipient', key: 'd' },
+      { id: 'e', icon: '👶', name: 'Patient E', blood: 'A-', detail: 'Needs O-/A-', key: 'e' }
+    ];
+    
+    // Game state
+    let selectedDonor = null;
+    let selectedRecipient = null;
+    let score = 0;
+    let matches = 0;
+    let lives = 3;
+    const matchedPairs = new Set();
+    
+    // Blood type compatibility
+    function isCompatible(donorBlood, recipientBlood) {
+      const compatibility = {
+        'O-': ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'],
+        'O+': ['O+', 'A+', 'B+', 'AB+'],
+        'A-': ['A-', 'A+', 'AB-', 'AB+'],
+        'A+': ['A+', 'AB+'],
+        'B-': ['B-', 'B+', 'AB-', 'AB+'],
+        'B+': ['B+', 'AB+'],
+        'AB-': ['AB-', 'AB+'],
+        'AB+': ['AB+']
+      };
+      
+      return compatibility[donorBlood]?.includes(recipientBlood) || false;
+    }
+    
+    // Initialize game
+    function init() {
+      const donorsDiv = document.getElementById('donors');
+      const recipientsDiv = document.getElementById('recipients');
+      
+      donors.forEach((donor, i) => {
+        const card = document.createElement('div');
+        card.className = 'card donor';
+        card.dataset.id = donor.id;
+        card.dataset.blood = donor.blood;
+        card.dataset.key = donor.key;
+        card.innerHTML = `
+          <div class="card-icon">${donor.icon}</div>
+          <div class="card-name">${donor.name}</div>
+          <div class="card-detail">Blood: ${donor.blood}</div>
+          <div class="card-detail">${donor.detail}</div>
+        `;
+        card.onclick = () => selectDonor(card);
+        donorsDiv.appendChild(card);
+      });
+      
+      recipients.forEach((recipient, i) => {
+        const card = document.createElement('div');
+        card.className = 'card recipient';
+        card.dataset.id = recipient.id;
+        card.dataset.blood = recipient.blood;
+        card.dataset.key = recipient.key;
+        card.innerHTML = `
+          <div class="card-icon">${recipient.icon}</div>
+          <div class="card-name">${recipient.name}</div>
+          <div class="card-detail">Blood: ${recipient.blood}</div>
+          <div class="card-detail">${recipient.detail}</div>
+        `;
+        card.onclick = () => selectRecipient(card);
+        recipientsDiv.appendChild(card);
+      });
+    }
+    
+    function selectDonor(card) {
+      if (card.classList.contains('matched')) return;
+      
+      document.querySelectorAll('.donor').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedDonor = card;
+      
+      showMessage('Donor selected! Now select compatible recipient', var(--cyan));
+    }
+    
+    function selectRecipient(card) {
+      if (card.classList.contains('matched')) return;
+      
+      if (!selectedDonor) {
+        showMessage('⚠️ Select a donor first!', var(--yellow));
+        return;
+      }
+      
+      document.querySelectorAll('.recipient').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedRecipient = card;
+      
+      checkMatch();
+    }
+    
+    function checkMatch() {
+      const donorBlood = selectedDonor.dataset.blood;
+      const recipientBlood = selectedRecipient.dataset.blood;
+      
+      if (isCompatible(donorBlood, recipientBlood)) {
+        // SUCCESSFUL MATCH!
+        score += 50;
+        matches++;
+        
+        selectedDonor.classList.add('matched');
+        selectedRecipient.classList.add('matched');
+        
+        matchedPairs.add(selectedDonor.dataset.id + '-' + selectedRecipient.dataset.id);
+        
+        showMessage(`✅ PERFECT MATCH! +50 points`, var(--green));
+        
+        document.getElementById('score').textContent = score;
+        document.getElementById('matches').textContent = `${matches}/5`;
+        
+        if (matches === 5) {
+          setTimeout(() => {
+            score += 100;
+            document.getElementById('score').textContent = score;
+            showMessage(`🎉 ALL TRANSPLANTS SUCCESSFUL! +100 BONUS! FINAL SCORE: ${score}`, var(--green));
+          }, 1000);
+        }
+      } else {
+        // WRONG MATCH!
+        lives--;
+        score = Math.max(0, score - 20);
+        
+        showMessage(`❌ INCOMPATIBLE! Blood type mismatch! -20 points, -1 life`, var(--red));
+        
+        document.getElementById('score').textContent = score;
+        document.getElementById('lives').textContent = lives;
+        
+        if (lives === 0) {
+          setTimeout(() => {
+            showMessage(`💀 GAME OVER! Final Score: ${score}`, var(--red));
+            setTimeout(() => location.reload(), 3000);
+          }, 1500);
+        }
+      }
+      
+      selectedDonor.classList.remove('selected');
+      selectedRecipient.classList.remove('selected');
+      selectedDonor = null;
+      selectedRecipient = null;
+    }
+    
+    function showMessage(text, color) {
+      const msg = document.getElementById('message');
+      msg.textContent = text;
+      msg.style.color = color;
+    }
+    
+    // KEYBOARD CONTROLS
+    document.addEventListener('keydown', (e) => {
+      const key = e.key.toLowerCase();
+      
+      // Number keys for donors
+      if (['1', '2', '3', '4', '5'].includes(key)) {
+        const donor = document.querySelector(`.donor[data-key="${key}"]`);
+        if (donor && !donor.classList.contains('matched')) {
+          selectDonor(donor);
+        }
+      }
+      
+      // Letter keys for recipients
+      if (['a', 'b', 'c', 'd', 'e'].includes(key)) {
+        const recipient = document.querySelector(`.recipient[data-key="${key}"]`);
+        if (recipient && !recipient.classList.contains('matched')) {
+          selectRecipient(recipient);
+        }
+      }
+    });
+    
+    // Initialize
+    init();
+  </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

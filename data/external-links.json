@@ -1,0 +1,1747 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-01-07",
+    "description": "Comprehensive external links database for PatientAnalog research platform",
+    "totalEntries": 215
+  },
+  "links": [
+    {
+      "category": "REGULATORY",
+      "subcategory": "Congress",
+      "name": "FDA Modernization Act 2.0",
+      "url": "https://www.congress.gov/bill/117th-congress/senate-bill/5002",
+      "parent_url": "https://www.congress.gov",
+      "description": "Landmark legislation removing mandatory animal testing requirements for FDA drug approval",
+      "tags": ["FDA", "animal testing", "NAMs", "legislation", "drug approval"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "Congress",
+      "name": "FDA Modernization Act 3.0",
+      "url": "https://www.congress.gov/bill/118th-congress/house-bill/7248",
+      "parent_url": "https://www.congress.gov",
+      "description": "Expanded legislation further promoting New Approach Methodologies in drug development",
+      "tags": ["FDA", "NAMs", "legislation", "drug development"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "Congress",
+      "name": "21st Century Cures Act",
+      "url": "https://www.congress.gov/bill/114th-congress/house-bill/34",
+      "parent_url": "https://www.congress.gov",
+      "description": "Comprehensive legislation accelerating medical product development and innovation",
+      "tags": ["FDA", "innovation", "legislation", "medical devices", "drug development"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "Congress",
+      "name": "Congress.gov - Health Legislation Portal",
+      "url": "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22subjects%22%3A%5B%22Health%22%5D%7D",
+      "parent_url": "https://www.congress.gov",
+      "description": "Search portal for all health-related congressional legislation",
+      "tags": ["legislation", "health policy", "congressional records"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA ISTAND Program",
+      "url": "https://www.fda.gov/drugs/development-approval-process-drugs/innovative-science-and-technology-approaches-new-drugs-istand-pilot-program",
+      "parent_url": "https://www.fda.gov",
+      "description": "Innovative Science and Technology Approaches for New Drugs pilot program",
+      "tags": ["FDA", "ISTAND", "NAMs", "drug development", "innovation"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA NAMs Guidance Documents",
+      "url": "https://www.fda.gov/science-research/about-science-research-fda/new-approach-methodologies-nams",
+      "parent_url": "https://www.fda.gov",
+      "description": "Official FDA guidance on New Approach Methodologies for drug testing",
+      "tags": ["FDA", "NAMs", "guidance", "regulatory", "alternative methods"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA Alternative Methods Working Group",
+      "url": "https://www.fda.gov/science-research/advancing-alternative-methods-fda",
+      "parent_url": "https://www.fda.gov",
+      "description": "FDA initiatives advancing alternative testing methodologies",
+      "tags": ["FDA", "alternative methods", "3Rs", "animal testing alternatives"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA Drug Development Tools Qualification",
+      "url": "https://www.fda.gov/drugs/development-approval-process-drugs/drug-development-tools-qualification-programs",
+      "parent_url": "https://www.fda.gov",
+      "description": "Programs for qualifying drug development tools including biomarkers and clinical outcome assessments",
+      "tags": ["FDA", "biomarkers", "drug development", "qualification"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA Center for Drug Evaluation and Research",
+      "url": "https://www.fda.gov/about-fda/fda-organization/center-drug-evaluation-and-research-cder",
+      "parent_url": "https://www.fda.gov",
+      "description": "CDER overview and regulatory guidance for pharmaceutical development",
+      "tags": ["FDA", "CDER", "drug evaluation", "regulatory"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "FDA",
+      "name": "FDA Organ-on-a-Chip Research",
+      "url": "https://www.fda.gov/science-research/fda-science-forum/organ-chip-technology",
+      "parent_url": "https://www.fda.gov",
+      "description": "FDA research and evaluation of organ-on-chip platforms",
+      "tags": ["FDA", "organ-on-chip", "microphysiological systems", "research"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "NIH NCATS",
+      "url": "https://ncats.nih.gov",
+      "parent_url": "https://www.nih.gov",
+      "description": "National Center for Advancing Translational Sciences",
+      "tags": ["NIH", "NCATS", "translational science", "research funding"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "NCATS Tissue Chip Program",
+      "url": "https://ncats.nih.gov/tissuechip",
+      "parent_url": "https://ncats.nih.gov",
+      "description": "NIH program developing microphysiological systems for drug testing",
+      "tags": ["NIH", "NCATS", "tissue chip", "organ-on-chip", "MPS"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "ARPA-H",
+      "url": "https://arpa-h.gov",
+      "parent_url": "https://arpa-h.gov",
+      "description": "Advanced Research Projects Agency for Health - breakthrough health research",
+      "tags": ["ARPA-H", "health research", "innovation", "funding"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "ARPA-H Programs",
+      "url": "https://arpa-h.gov/research-and-funding",
+      "parent_url": "https://arpa-h.gov",
+      "description": "ARPA-H research programs and funding opportunities",
+      "tags": ["ARPA-H", "funding", "research programs", "health innovation"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "NIH SBIR/STTR Programs",
+      "url": "https://seed.nih.gov",
+      "parent_url": "https://www.nih.gov",
+      "description": "Small Business Innovation Research and Technology Transfer programs",
+      "tags": ["NIH", "SBIR", "STTR", "small business", "funding", "grants"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "NIH Office of Research Infrastructure Programs",
+      "url": "https://orip.nih.gov",
+      "parent_url": "https://www.nih.gov",
+      "description": "Supporting development of research models and tools",
+      "tags": ["NIH", "ORIP", "research infrastructure", "models"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "NIH",
+      "name": "NIH 3D Tissue Bioprinting Consortium",
+      "url": "https://ncats.nih.gov/research/research-activities/tissue-chip/3d-tissue-bioprinting",
+      "parent_url": "https://ncats.nih.gov",
+      "description": "Collaborative effort to advance tissue bioprinting technologies",
+      "tags": ["NIH", "bioprinting", "tissue engineering", "3D printing"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EPA",
+      "name": "EPA NAMs Work Plan",
+      "url": "https://www.epa.gov/chemical-research/new-approach-methods-work-plan",
+      "parent_url": "https://www.epa.gov",
+      "description": "EPA roadmap for implementing New Approach Methodologies",
+      "tags": ["EPA", "NAMs", "chemical safety", "toxicology", "regulatory"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EPA",
+      "name": "EPA Computational Toxicology Research",
+      "url": "https://www.epa.gov/comptox",
+      "parent_url": "https://www.epa.gov",
+      "description": "EPA computational approaches to chemical hazard assessment",
+      "tags": ["EPA", "computational toxicology", "chemical safety", "in silico"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EPA",
+      "name": "EPA ToxCast Program",
+      "url": "https://www.epa.gov/chemical-research/toxicity-forecasting",
+      "parent_url": "https://www.epa.gov",
+      "description": "High-throughput screening program for chemical toxicity",
+      "tags": ["EPA", "ToxCast", "high-throughput screening", "toxicity"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EMA",
+      "name": "EMA 3Rs Principles",
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/research-and-development/ethical-use-animals-medicine-testing",
+      "parent_url": "https://www.ema.europa.eu",
+      "description": "European Medicines Agency guidance on Replacement, Reduction, Refinement",
+      "tags": ["EMA", "3Rs", "animal testing", "regulatory", "Europe"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EMA",
+      "name": "EMA Innovation Task Force",
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/research-and-development/innovation-medicines",
+      "parent_url": "https://www.ema.europa.eu",
+      "description": "EMA support for innovative drug development approaches",
+      "tags": ["EMA", "innovation", "drug development", "regulatory"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "EMA",
+      "name": "EMA Regulatory Science Strategy",
+      "url": "https://www.ema.europa.eu/en/about-us/how-we-work/regulatory-science-strategy",
+      "parent_url": "https://www.ema.europa.eu",
+      "description": "EMA strategic approach to regulatory science advancement",
+      "tags": ["EMA", "regulatory science", "strategy", "Europe"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "OECD",
+      "name": "OECD Test Guidelines Programme",
+      "url": "https://www.oecd.org/chemicalsafety/testing/oecdguidelinesforthetestingofchemicals.htm",
+      "parent_url": "https://www.oecd.org",
+      "description": "Internationally harmonized chemical testing guidelines",
+      "tags": ["OECD", "test guidelines", "chemical safety", "international standards"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "OECD",
+      "name": "OECD Adverse Outcome Pathways",
+      "url": "https://www.oecd.org/chemicalsafety/testing/adverse-outcome-pathways-molecular-screening-and-toxicogenomics.htm",
+      "parent_url": "https://www.oecd.org",
+      "description": "Framework for organizing toxicological knowledge",
+      "tags": ["OECD", "AOP", "adverse outcome pathways", "toxicology"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "OECD",
+      "name": "OECD QSAR Toolbox",
+      "url": "https://www.oecd.org/chemicalsafety/risk-assessment/oecd-qsar-toolbox.htm",
+      "parent_url": "https://www.oecd.org",
+      "description": "Software for grouping chemicals and filling data gaps",
+      "tags": ["OECD", "QSAR", "computational toxicology", "chemical grouping"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Grand View Research - Organ-on-Chip Market",
+      "url": "https://www.grandviewresearch.com/industry-analysis/organ-on-chip-market",
+      "parent_url": "https://www.grandviewresearch.com",
+      "description": "Comprehensive market analysis of organ-on-chip industry",
+      "tags": ["market research", "organ-on-chip", "industry analysis", "market size"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Grand View Research - 3D Cell Culture Market",
+      "url": "https://www.grandviewresearch.com/industry-analysis/3d-cell-culture-market",
+      "parent_url": "https://www.grandviewresearch.com",
+      "description": "Market analysis of 3D cell culture technologies",
+      "tags": ["market research", "3D cell culture", "organoids", "market analysis"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Grand View Research - AI in Drug Discovery",
+      "url": "https://www.grandviewresearch.com/industry-analysis/artificial-intelligence-drug-discovery-market",
+      "parent_url": "https://www.grandviewresearch.com",
+      "description": "Market analysis of AI applications in pharmaceutical R&D",
+      "tags": ["market research", "AI", "drug discovery", "machine learning"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Grand View Research - Digital Twins Healthcare",
+      "url": "https://www.grandviewresearch.com/industry-analysis/digital-twin-market",
+      "parent_url": "https://www.grandviewresearch.com",
+      "description": "Market analysis of digital twin technology in healthcare",
+      "tags": ["market research", "digital twins", "healthcare", "simulation"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "MarketsandMarkets - Organ-on-Chip Market",
+      "url": "https://www.marketsandmarkets.com/Market-Reports/organs-on-chips-market-36898067.html",
+      "parent_url": "https://www.marketsandmarkets.com",
+      "description": "Detailed market forecast for organ-on-chip technologies",
+      "tags": ["market research", "organ-on-chip", "forecast", "market trends"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "MarketsandMarkets - Organoid Market",
+      "url": "https://www.marketsandmarkets.com/Market-Reports/organoid-market-145878451.html",
+      "parent_url": "https://www.marketsandmarkets.com",
+      "description": "Market analysis and forecast for organoid technologies",
+      "tags": ["market research", "organoids", "3D culture", "market forecast"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "MarketsandMarkets - In Vitro Toxicology Testing",
+      "url": "https://www.marketsandmarkets.com/Market-Reports/in-vitro-toxicology-testing-market-225382720.html",
+      "parent_url": "https://www.marketsandmarkets.com",
+      "description": "Market analysis for in vitro toxicology testing services",
+      "tags": ["market research", "in vitro", "toxicology", "testing services"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "MarketsandMarkets - AI in Drug Discovery",
+      "url": "https://www.marketsandmarkets.com/Market-Reports/ai-in-drug-discovery-market-151193446.html",
+      "parent_url": "https://www.marketsandmarkets.com",
+      "description": "Comprehensive AI drug discovery market analysis",
+      "tags": ["market research", "AI", "drug discovery", "market size"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Mordor Intelligence - Organ-on-Chip Market",
+      "url": "https://www.mordorintelligence.com/industry-reports/organ-on-chip-market",
+      "parent_url": "https://www.mordorintelligence.com",
+      "description": "Industry report on global organ-on-chip market",
+      "tags": ["market research", "organ-on-chip", "global market", "industry report"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Mordor Intelligence - 3D Cell Culture Market",
+      "url": "https://www.mordorintelligence.com/industry-reports/3d-cell-culture-market",
+      "parent_url": "https://www.mordorintelligence.com",
+      "description": "3D cell culture technology market analysis",
+      "tags": ["market research", "3D cell culture", "spheroids", "market analysis"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Mordor Intelligence - Lab-on-Chip Market",
+      "url": "https://www.mordorintelligence.com/industry-reports/lab-on-a-chip-market",
+      "parent_url": "https://www.mordorintelligence.com",
+      "description": "Lab-on-chip microfluidics market report",
+      "tags": ["market research", "lab-on-chip", "microfluidics", "diagnostics"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Precedence Research - Organ-on-Chip Market",
+      "url": "https://www.precedenceresearch.com/organ-on-chip-market",
+      "parent_url": "https://www.precedenceresearch.com",
+      "description": "Organ-on-chip market size and growth projections",
+      "tags": ["market research", "organ-on-chip", "market size", "CAGR"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Precedence Research - AI Drug Discovery Market",
+      "url": "https://www.precedenceresearch.com/ai-in-drug-discovery-market",
+      "parent_url": "https://www.precedenceresearch.com",
+      "description": "AI-driven drug discovery market projections",
+      "tags": ["market research", "AI", "drug discovery", "market growth"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Precedence Research - Digital Therapeutics Market",
+      "url": "https://www.precedenceresearch.com/digital-therapeutics-market",
+      "parent_url": "https://www.precedenceresearch.com",
+      "description": "Digital therapeutics market size and forecast",
+      "tags": ["market research", "digital therapeutics", "digital health", "market forecast"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Global Market Insights - Organ-on-Chip",
+      "url": "https://www.gminsights.com/industry-analysis/organ-on-chip-market",
+      "parent_url": "https://www.gminsights.com",
+      "description": "Organ-on-chip market insights and regional analysis",
+      "tags": ["market research", "organ-on-chip", "regional analysis", "market insights"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Global Market Insights - In Vitro Diagnostics",
+      "url": "https://www.gminsights.com/industry-analysis/in-vitro-diagnostics-ivd-market",
+      "parent_url": "https://www.gminsights.com",
+      "description": "IVD market analysis and competitive landscape",
+      "tags": ["market research", "IVD", "diagnostics", "market analysis"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Global Market Insights - Cell Culture Market",
+      "url": "https://www.gminsights.com/industry-analysis/cell-culture-market",
+      "parent_url": "https://www.gminsights.com",
+      "description": "Cell culture products and services market analysis",
+      "tags": ["market research", "cell culture", "bioproduction", "market size"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Fortune Business Insights - Organ-on-Chip",
+      "url": "https://www.fortunebusinessinsights.com/organ-on-chip-market-102794",
+      "parent_url": "https://www.fortunebusinessinsights.com",
+      "description": "Organ-on-chip market share and growth analysis",
+      "tags": ["market research", "organ-on-chip", "market share", "growth analysis"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Fortune Business Insights - AI Healthcare",
+      "url": "https://www.fortunebusinessinsights.com/artificial-intelligence-ai-in-healthcare-market-102044",
+      "parent_url": "https://www.fortunebusinessinsights.com",
+      "description": "AI in healthcare market comprehensive analysis",
+      "tags": ["market research", "AI", "healthcare", "market trends"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Market Reports",
+      "name": "Fortune Business Insights - Organoids Market",
+      "url": "https://www.fortunebusinessinsights.com/organoids-market-103113",
+      "parent_url": "https://www.fortunebusinessinsights.com",
+      "description": "Organoids and spheroids market analysis",
+      "tags": ["market research", "organoids", "spheroids", "3D culture"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "Emulate Bio",
+      "url": "https://www.emulatebio.com",
+      "parent_url": "https://www.emulatebio.com",
+      "description": "Leading organ-on-chip company with Human Emulation System",
+      "tags": ["organ-on-chip", "MPS", "drug discovery", "Wyss Institute spinout"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "Emulate Bio - Products",
+      "url": "https://www.emulatebio.com/products",
+      "parent_url": "https://www.emulatebio.com",
+      "description": "Organ-Chip products including liver, lung, intestine, kidney chips",
+      "tags": ["organ-on-chip", "liver chip", "lung chip", "intestine chip"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "CN Bio Innovations",
+      "url": "https://www.cn-bio.com",
+      "parent_url": "https://www.cn-bio.com",
+      "description": "Multi-organ-on-chip systems for drug development",
+      "tags": ["organ-on-chip", "multi-organ", "liver", "DMPK"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "CN Bio - PhysioMimix",
+      "url": "https://www.cn-bio.com/physiomimix",
+      "parent_url": "https://www.cn-bio.com",
+      "description": "PhysioMimix multi-organ microphysiological system",
+      "tags": ["organ-on-chip", "multi-organ", "MPS", "drug metabolism"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "MIMETAS",
+      "url": "https://www.mimetas.com",
+      "parent_url": "https://www.mimetas.com",
+      "description": "High-throughput organ-on-chip platform OrganoPlate",
+      "tags": ["organ-on-chip", "high-throughput", "OrganoPlate", "3D culture"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "MIMETAS - OrganoPlate",
+      "url": "https://www.mimetas.com/en/organoplate",
+      "parent_url": "https://www.mimetas.com",
+      "description": "96-well organ-on-chip platform for screening",
+      "tags": ["organ-on-chip", "screening", "high-throughput", "microfluidics"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "InSphero",
+      "url": "https://www.insphero.com",
+      "parent_url": "https://www.insphero.com",
+      "description": "3D microtissue and organ-on-chip solutions",
+      "tags": ["3D microtissue", "spheroids", "liver", "pancreatic islets"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "InSphero - Akura Platform",
+      "url": "https://www.insphero.com/products/akura",
+      "parent_url": "https://www.insphero.com",
+      "description": "Akura organ-on-chip flow system",
+      "tags": ["organ-on-chip", "3D tissue", "flow system", "ADME-Tox"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "TissUse",
+      "url": "https://www.tissuse.com",
+      "parent_url": "https://www.tissuse.com",
+      "description": "Multi-organ-chip platform HUMIMIC for systemic research",
+      "tags": ["multi-organ-chip", "HUMIMIC", "systemic toxicity", "human-on-chip"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Platform Leaders",
+      "name": "TissUse - HUMIMIC Platform",
+      "url": "https://www.tissuse.com/en/humimic",
+      "parent_url": "https://www.tissuse.com",
+      "description": "HUMIMIC multi-organ-chip system details",
+      "tags": ["multi-organ-chip", "human-on-chip", "systemic", "interconnected"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "Hesperos",
+      "url": "https://www.hesperosinc.com",
+      "parent_url": "https://www.hesperosinc.com",
+      "description": "Human-on-a-chip systems with functional readouts",
+      "tags": ["human-on-chip", "functional readout", "neuromuscular", "cardiac"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "Hesperos - Multi-Organ Systems",
+      "url": "https://www.hesperosinc.com/multi-organ-systems",
+      "parent_url": "https://www.hesperosinc.com",
+      "description": "Interconnected multi-organ human-on-chip platforms",
+      "tags": ["human-on-chip", "multi-organ", "serum-free", "phenotypic"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "Quris AI (formerly Nortis)",
+      "url": "https://www.quris.ai",
+      "parent_url": "https://www.quris.ai",
+      "description": "AI-powered clinical prediction using organ-on-chip",
+      "tags": ["organ-on-chip", "AI", "clinical prediction", "drug safety"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "Quris AI - Bio-AI Platform",
+      "url": "https://www.quris.ai/platform",
+      "parent_url": "https://www.quris.ai",
+      "description": "Integrated organ-on-chip and AI prediction platform",
+      "tags": ["organ-on-chip", "AI", "machine learning", "clinical trials"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "AxoSim",
+      "url": "https://www.axosim.com",
+      "parent_url": "https://www.axosim.com",
+      "description": "Nerve-on-a-chip platform for neurotoxicity testing",
+      "tags": ["nerve-on-chip", "neurotoxicity", "peripheral nerve", "CNS"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "AxoSim - NerveSim Platform",
+      "url": "https://www.axosim.com/nervesim",
+      "parent_url": "https://www.axosim.com",
+      "description": "NerveSim platform for functional nerve assessment",
+      "tags": ["nerve-on-chip", "electrophysiology", "myelination", "neuropathy"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "AlveoliX",
+      "url": "https://www.alveolix.com",
+      "parent_url": "https://www.alveolix.com",
+      "description": "Lung-on-chip platform with breathing mechanics",
+      "tags": ["lung-on-chip", "respiratory", "breathing", "alveolar"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "AlveoliX - AXlung Platform",
+      "url": "https://www.alveolix.com/axlung",
+      "parent_url": "https://www.alveolix.com",
+      "description": "AXlung breathing lung-on-chip system",
+      "tags": ["lung-on-chip", "mechanical breathing", "air-liquid interface", "respiratory"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "SynVivo",
+      "url": "https://www.synvivobio.com",
+      "parent_url": "https://www.synvivobio.com",
+      "description": "Microfluidic blood vessel-on-chip platform",
+      "tags": ["vessel-on-chip", "microfluidics", "blood-brain barrier", "vascular"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Specialized Platforms",
+      "name": "SynVivo - SynBBB",
+      "url": "https://www.synvivobio.com/synbbb",
+      "parent_url": "https://www.synvivobio.com",
+      "description": "Blood-brain barrier on-chip model",
+      "tags": ["BBB", "blood-brain barrier", "CNS", "vascular model"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Technology",
+      "name": "HUB Organoids (Hubrecht)",
+      "url": "https://www.hubrecht.eu/research-groups/clevers-group",
+      "parent_url": "https://www.hubrecht.eu",
+      "description": "Original organoid technology from Hans Clevers laboratory",
+      "tags": ["organoids", "stem cells", "Clevers", "intestinal organoids"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Technology",
+      "name": "HUB Organoid Technology Foundation",
+      "url": "https://www.hub4organoids.eu",
+      "parent_url": "https://www.hub4organoids.eu",
+      "description": "Non-profit advancing organoid technology and applications",
+      "tags": ["organoids", "stem cells", "patient-derived", "disease modeling"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Suppliers",
+      "name": "STEMCELL Technologies",
+      "url": "https://www.stemcell.com",
+      "parent_url": "https://www.stemcell.com",
+      "description": "Leading supplier of organoid culture systems and reagents",
+      "tags": ["organoids", "stem cells", "culture media", "reagents"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Suppliers",
+      "name": "STEMCELL - Organoid Resources",
+      "url": "https://www.stemcell.com/organoids",
+      "parent_url": "https://www.stemcell.com",
+      "description": "Organoid culture products and protocols",
+      "tags": ["organoids", "protocols", "IntestiCult", "hepatic organoids"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Suppliers",
+      "name": "STEMCELL - STEMdiff Platform",
+      "url": "https://www.stemcell.com/stemdiff",
+      "parent_url": "https://www.stemcell.com",
+      "description": "Differentiation platform for pluripotent stem cells",
+      "tags": ["iPSC", "differentiation", "stem cells", "neural organoids"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Services",
+      "name": "DefiniGEN",
+      "url": "https://www.definigen.com",
+      "parent_url": "https://www.definigen.com",
+      "description": "iPSC-derived hepatocytes and disease models",
+      "tags": ["iPSC", "hepatocytes", "disease modeling", "NASH"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Services",
+      "name": "DefiniGEN - Products",
+      "url": "https://www.definigen.com/products",
+      "parent_url": "https://www.definigen.com",
+      "description": "iPSC-derived cell products for drug discovery",
+      "tags": ["iPSC", "hepatocytes", "intestinal cells", "disease models"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Services",
+      "name": "Crown Bioscience",
+      "url": "https://www.crownbio.com",
+      "parent_url": "https://www.crownbio.com",
+      "description": "Patient-derived tumor organoids for oncology research",
+      "tags": ["organoids", "PDX", "oncology", "tumor models"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Organoid Services",
+      "name": "Crown Bio - Tumor Organoids",
+      "url": "https://www.crownbio.com/services/in-vitro/tumor-organoids",
+      "parent_url": "https://www.crownbio.com",
+      "description": "Patient-derived tumor organoid services",
+      "tags": ["tumor organoids", "PDO", "oncology", "drug screening"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Bioprinting",
+      "name": "System1 Biosciences",
+      "url": "https://www.system1.bio",
+      "parent_url": "https://www.system1.bio",
+      "description": "Brain organoid platform for neurological disease",
+      "tags": ["brain organoids", "neurological disease", "CNS", "3D culture"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Bioprinting",
+      "name": "Prellis Biologics",
+      "url": "https://www.prellisbio.com",
+      "parent_url": "https://www.prellisbio.com",
+      "description": "Holographic bioprinting for vascularized tissue",
+      "tags": ["bioprinting", "vascularization", "3D printing", "tissue engineering"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Bioprinting",
+      "name": "Prellis - Technology",
+      "url": "https://www.prellisbio.com/technology",
+      "parent_url": "https://www.prellisbio.com",
+      "description": "Holographic bioprinting technology platform",
+      "tags": ["bioprinting", "holographic", "vascularized tissue", "organ fabrication"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Recursion Pharmaceuticals",
+      "url": "https://www.recursion.com",
+      "parent_url": "https://www.recursion.com",
+      "description": "AI-powered drug discovery with massive phenotypic screening",
+      "tags": ["AI", "drug discovery", "phenotypic screening", "machine learning"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Recursion - Platform",
+      "url": "https://www.recursion.com/platform",
+      "parent_url": "https://www.recursion.com",
+      "description": "Recursion Operating System for drug discovery",
+      "tags": ["AI", "phenomics", "high-throughput imaging", "drug discovery"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Recursion - Pipeline",
+      "url": "https://www.recursion.com/pipeline",
+      "parent_url": "https://www.recursion.com",
+      "description": "Recursion drug development pipeline",
+      "tags": ["AI", "pipeline", "clinical trials", "drug candidates"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Schrödinger",
+      "url": "https://www.schrodinger.com",
+      "parent_url": "https://www.schrodinger.com",
+      "description": "Physics-based computational drug discovery platform",
+      "tags": ["computational chemistry", "molecular modeling", "drug design", "simulation"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Schrödinger - Drug Discovery",
+      "url": "https://www.schrodinger.com/drug-discovery",
+      "parent_url": "https://www.schrodinger.com",
+      "description": "Computational drug discovery solutions",
+      "tags": ["computational", "drug design", "molecular dynamics", "FEP+"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "BenevolentAI",
+      "url": "https://www.benevolent.com",
+      "parent_url": "https://www.benevolent.com",
+      "description": "AI platform for drug discovery and development",
+      "tags": ["AI", "drug discovery", "knowledge graph", "target identification"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "BenevolentAI - Platform",
+      "url": "https://www.benevolent.com/platform",
+      "parent_url": "https://www.benevolent.com",
+      "description": "Benevolent Platform for AI drug discovery",
+      "tags": ["AI", "knowledge graph", "drug targets", "biomedical data"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Atomwise",
+      "url": "https://www.atomwise.com",
+      "parent_url": "https://www.atomwise.com",
+      "description": "AI for small molecule drug discovery using deep learning",
+      "tags": ["AI", "deep learning", "virtual screening", "small molecules"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Atomwise - Technology",
+      "url": "https://www.atomwise.com/technology",
+      "parent_url": "https://www.atomwise.com",
+      "description": "AtomNet deep learning for structure-based drug design",
+      "tags": ["AI", "AtomNet", "structure-based", "virtual screening"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Insilico Medicine",
+      "url": "https://www.insilico.com",
+      "parent_url": "https://www.insilico.com",
+      "description": "Generative AI for drug discovery and aging research",
+      "tags": ["AI", "generative AI", "drug discovery", "aging"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Insilico - Pharma.AI",
+      "url": "https://www.insilico.com/platform",
+      "parent_url": "https://www.insilico.com",
+      "description": "Pharma.AI end-to-end drug discovery platform",
+      "tags": ["AI", "generative chemistry", "target discovery", "clinical prediction"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "AI Platforms",
+      "name": "Insilico - Pipeline",
+      "url": "https://www.insilico.com/pipeline",
+      "parent_url": "https://www.insilico.com",
+      "description": "AI-discovered drug candidates in development",
+      "tags": ["AI", "drug pipeline", "fibrosis", "oncology"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Healthcare Digital Twins",
+      "name": "Twin Health",
+      "url": "https://www.twinhealth.com",
+      "parent_url": "https://www.twinhealth.com",
+      "description": "Digital twin platform for metabolic disease reversal",
+      "tags": ["digital twin", "metabolic disease", "diabetes", "personalized medicine"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Healthcare Digital Twins",
+      "name": "Twin Health - Science",
+      "url": "https://www.twinhealth.com/science",
+      "parent_url": "https://www.twinhealth.com",
+      "description": "Whole Body Digital Twin technology and clinical evidence",
+      "tags": ["digital twin", "precision medicine", "metabolic", "AI"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Healthcare Digital Twins",
+      "name": "HeartFlow",
+      "url": "https://www.heartflow.com",
+      "parent_url": "https://www.heartflow.com",
+      "description": "Digital twin technology for cardiovascular analysis",
+      "tags": ["digital twin", "cardiovascular", "FFR", "coronary artery"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Healthcare Digital Twins",
+      "name": "HeartFlow - Technology",
+      "url": "https://www.heartflow.com/heartflow-technology",
+      "parent_url": "https://www.heartflow.com",
+      "description": "HeartFlow Analysis FFR-CT technology",
+      "tags": ["digital twin", "cardiac", "CT imaging", "blood flow"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Clinical Trials",
+      "name": "Unlearn.AI",
+      "url": "https://www.unlearn.ai",
+      "parent_url": "https://www.unlearn.ai",
+      "description": "Digital twins for clinical trial optimization",
+      "tags": ["digital twin", "clinical trials", "AI", "patient simulation"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Clinical Trials",
+      "name": "Unlearn.AI - Technology",
+      "url": "https://www.unlearn.ai/technology",
+      "parent_url": "https://www.unlearn.ai",
+      "description": "TwinRCT digital twin clinical trial platform",
+      "tags": ["digital twin", "synthetic control arm", "clinical trials", "machine learning"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Simulation Platforms",
+      "name": "Dassault Systèmes - SIMULIA",
+      "url": "https://www.3ds.com/products-services/simulia",
+      "parent_url": "https://www.3ds.com",
+      "description": "Living Heart Project and biomedical simulation",
+      "tags": ["simulation", "Living Heart", "computational modeling", "FDA"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Simulation Platforms",
+      "name": "Dassault - Living Heart Project",
+      "url": "https://www.3ds.com/products-services/simulia/solutions/life-sciences-healthcare/the-living-heart-project",
+      "parent_url": "https://www.3ds.com",
+      "description": "Collaborative cardiac simulation initiative",
+      "tags": ["Living Heart", "cardiac simulation", "in silico", "regulatory"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Simulation Platforms",
+      "name": "Dassault - Life Sciences",
+      "url": "https://www.3ds.com/industries/life-sciences-healthcare",
+      "parent_url": "https://www.3ds.com",
+      "description": "Life sciences simulation and digital twin solutions",
+      "tags": ["simulation", "life sciences", "digital twin", "modeling"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Pfizer",
+      "url": "https://www.pfizer.com",
+      "parent_url": "https://www.pfizer.com",
+      "description": "Global pharmaceutical leader in drug development",
+      "tags": ["big pharma", "drug development", "vaccines", "oncology"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Pfizer - Science",
+      "url": "https://www.pfizer.com/science",
+      "parent_url": "https://www.pfizer.com",
+      "description": "Pfizer research and development initiatives",
+      "tags": ["R&D", "drug discovery", "clinical trials", "innovation"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Merck (MSD)",
+      "url": "https://www.merck.com",
+      "parent_url": "https://www.merck.com",
+      "description": "Global healthcare company - pharmaceuticals and vaccines",
+      "tags": ["big pharma", "oncology", "vaccines", "immunology"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Merck - Research",
+      "url": "https://www.merck.com/research",
+      "parent_url": "https://www.merck.com",
+      "description": "Merck Research Laboratories innovation programs",
+      "tags": ["R&D", "drug discovery", "MRL", "innovation"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Eli Lilly",
+      "url": "https://www.lilly.com",
+      "parent_url": "https://www.lilly.com",
+      "description": "Pharmaceutical company focused on diabetes, oncology, neurodegeneration",
+      "tags": ["big pharma", "diabetes", "oncology", "neuroscience"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Eli Lilly - Discovery",
+      "url": "https://www.lilly.com/discovery",
+      "parent_url": "https://www.lilly.com",
+      "description": "Lilly drug discovery and development approach",
+      "tags": ["R&D", "drug discovery", "innovation", "pipeline"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Bristol-Myers Squibb",
+      "url": "https://www.bms.com",
+      "parent_url": "https://www.bms.com",
+      "description": "Biopharmaceutical company in oncology, hematology, immunology",
+      "tags": ["big pharma", "oncology", "immuno-oncology", "cell therapy"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "BMS - Research",
+      "url": "https://www.bms.com/researchers-and-partners.html",
+      "parent_url": "https://www.bms.com",
+      "description": "BMS research partnerships and innovation",
+      "tags": ["R&D", "partnerships", "innovation", "collaboration"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "AbbVie",
+      "url": "https://www.abbvie.com",
+      "parent_url": "https://www.abbvie.com",
+      "description": "Biopharmaceutical company - immunology, oncology, neuroscience",
+      "tags": ["big pharma", "immunology", "oncology", "Humira"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "AbbVie - Science",
+      "url": "https://www.abbvie.com/science.html",
+      "parent_url": "https://www.abbvie.com",
+      "description": "AbbVie scientific approach and R&D",
+      "tags": ["R&D", "drug discovery", "science", "innovation"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "Johnson & Johnson",
+      "url": "https://www.jnj.com",
+      "parent_url": "https://www.jnj.com",
+      "description": "Healthcare conglomerate - pharmaceuticals, medical devices",
+      "tags": ["big pharma", "pharmaceuticals", "medical devices", "consumer health"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "US Pharma",
+      "name": "J&J - Innovative Medicine",
+      "url": "https://www.jnj.com/innovative-medicine",
+      "parent_url": "https://www.jnj.com",
+      "description": "J&J pharmaceutical innovation and research",
+      "tags": ["R&D", "innovation", "Janssen", "drug development"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Roche",
+      "url": "https://www.roche.com",
+      "parent_url": "https://www.roche.com",
+      "description": "Swiss pharmaceutical and diagnostics leader",
+      "tags": ["big pharma", "diagnostics", "oncology", "personalized medicine"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Roche - Innovation",
+      "url": "https://www.roche.com/innovation",
+      "parent_url": "https://www.roche.com",
+      "description": "Roche research and innovation initiatives",
+      "tags": ["R&D", "innovation", "personalized healthcare", "diagnostics"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Novartis",
+      "url": "https://www.novartis.com",
+      "parent_url": "https://www.novartis.com",
+      "description": "Swiss pharmaceutical company - innovative medicines",
+      "tags": ["big pharma", "oncology", "gene therapy", "cardiovascular"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Novartis - Research",
+      "url": "https://www.novartis.com/research-development",
+      "parent_url": "https://www.novartis.com",
+      "description": "Novartis research and development programs",
+      "tags": ["R&D", "drug discovery", "innovation", "NIBR"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "GSK",
+      "url": "https://www.gsk.com",
+      "parent_url": "https://www.gsk.com",
+      "description": "British pharmaceutical - vaccines, medicines",
+      "tags": ["big pharma", "vaccines", "infectious disease", "respiratory"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "GSK - R&D",
+      "url": "https://www.gsk.com/en-gb/research-and-development",
+      "parent_url": "https://www.gsk.com",
+      "description": "GSK research and development approach",
+      "tags": ["R&D", "drug discovery", "vaccines", "innovation"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "AstraZeneca",
+      "url": "https://www.astrazeneca.com",
+      "parent_url": "https://www.astrazeneca.com",
+      "description": "British-Swedish pharmaceutical - oncology, cardiovascular, respiratory",
+      "tags": ["big pharma", "oncology", "cardiovascular", "respiratory"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "AstraZeneca - R&D",
+      "url": "https://www.astrazeneca.com/r-d.html",
+      "parent_url": "https://www.astrazeneca.com",
+      "description": "AstraZeneca research and development",
+      "tags": ["R&D", "drug discovery", "science", "innovation"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Sanofi",
+      "url": "https://www.sanofi.com",
+      "parent_url": "https://www.sanofi.com",
+      "description": "French pharmaceutical - vaccines, rare diseases, immunology",
+      "tags": ["big pharma", "vaccines", "rare diseases", "immunology"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Sanofi - R&D",
+      "url": "https://www.sanofi.com/en/science-and-innovation",
+      "parent_url": "https://www.sanofi.com",
+      "description": "Sanofi science and innovation programs",
+      "tags": ["R&D", "innovation", "drug discovery", "partnerships"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Boehringer Ingelheim",
+      "url": "https://www.boehringer-ingelheim.com",
+      "parent_url": "https://www.boehringer-ingelheim.com",
+      "description": "German pharmaceutical - respiratory, cardiovascular, CNS",
+      "tags": ["big pharma", "respiratory", "cardiovascular", "animal health"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "European Pharma",
+      "name": "Boehringer - Research",
+      "url": "https://www.boehringer-ingelheim.com/human-health/research-development",
+      "parent_url": "https://www.boehringer-ingelheim.com",
+      "description": "Boehringer Ingelheim R&D approach",
+      "tags": ["R&D", "drug discovery", "innovation", "research"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "Asian Pharma",
+      "name": "Takeda",
+      "url": "https://www.takeda.com",
+      "parent_url": "https://www.takeda.com",
+      "description": "Japanese pharmaceutical - GI, rare diseases, oncology, neuroscience",
+      "tags": ["big pharma", "rare diseases", "GI", "neuroscience"]
+    },
+    {
+      "category": "BIG_PHARMA",
+      "subcategory": "Asian Pharma",
+      "name": "Takeda - R&D",
+      "url": "https://www.takeda.com/what-we-do/research-and-development",
+      "parent_url": "https://www.takeda.com",
+      "description": "Takeda research and development programs",
+      "tags": ["R&D", "innovation", "drug discovery", "Japan"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "Wyss Institute at Harvard",
+      "url": "https://wyss.harvard.edu",
+      "parent_url": "https://www.harvard.edu",
+      "description": "Wyss Institute for Biologically Inspired Engineering",
+      "tags": ["organ-on-chip", "bioinspired", "Harvard", "research institute"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "Wyss - Organ-on-Chip Research",
+      "url": "https://wyss.harvard.edu/technology/human-organs-on-chips",
+      "parent_url": "https://wyss.harvard.edu",
+      "description": "Pioneering organ-on-chip technology development",
+      "tags": ["organ-on-chip", "human chips", "Ingber", "MPS"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "MIT Koch Institute",
+      "url": "https://ki.mit.edu",
+      "parent_url": "https://www.mit.edu",
+      "description": "MIT Koch Institute for Integrative Cancer Research",
+      "tags": ["MIT", "cancer research", "engineering", "biology"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "MIT - Drug Delivery",
+      "url": "https://www.mit.edu/research/labs",
+      "parent_url": "https://www.mit.edu",
+      "description": "MIT research laboratories including drug delivery",
+      "tags": ["MIT", "research", "drug delivery", "nanotechnology"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "MIT Media Lab",
+      "url": "https://www.media.mit.edu",
+      "parent_url": "https://www.mit.edu",
+      "description": "MIT Media Lab - innovative research in technology",
+      "tags": ["MIT", "innovation", "technology", "interdisciplinary"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Government Agencies",
+      "name": "NIH - National Institutes of Health",
+      "url": "https://www.nih.gov",
+      "parent_url": "https://www.nih.gov",
+      "description": "US primary agency for biomedical research",
+      "tags": ["NIH", "biomedical research", "funding", "government"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Government Agencies",
+      "name": "NIH - Research Portfolio",
+      "url": "https://www.nih.gov/research-training",
+      "parent_url": "https://www.nih.gov",
+      "description": "NIH research programs and training opportunities",
+      "tags": ["NIH", "research", "grants", "training"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Government Agencies",
+      "name": "DARPA Biological Technologies Office",
+      "url": "https://www.darpa.mil/about-us/offices/bto",
+      "parent_url": "https://www.darpa.mil",
+      "description": "DARPA programs in biological technologies",
+      "tags": ["DARPA", "BTO", "defense", "biosecurity"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Government Agencies",
+      "name": "DARPA - Programs",
+      "url": "https://www.darpa.mil/work-with-us/opportunities",
+      "parent_url": "https://www.darpa.mil",
+      "description": "DARPA research opportunities and programs",
+      "tags": ["DARPA", "funding", "innovation", "defense research"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Government Agencies",
+      "name": "ARPA-H Programs",
+      "url": "https://arpa-h.gov/programs",
+      "parent_url": "https://arpa-h.gov",
+      "description": "Advanced Research Projects Agency for Health programs",
+      "tags": ["ARPA-H", "health research", "innovation", "breakthrough"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "3Rs Organizations",
+      "name": "NC3Rs",
+      "url": "https://www.nc3rs.org.uk",
+      "parent_url": "https://www.nc3rs.org.uk",
+      "description": "UK National Centre for 3Rs - Replacement, Reduction, Refinement",
+      "tags": ["3Rs", "animal alternatives", "UK", "welfare"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "3Rs Organizations",
+      "name": "NC3Rs - CRACK IT",
+      "url": "https://www.nc3rs.org.uk/crackit",
+      "parent_url": "https://www.nc3rs.org.uk",
+      "description": "Open innovation platform for 3Rs solutions",
+      "tags": ["3Rs", "innovation", "challenges", "alternatives"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "3Rs Organizations",
+      "name": "NC3Rs - Resources",
+      "url": "https://www.nc3rs.org.uk/3rs-resources",
+      "parent_url": "https://www.nc3rs.org.uk",
+      "description": "Educational resources on 3Rs principles",
+      "tags": ["3Rs", "education", "guidelines", "resources"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Nature",
+      "url": "https://www.nature.com",
+      "parent_url": "https://www.nature.com",
+      "description": "Premier multidisciplinary science journal",
+      "tags": ["journal", "peer-reviewed", "science", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Nature - Biomedical Engineering",
+      "url": "https://www.nature.com/natbiomedeng",
+      "parent_url": "https://www.nature.com",
+      "description": "Nature Biomedical Engineering journal",
+      "tags": ["journal", "biomedical engineering", "organ-on-chip", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Nature - Drug Discovery",
+      "url": "https://www.nature.com/nrd",
+      "parent_url": "https://www.nature.com",
+      "description": "Nature Reviews Drug Discovery",
+      "tags": ["journal", "drug discovery", "reviews", "pharmaceutical"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Nature - Methods",
+      "url": "https://www.nature.com/nmeth",
+      "parent_url": "https://www.nature.com",
+      "description": "Nature Methods - techniques for life sciences",
+      "tags": ["journal", "methods", "techniques", "protocols"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Science",
+      "url": "https://www.science.org",
+      "parent_url": "https://www.science.org",
+      "description": "AAAS flagship journal Science",
+      "tags": ["journal", "peer-reviewed", "AAAS", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Science Translational Medicine",
+      "url": "https://www.science.org/journal/stm",
+      "parent_url": "https://www.science.org",
+      "description": "Translational research from bench to bedside",
+      "tags": ["journal", "translational", "clinical", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Science Advances",
+      "url": "https://www.science.org/journal/sciadv",
+      "parent_url": "https://www.science.org",
+      "description": "Open access multidisciplinary science journal",
+      "tags": ["journal", "open access", "multidisciplinary", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Cell",
+      "url": "https://www.cell.com",
+      "parent_url": "https://www.cell.com",
+      "description": "Cell Press - leading life sciences journals",
+      "tags": ["journal", "cell biology", "life sciences", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Cell Stem Cell",
+      "url": "https://www.cell.com/cell-stem-cell/home",
+      "parent_url": "https://www.cell.com",
+      "description": "Leading journal in stem cell research",
+      "tags": ["journal", "stem cells", "regenerative medicine", "organoids"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "Cell Reports",
+      "url": "https://www.cell.com/cell-reports/home",
+      "parent_url": "https://www.cell.com",
+      "description": "Open access journal for life sciences",
+      "tags": ["journal", "open access", "life sciences", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "ACS Publications",
+      "url": "https://pubs.acs.org",
+      "parent_url": "https://www.acs.org",
+      "description": "American Chemical Society journals",
+      "tags": ["chemistry", "journals", "ACS", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "ACS Nano",
+      "url": "https://pubs.acs.org/journal/ancac3",
+      "parent_url": "https://www.acs.org",
+      "description": "Journal for nanoscience and nanotechnology",
+      "tags": ["journal", "nanotechnology", "nanomedicine", "materials"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Scientific Journals",
+      "name": "ACS Biomaterials",
+      "url": "https://pubs.acs.org/journal/abseba",
+      "parent_url": "https://www.acs.org",
+      "description": "ACS Biomaterials Science & Engineering",
+      "tags": ["journal", "biomaterials", "tissue engineering", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "Fierce Biotech",
+      "url": "https://www.fiercebiotech.com",
+      "parent_url": "https://www.fiercebiotech.com",
+      "description": "Biotechnology industry news and analysis",
+      "tags": ["news", "biotech", "industry", "analysis"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "Fierce Biotech - R&D",
+      "url": "https://www.fiercebiotech.com/research-and-development",
+      "parent_url": "https://www.fiercebiotech.com",
+      "description": "Biotech R&D news and updates",
+      "tags": ["news", "R&D", "drug development", "biotech"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "STAT News",
+      "url": "https://www.statnews.com",
+      "parent_url": "https://www.statnews.com",
+      "description": "Health and medicine news reporting",
+      "tags": ["news", "health", "medicine", "pharma"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "STAT - Pharma",
+      "url": "https://www.statnews.com/category/pharma",
+      "parent_url": "https://www.statnews.com",
+      "description": "Pharmaceutical industry news coverage",
+      "tags": ["news", "pharma", "drug development", "FDA"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "BioSpace",
+      "url": "https://www.biospace.com",
+      "parent_url": "https://www.biospace.com",
+      "description": "Life sciences and biotech news",
+      "tags": ["news", "biotech", "life sciences", "jobs"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "BioSpace - Drug Discovery",
+      "url": "https://www.biospace.com/drug-discovery",
+      "parent_url": "https://www.biospace.com",
+      "description": "Drug discovery news and trends",
+      "tags": ["news", "drug discovery", "research", "innovation"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "Genetic Engineering News",
+      "url": "https://www.genengnews.com",
+      "parent_url": "https://www.genengnews.com",
+      "description": "Biotechnology and pharmaceutical news",
+      "tags": ["news", "genetic engineering", "biotech", "pharma"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "GEN - Drug Discovery",
+      "url": "https://www.genengnews.com/topics/drug-discovery",
+      "parent_url": "https://www.genengnews.com",
+      "description": "Drug discovery news and developments",
+      "tags": ["news", "drug discovery", "screening", "targets"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Industry News",
+      "name": "GEN - Omics",
+      "url": "https://www.genengnews.com/topics/omics",
+      "parent_url": "https://www.genengnews.com",
+      "description": "Genomics, proteomics, and omics technologies",
+      "tags": ["news", "omics", "genomics", "proteomics"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Venture Data",
+      "name": "Crunchbase",
+      "url": "https://www.crunchbase.com",
+      "parent_url": "https://www.crunchbase.com",
+      "description": "Startup and venture funding database",
+      "tags": ["funding", "startups", "venture capital", "database"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Venture Data",
+      "name": "Crunchbase - Biotechnology",
+      "url": "https://www.crunchbase.com/hub/biotechnology-companies",
+      "parent_url": "https://www.crunchbase.com",
+      "description": "Biotechnology company funding data",
+      "tags": ["funding", "biotech", "startups", "investment"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Venture Data",
+      "name": "Crunchbase - Healthcare",
+      "url": "https://www.crunchbase.com/hub/health-care-companies",
+      "parent_url": "https://www.crunchbase.com",
+      "description": "Healthcare company investment database",
+      "tags": ["funding", "healthcare", "digital health", "investment"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Private Markets",
+      "name": "PitchBook",
+      "url": "https://pitchbook.com",
+      "parent_url": "https://pitchbook.com",
+      "description": "Private market financial data platform",
+      "tags": ["funding", "private equity", "venture capital", "M&A"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Private Markets",
+      "name": "PitchBook - Life Sciences",
+      "url": "https://pitchbook.com/news/reports/q4-2025-pitchbook-analyst-note-life-sciences",
+      "parent_url": "https://pitchbook.com",
+      "description": "Life sciences investment analysis",
+      "tags": ["funding", "life sciences", "biotech", "investment trends"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Market Intelligence",
+      "name": "CB Insights",
+      "url": "https://www.cbinsights.com",
+      "parent_url": "https://www.cbinsights.com",
+      "description": "Market intelligence and emerging tech analysis",
+      "tags": ["market intelligence", "emerging tech", "analysis", "trends"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Market Intelligence",
+      "name": "CB Insights - Healthcare",
+      "url": "https://www.cbinsights.com/research/healthcare",
+      "parent_url": "https://www.cbinsights.com",
+      "description": "Healthcare technology market analysis",
+      "tags": ["healthcare", "digital health", "AI", "market analysis"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Market Intelligence",
+      "name": "CB Insights - Biotech",
+      "url": "https://www.cbinsights.com/research/biotech",
+      "parent_url": "https://www.cbinsights.com",
+      "description": "Biotechnology market intelligence",
+      "tags": ["biotech", "drug discovery", "market trends", "analysis"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Emerging Players",
+      "name": "Javelin Biotech",
+      "url": "https://www.javelinbiotech.com",
+      "parent_url": "https://www.javelinbiotech.com",
+      "description": "Vascularized organ-on-chip for drug development",
+      "tags": ["organ-on-chip", "vascularization", "drug discovery", "MIT spinout"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Emerging Players",
+      "name": "Bi/ond",
+      "url": "https://www.biond-solutions.com",
+      "parent_url": "https://www.biond-solutions.com",
+      "description": "Organ-on-chip platform with integrated sensors",
+      "tags": ["organ-on-chip", "sensors", "real-time monitoring", "microfluidics"]
+    },
+    {
+      "category": "COMPANIES_ORGAN_ON_CHIP",
+      "subcategory": "Emerging Players",
+      "name": "Dynamic42",
+      "url": "https://www.dynamic42.com",
+      "parent_url": "https://www.dynamic42.com",
+      "description": "Liver-on-chip solutions for ADME-Tox",
+      "tags": ["liver-on-chip", "ADME", "toxicology", "drug metabolism"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Platform Providers",
+      "name": "Organoid Therapeutics",
+      "url": "https://www.organoid-therapeutics.com",
+      "parent_url": "https://www.organoid-therapeutics.com",
+      "description": "Patient-derived organoids for drug screening",
+      "tags": ["organoids", "patient-derived", "drug screening", "oncology"]
+    },
+    {
+      "category": "COMPANIES_ORGANOIDS",
+      "subcategory": "Platform Providers",
+      "name": "Cellesce",
+      "url": "https://www.cellesce.com",
+      "parent_url": "https://www.cellesce.com",
+      "description": "Scalable organoid manufacturing platform",
+      "tags": ["organoids", "manufacturing", "scale-up", "automation"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "Specialized AI",
+      "name": "Exscientia",
+      "url": "https://www.exscientia.ai",
+      "parent_url": "https://www.exscientia.ai",
+      "description": "AI-driven drug design and patient selection",
+      "tags": ["AI", "drug design", "precision medicine", "clinical trials"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "Specialized AI",
+      "name": "Relay Therapeutics",
+      "url": "https://www.relaytx.com",
+      "parent_url": "https://www.relaytx.com",
+      "description": "Motion-based drug discovery using computational biology",
+      "tags": ["AI", "protein dynamics", "structure-based", "drug discovery"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "Specialized AI",
+      "name": "Tempus",
+      "url": "https://www.tempus.com",
+      "parent_url": "https://www.tempus.com",
+      "description": "AI-enabled precision medicine platform",
+      "tags": ["AI", "precision medicine", "genomics", "clinical data"]
+    },
+    {
+      "category": "COMPANIES_AI_DRUG_DISCOVERY",
+      "subcategory": "Specialized AI",
+      "name": "Insitro",
+      "url": "https://www.insitro.com",
+      "parent_url": "https://www.insitro.com",
+      "description": "Machine learning for drug discovery at scale",
+      "tags": ["AI", "machine learning", "cell biology", "drug discovery"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "Stanford Bio-X",
+      "url": "https://biox.stanford.edu",
+      "parent_url": "https://www.stanford.edu",
+      "description": "Stanford interdisciplinary biosciences institute",
+      "tags": ["Stanford", "biosciences", "interdisciplinary", "research"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "UC Berkeley - Bioengineering",
+      "url": "https://bioeng.berkeley.edu",
+      "parent_url": "https://www.berkeley.edu",
+      "description": "UC Berkeley bioengineering research programs",
+      "tags": ["Berkeley", "bioengineering", "research", "tissue engineering"]
+    },
+    {
+      "category": "RESEARCH_INSTITUTIONS",
+      "subcategory": "Academic Centers",
+      "name": "Johns Hopkins - Institute for NanoBioTechnology",
+      "url": "https://inbt.jhu.edu",
+      "parent_url": "https://www.jhu.edu",
+      "description": "Johns Hopkins nanobiotechnology research",
+      "tags": ["Johns Hopkins", "nanotechnology", "bioengineering", "research"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "International",
+      "name": "ICH - International Council for Harmonisation",
+      "url": "https://www.ich.org",
+      "parent_url": "https://www.ich.org",
+      "description": "International pharmaceutical regulatory harmonization",
+      "tags": ["ICH", "harmonization", "regulatory", "international"]
+    },
+    {
+      "category": "REGULATORY",
+      "subcategory": "International",
+      "name": "WHO - Prequalification",
+      "url": "https://extranet.who.int/pqweb",
+      "parent_url": "https://www.who.int",
+      "description": "WHO prequalification of medicines program",
+      "tags": ["WHO", "prequalification", "global health", "regulatory"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Open Access",
+      "name": "PLOS ONE",
+      "url": "https://journals.plos.org/plosone",
+      "parent_url": "https://plos.org",
+      "description": "Open access multidisciplinary science journal",
+      "tags": ["journal", "open access", "peer-reviewed", "research"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Open Access",
+      "name": "eLife",
+      "url": "https://elifesciences.org",
+      "parent_url": "https://elifesciences.org",
+      "description": "Open access journal for life and biomedical sciences",
+      "tags": ["journal", "open access", "life sciences", "biomedical"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Preprints",
+      "name": "bioRxiv",
+      "url": "https://www.biorxiv.org",
+      "parent_url": "https://www.biorxiv.org",
+      "description": "Preprint server for biology",
+      "tags": ["preprints", "biology", "research", "open access"]
+    },
+    {
+      "category": "PUBLICATIONS",
+      "subcategory": "Preprints",
+      "name": "medRxiv",
+      "url": "https://www.medrxiv.org",
+      "parent_url": "https://www.medrxiv.org",
+      "description": "Preprint server for health sciences",
+      "tags": ["preprints", "medicine", "clinical", "research"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Specialized Platforms",
+      "name": "Owkin",
+      "url": "https://www.owkin.com",
+      "parent_url": "https://www.owkin.com",
+      "description": "AI for medical research with federated learning",
+      "tags": ["AI", "federated learning", "medical research", "clinical"]
+    },
+    {
+      "category": "COMPANIES_DIGITAL_TWINS",
+      "subcategory": "Specialized Platforms",
+      "name": "Paige",
+      "url": "https://www.paige.ai",
+      "parent_url": "https://www.paige.ai",
+      "description": "AI-powered digital pathology platform",
+      "tags": ["AI", "pathology", "cancer diagnosis", "FDA-cleared"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Specialized Reports",
+      "name": "BCC Research",
+      "url": "https://www.bccresearch.com",
+      "parent_url": "https://www.bccresearch.com",
+      "description": "Technology and life sciences market research",
+      "tags": ["market research", "technology", "life sciences", "analysis"]
+    },
+    {
+      "category": "MARKET_RESEARCH",
+      "subcategory": "Specialized Reports",
+      "name": "Evaluate Pharma",
+      "url": "https://www.evaluate.com/vantage",
+      "parent_url": "https://www.evaluate.com",
+      "description": "Pharmaceutical market analysis and forecasts",
+      "tags": ["market research", "pharma", "forecasts", "pipeline analysis"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Government Grants",
+      "name": "Grants.gov",
+      "url": "https://www.grants.gov",
+      "parent_url": "https://www.grants.gov",
+      "description": "US federal grants database and application portal",
+      "tags": ["grants", "federal funding", "NIH", "government"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Government Grants",
+      "name": "NSF - National Science Foundation",
+      "url": "https://www.nsf.gov",
+      "parent_url": "https://www.nsf.gov",
+      "description": "NSF research funding programs",
+      "tags": ["NSF", "grants", "research funding", "science"]
+    },
+    {
+      "category": "FUNDING_INVESTMENT",
+      "subcategory": "Government Grants",
+      "name": "BARDA - Biomedical Advanced Research",
+      "url": "https://www.medicalcountermeasures.gov",
+      "parent_url": "https://www.phe.gov",
+      "description": "BARDA advanced development and manufacturing",
+      "tags": ["BARDA", "funding", "medical countermeasures", "government"]
+    }
+  ]
+}

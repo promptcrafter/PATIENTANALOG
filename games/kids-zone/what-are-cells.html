@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What are Cells? | Discovery Zone | Patient Analog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard', sans-serif;
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: #fff; font-size: 2.2rem; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); margin-bottom: 10px; }
+    .subtitle { color: #fbcfe8; font-size: 1.1rem; }
+    .game-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .intro {
+      text-align: center;
+      padding: 20px;
+      background: #fdf2f8;
+      border-radius: 15px;
+      margin-bottom: 25px;
+    }
+    .intro-emoji { font-size: 4rem; }
+    .intro-text { font-size: 1.2rem; color: #831843; line-height: 1.8; margin-top: 15px; }
+    .cell-explorer {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cell-visual {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #fce7f3 0%, #fbcfe8 100%);
+      border-radius: 50%;
+      border: 8px solid #ec4899;
+    }
+    .cell-part {
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .cell-part:hover { transform: scale(1.15); }
+    .cell-part.active { animation: pulse 1s infinite; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .nucleus {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .mitochondria {
+      width: 50px;
+      height: 25px;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.6rem;
+    }
+    .mito1 { top: 25%; left: 15%; }
+    .mito2 { top: 65%; right: 20%; }
+    .ribosome {
+      width: 20px;
+      height: 20px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+    .ribo1 { top: 35%; left: 25%; }
+    .ribo2 { top: 55%; left: 20%; }
+    .ribo3 { top: 40%; right: 25%; }
+    .er {
+      width: 60px;
+      height: 20px;
+      background: linear-gradient(90deg, #f472b6, #ec4899);
+      border-radius: 10px;
+      top: 75%;
+      left: 30%;
+    }
+    .membrane {
+      width: 100%;
+      height: 100%;
+      border: 8px solid #ec4899;
+      border-radius: 50%;
+      position: absolute;
+      top: -8px;
+      left: -8px;
+    }
+    .info-panel {
+      flex: 1;
+      min-width: 250px;
+    }
+    .part-info {
+      display: none;
+      padding: 20px;
+      border-radius: 15px;
+      animation: fadeIn 0.3s;
+    }
+    .part-info.show { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .part-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .part-icon { font-size: 2rem; }
+    .part-description { font-size: 1.1rem; line-height: 1.7; margin-bottom: 15px; }
+    .part-analogy {
+      padding: 15px;
+      background: #fef3c7;
+      border-radius: 10px;
+      color: #92400e;
+    }
+    .default-info { background: #fdf2f8; color: #831843; }
+    .nucleus-info { background: #f3e8ff; color: #581c87; }
+    .mito-info { background: #fff7ed; color: #9a3412; }
+    .ribo-info { background: #f0fdf4; color: #166534; }
+    .er-info { background: #fdf2f8; color: #9d174d; }
+    .parts-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .legend-item {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .legend-item:hover { transform: scale(1.05); }
+    .legend-nucleus { background: #8b5cf6; color: #fff; }
+    .legend-mito { background: #f97316; color: #fff; }
+    .legend-ribo { background: #22c55e; color: #fff; }
+    .legend-er { background: #ec4899; color: #fff; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #fff;
+      color: #db2777;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+  <div class="container">
+    <header>
+      <h1>What are Cells?</h1>
+      <p class="subtitle">Learn about the tiny building blocks of your body!</p>
+    </header>
+
+    <div class="game-area">
+      <div class="intro">
+        <div class="intro-emoji">🔬</div>
+        <p class="intro-text">
+          Cells are the <strong>tiny building blocks</strong> that make up your whole body!<br>
+          You have about <strong>37 trillion cells</strong> - that's 37,000,000,000,000!<br>
+          Click on the cell parts below to learn what they do.
+        </p>
+      </div>
+
+      <div class="cell-explorer">
+        <div class="cell-visual">
+          <div class="cell-part membrane" data-part="membrane"></div>
+          <div class="cell-part nucleus" data-part="nucleus">NUCLEUS</div>
+          <div class="cell-part mitochondria mito1" data-part="mitochondria"></div>
+          <div class="cell-part mitochondria mito2" data-part="mitochondria"></div>
+          <div class="cell-part ribosome ribo1" data-part="ribosome"></div>
+          <div class="cell-part ribosome ribo2" data-part="ribosome"></div>
+          <div class="cell-part ribosome ribo3" data-part="ribosome"></div>
+          <div class="cell-part er" data-part="er"></div>
+        </div>
+
+        <div class="info-panel">
+          <div class="part-info default-info show" id="default-info">
+            <div class="part-title"><span class="part-icon">👆</span> Click a part!</div>
+            <p class="part-description">
+              Click on any part of the cell to learn what it does. Each part has an important job!
+            </p>
+            <div class="part-analogy">
+              <strong>Think of it like this:</strong> A cell is like a tiny city, with different buildings doing different jobs!
+            </div>
+          </div>
+
+          <div class="part-info nucleus-info" id="nucleus-info">
+            <div class="part-title"><span class="part-icon">🧠</span> Nucleus</div>
+            <p class="part-description">
+              The nucleus is the <strong>brain of the cell</strong>! It holds all the cell's DNA instructions and tells the other parts what to do.
+            </p>
+            <div class="part-analogy">
+              <strong>Like:</strong> The principal's office in a school - it's where all the important decisions are made!
+            </div>
+          </div>
+
+          <div class="part-info mito-info" id="mitochondria-info">
+            <div class="part-title"><span class="part-icon">⚡</span> Mitochondria</div>
+            <p class="part-description">
+              Mitochondria are the <strong>powerhouses of the cell</strong>! They take food and oxygen and turn them into energy the cell can use.
+            </p>
+            <div class="part-analogy">
+              <strong>Like:</strong> A power plant that makes electricity for a city!
+            </div>
+          </div>
+
+          <div class="part-info ribo-info" id="ribosome-info">
+            <div class="part-title"><span class="part-icon">🏭</span> Ribosomes</div>
+            <p class="part-description">
+              Ribosomes are tiny <strong>protein factories</strong>! They read instructions from DNA and build proteins that the cell needs.
+            </p>
+            <div class="part-analogy">
+              <strong>Like:</strong> Workers in a factory, following instructions to build things!
+            </div>
+          </div>
+
+          <div class="part-info er-info" id="er-info">
+            <div class="part-title"><span class="part-icon">📦</span> Endoplasmic Reticulum (ER)</div>
+            <p class="part-description">
+              The ER is like a <strong>highway system</strong> inside the cell! It helps move things around and processes proteins.
+            </p>
+            <div class="part-analogy">
+              <strong>Like:</strong> Roads and conveyor belts that move packages around a warehouse!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="parts-legend">
+        <span class="legend-item legend-nucleus" data-part="nucleus">Nucleus</span>
+        <span class="legend-item legend-mito" data-part="mitochondria">Mitochondria</span>
+        <span class="legend-item legend-ribo" data-part="ribosome">Ribosomes</span>
+        <span class="legend-item legend-er" data-part="er">ER</span>
+      </div>
+    </div>
+
+    <center><a href="./" class="back-btn">Back to Discovery Zone</a></center>
+  </div>
+
+  <script>
+    const parts = document.querySelectorAll('.cell-part, .legend-item');
+    const infoPanels = document.querySelectorAll('.part-info');
+
+    parts.forEach(part => {
+      part.addEventListener('click', () => {
+        const partType = part.dataset.part;
+
+        // Hide all info panels
+        infoPanels.forEach(panel => panel.classList.remove('show'));
+
+        // Remove active from all parts
+        document.querySelectorAll('.cell-part').forEach(p => p.classList.remove('active'));
+
+        // Show selected info
+        const targetPanel = document.getElementById(partType + '-info');
+        if (targetPanel) {
+          targetPanel.classList.add('show');
+        } else {
+          document.getElementById('default-info').classList.add('show');
+        }
+
+        // Highlight matching cell parts
+        document.querySelectorAll(`.cell-part[data-part="${partType}"]`).forEach(p => {
+          p.classList.add('active');
+        });
+      });
+    });
+  </script>
+<!-- Restore nav after main JS runs -->
+<script>
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483646!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;border-bottom:1px solid rgba(0,255,255,0.2)!important;padding:8px 16px!important;min-height:44px!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 2px 10px rgba(0,0,0,0.5)!important;backdrop-filter:blur(10px)!important;';
+      nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex!important;font-size:16px!important;font-weight:700!important;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3)!important;text-decoration:none!important;">Patient Analog</a><div class="nav-links" style="display:flex!important;gap:8px!important;margin-left:auto!important;"><a href="/portfolio" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Portfolio</a><a href="/research" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Research</a><a href="/haptic" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Haptic</a><a href="/games" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Games</a><a href="/legal" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Legal</a></div>';
+    }
+  });
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

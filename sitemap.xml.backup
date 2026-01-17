@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Site Pages -->
+  <url><loc>https://patientanalog.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://patientanalog.com/games</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://patientanalog.com/simulations</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://patientanalog.com/portfolio</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/portfolio-assets</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/science</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/technology</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/news</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/companies</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/regulatory</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/market</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/glossary</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/haptic</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://patientanalog.com/intelligence</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/resources</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/framework</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://patientanalog.com/models</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://patientanalog.com/kids</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/platform</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://patientanalog.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://patientanalog.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
+  <!-- Game Pages -->
+  <url><loc>https://patientanalog.com/games/synapse</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/games/lung-chip</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/games/dna-repair</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://patientanalog.com/games/ai-discovery</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>

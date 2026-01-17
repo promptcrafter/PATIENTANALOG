@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cell Defense | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --cyan: #00e5ff; --green: #00cc66; --red: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: system-ui, sans-serif; background: var(--bg); color: white; 
+      min-height: 100vh; padding: 20px; overflow: hidden;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 10px; text-align: center; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; text-align: center; }
+    
+    .controls { 
+      background: rgba(0,229,255,0.1); border: 2px solid var(--cyan); 
+      border-radius: 12px; padding: 15px; margin-bottom: 20px; text-align: center;
+    }
+    
+    .score-board { 
+      display: flex; justify-content: space-around; margin-bottom: 20px;
+      font-size: 1.3rem; font-weight: bold;
+    }
+    
+    /* Game Arena */
+    .arena {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: linear-gradient(180deg, #001428 0%, #000a14 100%);
+      border: 3px solid var(--cyan);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    /* Player Cell */
+    .player {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s;
+      filter: drop-shadow(0 0 10px var(--cyan));
+      z-index: 100;
+    }
+    
+    /* Virus */
+    .virus {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: virus-float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px var(--red));
+    }
+    
+    @keyframes virus-float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(180deg); }
+    }
+    
+    /* Antibody Projectile */
+    .antibody {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 8px var(--green));
+      z-index: 50;
+    }
+    
+    /* Explosion */
+    .explosion {
+      position: absolute;
+      font-size: 48px;
+      animation: explode 0.5s ease-out;
+      pointer-events: none;
+      z-index: 200;
+    }
+    
+    @keyframes explode {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    
+    .message { 
+      text-align: center; font-size: 20px; font-weight: bold;
+      min-height: 30px;
+    }
+    
+    .hint {
+      text-align: center; color: #666; font-size: 13px; margin-top: 10px;
+      padding: 10px; background: rgba(0,0,0,0.5); border-radius: 8px;
+    }
+    
+    .game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.9);
+      padding: 40px;
+      border-radius: 20px;
+      border: 3px solid var(--cyan);
+      text-align: center;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .game-over.show { display: block; }
+    
+    .restart-btn {
+      margin-top: 20px;
+      padding: 15px 40px;
+      font-size: 18px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .restart-btn:hover {
+      background: var(--cyan);
+      transform: scale(1.1);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+  <div class="container">
+    <h1>🦠 CELL DEFENSE</h1>
+    <p class="subtitle">Defend the cell! Destroy viruses before they reach you!</p>
+    
+    <div class="controls">
+      ⌨️ <strong>WASD</strong> or <strong>ARROW KEYS</strong> to move • <strong>SPACEBAR</strong> to shoot antibodies<br>
+      🖱️ <strong>CLICK anywhere</strong> to shoot in that direction
+    </div>
+    
+    <div class="score-board">
+      <div>
+        <div style="color: var(--green);" id="score">0</div>
+        <div style="font-size: 11px; color: #666;">SCORE</div>
+      </div>
+      <div>
+        <div style="color: var(--red);" id="virusCount">0</div>
+        <div style="font-size: 11px; color: #666;">DESTROYED</div>
+      </div>
+      <div>
+        <div style="color: var(--cyan);" id="health">100</div>
+        <div style="font-size: 11px; color: #666;">HEALTH</div>
+      </div>
+    </div>
+    
+    <div class="arena" id="arena">
+      <div class="player" id="player">⚪</div>
+      
+      <div class="game-over" id="gameOver">
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">💀 GAME OVER 💀</h2>
+        <div style="font-size: 24px; color: var(--cyan);">Final Score: <span id="finalScore">0</span></div>
+        <div style="font-size: 18px; color: #888; margin-top: 10px;">Viruses Destroyed: <span id="finalVirus">0</span></div>
+        <button class="restart-btn" onclick="restartGame()">🔄 PLAY AGAIN</button>
+      </div>
+    </div>
+    
+    <div class="message" id="message" style="color: var(--cyan);">Move with WASD/Arrows • Shoot with SPACEBAR or CLICK!</div>
+    <div class="hint">💡 Destroy viruses before they reach you! Each hit = -10 health!</div>
+  </div>
+
+  <script>
+    const arena = document.getElementById('arena');
+    const player = document.getElementById('player');
+    const gameOverScreen = document.getElementById('gameOver');
+    
+    // Game state
+    let gameActive = true;
+    let score = 0;
+    let virusesDestroyed = 0;
+    let health = 100;
+    let playerX = 50; // percent
+    let playerY = 80; // percent
+    let viruses = [];
+    let antibodies = [];
+    let keys = {};
+    
+    // Player movement
+    const playerSpeed = 2;
+    
+    function updatePlayerPosition() {
+      if (!gameActive) return;
+      
+      if (keys['ArrowLeft'] || keys['a'] || keys['A']) playerX -= playerSpeed;
+      if (keys['ArrowRight'] || keys['d'] || keys['D']) playerX += playerSpeed;
+      if (keys['ArrowUp'] || keys['w'] || keys['W']) playerY -= playerSpeed;
+      if (keys['ArrowDown'] || keys['s'] || keys['S']) playerY += playerSpeed;
+      
+      // Boundaries
+      playerX = Math.max(5, Math.min(95, playerX));
+      playerY = Math.max(5, Math.min(95, playerY));
+      
+      player.style.left = playerX + '%';
+      player.style.top = playerY + '%';
+    }
+    
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      keys[e.key] = true;
+      
+      // Spacebar to shoot
+      if (e.key === ' ') {
+        shootAntibody(0, -1); // Shoot up
+        e.preventDefault();
+      }
+    });
+    
+    document.addEventListener('keyup', (e) => {
+      keys[e.key] = false;
+    });
+    
+    // Click to shoot
+    arena.addEventListener('click', (e) => {
+      if (!gameActive) return;
+      
+      const arenaRect = arena.getBoundingClientRect();
+      const clickX = ((e.clientX - arenaRect.left) / arenaRect.width) * 100;
+      const clickY = ((e.clientY - arenaRect.top) / arenaRect.height) * 100;
+      
+      // Calculate direction
+      const dx = clickX - playerX;
+      const dy = clickY - playerY;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      
+      shootAntibody(dx / length, dy / length);
+    });
+    
+    // Shoot antibody
+    function shootAntibody(dirX, dirY) {
+      const antibody = document.createElement('div');
+      antibody.className = 'antibody';
+      antibody.textContent = '💚'; // GREEN HEART antibody
+      antibody.style.left = playerX + '%';
+      antibody.style.top = playerY + '%';
+      
+      arena.appendChild(antibody);
+      
+      antibodies.push({
+        element: antibody,
+        x: playerX,
+        y: playerY,
+        dx: dirX * 3,
+        dy: dirY * 3
+      });
+    }
+    
+    // Spawn virus
+    function spawnVirus() {
+      if (!gameActive) return;
+      
+      const virus = document.createElement('div');
+      virus.className = 'virus';
+      virus.textContent = ['☣️', '🦠', '🔴', '⚠️'][Math.floor(Math.random() * 4)]; // UNIQUE virus types
+      
+      const x = Math.random() * 90 + 5;
+      virus.style.left = x + '%';
+      virus.style.top = '-10%';
+      
+      arena.appendChild(virus);
+      
+      viruses.push({
+        element: virus,
+        x: x,
+        y: -10,
+        speed: 0.3 + Math.random() * 0.5
+      });
+    }
+    
+    // Game loop
+    function gameLoop() {
+      if (!gameActive) return;
+      
+      updatePlayerPosition();
+      
+      // Move viruses
+      viruses.forEach((virus, i) => {
+        virus.y += virus.speed;
+        virus.element.style.top = virus.y + '%';
+        
+        // Check if virus hit player
+        const dist = Math.sqrt(
+          Math.pow(virus.x - playerX, 2) + 
+          Math.pow(virus.y - playerY, 2)
+        );
+        
+        if (dist < 8) {
+          health -= 10;
+          document.getElementById('health').textContent = health;
+          showExplosion(virus.x, virus.y, '💥');
+          virus.element.remove();
+          viruses.splice(i, 1);
+          
+          if (health <= 0) {
+            gameOver();
+          }
+        }
+        
+        // Remove if off screen
+        if (virus.y > 105) {
+          virus.element.remove();
+          viruses.splice(i, 1);
+        }
+      });
+      
+      // Move antibodies
+      antibodies.forEach((ab, i) => {
+        ab.x += ab.dx;
+        ab.y += ab.dy;
+        ab.element.style.left = ab.x + '%';
+        ab.element.style.top = ab.y + '%';
+        
+        // Check collision with viruses
+        viruses.forEach((virus, vi) => {
+          const dist = Math.sqrt(
+            Math.pow(virus.x - ab.x, 2) + 
+            Math.pow(virus.y - ab.y, 2)
+          );
+          
+          if (dist < 5) {
+            score += 10;
+            virusesDestroyed++;
+            document.getElementById('score').textContent = score;
+            document.getElementById('virusCount').textContent = virusesDestroyed;
+            
+            showExplosion(virus.x, virus.y, '✨');
+            
+            virus.element.remove();
+            viruses.splice(vi, 1);
+            ab.element.remove();
+            antibodies.splice(i, 1);
+          }
+        });
+        
+        // Remove if off screen
+        if (ab.x < -5 || ab.x > 105 || ab.y < -5 || ab.y > 105) {
+          ab.element.remove();
+          antibodies.splice(i, 1);
+        }
+      });
+      
+      requestAnimationFrame(gameLoop);
+    }
+    
+    function showExplosion(x, y, emoji) {
+      const exp = document.createElement('div');
+      exp.className = 'explosion';
+      exp.textContent = emoji;
+      exp.style.left = x + '%';
+      exp.style.top = y + '%';
+      arena.appendChild(exp);
+      
+      setTimeout(() => exp.remove(), 500);
+    }
+    
+    function gameOver() {
+      gameActive = false;
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('finalVirus').textContent = virusesDestroyed;
+      gameOverScreen.classList.add('show');
+    }
+    
+    function restartGame() {
+      // Clear everything
+      viruses.forEach(v => v.element.remove());
+      antibodies.forEach(a => a.element.remove());
+      viruses = [];
+      antibodies = [];
+      
+      // Reset state
+      gameActive = true;
+      score = 0;
+      virusesDestroyed = 0;
+      health = 100;
+      playerX = 50;
+      playerY = 80;
+      
+      document.getElementById('score').textContent = score;
+      document.getElementById('virusCount').textContent = virusesDestroyed;
+      document.getElementById('health').textContent = health;
+      
+      player.style.left = playerX + '%';
+      player.style.top = playerY + '%';
+      
+      gameOverScreen.classList.remove('show');
+      
+      gameLoop();
+    }
+    
+    // Initialize
+    player.style.left = playerX + '%';
+    player.style.top = playerY + '%';
+    
+    // Start spawning viruses
+    setInterval(() => {
+      if (gameActive) spawnVirus();
+    }, 2000);
+    
+    // Start game loop
+    gameLoop();
+  </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

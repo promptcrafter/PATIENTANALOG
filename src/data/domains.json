@@ -1,0 +1,283 @@
+{
+  "meta": {
+    "totalDomains": 149,
+    "lastUpdated": "2026-01-09",
+    "contactMethod": "Sedo Marketplace",
+    "legalNotice": "Generic scientific terminology from NIH, FDA, NCATS regulatory documentation."
+  },
+  "categories": [
+    {
+      "id": "patient-simulation",
+      "name": "Patient Simulation & Digital Twins",
+      "description": "Whole-patient simulation and personalized medicine infrastructure",
+      "domains": [
+        { "domain": "patientanalog.com", "tier": "flagship", "label": "Patient Analog" },
+        { "domain": "patientdigitaltwin.app", "tier": "strategic", "label": "Patient Digital Twin" },
+        { "domain": "patienttwin.app", "tier": "strategic", "label": "Patient Twin" },
+        { "domain": "digitaltwinhuman.com", "tier": "strategic", "label": "Digital Twin Human" },
+        { "domain": "digitaltwinbio.com", "tier": "standard", "label": "Digital Twin Bio" },
+        { "domain": "drugdigitaltwin.com", "tier": "standard", "label": "Drug Digital Twin" },
+        { "domain": "genomedigitaltwin.com", "tier": "standard", "label": "Genome Digital Twin" },
+        { "domain": "genetwin.com", "tier": "standard", "label": "Gene Twin" },
+        { "domain": "heartdigitaltwin.com", "tier": "strategic", "label": "Heart Digital Twin" },
+        { "domain": "liverdigitaltwin.com", "tier": "strategic", "label": "Liver Digital Twin" },
+        { "domain": "kidneydigitaltwin.com", "tier": "strategic", "label": "Kidney Digital Twin" }
+      ]
+    },
+    {
+      "id": "organ-on-chip",
+      "name": "Organ-on-Chip & MPS Platforms",
+      "description": "Microphysiological systems and tissue engineering platforms",
+      "domains": [
+        { "domain": "humanonchip.com", "tier": "strategic", "label": "Human-on-Chip" },
+        { "domain": "humanmps.com", "tier": "strategic", "label": "Human MPS" },
+        { "domain": "humanmps.io", "tier": "standard", "label": "Human MPS IO" },
+        { "domain": "biomps.com", "tier": "standard", "label": "Bio MPS" },
+        { "domain": "tissuechip.com", "tier": "strategic", "label": "Tissue Chip" },
+        { "domain": "tissuechips.com", "tier": "standard", "label": "Tissue Chips" },
+        { "domain": "tissueonchip.com", "tier": "strategic", "label": "Tissue-on-Chip" },
+        { "domain": "tissueonchip.io", "tier": "standard", "label": "Tissue-on-Chip IO" },
+        { "domain": "microphysio.com", "tier": "standard", "label": "Microphysio" },
+        { "domain": "cellonchip.com", "tier": "standard", "label": "Cell-on-Chip" },
+        { "domain": "cellchip.app", "tier": "standard", "label": "Cell Chip" },
+        { "domain": "lungchip.com", "tier": "strategic", "label": "Lung Chip" },
+        { "domain": "kidneychip.com", "tier": "strategic", "label": "Kidney Chip" },
+        { "domain": "dilichip.com", "tier": "standard", "label": "DILI Chip" },
+        { "domain": "admechip.com", "tier": "standard", "label": "ADME Chip" },
+        { "domain": "neurochip.app", "tier": "standard", "label": "Neuro Chip" },
+        { "domain": "synapchip.com", "tier": "standard", "label": "Synap Chip" },
+        { "domain": "biohybridchip.com", "tier": "standard", "label": "Biohybrid Chip" },
+        { "domain": "emulationchip.com", "tier": "standard", "label": "Emulation Chip" },
+        { "domain": "emulatorchip.com", "tier": "standard", "label": "Emulator Chip" }
+      ]
+    },
+    {
+      "id": "organoids",
+      "name": "Organoid Medicine",
+      "description": "Patient-derived 3D cellular models and applications",
+      "domains": [
+        { "domain": "organoidmedicine.com", "tier": "strategic", "label": "Organoid Medicine" },
+        { "domain": "organoids.app", "tier": "strategic", "label": "Organoids App" }
+      ]
+    },
+    {
+      "id": "ai-computational",
+      "name": "AI & Computational Biology",
+      "description": "Machine learning platforms for drug discovery",
+      "domains": [
+        { "domain": "biocomputeai.com", "tier": "strategic", "label": "BioCompute AI" },
+        { "domain": "biocircuitai.com", "tier": "standard", "label": "BioCircuit AI" },
+        { "domain": "biologyfirstai.com", "tier": "standard", "label": "Biology First AI" },
+        { "domain": "biologyfirstai.app", "tier": "standard", "label": "Biology First AI App" },
+        { "domain": "biologyfirst.app", "tier": "standard", "label": "Biology First" },
+        { "domain": "braincomputerai.com", "tier": "standard", "label": "Brain Computer AI" },
+        { "domain": "clinicaldocai.com", "tier": "standard", "label": "Clinical Doc AI" },
+        { "domain": "clinicaldoc.app", "tier": "standard", "label": "Clinical Doc App" },
+        { "domain": "medicalaiplatform.com", "tier": "standard", "label": "Medical AI Platform" },
+        { "domain": "neuralchipai.com", "tier": "standard", "label": "Neural Chip AI" },
+        { "domain": "omniomicsai.com", "tier": "standard", "label": "OmniOmics AI" },
+        { "domain": "quantumdrugdiscovery.com", "tier": "strategic", "label": "Quantum Drug Discovery" },
+        { "domain": "quantummolsim.com", "tier": "standard", "label": "Quantum Mol Sim" }
+      ]
+    },
+    {
+      "id": "cell-gene-therapy",
+      "name": "Cell & Gene Therapy",
+      "description": "Advanced therapeutics and regenerative medicine",
+      "domains": [
+        { "domain": "celltherapy.app", "tier": "strategic", "label": "Cell Therapy" },
+        { "domain": "celltherapybiobank.com", "tier": "standard", "label": "Cell Therapy BioBank" },
+        { "domain": "therapeuticbiobank.com", "tier": "standard", "label": "Therapeutic BioBank" },
+        { "domain": "geneediting.app", "tier": "strategic", "label": "Gene Editing" },
+        { "domain": "regenerativemed.app", "tier": "standard", "label": "Regenerative Med" },
+        { "domain": "syntheticbiology.app", "tier": "standard", "label": "Synthetic Biology" },
+        { "domain": "synthbiox.com", "tier": "standard", "label": "SynthBioX" },
+        { "domain": "cellularfermentation.com", "tier": "standard", "label": "Cellular Fermentation" },
+        { "domain": "bioprintcore.com", "tier": "standard", "label": "BioPrint Core" }
+      ]
+    },
+    {
+      "id": "immunology",
+      "name": "Immunology & T-Cell Platforms",
+      "description": "Immune cell engineering and immunotherapy",
+      "domains": [
+        { "domain": "tcellengager.com", "tier": "strategic", "label": "T-Cell Engager" },
+        { "domain": "tcellbio.com", "tier": "standard", "label": "T-Cell Bio" },
+        { "domain": "tcellai.com", "tier": "standard", "label": "T-Cell AI" },
+        { "domain": "tcellrx.com", "tier": "standard", "label": "T-Cell Rx" },
+        { "domain": "tcellvault.com", "tier": "standard", "label": "T-Cell Vault" },
+        { "domain": "immuncore.com", "tier": "strategic", "label": "ImmunCore" },
+        { "domain": "antigencore.com", "tier": "standard", "label": "Antigen Core" },
+        { "domain": "vaccinecore.com", "tier": "standard", "label": "Vaccine Core" },
+        { "domain": "allergenless.com", "tier": "standard", "label": "Allergenless" }
+      ]
+    },
+    {
+      "id": "rna-therapeutics",
+      "name": "RNA & Nucleic Acid Therapeutics",
+      "description": "Next-generation RNA platforms and modifications",
+      "domains": [
+        { "domain": "rna0.com", "tier": "flagship", "label": "RNA Zero" },
+        { "domain": "nextgenrna.com", "tier": "strategic", "label": "NextGen RNA" },
+        { "domain": "selfamplifying.com", "tier": "standard", "label": "Self Amplifying" },
+        { "domain": "mrnamodification.com", "tier": "standard", "label": "mRNA Modification" },
+        { "domain": "epitranscript.com", "tier": "standard", "label": "Epitranscript" }
+      ]
+    },
+    {
+      "id": "liquid-biopsy",
+      "name": "Liquid Biopsy & Diagnostics",
+      "description": "Non-invasive cancer detection and monitoring",
+      "domains": [
+        { "domain": "circdna.com", "tier": "strategic", "label": "CircDNA" },
+        { "domain": "circulatingdna.com", "tier": "standard", "label": "Circulating DNA" },
+        { "domain": "circulatingtumordna.com", "tier": "standard", "label": "ctDNA" },
+        { "domain": "drugscreening.app", "tier": "standard", "label": "Drug Screening" }
+      ]
+    },
+    {
+      "id": "metabolic",
+      "name": "Metabolic Biomarkers & Therapeutics",
+      "description": "Adipokines, hormones, and metabolic targets",
+      "domains": [
+        { "domain": "glp1bio.com", "tier": "strategic", "label": "GLP-1 Bio" },
+        { "domain": "incretinclinic.com", "tier": "standard", "label": "Incretin Clinic" },
+        { "domain": "incretinhealth.com", "tier": "standard", "label": "Incretin Health" },
+        { "domain": "senolytichealth.com", "tier": "standard", "label": "Senolytic Health" },
+        { "domain": "chemerin.com", "tier": "standard", "label": "Chemerin" },
+        { "domain": "omentin.com", "tier": "standard", "label": "Omentin" },
+        { "domain": "vaspin.com", "tier": "standard", "label": "Vaspin" },
+        { "domain": "neuropeptidey.com", "tier": "standard", "label": "Neuropeptide Y" },
+        { "domain": "heparan.com", "tier": "standard", "label": "Heparan" }
+      ]
+    },
+    {
+      "id": "neurotech",
+      "name": "Neurotechnology & Brain Research",
+      "description": "Neural interfaces and brain simulation",
+      "domains": [
+        { "domain": "brainrift.com", "tier": "strategic", "label": "Brain Rift" },
+        { "domain": "synaptrack.com", "tier": "standard", "label": "SynapTrack" },
+        { "domain": "memristorcore.com", "tier": "standard", "label": "Memristor Core" }
+      ]
+    },
+    {
+      "id": "emerging-tech",
+      "name": "Emerging Technology",
+      "description": "Blockchain, robotics, and next-gen platforms",
+      "domains": [
+        { "domain": "aitrustnetwork.com", "tier": "standard", "label": "AI Trust Network" },
+        { "domain": "chaingovern.com", "tier": "standard", "label": "Chain Govern" },
+        { "domain": "decentralauth.com", "tier": "standard", "label": "Decentral Auth" },
+        { "domain": "tokenlattice.com", "tier": "standard", "label": "Token Lattice" },
+        { "domain": "trustmetaid.com", "tier": "standard", "label": "TrustMeta ID" },
+        { "domain": "transformerasic.com", "tier": "standard", "label": "Transformer ASIC" },
+        { "domain": "swarmnano.com", "tier": "standard", "label": "Swarm Nano" },
+        { "domain": "orbitalpulse.com", "tier": "standard", "label": "Orbital Pulse" },
+        { "domain": "yieldbotics.com", "tier": "standard", "label": "Yield Botics" }
+      ]
+    },
+    {
+      "id": "robotics",
+      "name": "Robotics & Entertainment",
+      "description": "Humanoid robotics and emerging platforms",
+      "domains": [
+        { "domain": "humanoidbetting.com", "tier": "standard", "label": "Humanoid Betting" },
+        { "domain": "humanoidboxingleague.com", "tier": "standard", "label": "Humanoid Boxing League" },
+        { "domain": "robotgrandprix.com", "tier": "standard", "label": "Robot Grand Prix" }
+      ]
+    },
+    {
+      "id": "specialty",
+      "name": "Specialty & Niche",
+      "description": "Specialized scientific terminology",
+      "domains": [
+        { "domain": "5-plet.com", "tier": "standard", "label": "5-Plet" },
+        { "domain": "5plet.com", "tier": "standard", "label": "5Plet" },
+        { "domain": "breathingcrystal.com", "tier": "standard", "label": "Breathing Crystal" },
+        { "domain": "tridymite.com", "tier": "standard", "label": "Tridymite" }
+      ]
+    },
+    {
+      "id": "fragrance-botanical",
+      "name": "Fragrance & Botanical Extracts",
+      "description": "Premium botanical and aromatic compounds",
+      "domains": [
+        { "domain": "rosedamascena.com", "tier": "strategic", "label": "Rosa Damascena" },
+        { "domain": "damascenarose.com", "tier": "standard", "label": "Damascena Rose" },
+        { "domain": "roseisparta.com", "tier": "standard", "label": "Rose Isparta" },
+        { "domain": "rosetaif.com", "tier": "standard", "label": "Rose Taif" },
+        { "domain": "grassejasmin.com", "tier": "standard", "label": "Grasse Jasmin" },
+        { "domain": "grassejasmine.com", "tier": "standard", "label": "Grasse Jasmine" },
+        { "domain": "agarwoodextract.com", "tier": "standard", "label": "Agarwood Extract" },
+        { "domain": "oudextract.com", "tier": "standard", "label": "Oud Extract" },
+        { "domain": "oudreserve.com", "tier": "standard", "label": "Oud Reserve" },
+        { "domain": "vetiverroot.com", "tier": "standard", "label": "Vetiver Root" }
+      ]
+    },
+    {
+      "id": "arabic-idn",
+      "name": "Arabic IDN Premium Portfolio",
+      "description": "Internationalized domain names in Arabic script",
+      "domains": [
+        { "domain": "أموال.com", "tier": "flagship", "label": "Amwal (Money/Wealth)" },
+        { "domain": "مستقبل.com", "tier": "flagship", "label": "Mustaqbal (Future)" },
+        { "domain": "إدارة.com", "tier": "strategic", "label": "Idara (Management)" },
+        { "domain": "إمارة.com", "tier": "strategic", "label": "Imara (Emirate)" },
+        { "domain": "إنترنت.com", "tier": "strategic", "label": "Internet" },
+        { "domain": "حكمة.com", "tier": "strategic", "label": "Hikma (Wisdom)" },
+        { "domain": "مجتمع.com", "tier": "strategic", "label": "Mujtama (Community)" },
+        { "domain": "ملكة.com", "tier": "strategic", "label": "Malika (Queen)" },
+        { "domain": "ملكي.com", "tier": "strategic", "label": "Malaki (Royal)" },
+        { "domain": "سمو.com", "tier": "strategic", "label": "Sumuw (Highness)" },
+        { "domain": "شرف.com", "tier": "strategic", "label": "Sharaf (Honor)" },
+        { "domain": "روح.com", "tier": "strategic", "label": "Ruh (Spirit/Soul)" },
+        { "domain": "إيمان.com", "tier": "strategic", "label": "Iman (Faith)" },
+        { "domain": "قراءة.com", "tier": "standard", "label": "Qira'a (Reading)" },
+        { "domain": "نبأ.com", "tier": "standard", "label": "Naba (News)" },
+        { "domain": "ضوء.com", "tier": "standard", "label": "Daw (Light)" },
+        { "domain": "وجه.com", "tier": "standard", "label": "Wajh (Face)" },
+        { "domain": "جلد.com", "tier": "standard", "label": "Jild (Leather)" },
+        { "domain": "دهن.com", "tier": "standard", "label": "Duhn (Oil)" },
+        { "domain": "حرير.com", "tier": "strategic", "label": "Harir (Silk)" },
+        { "domain": "كشمير.com", "tier": "standard", "label": "Kashmir" },
+        { "domain": "ياقوت.com", "tier": "strategic", "label": "Yaqut (Ruby)" },
+        { "domain": "زمرد.com", "tier": "strategic", "label": "Zumurrud (Emerald)" },
+        { "domain": "لؤلؤ.com", "tier": "strategic", "label": "Lu'lu (Pearl)" },
+        { "domain": "بلاتين.com", "tier": "standard", "label": "Platinum" },
+        { "domain": "ألماسأزرق.com", "tier": "strategic", "label": "Blue Diamond" },
+        { "domain": "ألماسات.com", "tier": "strategic", "label": "Almasat (Diamonds)" },
+        { "domain": "أريج.com", "tier": "standard", "label": "Areej (Fragrance)" },
+        { "domain": "عبير.com", "tier": "standard", "label": "Abeer (Perfume)" },
+        { "domain": "سراب.com", "tier": "standard", "label": "Sarab (Mirage)" },
+        { "domain": "عودكينام.com", "tier": "standard", "label": "Oud Keenam" },
+        { "domain": "تركيه.com", "tier": "standard", "label": "Turkiye" },
+        { "domain": "اللامركزية.com", "tier": "standard", "label": "Decentralization" },
+        { "domain": "اللاركزة.com", "tier": "standard", "label": "Decentralized" },
+        { "domain": "المركزية.com", "tier": "standard", "label": "Centralization" }
+      ]
+    },
+    {
+      "id": "chinese-idn",
+      "name": "Chinese IDN Portfolio",
+      "description": "Internationalized domain names in Chinese script",
+      "domains": [
+        { "domain": "精准医疗.com", "tier": "flagship", "label": "Precision Medicine" },
+        { "domain": "免疫治疗.com", "tier": "strategic", "label": "Immunotherapy" },
+        { "domain": "神经芯片.com", "tier": "strategic", "label": "Neural Chip" }
+      ]
+    }
+  ],
+  "statistics": {
+    "byTier": {
+      "flagship": 4,
+      "strategic": 42,
+      "standard": 101
+    },
+    "byLanguage": {
+      "english": 109,
+      "arabic": 35,
+      "chinese": 3
+    }
+  }
+}

@@ -1,0 +1,2262 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORGANOID MEDICINE - Precision Drug Discovery Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #00ff88;
+            --secondary: #00d4ff;
+            --danger: #ff3366;
+            --warning: #ffaa00;
+            --purple: #9d00ff;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --glass: rgba(10, 20, 40, 0.85);
+            --glass-border: rgba(0, 255, 136, 0.3);
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* DNA Helix Background Pattern */
+        .dna-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0c8 10 8 20 0 30s-8 20 0 30' stroke='%2300ff88' fill='none' stroke-width='2'/%3E%3Cpath d='M30 0c-8 10-8 20 0 30s8 20 0 30' stroke='%2300d4ff' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        /* Main Container */
+        .game-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 70px 20px 20px 20px;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .game-title span {
+            font-size: 14px;
+            display: block;
+            background: none;
+            -webkit-text-fill-color: rgba(255,255,255,0.6);
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr 320px;
+            gap: 20px;
+            min-height: calc(100vh - 160px);
+        }
+
+        /* Panel Styles */
+        .panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Patient Panel */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(157, 0, 255, 0.2), rgba(0, 212, 255, 0.1));
+            border: 1px solid rgba(157, 0, 255, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .patient-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--secondary));
+        }
+
+        .patient-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--purple), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
+        }
+
+        .patient-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .patient-condition {
+            font-size: 14px;
+            color: var(--danger);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .patient-info {
+            display: grid;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .patient-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .patient-info-label {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .patient-info-value {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .urgency-bar {
+            margin-top: 15px;
+        }
+
+        .urgency-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .urgency-bar-track {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .urgency-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--warning), var(--danger));
+            border-radius: 4px;
+            transition: width 1s linear;
+        }
+
+        /* Mutations Display */
+        .mutations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .mutation-tag {
+            padding: 4px 10px;
+            background: rgba(255, 51, 102, 0.2);
+            border: 1px solid var(--danger);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--danger);
+        }
+
+        /* Center Panel - Lab */
+        .lab-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Organoid Display */
+        .organoid-chamber {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(15, 25, 35, 0.9), rgba(0, 10, 30, 0.95));
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .chamber-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .chamber-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+
+        .chamber-status {
+            font-size: 12px;
+            padding: 5px 12px;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            color: var(--primary);
+        }
+
+        #organoidCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Organoid Stats */
+        .organoid-stats {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), transparent);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .organoid-stat {
+            text-align: center;
+        }
+
+        .organoid-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .organoid-stat-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .organoid-stat-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .organoid-stat-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Control Buttons */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 15px 10px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .control-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.4), rgba(0, 212, 255, 0.2));
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .control-btn .icon {
+            font-size: 24px;
+        }
+
+        .control-btn.danger {
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.2), rgba(255, 51, 102, 0.1));
+            border-color: rgba(255, 51, 102, 0.4);
+        }
+
+        .control-btn.danger:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.4), rgba(255, 51, 102, 0.2));
+            border-color: var(--danger);
+            box-shadow: 0 5px 20px rgba(255, 51, 102, 0.3);
+        }
+
+        /* Drug Panel */
+        .drug-library {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .drug-library::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .drug-library::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+        }
+
+        .drug-library::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .drug-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid transparent;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drug-item:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--glass-border);
+        }
+
+        .drug-item.selected {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .drug-item.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .drug-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .drug-info {
+            flex: 1;
+        }
+
+        .drug-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .drug-type {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .drug-efficacy {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        /* Test Results */
+        .test-results {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-drug {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .result-bar {
+            width: 100px;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .result-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .result-bar-fill.excellent { background: var(--primary); }
+        .result-bar-fill.good { background: var(--secondary); }
+        .result-bar-fill.moderate { background: var(--warning); }
+        .result-bar-fill.poor { background: var(--danger); }
+
+        .result-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            width: 50px;
+            text-align: right;
+        }
+
+        .result-icon {
+            font-size: 16px;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            width: 100%;
+            padding: 15px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--primary), #00cc6a);
+            color: #000;
+            box-shadow: 0 5px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .action-btn.primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 35px rgba(0, 255, 136, 0.6);
+        }
+
+        .action-btn.secondary {
+            background: linear-gradient(135deg, var(--secondary), #0099cc);
+            color: #000;
+            box-shadow: 0 5px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Phase Indicator */
+        .phase-indicator {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .phase {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .phase.active {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .phase.completed {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--glass);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            max-width: 350px;
+        }
+
+        .notification.success { border-color: var(--primary); }
+        .notification.warning { border-color: var(--warning); }
+        .notification.error { border-color: var(--danger); }
+        .notification.info { border-color: var(--secondary); }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .notification-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Educational Tooltip */
+        .edu-tip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(157, 0, 255, 0.3), rgba(0, 212, 255, 0.2));
+            border: 1px solid var(--purple);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .edu-tip-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .edu-tip-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .edu-tip-dismiss {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .start-screen.hidden {
+            display: none;
+        }
+
+        .start-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.8)); }
+        }
+
+        .start-subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .start-btn {
+            padding: 20px 60px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.7);
+        }
+
+        .start-features {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .start-feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .start-feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .start-feature-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .result-screen.show {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .result-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .result-title.success { color: var(--primary); }
+        .result-title.failure { color: var(--danger); }
+
+        .result-details {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .result-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .result-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            color: var(--primary);
+        }
+
+        .result-stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+        }
+
+        /* Achievements Panel */
+        .achievements {
+            position: fixed;
+            top: 80px;
+            right: -350px;
+            width: 320px;
+            max-height: 80vh;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px 0 0 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 500;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .achievements.show {
+            right: 0;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item.unlocked {
+            opacity: 1;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .achievement-icon {
+            font-size: 30px;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .achievement-desc {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 20px;
+            animation: particleFade 1s ease-out forwards;
+        }
+
+        @keyframes particleFade {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-50px) scale(0.5); }
+        }
+
+        /* Combo Display */
+        .combo-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary);
+            z-index: 1000;
+            animation: comboAnim 0.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes comboAnim {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div class="bg-animation"></div>
+    <div class="dna-pattern"></div>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+        <div class="start-title">🧫 ORGANOID MEDICINE</div>
+        <div class="start-subtitle">Precision Drug Discovery Simulator</div>
+        <button class="start-btn" onclick="Game.start()">🔬 BEGIN RESEARCH</button>
+        <div class="start-features">
+            <div class="start-feature">
+                <div class="start-feature-icon">🧬</div>
+                <div class="start-feature-text">Grow Patient<br>Organoids</div>
+            </div>
+            <div class="start-feature">
+                <div class="start-feature-icon">💊</div>
+                <div class="start-feature-text">Test 20+<br>Drug Compounds</div>
+            </div>
+            <div class="start-feature">
+                <div class="start-feature-icon">🎯</div>
+                <div class="start-feature-text">Personalized<br>Treatment</div>
+            </div>
+            <div class="start-feature">
+                <div class="start-feature-icon">🏆</div>
+                <div class="start-feature-text">Save Lives<br>Earn Reputation</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div class="result-screen" id="resultScreen">
+        <div class="result-icon" id="resultIcon">🎉</div>
+        <div class="result-title success" id="resultTitle">PATIENT CURED!</div>
+        <div class="result-details" id="resultDetails">
+            Your treatment recommendation was successful. The patient is responding well to therapy.
+        </div>
+        <div class="result-stats">
+            <div class="result-stat">
+                <div class="result-stat-value" id="resultScore">0</div>
+                <div class="result-stat-label">Points Earned</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value" id="resultAccuracy">0%</div>
+                <div class="result-stat-label">Treatment Match</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value" id="resultTime">0:00</div>
+                <div class="result-stat-label">Time Taken</div>
+            </div>
+        </div>
+        <button class="start-btn" onclick="Game.nextPatient()">🔬 NEXT PATIENT</button>
+    </div>
+
+    <!-- Main Game -->
+    <div class="game-container">
+        <header class="game-header">
+            <div class="game-title">
+                🧫 ORGANOID MEDICINE
+                <span>Precision Drug Discovery Lab</span>
+            </div>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="scoreDisplay">0</div>
+                    <div class="stat-label">Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="repDisplay">50</div>
+                    <div class="stat-label">Reputation</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="patientsDisplay">0</div>
+                    <div class="stat-label">Patients Cured</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="streakDisplay">0</div>
+                    <div class="stat-label">Win Streak</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="phase-indicator">
+            <div class="phase" id="phase1">1. PATIENT</div>
+            <div class="phase" id="phase2">2. CULTIVATE</div>
+            <div class="phase" id="phase3">3. TEST DRUGS</div>
+            <div class="phase" id="phase4">4. TREAT</div>
+        </div>
+
+        <div class="game-grid">
+            <!-- Left Panel - Patient -->
+            <div class="panel" id="patientPanel">
+                <div class="panel-title">👤 Current Patient</div>
+                <div class="patient-card" id="patientCard">
+                    <div class="patient-avatar" id="patientAvatar">👩</div>
+                    <div class="patient-name" id="patientName">Loading...</div>
+                    <div class="patient-condition" id="patientCondition">Awaiting patient</div>
+                    <div class="patient-info">
+                        <div class="patient-info-row">
+                            <span class="patient-info-label">Age</span>
+                            <span class="patient-info-value" id="patientAge">--</span>
+                        </div>
+                        <div class="patient-info-row">
+                            <span class="patient-info-label">Stage</span>
+                            <span class="patient-info-value" id="patientStage">--</span>
+                        </div>
+                        <div class="patient-info-row">
+                            <span class="patient-info-label">Organoid Type</span>
+                            <span class="patient-info-value" id="patientOrganoid">--</span>
+                        </div>
+                        <div class="patient-info-row">
+                            <span class="patient-info-label">Best Match</span>
+                            <span class="patient-info-value" id="patientBestDrug">???</span>
+                        </div>
+                    </div>
+                    <div class="urgency-bar">
+                        <div class="urgency-bar-label">
+                            <span>⏱️ Time Remaining</span>
+                            <span id="urgencyTime">5:00</span>
+                        </div>
+                        <div class="urgency-bar-track">
+                            <div class="urgency-bar-fill" id="urgencyFill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="mutations" id="mutationTags">
+                        <!-- Mutation tags appear here -->
+                    </div>
+                </div>
+
+                <button class="action-btn secondary" onclick="Game.newPatient()" id="newPatientBtn">
+                    📋 NEW PATIENT
+                </button>
+            </div>
+
+            <!-- Center Panel - Lab -->
+            <div class="lab-area">
+                <div class="panel" style="flex: 1; display: flex; flex-direction: column;">
+                    <div class="panel-title">🔬 Organoid Culture Chamber</div>
+                    <div class="organoid-chamber" id="organoidChamber">
+                        <div class="chamber-header">
+                            <span class="chamber-title">INCUBATION UNIT</span>
+                            <span class="chamber-status" id="chamberStatus">STANDBY</span>
+                        </div>
+                        <canvas id="organoidCanvas"></canvas>
+                        <div class="organoid-stats">
+                            <div class="organoid-stat">
+                                <div class="organoid-stat-value" id="orgHealth">0%</div>
+                                <div class="organoid-stat-label">Health</div>
+                                <div class="organoid-stat-bar"><div class="organoid-stat-bar-fill" id="orgHealthBar" style="width: 0%"></div></div>
+                            </div>
+                            <div class="organoid-stat">
+                                <div class="organoid-stat-value" id="orgSize">0mm</div>
+                                <div class="organoid-stat-label">Size</div>
+                                <div class="organoid-stat-bar"><div class="organoid-stat-bar-fill" id="orgSizeBar" style="width: 0%; background: var(--secondary);"></div></div>
+                            </div>
+                            <div class="organoid-stat">
+                                <div class="organoid-stat-value" id="orgMaturity">0%</div>
+                                <div class="organoid-stat-label">Maturity</div>
+                                <div class="organoid-stat-bar"><div class="organoid-stat-bar-fill" id="orgMaturityBar" style="width: 0%; background: var(--purple);"></div></div>
+                            </div>
+                            <div class="organoid-stat">
+                                <div class="organoid-stat-value" id="orgQuality">0</div>
+                                <div class="organoid-stat-label">Quality</div>
+                                <div class="organoid-stat-bar"><div class="organoid-stat-bar-fill" id="orgQualityBar" style="width: 0%; background: var(--warning);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controls" id="cultureControls">
+                        <button class="control-btn" onclick="Game.feedOrganoid()" id="btnFeed">
+                            <span class="icon">🧪</span>
+                            Nutrients
+                        </button>
+                        <button class="control-btn" onclick="Game.oxygenate()" id="btnOxygen">
+                            <span class="icon">💨</span>
+                            Oxygen
+                        </button>
+                        <button class="control-btn" onclick="Game.stimulate()" id="btnStimulate">
+                            <span class="icon">⚡</span>
+                            Stimulate
+                        </button>
+                        <button class="control-btn" onclick="Game.adjustTemp()" id="btnTemp">
+                            <span class="icon">🌡️</span>
+                            Temp 37°C
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Drugs -->
+            <div class="panel" id="drugPanel">
+                <div class="panel-title">💊 Drug Compounds</div>
+                <div class="drug-library" id="drugLibrary">
+                    <!-- Drugs populated by JS -->
+                </div>
+
+                <button class="action-btn primary" onclick="Game.testDrug()" id="testDrugBtn" disabled>
+                    🧪 TEST SELECTED DRUG
+                </button>
+
+                <div class="test-results" id="testResults">
+                    <div class="panel-title" style="margin-top: 0;">📊 Test Results</div>
+                    <div id="resultsContainer">
+                        <p style="color: rgba(255,255,255,0.4); text-align: center; font-size: 13px;">No tests yet</p>
+                    </div>
+                </div>
+
+                <button class="action-btn primary" onclick="Game.recommendTreatment()" id="recommendBtn" disabled style="margin-top: 15px;">
+                    🎯 RECOMMEND TREATMENT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer"></div>
+
+    <!-- Educational Tips Container -->
+    <div id="eduTipContainer"></div>
+
+    <!-- Achievements Panel -->
+    <div class="achievements" id="achievementsPanel">
+        <div class="panel-title">🏆 Achievements</div>
+        <div id="achievementsList"></div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════════════
+        // ORGANOID MEDICINE - GAME ENGINE
+        // ═══════════════════════════════════════════════════════════════════════
+
+        const Game = {
+            // Game State
+            state: {
+                score: 0,
+                reputation: 50,
+                patientsCured: 0,
+                streak: 0,
+                currentPhase: 0,
+                gameStarted: false,
+                startTime: null,
+
+                // Current patient
+                patient: null,
+
+                // Organoid
+                organoid: {
+                    health: 0,
+                    size: 0,
+                    maturity: 0,
+                    quality: 0,
+                    oxygen: 50,
+                    nutrients: 50,
+                    temperature: 37,
+                    growing: false
+                },
+
+                // Drug testing
+                selectedDrug: null,
+                testedDrugs: [],
+                testResults: {},
+
+                // Timer
+                timeRemaining: 300,
+                timerInterval: null,
+
+                // Achievements
+                achievements: new Set()
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // DATA
+            // ═══════════════════════════════════════════════════════════
+
+            patients: {
+                firstNames: ['Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'William', 'Sophia', 'James', 'Isabella', 'Oliver', 'Mia', 'Benjamin', 'Charlotte', 'Elijah', 'Amelia', 'Lucas', 'Harper', 'Mason', 'Evelyn', 'Logan'],
+                lastNames: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Chen', 'Kim', 'Patel', 'Singh', 'Nguyen', 'Lee', 'Wang', 'Ali', 'Anderson', 'Taylor'],
+                avatars: ['👩', '👨', '👩‍🦰', '👨‍🦱', '👩‍🦳', '👨‍🦳', '👴', '👵', '🧑', '👱‍♀️', '👱', '🧔', '👩‍🦲', '🧑‍🦰'],
+                conditions: [
+                    { name: 'Breast Cancer', type: 'tumor', icon: '🎀', mutations: ['BRCA1', 'HER2+', 'ER+'], bestDrugs: ['tamoxifen', 'herceptin', 'doxorubicin'] },
+                    { name: 'Lung Cancer', type: 'lung', icon: '🫁', mutations: ['EGFR', 'ALK', 'KRAS'], bestDrugs: ['gefitinib', 'crizotinib', 'pembrolizumab'] },
+                    { name: 'Colorectal Cancer', type: 'tumor', icon: '🔴', mutations: ['KRAS', 'BRAF', 'MSI-H'], bestDrugs: ['cetuximab', 'bevacizumab', 'fluorouracil'] },
+                    { name: 'Liver Disease', type: 'liver', icon: '🟤', mutations: ['CYP2D6', 'UGT1A1'], bestDrugs: ['sofosbuvir', 'ursodiol', 'rifaximin'] },
+                    { name: 'Parkinson\'s Disease', type: 'brain', icon: '🧠', mutations: ['LRRK2', 'GBA', 'SNCA'], bestDrugs: ['levodopa', 'pramipexole', 'rasagiline'] },
+                    { name: 'Kidney Disease', type: 'kidney', icon: '🫘', mutations: ['PKD1', 'APOL1'], bestDrugs: ['tolvaptan', 'lisinopril', 'erythropoietin'] },
+                    { name: 'Heart Failure', type: 'heart', icon: '🫀', mutations: ['TTN', 'MYH7', 'LMNA'], bestDrugs: ['entresto', 'metoprolol', 'digoxin'] },
+                    { name: 'Leukemia', type: 'blood', icon: '🩸', mutations: ['BCR-ABL', 'FLT3', 'NPM1'], bestDrugs: ['imatinib', 'dasatinib', 'midostaurin'] }
+                ]
+            },
+
+            drugs: [
+                { id: 'tamoxifen', name: 'Tamoxifen', type: 'Hormone Therapy', icon: '💊', color: '#ff69b4', efficacy: 75, toxicity: 15, targets: ['BRCA1', 'ER+'] },
+                { id: 'herceptin', name: 'Herceptin', type: 'Targeted Therapy', icon: '🎯', color: '#00d4ff', efficacy: 85, toxicity: 20, targets: ['HER2+'] },
+                { id: 'doxorubicin', name: 'Doxorubicin', type: 'Chemotherapy', icon: '☠️', color: '#ff3366', efficacy: 70, toxicity: 45, targets: ['BRCA1', 'tumor'] },
+                { id: 'gefitinib', name: 'Gefitinib', type: 'EGFR Inhibitor', icon: '🔬', color: '#9d00ff', efficacy: 80, toxicity: 25, targets: ['EGFR'] },
+                { id: 'pembrolizumab', name: 'Keytruda', type: 'Immunotherapy', icon: '🛡️', color: '#00ff88', efficacy: 65, toxicity: 30, targets: ['PD-L1', 'MSI-H'] },
+                { id: 'imatinib', name: 'Gleevec', type: 'Kinase Inhibitor', icon: '⚡', color: '#ffaa00', efficacy: 90, toxicity: 20, targets: ['BCR-ABL'] },
+                { id: 'cetuximab', name: 'Erbitux', type: 'Monoclonal Ab', icon: '🧬', color: '#00d4ff', efficacy: 60, toxicity: 35, targets: ['EGFR', 'KRAS'] },
+                { id: 'bevacizumab', name: 'Avastin', type: 'Anti-Angiogenic', icon: '🩸', color: '#ff6b6b', efficacy: 55, toxicity: 40, targets: ['VEGF'] },
+                { id: 'levodopa', name: 'Levodopa', type: 'Dopamine Precursor', icon: '🧠', color: '#9d00ff', efficacy: 85, toxicity: 15, targets: ['LRRK2', 'SNCA'] },
+                { id: 'sofosbuvir', name: 'Sovaldi', type: 'Antiviral', icon: '🦠', color: '#00ff88', efficacy: 95, toxicity: 10, targets: ['HCV', 'liver'] },
+                { id: 'entresto', name: 'Entresto', type: 'Heart Failure', icon: '❤️', color: '#ff3366', efficacy: 80, toxicity: 20, targets: ['TTN', 'heart'] },
+                { id: 'tolvaptan', name: 'Jynarque', type: 'V2 Antagonist', icon: '💧', color: '#00d4ff', efficacy: 70, toxicity: 25, targets: ['PKD1', 'kidney'] },
+                { id: 'crizotinib', name: 'Xalkori', type: 'ALK Inhibitor', icon: '🎯', color: '#ff69b4', efficacy: 75, toxicity: 30, targets: ['ALK'] },
+                { id: 'dasatinib', name: 'Sprycel', type: 'Kinase Inhibitor', icon: '⚡', color: '#ffaa00', efficacy: 85, toxicity: 35, targets: ['BCR-ABL', 'blood'] },
+                { id: 'pramipexole', name: 'Mirapex', type: 'Dopamine Agonist', icon: '🧠', color: '#9d00ff', efficacy: 70, toxicity: 20, targets: ['GBA', 'brain'] },
+                { id: 'metoprolol', name: 'Lopressor', type: 'Beta Blocker', icon: '❤️', color: '#ff6b6b', efficacy: 65, toxicity: 15, targets: ['heart', 'MYH7'] },
+                { id: 'fluorouracil', name: '5-FU', type: 'Antimetabolite', icon: '☠️', color: '#ff3366', efficacy: 60, toxicity: 50, targets: ['tumor', 'BRAF'] },
+                { id: 'lisinopril', name: 'Zestril', type: 'ACE Inhibitor', icon: '💧', color: '#00d4ff', efficacy: 70, toxicity: 15, targets: ['APOL1', 'kidney'] },
+                { id: 'ursodiol', name: 'Actigall', type: 'Bile Acid', icon: '🟤', color: '#8B4513', efficacy: 65, toxicity: 10, targets: ['liver', 'UGT1A1'] },
+                { id: 'experimental_x', name: 'Compound X-47', type: 'Experimental', icon: '🧪', color: '#00ff88', efficacy: 50, toxicity: 60, targets: ['unknown'] }
+            ],
+
+            eduTips: [
+                { icon: '🧬', text: 'Organoids are 3D cell structures grown from stem cells that mimic real organ function. They allow personalized drug testing before treatment.' },
+                { icon: '💊', text: 'Targeted therapies work by attacking specific mutations in cancer cells, reducing damage to healthy tissue.' },
+                { icon: '🔬', text: 'BRCA1 and BRCA2 mutations significantly increase breast and ovarian cancer risk. Drugs like PARP inhibitors specifically target these.' },
+                { icon: '🛡️', text: 'Immunotherapy helps your immune system recognize and fight cancer cells. PD-L1 inhibitors remove the "brakes" on immune cells.' },
+                { icon: '🧠', text: 'Brain organoids can develop structures similar to early brain development, helping study neurological diseases.' },
+                { icon: '⚡', text: 'Kinase inhibitors block enzymes that cancer cells need to grow. BCR-ABL inhibitors revolutionized leukemia treatment.' },
+                { icon: '🫀', text: 'Heart organoids can beat and respond to drugs, making them invaluable for cardiac safety testing.' },
+                { icon: '🧪', text: 'Higher organoid quality means more accurate drug testing results. Keep your organoid healthy!' },
+                { icon: '💉', text: 'Chemotherapy drugs often have high toxicity because they target rapidly dividing cells - both cancer and healthy.' },
+                { icon: '🎯', text: 'Personalized medicine matches treatments to each patient\'s unique genetic profile for better outcomes.' }
+            ],
+
+            achievementsDef: [
+                { id: 'first_cure', name: 'First Do No Harm', desc: 'Cure your first patient', icon: '🏥' },
+                { id: 'perfect_match', name: 'Perfect Match', desc: 'Find the optimal drug on first test', icon: '🎯' },
+                { id: 'speed_demon', name: 'Speed Demon', desc: 'Cure patient in under 2 minutes', icon: '⚡' },
+                { id: 'combo_master', name: 'Combo Master', desc: 'Test a synergistic drug combination', icon: '🔗' },
+                { id: 'organoid_expert', name: 'Culture Expert', desc: 'Achieve 100% organoid quality', icon: '🧫' },
+                { id: 'streak_5', name: 'Hot Streak', desc: 'Cure 5 patients in a row', icon: '🔥' },
+                { id: 'streak_10', name: 'Unstoppable', desc: 'Cure 10 patients in a row', icon: '🌟' },
+                { id: 'all_organs', name: 'Organ Collector', desc: 'Successfully treat all organ types', icon: '🏆' },
+                { id: 'reputation_100', name: 'World Renowned', desc: 'Reach 100 reputation', icon: '👑' },
+                { id: 'no_toxicity', name: 'Gentle Touch', desc: 'Cure without any toxic drug tests', icon: '🕊️' }
+            ],
+
+            // ═══════════════════════════════════════════════════════════
+            // AUDIO
+            // ═══════════════════════════════════════════════════════════
+
+            audio: {
+                ctx: null,
+
+                init() {
+                    if (window.AudioManager) {
+                        this.ctx = window.AudioManager.getContext();
+                    } else {
+                        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                },
+
+                play(type) {
+                    if (!this.ctx) this.init();
+                    if (window.AudioManager && !window.AudioManager.isEnabled()) return;
+
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+
+                    switch(type) {
+                        case 'success':
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(523.25, now);
+                            osc.frequency.setValueAtTime(659.25, now + 0.1);
+                            osc.frequency.setValueAtTime(783.99, now + 0.2);
+                            gain.gain.setValueAtTime(0.3, now);
+                            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                            osc.start(now);
+                            osc.stop(now + 0.4);
+                            break;
+
+                        case 'click':
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(800, now);
+                            gain.gain.setValueAtTime(0.2, now);
+                            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                            osc.start(now);
+                            osc.stop(now + 0.1);
+                            break;
+
+                        case 'error':
+                            osc.type = 'sawtooth';
+                            osc.frequency.setValueAtTime(200, now);
+                            osc.frequency.setValueAtTime(150, now + 0.1);
+                            gain.gain.setValueAtTime(0.2, now);
+                            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                            osc.start(now);
+                            osc.stop(now + 0.2);
+                            break;
+
+                        case 'achievement':
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(440, now);
+                            osc.frequency.setValueAtTime(554.37, now + 0.15);
+                            osc.frequency.setValueAtTime(659.25, now + 0.3);
+                            osc.frequency.setValueAtTime(880, now + 0.45);
+                            gain.gain.setValueAtTime(0.3, now);
+                            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+                            osc.start(now);
+                            osc.stop(now + 0.7);
+                            break;
+
+                        case 'grow':
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(300, now);
+                            osc.frequency.exponentialRampToValueAtTime(600, now + 0.2);
+                            gain.gain.setValueAtTime(0.15, now);
+                            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                            osc.start(now);
+                            osc.stop(now + 0.3);
+                            break;
+
+                        case 'cure':
+                            // Victory fanfare
+                            const freqs = [523.25, 659.25, 783.99, 1046.50];
+                            freqs.forEach((freq, i) => {
+                                const o = this.ctx.createOscillator();
+                                const g = this.ctx.createGain();
+                                o.connect(g);
+                                g.connect(this.ctx.destination);
+                                o.type = 'sine';
+                                o.frequency.setValueAtTime(freq, now + i * 0.15);
+                                g.gain.setValueAtTime(0.25, now + i * 0.15);
+                                g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 0.4);
+                                o.start(now + i * 0.15);
+                                o.stop(now + i * 0.15 + 0.4);
+                            });
+                            return;
+                    }
+                }
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // CANVAS RENDERING
+            // ═══════════════════════════════════════════════════════════
+
+            canvas: {
+                el: null,
+                ctx: null,
+                cells: [],
+                particles: [],
+                animationId: null,
+
+                init() {
+                    this.el = document.getElementById('organoidCanvas');
+                    this.ctx = this.el.getContext('2d');
+                    this.resize();
+                    window.addEventListener('resize', () => this.resize());
+                },
+
+                resize() {
+                    const container = this.el.parentElement;
+                    this.el.width = container.clientWidth;
+                    this.el.height = container.clientHeight;
+                },
+
+                clear() {
+                    this.cells = [];
+                    this.particles = [];
+                },
+
+                spawnCell(type) {
+                    const colors = {
+                        tumor: '#ff3366',
+                        lung: '#ff9999',
+                        liver: '#8B4513',
+                        brain: '#dda0dd',
+                        kidney: '#cd853f',
+                        heart: '#ff6b6b',
+                        blood: '#dc143c'
+                    };
+
+                    this.cells.push({
+                        x: this.el.width / 2 + (Math.random() - 0.5) * 50,
+                        y: this.el.height / 2 + (Math.random() - 0.5) * 50,
+                        radius: 5 + Math.random() * 5,
+                        color: colors[type] || '#00ff88',
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        pulse: Math.random() * Math.PI * 2,
+                        type: type
+                    });
+                },
+
+                addParticle(x, y, color) {
+                    for (let i = 0; i < 5; i++) {
+                        this.particles.push({
+                            x: x,
+                            y: y,
+                            vx: (Math.random() - 0.5) * 3,
+                            vy: (Math.random() - 0.5) * 3,
+                            life: 1,
+                            color: color || '#00ff88'
+                        });
+                    }
+                },
+
+                render() {
+                    const ctx = this.ctx;
+                    const w = this.el.width;
+                    const h = this.el.height;
+
+                    // Clear with gradient background
+                    const gradient = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w/2);
+                    gradient.addColorStop(0, '#0a1628');
+                    gradient.addColorStop(1, '#050510');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, w, h);
+
+                    // Draw petri dish
+                    ctx.beginPath();
+                    ctx.arc(w/2, h/2, Math.min(w, h) * 0.4, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(0, 255, 136, 0.3)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    // Draw cells
+                    this.cells.forEach(cell => {
+                        // Update position
+                        cell.x += cell.vx;
+                        cell.y += cell.vy;
+                        cell.pulse += 0.05;
+
+                        // Bounce off petri dish
+                        const dx = cell.x - w/2;
+                        const dy = cell.y - h/2;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        const maxDist = Math.min(w, h) * 0.35;
+
+                        if (dist > maxDist) {
+                            const angle = Math.atan2(dy, dx);
+                            cell.x = w/2 + Math.cos(angle) * maxDist;
+                            cell.y = h/2 + Math.sin(angle) * maxDist;
+                            cell.vx *= -0.5;
+                            cell.vy *= -0.5;
+                        }
+
+                        // Slight random movement
+                        cell.vx += (Math.random() - 0.5) * 0.1;
+                        cell.vy += (Math.random() - 0.5) * 0.1;
+                        cell.vx *= 0.99;
+                        cell.vy *= 0.99;
+
+                        // Draw cell
+                        const pulseRadius = cell.radius + Math.sin(cell.pulse) * 2;
+
+                        // Glow
+                        ctx.beginPath();
+                        ctx.arc(cell.x, cell.y, pulseRadius * 2, 0, Math.PI * 2);
+                        const glow = ctx.createRadialGradient(cell.x, cell.y, 0, cell.x, cell.y, pulseRadius * 2);
+                        glow.addColorStop(0, cell.color + '40');
+                        glow.addColorStop(1, 'transparent');
+                        ctx.fillStyle = glow;
+                        ctx.fill();
+
+                        // Cell body
+                        ctx.beginPath();
+                        ctx.arc(cell.x, cell.y, pulseRadius, 0, Math.PI * 2);
+                        ctx.fillStyle = cell.color;
+                        ctx.fill();
+
+                        // Nucleus
+                        ctx.beginPath();
+                        ctx.arc(cell.x, cell.y, pulseRadius * 0.4, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(0,0,0,0.4)';
+                        ctx.fill();
+                    });
+
+                    // Draw particles
+                    this.particles = this.particles.filter(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.life -= 0.02;
+
+                        if (p.life > 0) {
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, 3 * p.life, 0, Math.PI * 2);
+                            ctx.fillStyle = p.color + Math.floor(p.life * 255).toString(16).padStart(2, '0');
+                            ctx.fill();
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    // Continue animation
+                    if (Game.state.organoid.growing) {
+                        this.animationId = requestAnimationFrame(() => this.render());
+                    }
+                },
+
+                startAnimation() {
+                    if (this.animationId) return;
+                    this.render();
+                },
+
+                stopAnimation() {
+                    if (this.animationId) {
+                        cancelAnimationFrame(this.animationId);
+                        this.animationId = null;
+                    }
+                }
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // GAME LOGIC
+            // ═══════════════════════════════════════════════════════════
+
+            start() {
+                document.getElementById('startScreen').classList.add('hidden');
+                this.state.gameStarted = true;
+                this.audio.init();
+                this.canvas.init();
+                this.renderDrugLibrary();
+                this.renderAchievements();
+                this.newPatient();
+
+                // Show initial tip
+                setTimeout(() => this.showEduTip(), 2000);
+            },
+
+            newPatient() {
+                // Reset state
+                this.state.currentPhase = 1;
+                this.state.patient = this.generatePatient();
+                this.state.organoid = { health: 0, size: 0, maturity: 0, quality: 0, oxygen: 50, nutrients: 50, temperature: 37, growing: false };
+                this.state.selectedDrug = null;
+                this.state.testedDrugs = [];
+                this.state.testResults = {};
+                this.state.timeRemaining = 300;
+                this.state.startTime = Date.now();
+
+                // Clear canvas
+                this.canvas.clear();
+
+                // Update UI
+                this.renderPatient();
+                this.updatePhaseIndicator();
+                this.updateOrganoidStats();
+                this.clearTestResults();
+
+                // Start timer
+                this.startTimer();
+
+                // Enable controls
+                document.getElementById('newPatientBtn').disabled = true;
+                document.getElementById('testDrugBtn').disabled = true;
+                document.getElementById('recommendBtn').disabled = true;
+
+                this.audio.play('click');
+                this.notify('New Patient', `${this.state.patient.name} needs your help!`, 'info');
+
+                // Start cultivation automatically
+                setTimeout(() => this.startCultivation(), 1000);
+            },
+
+            generatePatient() {
+                const firstName = this.patients.firstNames[Math.floor(Math.random() * this.patients.firstNames.length)];
+                const lastName = this.patients.lastNames[Math.floor(Math.random() * this.patients.lastNames.length)];
+                const avatar = this.patients.avatars[Math.floor(Math.random() * this.patients.avatars.length)];
+                const condition = this.patients.conditions[Math.floor(Math.random() * this.patients.conditions.length)];
+                const age = 25 + Math.floor(Math.random() * 55);
+                const stage = ['I', 'II', 'III', 'IV'][Math.floor(Math.random() * 4)];
+
+                // Select 1-3 mutations from condition
+                const numMutations = 1 + Math.floor(Math.random() * Math.min(3, condition.mutations.length));
+                const mutations = [...condition.mutations].sort(() => Math.random() - 0.5).slice(0, numMutations);
+
+                // Determine best drug based on mutations
+                const bestDrug = condition.bestDrugs[Math.floor(Math.random() * condition.bestDrugs.length)];
+
+                return {
+                    name: `${firstName} ${lastName}`,
+                    avatar: avatar,
+                    age: age,
+                    condition: condition,
+                    stage: stage,
+                    mutations: mutations,
+                    bestDrug: bestDrug
+                };
+            },
+
+            renderPatient() {
+                const p = this.state.patient;
+                document.getElementById('patientAvatar').textContent = p.avatar;
+                document.getElementById('patientName').textContent = p.name;
+                document.getElementById('patientCondition').innerHTML = `${p.condition.icon} ${p.condition.name}`;
+                document.getElementById('patientAge').textContent = `${p.age} years`;
+                document.getElementById('patientStage').textContent = `Stage ${p.stage}`;
+                document.getElementById('patientOrganoid').textContent = p.condition.type.charAt(0).toUpperCase() + p.condition.type.slice(1);
+                document.getElementById('patientBestDrug').textContent = '???';
+
+                // Render mutations
+                const mutationsEl = document.getElementById('mutationTags');
+                mutationsEl.innerHTML = p.mutations.map(m => `<span class="mutation-tag">${m}</span>`).join('');
+            },
+
+            startCultivation() {
+                this.state.currentPhase = 2;
+                this.updatePhaseIndicator();
+                this.state.organoid.growing = true;
+
+                // Start with some cells
+                for (let i = 0; i < 5; i++) {
+                    this.canvas.spawnCell(this.state.patient.condition.type);
+                }
+
+                this.canvas.startAnimation();
+                document.getElementById('chamberStatus').textContent = 'CULTIVATING';
+                document.getElementById('chamberStatus').style.background = 'rgba(0, 255, 136, 0.3)';
+
+                this.notify('Cultivation Started', 'Grow the organoid to proceed with drug testing.', 'info');
+
+                // Growth interval
+                this.growthInterval = setInterval(() => this.growOrganoid(), 100);
+            },
+
+            growOrganoid() {
+                const org = this.state.organoid;
+
+                // Base growth
+                const growthRate = 0.1;
+                const healthDecay = 0.05;
+                const nutrientDecay = 0.1;
+                const oxygenDecay = 0.08;
+
+                // Apply decay
+                org.nutrients = Math.max(0, org.nutrients - nutrientDecay);
+                org.oxygen = Math.max(0, org.oxygen - oxygenDecay);
+
+                // Calculate health based on conditions
+                const tempFactor = org.temperature >= 36 && org.temperature <= 38 ? 1 : 0.5;
+                const nutrientFactor = org.nutrients / 100;
+                const oxygenFactor = org.oxygen / 100;
+
+                const healthChange = (nutrientFactor * oxygenFactor * tempFactor * 0.3) - healthDecay;
+                org.health = Math.max(0, Math.min(100, org.health + healthChange));
+
+                // Grow if healthy
+                if (org.health > 30) {
+                    org.size = Math.min(5, org.size + growthRate * 0.01 * (org.health / 100));
+                    org.maturity = Math.min(100, org.maturity + growthRate * 0.5 * (org.health / 100));
+
+                    // Spawn new cells occasionally
+                    if (Math.random() < 0.02 && this.canvas.cells.length < 50) {
+                        this.canvas.spawnCell(this.state.patient.condition.type);
+                    }
+                }
+
+                // Calculate quality
+                org.quality = Math.floor((org.health * 0.4 + org.maturity * 0.4 + (org.size / 5) * 100 * 0.2));
+
+                // Check if ready for testing
+                if (org.maturity >= 80 && this.state.currentPhase === 2) {
+                    this.state.currentPhase = 3;
+                    this.updatePhaseIndicator();
+                    document.getElementById('chamberStatus').textContent = 'READY FOR TESTING';
+                    document.getElementById('chamberStatus').style.background = 'rgba(0, 212, 255, 0.3)';
+                    this.notify('Organoid Ready!', 'The organoid has matured. Begin drug testing.', 'success');
+                    this.audio.play('success');
+
+                    // Check for quality achievement
+                    if (org.quality >= 100) {
+                        this.unlockAchievement('organoid_expert');
+                    }
+                }
+
+                this.updateOrganoidStats();
+            },
+
+            feedOrganoid() {
+                if (this.state.organoid.nutrients < 100) {
+                    this.state.organoid.nutrients = Math.min(100, this.state.organoid.nutrients + 30);
+                    this.canvas.addParticle(this.canvas.el.width / 2, this.canvas.el.height / 2, '#00ff88');
+                    this.audio.play('grow');
+                    this.updateOrganoidStats();
+                }
+            },
+
+            oxygenate() {
+                if (this.state.organoid.oxygen < 100) {
+                    this.state.organoid.oxygen = Math.min(100, this.state.organoid.oxygen + 25);
+                    this.canvas.addParticle(this.canvas.el.width / 2, this.canvas.el.height / 2, '#00d4ff');
+                    this.audio.play('grow');
+                    this.updateOrganoidStats();
+                }
+            },
+
+            stimulate() {
+                if (this.state.organoid.maturity < 100) {
+                    this.state.organoid.maturity = Math.min(100, this.state.organoid.maturity + 10);
+                    this.state.organoid.health = Math.max(0, this.state.organoid.health - 5);
+                    this.canvas.addParticle(this.canvas.el.width / 2, this.canvas.el.height / 2, '#ffaa00');
+                    this.audio.play('click');
+                    this.updateOrganoidStats();
+                }
+            },
+
+            adjustTemp() {
+                // Cycle through temperatures
+                const temps = [35, 36, 37, 38, 39];
+                const currentIndex = temps.indexOf(this.state.organoid.temperature);
+                this.state.organoid.temperature = temps[(currentIndex + 1) % temps.length];
+                document.getElementById('btnTemp').innerHTML = `<span class="icon">🌡️</span>Temp ${this.state.organoid.temperature}°C`;
+                this.audio.play('click');
+            },
+
+            updateOrganoidStats() {
+                const org = this.state.organoid;
+                document.getElementById('orgHealth').textContent = Math.floor(org.health) + '%';
+                document.getElementById('orgSize').textContent = org.size.toFixed(1) + 'mm';
+                document.getElementById('orgMaturity').textContent = Math.floor(org.maturity) + '%';
+                document.getElementById('orgQuality').textContent = Math.floor(org.quality);
+
+                document.getElementById('orgHealthBar').style.width = org.health + '%';
+                document.getElementById('orgSizeBar').style.width = (org.size / 5 * 100) + '%';
+                document.getElementById('orgMaturityBar').style.width = org.maturity + '%';
+                document.getElementById('orgQualityBar').style.width = org.quality + '%';
+            },
+
+            renderDrugLibrary() {
+                const container = document.getElementById('drugLibrary');
+                container.innerHTML = this.drugs.map(drug => `
+                    <div class="drug-item" data-drug-id="${drug.id}" onclick="Game.selectDrug('${drug.id}')">
+                        <div class="drug-icon" style="background: ${drug.color}40; border: 1px solid ${drug.color};">${drug.icon}</div>
+                        <div class="drug-info">
+                            <div class="drug-name">${drug.name}</div>
+                            <div class="drug-type">${drug.type}</div>
+                        </div>
+                        <div class="drug-efficacy">${drug.efficacy}%</div>
+                    </div>
+                `).join('');
+            },
+
+            selectDrug(drugId) {
+                if (this.state.currentPhase < 3) {
+                    this.notify('Not Ready', 'Wait for organoid to mature before testing drugs.', 'warning');
+                    return;
+                }
+
+                // Deselect all
+                document.querySelectorAll('.drug-item').forEach(el => el.classList.remove('selected'));
+
+                // Select this drug
+                document.querySelector(`[data-drug-id="${drugId}"]`).classList.add('selected');
+                this.state.selectedDrug = drugId;
+
+                document.getElementById('testDrugBtn').disabled = false;
+                this.audio.play('click');
+            },
+
+            testDrug() {
+                if (!this.state.selectedDrug || this.state.currentPhase < 3) return;
+
+                const drugId = this.state.selectedDrug;
+                const drug = this.drugs.find(d => d.id === drugId);
+                const patient = this.state.patient;
+
+                // Check if already tested
+                if (this.state.testedDrugs.includes(drugId)) {
+                    this.notify('Already Tested', 'You have already tested this drug.', 'warning');
+                    return;
+                }
+
+                // Calculate efficacy
+                let efficacy = drug.efficacy;
+                let matchBonus = 0;
+
+                // Check mutation matches
+                patient.mutations.forEach(mutation => {
+                    if (drug.targets.includes(mutation)) {
+                        matchBonus += 15;
+                    }
+                });
+
+                // Check organ type match
+                if (drug.targets.includes(patient.condition.type)) {
+                    matchBonus += 10;
+                }
+
+                // Quality affects accuracy
+                const qualityFactor = this.state.organoid.quality / 100;
+                const randomVariance = (Math.random() - 0.5) * 20 * (1 - qualityFactor);
+
+                efficacy = Math.max(5, Math.min(100, efficacy + matchBonus + randomVariance));
+
+                // Check toxicity
+                const toxicity = drug.toxicity * (1 + (Math.random() - 0.5) * 0.3);
+                const toxic = toxicity > 50;
+
+                // Store result
+                this.state.testResults[drugId] = {
+                    efficacy: Math.floor(efficacy),
+                    toxicity: Math.floor(toxicity),
+                    toxic: toxic,
+                    isOptimal: drugId === patient.bestDrug
+                };
+                this.state.testedDrugs.push(drugId);
+
+                // Render results
+                this.renderTestResults();
+
+                // Visual feedback
+                if (toxic) {
+                    this.canvas.cells = this.canvas.cells.slice(0, Math.floor(this.canvas.cells.length * 0.7));
+                    this.canvas.addParticle(this.canvas.el.width / 2, this.canvas.el.height / 2, '#ff3366');
+                    this.audio.play('error');
+                    this.notify('Toxicity Warning!', `${drug.name} shows high toxicity. Consider alternatives.`, 'error');
+                } else if (efficacy >= 80) {
+                    this.canvas.addParticle(this.canvas.el.width / 2, this.canvas.el.height / 2, '#00ff88');
+                    this.audio.play('success');
+                    this.notify('Strong Response!', `${drug.name} shows ${Math.floor(efficacy)}% efficacy!`, 'success');
+
+                    // First test achievement
+                    if (this.state.testedDrugs.length === 1 && this.state.testResults[drugId].isOptimal) {
+                        this.unlockAchievement('perfect_match');
+                    }
+                } else {
+                    this.audio.play('click');
+                }
+
+                // Enable recommend button if we have at least one test
+                if (this.state.testedDrugs.length >= 1) {
+                    document.getElementById('recommendBtn').disabled = false;
+                }
+
+                // Clear selection
+                this.state.selectedDrug = null;
+                document.querySelectorAll('.drug-item').forEach(el => el.classList.remove('selected'));
+                document.getElementById('testDrugBtn').disabled = true;
+            },
+
+            renderTestResults() {
+                const container = document.getElementById('resultsContainer');
+
+                if (this.state.testedDrugs.length === 0) {
+                    container.innerHTML = '<p style="color: rgba(255,255,255,0.4); text-align: center; font-size: 13px;">No tests yet</p>';
+                    return;
+                }
+
+                container.innerHTML = this.state.testedDrugs.map(drugId => {
+                    const drug = this.drugs.find(d => d.id === drugId);
+                    const result = this.state.testResults[drugId];
+
+                    let barClass = 'poor';
+                    if (result.efficacy >= 80) barClass = 'excellent';
+                    else if (result.efficacy >= 60) barClass = 'good';
+                    else if (result.efficacy >= 40) barClass = 'moderate';
+
+                    let icon = '✅';
+                    if (result.toxic) icon = '☠️';
+                    else if (result.efficacy < 40) icon = '❌';
+                    else if (result.efficacy < 60) icon = '⚠️';
+
+                    return `
+                        <div class="result-item">
+                            <span class="result-drug">${drug.icon} ${drug.name}</span>
+                            <div class="result-bar">
+                                <div class="result-bar-fill ${barClass}" style="width: ${result.efficacy}%"></div>
+                            </div>
+                            <span class="result-value">${result.efficacy}%</span>
+                            <span class="result-icon">${icon}</span>
+                        </div>
+                    `;
+                }).join('');
+            },
+
+            clearTestResults() {
+                document.getElementById('resultsContainer').innerHTML = '<p style="color: rgba(255,255,255,0.4); text-align: center; font-size: 13px;">No tests yet</p>';
+            },
+
+            recommendTreatment() {
+                if (this.state.testedDrugs.length === 0) return;
+
+                this.state.currentPhase = 4;
+                this.updatePhaseIndicator();
+
+                // Find best tested drug
+                let bestDrugId = null;
+                let bestEfficacy = 0;
+
+                this.state.testedDrugs.forEach(drugId => {
+                    const result = this.state.testResults[drugId];
+                    if (!result.toxic && result.efficacy > bestEfficacy) {
+                        bestEfficacy = result.efficacy;
+                        bestDrugId = drugId;
+                    }
+                });
+
+                if (!bestDrugId) {
+                    this.notify('No Valid Treatment', 'All tested drugs showed high toxicity. Try other compounds.', 'error');
+                    this.state.currentPhase = 3;
+                    this.updatePhaseIndicator();
+                    return;
+                }
+
+                // Stop timers
+                clearInterval(this.state.timerInterval);
+                clearInterval(this.growthInterval);
+                this.canvas.stopAnimation();
+
+                // Calculate success
+                const patient = this.state.patient;
+                const isOptimal = bestDrugId === patient.bestDrug;
+                const timeTaken = Math.floor((Date.now() - this.state.startTime) / 1000);
+                const timeBonus = Math.max(0, (300 - timeTaken) * 2);
+
+                // Determine if successful
+                const successThreshold = isOptimal ? 50 : 70;
+                const success = bestEfficacy >= successThreshold;
+
+                // Calculate score
+                let score = 0;
+                if (success) {
+                    score = Math.floor(bestEfficacy * 5);
+                    score += isOptimal ? 200 : 0;
+                    score += timeBonus;
+                    score += Math.floor(this.state.organoid.quality);
+
+                    // Check for no toxicity achievement
+                    const hadToxic = Object.values(this.state.testResults).some(r => r.toxic);
+                    if (!hadToxic) {
+                        this.unlockAchievement('no_toxicity');
+                    }
+
+                    // Update stats
+                    this.state.score += score;
+                    this.state.patientsCured++;
+                    this.state.streak++;
+                    this.state.reputation = Math.min(100, this.state.reputation + 5);
+
+                    // Streak achievements
+                    if (this.state.streak >= 5) this.unlockAchievement('streak_5');
+                    if (this.state.streak >= 10) this.unlockAchievement('streak_10');
+                    if (this.state.patientsCured === 1) this.unlockAchievement('first_cure');
+                    if (this.state.reputation >= 100) this.unlockAchievement('reputation_100');
+
+                    // Speed achievement
+                    if (timeTaken < 120) this.unlockAchievement('speed_demon');
+
+                    this.audio.play('cure');
+                } else {
+                    this.state.streak = 0;
+                    this.state.reputation = Math.max(0, this.state.reputation - 10);
+                    this.audio.play('error');
+                }
+
+                // Update displays
+                this.updateStats();
+
+                // Show result screen
+                this.showResult(success, score, bestEfficacy, timeTaken, bestDrugId);
+            },
+
+            showResult(success, score, efficacy, timeTaken, drugId) {
+                const drug = this.drugs.find(d => d.id === drugId);
+                const screen = document.getElementById('resultScreen');
+
+                document.getElementById('resultIcon').textContent = success ? '🎉' : '💔';
+                document.getElementById('resultTitle').textContent = success ? 'PATIENT CURED!' : 'TREATMENT FAILED';
+                document.getElementById('resultTitle').className = `result-title ${success ? 'success' : 'failure'}`;
+
+                document.getElementById('resultDetails').textContent = success
+                    ? `Your ${drug.name} treatment recommendation was successful! ${this.state.patient.name} is responding well to therapy.`
+                    : `Unfortunately, ${drug.name} was not effective for ${this.state.patient.name}'s condition. The optimal treatment was ${this.drugs.find(d => d.id === this.state.patient.bestDrug)?.name || 'unknown'}.`;
+
+                document.getElementById('resultScore').textContent = '+' + score;
+                document.getElementById('resultAccuracy').textContent = efficacy + '%';
+
+                const mins = Math.floor(timeTaken / 60);
+                const secs = timeTaken % 60;
+                document.getElementById('resultTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+                screen.classList.add('show');
+            },
+
+            nextPatient() {
+                document.getElementById('resultScreen').classList.remove('show');
+                document.getElementById('newPatientBtn').disabled = false;
+                this.newPatient();
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // TIMER
+            // ═══════════════════════════════════════════════════════════
+
+            startTimer() {
+                clearInterval(this.state.timerInterval);
+
+                this.state.timerInterval = setInterval(() => {
+                    this.state.timeRemaining--;
+
+                    const mins = Math.floor(this.state.timeRemaining / 60);
+                    const secs = this.state.timeRemaining % 60;
+                    document.getElementById('urgencyTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                    document.getElementById('urgencyFill').style.width = (this.state.timeRemaining / 300 * 100) + '%';
+
+                    if (this.state.timeRemaining <= 0) {
+                        clearInterval(this.state.timerInterval);
+                        this.timeOut();
+                    }
+                }, 1000);
+            },
+
+            timeOut() {
+                clearInterval(this.growthInterval);
+                this.canvas.stopAnimation();
+
+                this.state.streak = 0;
+                this.state.reputation = Math.max(0, this.state.reputation - 15);
+                this.updateStats();
+
+                this.audio.play('error');
+                this.notify('Time Expired!', 'The patient was transferred to another facility.', 'error');
+
+                setTimeout(() => {
+                    document.getElementById('newPatientBtn').disabled = false;
+                }, 2000);
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // UI HELPERS
+            // ═══════════════════════════════════════════════════════════
+
+            updatePhaseIndicator() {
+                for (let i = 1; i <= 4; i++) {
+                    const el = document.getElementById('phase' + i);
+                    el.classList.remove('active', 'completed');
+
+                    if (i < this.state.currentPhase) {
+                        el.classList.add('completed');
+                    } else if (i === this.state.currentPhase) {
+                        el.classList.add('active');
+                    }
+                }
+            },
+
+            updateStats() {
+                document.getElementById('scoreDisplay').textContent = this.state.score.toLocaleString();
+                document.getElementById('repDisplay').textContent = this.state.reputation;
+                document.getElementById('patientsDisplay').textContent = this.state.patientsCured;
+                document.getElementById('streakDisplay').textContent = this.state.streak;
+            },
+
+            notify(title, text, type = 'info') {
+                const container = document.getElementById('notificationsContainer');
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-text">${text}</div>
+                `;
+                container.appendChild(notification);
+
+                setTimeout(() => notification.remove(), 4000);
+            },
+
+            showEduTip() {
+                const tip = this.eduTips[Math.floor(Math.random() * this.eduTips.length)];
+                const container = document.getElementById('eduTipContainer');
+
+                container.innerHTML = `
+                    <div class="edu-tip">
+                        <div class="edu-tip-icon">${tip.icon}</div>
+                        <div class="edu-tip-text">${tip.text}</div>
+                        <button class="edu-tip-dismiss" onclick="this.parentElement.remove()">Got it!</button>
+                    </div>
+                `;
+
+                // Auto-dismiss after 10 seconds
+                setTimeout(() => {
+                    const tipEl = container.querySelector('.edu-tip');
+                    if (tipEl) tipEl.remove();
+                }, 10000);
+
+                // Schedule next tip
+                setTimeout(() => {
+                    if (this.state.gameStarted) this.showEduTip();
+                }, 45000);
+            },
+
+            // ═══════════════════════════════════════════════════════════
+            // ACHIEVEMENTS
+            // ═══════════════════════════════════════════════════════════
+
+            renderAchievements() {
+                const container = document.getElementById('achievementsList');
+                container.innerHTML = this.achievementsDef.map(ach => `
+                    <div class="achievement-item" id="ach-${ach.id}">
+                        <div class="achievement-icon">${ach.icon}</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">${ach.name}</div>
+                            <div class="achievement-desc">${ach.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            unlockAchievement(id) {
+                if (this.state.achievements.has(id)) return;
+
+                this.state.achievements.add(id);
+                const ach = this.achievementsDef.find(a => a.id === id);
+
+                // Update UI
+                const el = document.getElementById('ach-' + id);
+                if (el) el.classList.add('unlocked');
+
+                // Show achievement panel briefly
+                document.getElementById('achievementsPanel').classList.add('show');
+                setTimeout(() => document.getElementById('achievementsPanel').classList.remove('show'), 3000);
+
+                // Notify
+                this.notify('🏆 Achievement Unlocked!', `${ach.icon} ${ach.name}`, 'success');
+                this.audio.play('achievement');
+
+                // Bonus score
+                this.state.score += 100;
+                this.updateStats();
+            },
+
+            toggleAchievements() {
+                document.getElementById('achievementsPanel').classList.toggle('show');
+            }
+        };
+
+        // Initialize canvas size on load
+        window.addEventListener('load', () => {
+            const canvas = document.getElementById('organoidCanvas');
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (!Game.state.gameStarted) return;
+
+            switch(e.key) {
+                case '1': Game.feedOrganoid(); break;
+                case '2': Game.oxygenate(); break;
+                case '3': Game.stimulate(); break;
+                case '4': Game.adjustTemp(); break;
+                case 'a': Game.toggleAchievements(); break;
+            }
+        });
+    </script>
+
+    <!-- Global Audio Manager -->
+    <script src="/js/audio-manager.js" defer></script>
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

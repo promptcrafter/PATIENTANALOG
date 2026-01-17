@@ -1,0 +1,1915 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTech Games - ALL BUGS FIXED</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+/* Reset & Base Styles */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background: #050510;
+    color: #00ffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+/* Animated Background Grid */
+#bg-grid {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: scroll 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes scroll {
+    to { background-position: 50px 50px; }
+}
+
+/* App Container */
+#app {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+/* Title */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, #00ffff, #ff0099, #00ff88);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient 3s ease infinite;
+    margin-bottom: 10px;
+    text-shadow: 0 0 30px #00ffff;
+}
+
+@keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    color: #00ff88;
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Menu Grid */
+#menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Game Cards */
+.card {
+    background: linear-gradient(135deg, rgba(0,255,255,0.05), rgba(255,0,153,0.05));
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,255,255,0.5);
+    border-color: #ff0099;
+}
+
+/* CUSTOM ICONS - NO EMOJIS */
+.icon, .icon *, .icon::before, .icon::after { pointer-events: none; }
+.icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+/* DNA HELIX ICON */
+.icon-dna {
+    position: relative;
+}
+.icon-dna::before,
+.icon-dna::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 80px;
+    background: linear-gradient(to bottom, 
+        #00ffff 0%, transparent 20%, 
+        #00ffff 40%, transparent 60%, 
+        #00ffff 80%, transparent 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 20px #00ffff;
+}
+.icon-dna::before {
+    left: 30%;
+    transform: rotate(15deg);
+}
+.icon-dna::after {
+    right: 30%;
+    transform: rotate(-15deg);
+}
+.icon-dna .strand {
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background: #00ffff;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* CELL NUCLEUS ICON */
+.icon-cell {
+    position: relative;
+}
+.icon-cell::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border: 4px solid #ff0099;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px #ff0099, inset 0 0 20px #ff0099;
+    animation: pulse 2s ease-in-out infinite;
+}
+.icon-cell::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #ff0099 0%, transparent 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px #ff0099;
+}
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* PROTEIN CHAIN ICON */
+.icon-protein {
+    position: relative;
+}
+.icon-protein .node {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #00ff88;
+    border-radius: 50%;
+            aspect-ratio: 1;
+    box-shadow: 0 0 15px #00ff88;
+}
+.icon-protein .node:nth-child(1) { top: 10px; left: 20px; }
+.icon-protein .node:nth-child(2) { top: 30px; left: 45px; }
+.icon-protein .node:nth-child(3) { top: 50px; left: 30px; }
+.icon-protein .node:nth-child(4) { top: 65px; left: 55px; }
+.icon-protein .node:nth-child(5) { top: 45px; left: 70px; }
+.icon-protein::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #00ff88;
+    border-radius: 50%;
+    top: 20px;
+    left: 20px;
+    opacity: 0.4;
+}
+
+/* ORGANOID CLUSTER ICON */
+.icon-organoid {
+    position: relative;
+}
+.icon-organoid .cell {
+    position: absolute;
+    border-radius: 50%;
+            aspect-ratio: 1;
+    border: 3px solid #9d00ff;
+    box-shadow: 0 0 15px #9d00ff;
+}
+.icon-organoid .cell:nth-child(1) { 
+    width: 35px; height: 35px; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(157,0,255,0.3), transparent);
+}
+.icon-organoid .cell:nth-child(2) { 
+    width: 25px; height: 25px; 
+    top: 20%; left: 30%; 
+}
+.icon-organoid .cell:nth-child(3) { 
+    width: 28px; height: 28px; 
+    top: 25%; right: 25%; 
+}
+.icon-organoid .cell:nth-child(4) { 
+    width: 22px; height: 22px; 
+    bottom: 25%; left: 25%; 
+}
+.icon-organoid .cell:nth-child(5) { 
+    width: 26px; height: 26px; 
+    bottom: 20%; right: 28%; 
+}
+
+/* CRISPR CROSSHAIR ICON */
+.icon-crispr {
+    position: relative;
+}
+.icon-crispr::before,
+.icon-crispr::after {
+    content: '';
+    position: absolute;
+    background: #ffdd00;
+    box-shadow: 0 0 20px #ffdd00;
+}
+.icon-crispr::before {
+    width: 4px;
+    height: 80px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.icon-crispr::after {
+    width: 80px;
+    height: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.icon-crispr .ring {
+    position: absolute;
+    border: 3px solid #ffdd00;
+    border-radius: 50%;
+            aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px #ffdd00;
+}
+.icon-crispr .ring:nth-child(1) { width: 30px; height: 30px; }
+.icon-crispr .ring:nth-child(2) { width: 55px; height: 55px; opacity: 0.6; }
+
+/* IMMUNE ANTIBODY ICON */
+.icon-immune {
+    position: relative;
+}
+.icon-immune::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 50px;
+    background: #ff6600;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px #ff6600;
+}
+.icon-immune .arm {
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background: #ff6600;
+    top: 35px;
+    box-shadow: 0 0 10px #ff6600;
+}
+.icon-immune .arm:nth-child(1) { 
+    left: 20px; 
+    transform: rotate(-40deg); 
+}
+.icon-immune .arm:nth-child(2) { 
+    right: 20px; 
+    transform: rotate(40deg); 
+}
+.icon-immune .tip {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #ff6600;
+    border-radius: 50%;
+            aspect-ratio: 1;
+    box-shadow: 0 0 12px #ff6600;
+}
+.icon-immune .tip:nth-child(3) { top: 20px; left: 15px; }
+.icon-immune .tip:nth-child(4) { top: 20px; right: 15px; }
+.icon-immune .tip:nth-child(5) { bottom: 15px; left: 50%; transform: translateX(-50%); }
+
+/* Card Text */
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffff;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.hs {
+    color: #ffdd00;
+    font-size: 0.75rem;
+}
+
+/* Game Screen */
+#game {
+    display: none;
+}
+
+#game.active {
+    display: block;
+}
+
+#title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: #ff0099;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px #ff0099;
+}
+
+/* Canvas */
+canvas {
+    border: 3px solid #00ffff;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(0,255,255,0.6);
+    background: #0a0a1a;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* Buttons */
+.btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+button {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 35px;
+    background: linear-gradient(135deg, #00ffff, #ff0099);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 40px rgba(255,0,153,0.7);
+}
+
+/* Game Over Overlay */
+#over {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+#over.active { 
+    display: flex; 
+}
+
+.over-box {
+    background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,153,0.1));
+    border: 3px solid #ff0099;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+}
+
+.over-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: #ff0099;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px #ff0099;
+}
+
+.score {
+    font-size: 2rem;
+    color: #00ffff;
+    margin-bottom: 30px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #menu { 
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    h1 { font-size: 2.5rem; }
+    .card { padding: 20px; }
+    .icon { width: 80px; height: 80px; }
+}
+
+@media (max-width: 500px) {
+    #menu {
+        grid-template-columns: 1fr;
+    }
+    h1 { font-size: 2rem; }
+}
+    </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+    <div id="bg-grid"></div>
+    
+    <div id="app">
+        <div id="menu-screen">
+            <h1>BIOTECH GAMES</h1>
+            <p class="subtitle">6 Addictive • Educational • Fun - ALL BUGS FIXED!</p>
+            
+            <div id="menu"></div>
+        </div>
+        
+        <div id="game">
+            <h2 id="title"></h2>
+            <canvas id="canvas" width="700" height="500"></canvas>
+            <div class="btns">
+                <button id="btn-back">Back to Menu</button>
+                <button id="btn-restart">Restart</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="over">
+        <div class="over-box">
+            <h2>GAME OVER!</h2>
+            <p class="score">Score: <span id="final">0</span></p>
+            <div class="btns">
+                <button id="btn-play-again">Play Again</button>
+                <button id="btn-menu">Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+/**
+ * BioTech Games Engine
+ * High-performance game engine with optimized rendering
+ */
+
+class GameEngine {
+    constructor() {
+        this.canvas = null;
+        this.ctx = null;
+        this.currentGame = null;
+        this.gameType = null;
+        this.score = 0;
+        this.highScores = {};
+        this.loop = null;
+        this.lastFrameTime = 0;
+        this.fps = 60;
+        this.frameInterval = 1000 / this.fps;
+        
+        // Performance optimizations
+        this.offscreenCanvas = null;
+        this.offscreenCtx = null;
+    }
+    
+    /**
+     * Initialize engine
+     */
+    init() {
+        this.canvas = document.getElementById('canvas');
+        this.ctx = this.canvas.getContext('2d', {
+            alpha: false,  // Performance boost
+            desynchronized: true  // Allows async rendering
+        });
+        
+        // Create offscreen canvas for double buffering
+        this.offscreenCanvas = document.createElement('canvas');
+        this.offscreenCanvas.width = this.canvas.width;
+        this.offscreenCanvas.height = this.canvas.height;
+        this.offscreenCtx = this.offscreenCanvas.getContext('2d', { alpha: false });
+        
+        // Load high scores from localStorage
+        this.loadHighScores();
+        
+        console.log('Game Engine Initialized');
+    }
+    
+    /**
+     * Start a game
+     */
+    startGame(type, GameClass) {
+        this.gameType = type;
+        this.score = 0;
+        
+        // Clean up previous game
+        if (this.currentGame) {
+            this.currentGame.destroy && this.currentGame.destroy();
+        }
+        
+        // Stop previous loop
+        if (this.loop) {
+            cancelAnimationFrame(this.loop);
+            this.loop = null;
+        }
+        
+        // Create new game instance
+        this.currentGame = new GameClass(this);
+        this.currentGame.start();
+        
+        // Start game loop with requestAnimationFrame for better performance
+        this.lastFrameTime = performance.now();
+        this.gameLoop();
+        
+        console.log(`Started game: ${type}`);
+    }
+    
+    /**
+     * Main game loop with frame rate control
+     */
+    gameLoop() {
+        const now = performance.now();
+        const elapsed = now - this.lastFrameTime;
+        
+        // Frame rate control
+        if (elapsed >= this.frameInterval) {
+            this.lastFrameTime = now - (elapsed % this.frameInterval);
+            
+            // Update game
+            if (this.currentGame && this.currentGame.update) {
+                this.currentGame.update(elapsed / 1000); // Delta time in seconds
+            }
+            
+            // Render to offscreen canvas
+            if (this.currentGame && this.currentGame.render) {
+                this.currentGame.render(this.offscreenCtx);
+            }
+            
+            // Blit to main canvas (faster than drawing directly)
+            this.ctx.drawImage(this.offscreenCanvas, 0, 0);
+        }
+        
+        // Continue loop
+        this.loop = requestAnimationFrame(() => this.gameLoop());
+    }
+    
+    /**
+     * Stop game loop
+     */
+    stopGame() {
+        if (this.loop) {
+            cancelAnimationFrame(this.loop);
+            this.loop = null;
+        }
+        
+        if (this.currentGame) {
+            this.currentGame.destroy && this.currentGame.destroy();
+            this.currentGame = null;
+        }
+    }
+    
+    /**
+     * End game
+     */
+    endGame() {
+        this.stopGame();
+        
+        // Update high score
+        if (this.score > (this.highScores[this.gameType] || 0)) {
+            this.highScores[this.gameType] = this.score;
+            this.saveHighScores();
+        }
+        
+        // Show game over screen
+        document.getElementById('final').textContent = this.score;
+        document.getElementById('over').classList.add('active');
+    }
+    
+    /**
+     * Add to score
+     */
+    addScore(points) {
+        this.score += points;
+    }
+    
+    /**
+     * Load high scores from localStorage
+     */
+    loadHighScores() {
+        try {
+            const saved = localStorage.getItem('biohs');
+            this.highScores = saved ? JSON.parse(saved) : {};
+        } catch (e) {
+            console.warn('Failed to load high scores:', e);
+            this.highScores = {};
+        }
+    }
+    
+    /**
+     * Save high scores to localStorage
+     */
+    saveHighScores() {
+        try {
+            localStorage.setItem('biohs', JSON.stringify(this.highScores));
+        } catch (e) {
+            console.warn('Failed to save high scores:', e);
+        }
+    }
+    
+    /**
+     * Get high score for game type
+     */
+    getHighScore(type) {
+        return this.highScores[type] || 0;
+    }
+    
+    /**
+     * Update high score displays
+     */
+    updateHighScoreDisplay() {
+        const games = ['dna', 'cell', 'protein', 'organoid', 'crispr', 'immune'];
+        games.forEach(game => {
+            const el = document.getElementById(`h-${game}`);
+            if (el) {
+                el.textContent = this.getHighScore(game);
+            }
+        });
+    }
+    
+    /**
+     * Clear canvas (optimized)
+     */
+    clearCanvas(ctx) {
+        // Faster than fillRect for full clear
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Fill with background color
+        ctx.fillStyle = '#0a0a1a';
+        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+// Create global engine instance
+const engine = new GameEngine();
+
+/**
+ * BioTech Games Renderer
+ * Optimized rendering utilities for high performance
+ */
+
+class Renderer {
+    constructor() {
+        // Color palette (pre-defined for performance)
+        this.colors = {
+            cyan: '#00ffff',
+            magenta: '#ff0099',
+            green: '#00ff88',
+            yellow: '#ffdd00',
+            purple: '#9d00ff',
+            orange: '#ff6600',
+            black: '#0a0a1a',
+            white: '#ffffff'
+        };
+        
+        // Font cache
+        this.fonts = {
+            hud: 'bold 20px monospace',
+            text: '16px monospace',
+            title: 'bold 50px monospace',
+            small: '14px monospace'
+        };
+    }
+    
+    /**
+     * Draw text with glow effect (optimized)
+     */
+    drawGlowText(ctx, text, x, y, color, font = this.fonts.hud, blur = 15) {
+        ctx.save();
+        ctx.font = font;
+        ctx.fillStyle = color;
+        ctx.shadowBlur = blur;
+        ctx.shadowColor = color;
+        ctx.fillText(text, x, y);
+        ctx.restore();
+    }
+    
+    /**
+     * Draw HUD text (no glow, faster)
+     */
+    drawHUD(ctx, text, x, y, color = this.colors.cyan) {
+        ctx.save();
+        ctx.font = this.fonts.hud;
+        ctx.fillStyle = color;
+        ctx.fillText(text, x, y);
+        ctx.restore();
+    }
+    
+    /**
+     * Draw circle with glow
+     */
+    drawGlowCircle(ctx, x, y, radius, color, blur = 15) {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.shadowBlur = blur;
+        ctx.shadowColor = color;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+    
+    /**
+     * Draw rect with glow
+     */
+    drawGlowRect(ctx, x, y, w, h, color, blur = 10) {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.shadowBlur = blur;
+        ctx.shadowColor = color;
+        ctx.fillRect(x, y, w, h);
+        ctx.restore();
+    }
+    
+    /**
+     * Draw target zone (translucent overlay)
+     */
+    drawTargetZone(ctx, x, y, w, h, alpha = 0.03) {
+        ctx.save();
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fillRect(x, y, w, h);
+        ctx.restore();
+    }
+    
+    /**
+     * Draw grid (optimized with path)
+     */
+    drawGrid(ctx, x, y, cols, rows, cellSize, color = 'rgba(255,255,255,0.05)') {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        
+        // Vertical lines
+        for (let i = 0; i <= cols; i++) {
+            const px = x + i * cellSize;
+            ctx.moveTo(px, y);
+            ctx.lineTo(px, y + rows * cellSize);
+        }
+        
+        // Horizontal lines
+        for (let i = 0; i <= rows; i++) {
+            const py = y + i * cellSize;
+            ctx.moveTo(x, py);
+            ctx.lineTo(x + cols * cellSize, py);
+        }
+        
+        ctx.stroke();
+        ctx.restore();
+    }
+    
+    /**
+     * Draw circular gradient background
+     */
+    drawRadialGlow(ctx, x, y, radius, innerColor, outerColor = 'transparent') {
+        ctx.save();
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, innerColor);
+        gradient.addColorStop(1, outerColor);
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+    
+    /**
+     * Draw progress bar
+     */
+    drawProgressBar(ctx, x, y, w, h, progress, color) {
+        ctx.save();
+        
+        // Background
+        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+        ctx.fillRect(x, y, w, h);
+        
+        // Progress
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, w * progress, h);
+        
+        // Border
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, w, h);
+        
+        ctx.restore();
+    }
+    
+    /**
+     * Draw crosshair
+     */
+    drawCrosshair(ctx, x, y, size = 18, color = '#fff') {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        
+        // Horizontal
+        ctx.moveTo(x - size, y);
+        ctx.lineTo(x + size, y);
+        
+        // Vertical
+        ctx.moveTo(x, y - size);
+        ctx.lineTo(x, y + size);
+        
+        ctx.stroke();
+        
+        // Center dot
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+    }
+    
+    /**
+     * Draw ring (hollow circle)
+     */
+    drawRing(ctx, x, y, radius, color, lineWidth = 3, blur = 0) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        if (blur > 0) {
+            ctx.shadowBlur = blur;
+            ctx.shadowColor = color;
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+    }
+    
+    /**
+     * Clear area (optimized)
+     */
+    clear(ctx, x, y, w, h) {
+        ctx.clearRect(x, y, w, h);
+    }
+    
+    /**
+     * Draw game background
+     */
+    drawBackground(ctx, width, height) {
+        ctx.fillStyle = this.colors.black;
+        ctx.fillRect(0, 0, width, height);
+    }
+}
+
+// Create global renderer instance
+const renderer = new Renderer();
+
+/**
+ * DNA Matcher Game
+ * Match complementary base pairs (A-T, G-C)
+ */
+
+class DNAMatcherGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.bases = [];
+        this.target = null;
+        this.streak = 0;
+        this.timeLeft = 60;
+        this.pairs = { A: 'T', T: 'A', G: 'C', C: 'G' };
+        this.colors = {
+            A: renderer.colors.cyan,
+            T: renderer.colors.magenta,
+            G: renderer.colors.green,
+            C: renderer.colors.yellow
+        };
+        this.lastSpawn = 0;
+        this.startTime = 0;
+        this.clickHandler = null;
+    }
+    
+    start() {
+        this.startTime = performance.now();
+        this.lastSpawn = this.startTime;
+        this.newTarget();
+        
+        // Setup click handler
+        this.clickHandler = (e) => this.handleClick(e);
+        this.engine.canvas.addEventListener('click', this.clickHandler);
+    }
+    
+    newTarget() {
+        const opts = ['A', 'T', 'G', 'C'];
+        this.target = opts[Math.floor(Math.random() * 4)];
+    }
+    
+    update(deltaTime) {
+        const now = performance.now();
+        
+        // Update timer
+        this.timeLeft = Math.max(0, 60 - (now - this.startTime) / 1000);
+        if (this.timeLeft <= 0) {
+            return this.engine.endGame();
+        }
+        
+        // Spawn bases
+        if (now - this.lastSpawn > 800) {
+            const opts = ['A', 'T', 'G', 'C'];
+            this.bases.push({
+                type: opts[Math.floor(Math.random() * 4)],
+                x: 50 + Math.random() * (this.engine.canvas.width - 100),
+                y: -30,
+                speed: 2 + Math.random()
+            });
+            this.lastSpawn = now;
+        }
+        
+        // Update bases
+        for (let i = this.bases.length - 1; i >= 0; i--) {
+            this.bases[i].y += this.bases[i].speed;
+            
+            // Remove if off screen
+            if (this.bases[i].y > this.engine.canvas.height) {
+                this.bases.splice(i, 1);
+                this.streak = 0;
+            }
+        }
+    }
+    
+    render(ctx) {
+        // Clear and draw background
+        this.engine.clearCanvas(ctx);
+        
+        // Draw target zone
+        renderer.drawTargetZone(
+            ctx,
+            0,
+            this.engine.canvas.height - 100,
+            this.engine.canvas.width,
+            100
+        );
+        
+        // Draw target
+        ctx.textAlign = 'center';
+        renderer.drawGlowText(
+            ctx,
+            this.target,
+            this.engine.canvas.width / 2,
+            this.engine.canvas.height - 40,
+            this.colors[this.target],
+            'bold 50px monospace',
+            20
+        );
+        
+        // Draw falling bases
+        ctx.font = 'bold 35px monospace';
+        this.bases.forEach(base => {
+            renderer.drawGlowText(
+                ctx,
+                base.type,
+                base.x,
+                base.y,
+                this.colors[base.type],
+                'bold 35px monospace',
+                15
+            );
+        });
+        
+        // Draw HUD
+        ctx.textAlign = 'left';
+        renderer.drawHUD(ctx, `SCORE: ${this.engine.score}`, 15, 30);
+        renderer.drawHUD(ctx, `STREAK: ${this.streak}x`, 15, 60);
+        renderer.drawHUD(ctx, `TIME: ${Math.ceil(this.timeLeft)}s`, 15, 90);
+        
+        // Draw instructions
+        ctx.font = renderer.fonts.text;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText(
+            `Click correct pair for: ${this.target} = ${this.pairs[this.target]}`,
+            15,
+            this.engine.canvas.height - 15
+        );
+    }
+    
+    handleClick(e) {
+        const rect = this.engine.canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Check if clicked on a base
+        for (let i = this.bases.length - 1; i >= 0; i--) {
+            const base = this.bases[i];
+            
+            if (Math.abs(x - base.x) < 25 && Math.abs(y - base.y) < 25) {
+                // Check if correct pair
+                if (base.type === this.pairs[this.target]) {
+                    this.streak++;
+                    this.engine.addScore(10 * this.streak);
+                    this.bases.splice(i, 1);
+                    this.newTarget();
+                } else {
+                    this.streak = 0;
+                }
+                break;
+            }
+        }
+    }
+    
+    destroy() {
+        // Clean up event listeners
+        if (this.clickHandler) {
+            this.engine.canvas.removeEventListener('click', this.clickHandler);
+        }
+    }
+}
+
+// Register game
+window.DNAMatcherGame = DNAMatcherGame;
+
+/**
+ * Cell Defense Game
+ * Tower defense - place defenders to stop pathogens
+ */
+
+class CellDefenseGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.pathogens = [];
+        this.defenders = [];
+        this.health = 100;
+        this.wave = 1;
+        this.lastSpawn = 0;
+        this.clickHandler = null;
+    }
+    
+    start() {
+        this.lastSpawn = performance.now();
+        this.clickHandler = (e) => this.handleClick(e);
+        this.engine.canvas.addEventListener('click', this.clickHandler);
+    }
+    
+    update(deltaTime) {
+        const now = performance.now();
+        
+        // Spawn pathogens
+        if (now - this.lastSpawn > 2000) {
+            this.pathogens.push({
+                x: -40,
+                y: 60 + Math.random() * (this.engine.canvas.height - 120),
+                vx: 1 + this.wave * 0.15,
+                hp: 2,
+                lastHit: 0
+            });
+            this.lastSpawn = now;
+        }
+        
+        // Update pathogens
+        for (let i = this.pathogens.length - 1; i >= 0; i--) {
+            const p = this.pathogens[i];
+            p.x += p.vx;
+            
+            // Check if reached cell zone
+            if (p.x > this.engine.canvas.width - 60) {
+                this.health -= 10;
+                this.pathogens.splice(i, 1);
+                if (this.health <= 0) {
+                    return this.engine.endGame();
+                }
+                continue;
+            }
+            
+            // Check defender attacks
+            this.defenders.forEach(d => {
+                const dist = Math.hypot(p.x - d.x, p.y - d.y);
+                if (dist < 120 && now - d.lastShot > 500) {
+                    p.hp--;
+                    d.lastShot = now;
+                }
+            });
+            
+            // Remove if dead
+            if (p.hp <= 0) {
+                this.engine.addScore(15 * this.wave);
+                this.pathogens.splice(i, 1);
+            }
+        }
+        
+        // Next wave
+        if (this.pathogens.length === 0 && now - this.lastSpawn > 3000) {
+            this.wave++;
+        }
+    }
+    
+    render(ctx) {
+        this.engine.clearCanvas(ctx);
+        
+        // Cell zone
+        ctx.fillStyle = 'rgba(0,255,136,0.15)';
+        ctx.fillRect(this.engine.canvas.width - 70, 0, 70, this.engine.canvas.height);
+        
+        // Defenders
+        this.defenders.forEach(d => {
+            renderer.drawGlowCircle(ctx, d.x, d.y, 15, renderer.colors.cyan, 15);
+        });
+        
+        // Pathogens
+        this.pathogens.forEach(p => {
+            renderer.drawGlowCircle(ctx, p.x, p.y, 18, renderer.colors.magenta, 15);
+        });
+        
+        // HUD
+        renderer.drawHUD(ctx, `SCORE: ${this.engine.score}`, 15, 30);
+        renderer.drawHUD(ctx, `HEALTH: ${this.health}%`, 15, 60);
+        renderer.drawHUD(ctx, `WAVE: ${this.wave}`, 15, 90);
+        
+        // Instructions
+        ctx.font = renderer.fonts.text;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('Click to place defender (Cost: 50 pts)', 15, this.engine.canvas.height - 15);
+    }
+    
+    handleClick(e) {
+        const rect = this.engine.canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (this.engine.score >= 50 && x < this.engine.canvas.width - 90) {
+            this.defenders.push({ x, y, lastShot: 0 });
+            this.engine.addScore(-50);
+        }
+    }
+    
+    destroy() {
+        if (this.clickHandler) {
+            this.engine.canvas.removeEventListener('click', this.clickHandler);
+        }
+    }
+}
+
+window.CellDefenseGame = CellDefenseGame;
+
+/**
+ * Protein Folder Game
+ * Tetris-style with rotation
+ */
+
+class ProteinFolderGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.grid = Array(10).fill().map(() => Array(16).fill(0));
+        this.piece = null;
+        this.px = 4;
+        this.py = 0;
+        this.lastDrop = 0;
+        this.colors = [
+            renderer.colors.cyan,
+            renderer.colors.magenta,
+            renderer.colors.green,
+            renderer.colors.yellow,
+            renderer.colors.purple,
+            renderer.colors.orange
+        ];
+        this.shapes = [
+            [[1,1,1,1]],
+            [[1,1],[1,1]],
+            [[1,1,1],[0,1,0]],
+            [[1,1,1],[1,0,0]],
+            [[1,1,1],[0,0,1]],
+            [[0,1,1],[1,1,0]],
+            [[1,1,0],[0,1,1]]
+        ];
+        this.keyHandler = null;
+    }
+    
+    start() {
+        this.newPiece();
+        this.lastDrop = performance.now();
+        this.keyHandler = (e) => this.handleKey(e);
+        document.addEventListener('keydown', this.keyHandler);
+    }
+    
+    newPiece() {
+        const idx = Math.floor(Math.random() * this.shapes.length);
+        this.piece = { shape: this.shapes[idx], color: this.colors[idx] };
+        this.px = 4;
+        this.py = 0;
+        
+        // Check if new piece collides immediately (game over condition)
+        if (this.collide(0, 0)) {
+            this.engine.endGame();
+        }
+    }
+    
+    update(deltaTime) {
+        const now = performance.now();
+        
+        if (now - this.lastDrop > 700) {
+            if (!this.collide(0, 1)) {
+                this.py++;
+            } else {
+                this.place();
+                this.clearLines();
+                this.newPiece();
+            }
+            this.lastDrop = now;
+        }
+    }
+    
+    render(ctx) {
+        this.engine.clearCanvas(ctx);
+        
+        const sz = 28;
+        const ox = (this.engine.canvas.width - 10 * sz) / 2;
+        const oy = 30;
+        
+        // Draw grid
+        renderer.drawGrid(ctx, ox, oy, 10, 16, sz);
+        
+        // Draw placed pieces
+        for (let x = 0; x < 10; x++) {
+            for (let y = 0; y < 16; y++) {
+                if (this.grid[x][y]) {
+                    ctx.fillStyle = this.grid[x][y];
+                    ctx.fillRect(ox + x * sz + 1, oy + y * sz + 1, sz - 2, sz - 2);
+                }
+            }
+        }
+        
+        // Draw current piece
+        if (this.piece) {
+            ctx.shadowBlur = 0;
+            for (let y = 0; y < this.piece.shape.length; y++) {
+                for (let x = 0; x < this.piece.shape[y].length; x++) {
+                    if (this.piece.shape[y][x]) {
+                        ctx.fillStyle = this.piece.color;
+                        ctx.fillRect(
+                            ox + (this.px + x) * sz + 1,
+                            oy + (this.py + y) * sz + 1,
+                            sz - 2,
+                            sz - 2
+                        );
+                    }
+                }
+            }
+        }
+        
+        // HUD
+        renderer.drawHUD(ctx, `SCORE: ${this.engine.score}`, 15, 25);
+        ctx.font = renderer.fonts.small;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('← → Move   ↓ Drop   ↑ SPACE Rotate', 15, this.engine.canvas.height - 10);
+    }
+    
+    collide(dx, dy) {
+        for (let y = 0; y < this.piece.shape.length; y++) {
+            for (let x = 0; x < this.piece.shape[y].length; x++) {
+                if (this.piece.shape[y][x]) {
+                    const nx = this.px + x + dx;
+                    const ny = this.py + y + dy;
+                    if (nx < 0 || nx >= 10 || ny >= 16) return true;
+                    if (ny >= 0 && this.grid[nx][ny]) return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    place() {
+        for (let y = 0; y < this.piece.shape.length; y++) {
+            for (let x = 0; x < this.piece.shape[y].length; x++) {
+                if (this.piece.shape[y][x]) {
+                    const nx = this.px + x;
+                    const ny = this.py + y;
+                    if (ny >= 0) this.grid[nx][ny] = this.piece.color;
+                }
+            }
+        }
+    }
+    
+    clearLines() {
+        for (let y = 15; y >= 0; y--) {
+            if (this.grid.every(col => col[y])) {
+                this.grid.forEach(col => { col.splice(y, 1); col.unshift(0); });
+                this.engine.addScore(100);
+                y++;
+            }
+        }
+    }
+    
+    rotate() {
+        const oldShape = this.piece.shape;
+        const rows = oldShape.length;
+        const cols = oldShape[0].length;
+        const newShape = [];
+        
+        for (let x = 0; x < cols; x++) {
+            const newRow = [];
+            for (let y = rows - 1; y >= 0; y--) {
+                newRow.push(oldShape[y][x]);
+            }
+            newShape.push(newRow);
+        }
+        
+        this.piece.shape = newShape;
+        if (this.collide(0, 0)) {
+            if (!this.collide(-1, 0)) this.px--;
+            else if (!this.collide(1, 0)) this.px++;
+            else this.piece.shape = oldShape;
+        }
+    }
+    
+    handleKey(e) {
+        if (e.key === 'ArrowLeft' && !this.collide(-1, 0)) this.px--;
+        if (e.key === 'ArrowRight' && !this.collide(1, 0)) this.px++;
+        if (e.key === 'ArrowDown' && !this.collide(0, 1)) {
+            this.py++;
+            this.engine.addScore(1);
+        }
+        if (e.key === 'ArrowUp' || e.key === ' ') {
+            e.preventDefault();
+            this.rotate();
+        }
+    }
+    
+    destroy() {
+        if (this.keyHandler) {
+            document.removeEventListener('keydown', this.keyHandler);
+        }
+    }
+}
+
+window.ProteinFolderGame = ProteinFolderGame;
+
+class OrganoidBuilderGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.cells = [];
+        this.nutrients = 100;
+        this.growth = 0;
+        this.target = 400;
+        this.types = {
+            stem: { cost: 10, g: 5, c: renderer.colors.cyan },
+            neural: { cost: 20, g: 12, c: renderer.colors.purple },
+            cardiac: { cost: 30, g: 18, c: renderer.colors.magenta }
+        };
+        this.sel = 'stem';
+        for (let i = 0; i < 4; i++) {
+            this.cells.push({
+                x: this.engine.canvas.width / 2 + (Math.random() - 0.5) * 60,
+                y: this.engine.canvas.height / 2 + (Math.random() - 0.5) * 60,
+                type: 'stem', size: 8, age: 0
+            });
+        }
+        this.clickHandler = null;
+        this.keyHandler = null;
+    }
+    start() {
+        this.clickHandler = (e) => this.handleClick(e);
+        this.engine.canvas.addEventListener('click', this.clickHandler);
+        
+        // Add keyboard handler for cell type selection
+        this.keyHandler = (e) => this.handleKey(e);
+        document.addEventListener('keydown', this.keyHandler);
+    }
+    update(deltaTime) {
+        this.nutrients = Math.min(100, this.nutrients + 0.08);
+        for (let i = this.cells.length - 1; i >= 0; i--) {
+            const c = this.cells[i];
+            c.age += 0.1;
+            if (this.nutrients > 15) {
+                this.growth += this.types[c.type].g * 0.008;
+                c.size = Math.min(14, 8 + c.age * 0.08);
+            }
+            this.nutrients -= 0.04;
+            if (c.age > 80 && Math.random() < 0.002 && this.cells.length < 25) {
+                const a = Math.random() * Math.PI * 2;
+                this.cells.push({
+                    x: c.x + Math.cos(a) * 30, y: c.y + Math.sin(a) * 30,
+                    type: c.type, size: 8, age: 0
+                });
+                this.engine.addScore(5);
+            }
+            if (this.nutrients < 0) this.cells.splice(i, 1);
+        }
+        if (this.nutrients < 0 || this.growth >= this.target) {
+            if (this.growth >= this.target) this.engine.addScore(500);
+            return this.engine.endGame();
+        }
+    }
+    render(ctx) {
+        this.engine.clearCanvas(ctx);
+        renderer.drawRing(ctx, this.engine.canvas.width / 2, this.engine.canvas.height / 2, 180, 'rgba(0,255,255,0.25)', 2);
+        this.cells.forEach(c => {
+            ctx.globalAlpha = 0.5;
+            renderer.drawGlowCircle(ctx, c.x, c.y, c.size, this.types[c.type].c, 12);
+            ctx.globalAlpha = 1;
+        });
+        renderer.drawHUD(ctx, `GROWTH: ${Math.floor(this.growth)}/${this.target}`, 15, 25);
+        renderer.drawHUD(ctx, `NUTRIENTS: ${Math.floor(this.nutrients)}%`, 15, 50);
+        renderer.drawHUD(ctx, `CELLS: ${this.cells.length}`, 15, 75);
+        let y = 100;
+        ctx.font = 'bold 14px monospace';
+        Object.entries(this.types).forEach(([name, cfg]) => {
+            const sel = name === this.sel;
+            ctx.fillStyle = sel ? cfg.c : 'rgba(255,255,255,0.3)';
+            ctx.fillText(`[${sel ? 'X' : ' '}] ${name} (${cfg.cost})`, 15, y);
+            y += 22;
+        });
+        ctx.font = renderer.fonts.small;
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+        ctx.fillText('123 = Select  Click dish to add cell', 15, this.engine.canvas.height - 10);
+    }
+    handleClick(e) {
+        const rect = this.engine.canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cfg = this.types[this.sel];
+        const dx = x - this.engine.canvas.width / 2;
+        const dy = y - this.engine.canvas.height / 2;
+        if (Math.hypot(dx, dy) < 180 && this.engine.score >= cfg.cost && this.cells.length < 25) {
+            this.cells.push({ x, y, type: this.sel, size: 8, age: 0 });
+            this.engine.addScore(-cfg.cost);
+        }
+    }
+    handleKey(e) {
+        // Allow number keys 1, 2, 3 to select cell types
+        if (e.key === '1') this.sel = 'stem';
+        if (e.key === '2') this.sel = 'neural';
+        if (e.key === '3') this.sel = 'cardiac';
+    }
+    destroy() {
+        if (this.clickHandler) this.engine.canvas.removeEventListener('click', this.clickHandler);
+        if (this.keyHandler) document.removeEventListener('keydown', this.keyHandler);
+    }
+}
+window.OrganoidBuilderGame = OrganoidBuilderGame;
+
+class CRISPRSniperGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.targets = [];
+        this.cx = 0; this.cy = 0;
+        this.acc = 100;
+        this.edits = 0;
+        this.needed = 12;
+        this.mouseMoveHandler = null;
+        this.clickHandler = null;
+    }
+    start() {
+        this.spawnTarget();
+        this.mouseMoveHandler = (e) => {
+            const r = this.engine.canvas.getBoundingClientRect();
+            this.cx = e.clientX - r.left;
+            this.cy = e.clientY - r.top;
+        };
+        this.clickHandler = (e) => this.handleClick(e);
+        this.engine.canvas.addEventListener('mousemove', this.mouseMoveHandler);
+        this.engine.canvas.addEventListener('click', this.clickHandler);
+    }
+    spawnTarget() {
+        if (this.targets.length < 2) {
+            this.targets.push({
+                x: 100 + Math.random() * (this.engine.canvas.width - 200),
+                y: 100 + Math.random() * (this.engine.canvas.height - 200),
+                size: 45, shrink: false, speed: 0.35,
+                color: [renderer.colors.cyan, renderer.colors.magenta, renderer.colors.green][Math.floor(Math.random() * 3)]
+            });
+        }
+    }
+    update(deltaTime) {
+        for (let i = this.targets.length - 1; i >= 0; i--) {
+            const t = this.targets[i];
+            if (!t.shrink) {
+                t.size += t.speed;
+                if (t.size >= 55) t.shrink = true;
+            } else {
+                t.size -= t.speed;
+                if (t.size <= 0) {
+                    this.targets.splice(i, 1);
+                    this.acc = Math.max(0, this.acc - 5);
+                }
+            }
+        }
+        if (Math.random() < 0.012) this.spawnTarget();
+        if (this.edits >= this.needed) {
+            this.engine.addScore(Math.floor(this.acc * 8));
+            return this.engine.endGame();
+        }
+        if (this.acc <= 0) return this.engine.endGame();
+    }
+    render(ctx) {
+        this.engine.clearCanvas(ctx);
+        this.targets.forEach(t => {
+            renderer.drawRing(ctx, t.x, t.y, t.size, 'rgba(255,255,255,0.25)', 2);
+            renderer.drawRing(ctx, t.x, t.y, 6, t.color, 4, 15);
+        });
+        renderer.drawCrosshair(ctx, this.cx, this.cy);
+        renderer.drawHUD(ctx, `EDITS: ${this.edits}/${this.needed}`, 15, 30);
+        renderer.drawHUD(ctx, `ACCURACY: ${Math.floor(this.acc)}%`, 15, 60);
+        renderer.drawHUD(ctx, `SCORE: ${this.engine.score}`, 15, 90);
+        ctx.font = renderer.fonts.text;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('Click when rings align!', 15, this.engine.canvas.height - 10);
+    }
+    handleClick(e) {
+        const r = this.engine.canvas.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        for (let i = this.targets.length - 1; i >= 0; i--) {
+            const t = this.targets[i];
+            const dist = Math.hypot(x - t.x, y - t.y);
+            if (dist < t.size) {
+                const prec = 1 - dist / t.size;
+                this.engine.addScore(Math.floor(prec * 120));
+                this.edits++;
+                this.targets.splice(i, 1);
+                return;
+            }
+        }
+        this.acc = Math.max(0, this.acc - 3);
+    }
+    destroy() {
+        if (this.mouseMoveHandler) this.engine.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
+        if (this.clickHandler) this.engine.canvas.removeEventListener('click', this.clickHandler);
+    }
+}
+window.CRISPRSniperGame = CRISPRSniperGame;
+
+class ImmuneRushGame {
+    constructor(engine) {
+        this.engine = engine;
+        this.antigens = [];
+        this.antibodies = { A: 6, B: 6, C: 6 };
+        this.sel = 'A';
+        this.health = 100;
+        this.wave = 1;
+        this.lastSpawn = 0;
+        this.colors = {
+            A: renderer.colors.cyan,
+            B: renderer.colors.magenta,
+            C: renderer.colors.green
+        };
+        this.clickHandler = null;
+    }
+    start() {
+        this.lastSpawn = performance.now();
+        this.clickHandler = (e) => this.handleClick(e);
+        this.engine.canvas.addEventListener('click', this.clickHandler);
+    }
+    update(deltaTime) {
+        const now = performance.now();
+        if (now - this.lastSpawn > 1300) {
+            const types = ['A', 'B', 'C'];
+            const type = types[Math.floor(Math.random() * 3)];
+            this.antigens.push({
+                type, x: 40 + Math.random() * (this.engine.canvas.width - 80),
+                y: -30, vy: 1.2 + this.wave * 0.12, color: this.colors[type]
+            });
+            this.lastSpawn = now;
+        }
+        for (let i = this.antigens.length - 1; i >= 0; i--) {
+            const a = this.antigens[i];
+            a.y += a.vy;
+            if (a.y > this.engine.canvas.height) {
+                this.antigens.splice(i, 1);
+                this.health -= 10;
+                if (this.health <= 0) return this.engine.endGame();
+            }
+        }
+        if (this.antigens.length === 0 && now - this.lastSpawn > 3500) {
+            this.wave++;
+            this.antibodies.A = Math.min(12, this.antibodies.A + 2);
+            this.antibodies.B = Math.min(12, this.antibodies.B + 2);
+            this.antibodies.C = Math.min(12, this.antibodies.C + 2);
+        }
+    }
+    render(ctx) {
+        this.engine.clearCanvas(ctx);
+        ctx.font = 'bold 30px monospace';
+        ctx.textAlign = 'center';
+        this.antigens.forEach(a => {
+            renderer.drawGlowText(ctx, a.type, a.x, a.y, a.color, 'bold 30px monospace', 15);
+        });
+        ctx.fillStyle = 'rgba(0,0,0,0.75)';
+        ctx.fillRect(0, this.engine.canvas.height - 70, this.engine.canvas.width, 70);
+        ctx.font = 'bold 18px monospace';
+        let x = 80;
+        ['A', 'B', 'C'].forEach(type => {
+            const sel = type === this.sel;
+            ctx.fillStyle = sel ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)';
+            ctx.fillRect(x - 40, this.engine.canvas.height - 58, 80, 48);
+            ctx.fillStyle = this.colors[type];
+            ctx.shadowBlur = sel ? 12 : 0;
+            ctx.shadowColor = this.colors[type];
+            ctx.fillText(`${type} (${this.antibodies[type]})`, x, this.engine.canvas.height - 28);
+            ctx.shadowBlur = 0;
+            x += 120;
+        });
+        ctx.textAlign = 'left';
+        renderer.drawHUD(ctx, `SCORE: ${this.engine.score}`, 15, 28);
+        renderer.drawHUD(ctx, `HEALTH: ${this.health}%`, 15, 56);
+        renderer.drawHUD(ctx, `WAVE: ${this.wave}`, 15, 84);
+        ctx.font = renderer.fonts.small;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('Click antibody, then matching antigen', 15, this.engine.canvas.height - 75);
+    }
+    handleClick(e) {
+        const r = this.engine.canvas.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        ['A', 'B', 'C'].forEach((type, i) => {
+            const bx = 80 + i * 120;
+            if (Math.abs(x - bx) < 40 && y > this.engine.canvas.height - 70) {
+                if (this.antibodies[type] > 0) this.sel = type;
+            }
+        });
+        if (this.antibodies[this.sel] > 0) {
+            for (let i = this.antigens.length - 1; i >= 0; i--) {
+                const a = this.antigens[i];
+                if (Math.abs(x - a.x) < 20 && Math.abs(y - a.y) < 20) {
+                    if (a.type === this.sel) {
+                        this.engine.addScore(25 * this.wave);
+                        this.antigens.splice(i, 1);
+                        this.antibodies[this.sel]--;
+                    }
+                    return;
+                }
+            }
+        }
+    }
+    destroy() {
+        if (this.clickHandler) this.engine.canvas.removeEventListener('click', this.clickHandler);
+    }
+}
+window.ImmuneRushGame = ImmuneRushGame;
+
+/**
+ * BioTech Games - Main Coordinator
+ * Initializes engine, creates menu, handles game lifecycle
+ */
+
+// Game configurations
+const GAMES = {
+    dna: {
+        title: 'DNA MATCHER',
+        name: 'DNA Matcher',
+        desc: 'Match base pairs fast!',
+        icon: `
+            <div class="icon icon-dna">
+                <div class="strand" style="top: 20px;"></div>
+                <div class="strand" style="top: 40px;"></div>
+                <div class="strand" style="top: 60px;"></div>
+            </div>
+        `,
+        class: DNAMatcherGame
+    },
+    cell: {
+        title: 'CELL DEFENSE',
+        name: 'Cell Defense',
+        desc: 'Stop the pathogens!',
+        icon: '<div class="icon icon-cell"></div>',
+        class: CellDefenseGame
+    },
+    protein: {
+        title: 'PROTEIN FOLDER',
+        name: 'Protein Folder',
+        desc: 'Fold amino acids!',
+        icon: `
+            <div class="icon icon-protein">
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+            </div>
+        `,
+        class: ProteinFolderGame
+    },
+    organoid: {
+        title: 'ORGANOID BUILDER',
+        name: 'Organoid Builder',
+        desc: 'Grow living tissue!',
+        icon: `
+            <div class="icon icon-organoid">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        `,
+        class: OrganoidBuilderGame
+    },
+    crispr: {
+        title: 'CRISPR SNIPER',
+        name: 'CRISPR Sniper',
+        desc: 'Edit genes precisely!',
+        icon: `
+            <div class="icon icon-crispr">
+                <div class="ring"></div>
+                <div class="ring"></div>
+            </div>
+        `,
+        class: CRISPRSniperGame
+    },
+    immune: {
+        title: 'IMMUNE RUSH',
+        name: 'Immune Rush',
+        desc: 'Match antibodies!',
+        icon: `
+            <div class="icon icon-immune">
+                <div class="arm"></div>
+                <div class="arm"></div>
+                <div class="tip"></div>
+                <div class="tip"></div>
+                <div class="tip"></div>
+            </div>
+        `,
+        class: ImmuneRushGame
+    }
+};
+
+/**
+ * Create menu cards
+ */
+function createMenu() {
+    const menu = document.getElementById('menu');
+    
+    Object.entries(GAMES).forEach(([key, game]) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            ${game.icon}
+            <h3>${game.name}</h3>
+            <p>${game.desc}</p>
+            <div class="hs">High: <span id="h-${key}">0</span></div>
+        `;
+        
+        card.addEventListener('click', () => startGame(key));
+        menu.appendChild(card);
+    });
+}
+
+/**
+ * Start a game
+ */
+function startGame(type) {
+    const game = GAMES[type];
+    if (!game) return console.error(`Unknown game: ${type}`);
+    
+    // Hide menu, show game
+    document.getElementById('menu-screen').style.display = 'none';
+    document.getElementById('game').classList.add('active');
+    document.getElementById('title').textContent = game.title;
+    
+    // Start game with engine
+    engine.startGame(type, game.class);
+    
+    console.log(`Started: ${game.name}`);
+}
+
+/**
+ * Back to menu
+ */
+function backToMenu() {
+    engine.stopGame();
+    document.getElementById('game').classList.remove('active');
+    document.getElementById('over').classList.remove('active');
+    document.getElementById('menu-screen').style.display = 'block';
+    engine.updateHighScoreDisplay();
+}
+
+/**
+ * Restart current game
+ */
+function restart() {
+    document.getElementById('over').classList.remove('active');
+    const type = engine.gameType;
+    if (type && GAMES[type]) {
+        engine.startGame(type, GAMES[type].class);
+    }
+}
+
+/**
+ * Initialize app
+ */
+function init() {
+    // Initialize engine
+    engine.init();
+    
+    // Create menu
+    createMenu();
+    
+    // Update high score displays
+    engine.updateHighScoreDisplay();
+    
+    // Setup button handlers
+    document.getElementById('btn-back').addEventListener('click', backToMenu);
+    document.getElementById('btn-restart').addEventListener('click', restart);
+    document.getElementById('btn-play-again').addEventListener('click', restart);
+    document.getElementById('btn-menu').addEventListener('click', backToMenu);
+    
+    console.log('BioTech Games Initialized');
+    console.log('- Engine: Ready');
+    console.log('- Renderer: Ready');
+    console.log('- Games: ' + Object.keys(GAMES).length);
+}
+
+// Start when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+    </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

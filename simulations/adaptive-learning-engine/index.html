@@ -1,0 +1,1268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+    <title>Adaptive Learning Engine | Patient Analog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; max-width: 100vw; }
+        #live-ticker, .live-ticker-bar, .live-ticker-inner {
+            overflow: hidden !important;
+            max-width: 100vw !important;
+            position: relative;
+            width: 100% !important;
+        }
+        .ticker-scroll, .ticker-scroll-content, .live-ticker-items {
+            max-width: 100vw !important;
+            overflow: hidden !important;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a1a2a 0%, #1a2a4a 50%, #2a3a6a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            max-width: 100vw;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; padding-top: 80px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #00d4aa, #00ffcc, #88ffdd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { font-size: 1.2em; color: #00d4aa; opacity: 0.9; margin-top: 10px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 400px; gap: 20px; }
+
+        /* Quiz Container */
+        .quiz-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 212, 170, 0.4);
+            padding: 30px;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Flow State Indicator */
+        .flow-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .flow-label {
+            font-size: 1.1em;
+            color: #88ffdd;
+            font-weight: bold;
+        }
+        .flow-state {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .flow-bored { background: linear-gradient(135deg, #666, #888); color: #ddd; }
+        .flow-anxious { background: linear-gradient(135deg, #ff4444, #ff6666); color: #fff; }
+        .flow-optimal {
+            background: linear-gradient(135deg, #00d4aa, #00ffcc);
+            color: #0a1a2a;
+            box-shadow: 0 0 20px rgba(0, 212, 170, 0.6);
+            animation: flowPulse 2s ease-in-out infinite;
+        }
+        @keyframes flowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 170, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 170, 0.9); }
+        }
+
+        /* Difficulty Badge */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .diff-easy { background: #22aa44; color: #fff; }
+        .diff-medium { background: #ff9900; color: #000; }
+        .diff-hard { background: #ff4444; color: #fff; }
+        .diff-expert { background: linear-gradient(135deg, #8800ff, #ff00ff); color: #fff; }
+
+        /* Question Display */
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .question-number {
+            font-size: 0.9em;
+            color: #00d4aa;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+        .timer-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .timer-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4aa, #00ffcc);
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+        .timer-fill.warning { background: linear-gradient(90deg, #ff9900, #ffcc00); }
+        .timer-fill.danger { background: linear-gradient(90deg, #ff4444, #ff6666); }
+
+        /* Answer Options */
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .answer-btn {
+            background: rgba(0, 212, 170, 0.1);
+            border: 2px solid rgba(0, 212, 170, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #fff;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        .answer-btn:hover {
+            background: rgba(0, 212, 170, 0.2);
+            border-color: #00d4aa;
+            transform: translateY(-2px);
+        }
+        .answer-btn.selected {
+            background: rgba(0, 212, 170, 0.3);
+            border-color: #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 212, 170, 0.4);
+        }
+        .answer-btn.correct {
+            background: rgba(34, 170, 68, 0.4);
+            border-color: #22aa44;
+            animation: correctPulse 0.5s ease;
+        }
+        .answer-btn.incorrect {
+            background: rgba(255, 68, 68, 0.4);
+            border-color: #ff4444;
+            animation: incorrectShake 0.5s ease;
+        }
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        @keyframes incorrectShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Feedback Area */
+        .feedback-area {
+            min-height: 80px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: auto;
+        }
+        .feedback-text {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        .feedback-positive { color: #00ffcc; }
+        .feedback-negative { color: #ff6666; }
+        .feedback-neutral { color: #88aaff; }
+
+        /* Controls Panel */
+        .controls {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 212, 170, 0.4);
+        }
+        .control-section { margin-bottom: 25px; }
+        .control-section h3 {
+            color: #00d4aa;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid rgba(0, 212, 170, 0.3);
+            padding-bottom: 8px;
+        }
+        button {
+            background: linear-gradient(135deg, #1a2a4a, #2a3a6a);
+            color: #fff;
+            border: 2px solid #00d4aa;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            border-color: #00ffcc;
+            box-shadow: 0 0 20px rgba(0, 212, 170, 0.5);
+        }
+        button.active {
+            background: linear-gradient(135deg, #00d4aa, #00ffcc);
+            color: #0a1a2a;
+            font-weight: bold;
+        }
+
+        /* Real-time Metrics */
+        .metrics-panel {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 212, 170, 0.3);
+            margin-bottom: 20px;
+        }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 212, 170, 0.2);
+        }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-label {
+            font-size: 0.9em;
+            color: #88ffdd;
+        }
+        .metric-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .metric-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .metric-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .fill-green { background: linear-gradient(90deg, #22aa44, #44cc66); }
+        .fill-yellow { background: linear-gradient(90deg, #ff9900, #ffcc00); }
+        .fill-red { background: linear-gradient(90deg, #ff4444, #ff6666); }
+        .fill-blue { background: linear-gradient(90deg, #4488ff, #88aaff); }
+        .fill-purple { background: linear-gradient(90deg, #8800ff, #aa44ff); }
+
+        /* Skill Mastery Visualization */
+        .mastery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .skill-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid rgba(0, 212, 170, 0.2);
+            transition: all 0.3s ease;
+        }
+        .skill-card.mastered {
+            border-color: #00d4aa;
+            background: rgba(0, 212, 170, 0.15);
+        }
+        .skill-name {
+            font-size: 0.75em;
+            color: #88ffdd;
+            margin-bottom: 8px;
+        }
+        .skill-ring {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .skill-ring svg {
+            transform: rotate(-90deg);
+        }
+        .skill-ring circle {
+            fill: none;
+            stroke-width: 4;
+        }
+        .skill-ring .bg { stroke: rgba(255, 255, 255, 0.1); }
+        .skill-ring .progress {
+            stroke: #00d4aa;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        .skill-percent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Streak Display */
+        .streak-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .streak-icon {
+            font-size: 1.5em;
+        }
+        .streak-count {
+            font-size: 2em;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+        .streak-label {
+            font-size: 0.9em;
+            color: #88ffdd;
+        }
+        .streak-fire {
+            animation: fireGlow 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes fireGlow {
+            from { text-shadow: 0 0 10px #ff6600; }
+            to { text-shadow: 0 0 20px #ffaa00, 0 0 30px #ff6600; }
+        }
+
+        /* History Log */
+        .history-log {
+            max-height: 150px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            font-size: 0.85em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .history-item:last-child { border-bottom: none; }
+        .history-icon { font-size: 1em; }
+        .history-correct { color: #22aa44; }
+        .history-incorrect { color: #ff4444; }
+
+        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+            body { overflow-x: hidden; }
+            canvas, #gameCanvas, .game-canvas, #simulationCanvas {
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: auto !important;
+                touch-action: none;
+            }
+            button, .btn, .sim-btn, .control-btn {
+                min-height: 48px !important;
+                min-width: 48px !important;
+                padding: 12px 24px !important;
+                font-size: 16px !important;
+            }
+            .simulation-container, .sim-container, .container {
+                width: 100% !important;
+                max-width: 100vw !important;
+                padding: 10px !important;
+            }
+            .controls, .control-panel {
+                flex-wrap: wrap !important;
+                gap: 10px !important;
+            }
+            input[type="range"] {
+                width: 100% !important;
+                min-height: 44px !important;
+            }
+            h1, .title { font-size: 1.5rem !important; }
+            h2 { font-size: 1.2rem !important; }
+            .info-panel, .stats-panel {
+                font-size: 14px !important;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+            .mastery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+  <link rel="canonical" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Adaptive Learning Engine | Patient Analog",
+    "description": "Biotech education platform for microphysiological systems and organ-on-chip technology",
+    "url": "https://patientanalog.com/simulations/adaptive-learning-engine.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Patient Analog"
+    }
+  }
+  </script>
+
+  <!-- Hreflang Tags for International SEO -->
+  <link rel="alternate" hreflang="en" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="en-US" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="en-GB" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="es" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="fr" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="de" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="it" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="pt" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="ja" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="ko" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="zh" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="ar" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+  <link rel="alternate" hreflang="x-default" href="https://patientanalog.com/simulations/adaptive-learning-engine">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+    <div class="container">
+        <header>
+            <h1>Adaptive Learning Engine</h1>
+            <p class="subtitle">Dynamic Difficulty Adjustment and Personalized Learning Simulation</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="quiz-container">
+                <!-- Flow State Indicator -->
+                <div class="flow-indicator">
+                    <span class="flow-label">Flow State:</span>
+                    <span class="flow-state flow-optimal" id="flow-state">OPTIMAL</span>
+                </div>
+
+                <!-- Question Area -->
+                <div class="question-area">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span class="question-number" id="question-number">Question 1 of 10</span>
+                        <span class="difficulty-badge diff-medium" id="difficulty-badge">MEDIUM</span>
+                    </div>
+
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer-fill" style="width: 100%;"></div>
+                    </div>
+
+                    <div class="question-text" id="question-text">
+                        Loading question...
+                    </div>
+
+                    <div class="answers-grid" id="answers-grid">
+                        <button class="answer-btn" data-index="0">Option A</button>
+                        <button class="answer-btn" data-index="1">Option B</button>
+                        <button class="answer-btn" data-index="2">Option C</button>
+                        <button class="answer-btn" data-index="3">Option D</button>
+                    </div>
+
+                    <div class="feedback-area">
+                        <div class="feedback-text feedback-neutral" id="feedback-text">
+                            Select an answer to continue. The system will adapt to your performance in real-time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <!-- Streak Display -->
+                <div class="streak-display">
+                    <span class="streak-icon" id="streak-icon">&#128293;</span>
+                    <div>
+                        <div class="streak-count" id="streak-count">0</div>
+                        <div class="streak-label">Current Streak</div>
+                    </div>
+                </div>
+
+                <!-- Real-time Metrics -->
+                <div class="metrics-panel">
+                    <h3 style="color: #00d4aa; margin-bottom: 15px; font-size: 1.1em;">Real-Time Metrics</h3>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Accuracy</span>
+                        <span class="metric-value" id="accuracy-value">0%</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-fill fill-green" id="accuracy-bar" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="metric-row" style="margin-top: 15px;">
+                        <span class="metric-label">Avg Response Time</span>
+                        <span class="metric-value" id="response-time-value">0.0s</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-fill fill-blue" id="response-time-bar" style="width: 50%;"></div>
+                    </div>
+
+                    <div class="metric-row" style="margin-top: 15px;">
+                        <span class="metric-label">Engagement Level</span>
+                        <span class="metric-value" id="engagement-value">High</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-fill fill-purple" id="engagement-bar" style="width: 80%;"></div>
+                    </div>
+
+                    <div class="metric-row" style="margin-top: 15px;">
+                        <span class="metric-label">Frustration Level</span>
+                        <span class="metric-value" id="frustration-value">Low</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-fill fill-red" id="frustration-bar" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Mastery -->
+                <div class="control-section">
+                    <h3>Skill Mastery</h3>
+                    <div class="mastery-grid" id="mastery-grid">
+                        <!-- Skills will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Answer History -->
+                <div class="control-section">
+                    <h3>Recent Answers</h3>
+                    <div class="history-log" id="history-log">
+                        <div class="history-item" style="color: #888;">No answers yet...</div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="control-section">
+                    <h3>Session Controls</h3>
+                    <button onclick="startNewSession()" id="start-btn">Start New Session</button>
+                    <button onclick="togglePause()" id="pause-btn">Pause</button>
+                    <button onclick="resetProgress()">Reset All Progress</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // ADAPTIVE LEARNING ENGINE SIMULATION
+        // ============================================
+
+        // Player State
+        const playerState = {
+            accuracy: 0,
+            totalCorrect: 0,
+            totalAnswered: 0,
+            streak: 0,
+            maxStreak: 0,
+            averageResponseTime: 0,
+            responseTimes: [],
+            frustrationLevel: 0,
+            engagementLevel: 80,
+            currentDifficulty: 2, // 1-4 (Easy, Medium, Hard, Expert)
+            flowState: 'optimal', // bored, anxious, optimal
+            skillMastery: {},
+            history: []
+        };
+
+        // Skill Categories
+        const skills = [
+            { id: 'biology', name: 'Biology', mastery: 0 },
+            { id: 'chemistry', name: 'Chemistry', mastery: 0 },
+            { id: 'physics', name: 'Physics', mastery: 0 },
+            { id: 'math', name: 'Math', mastery: 0 },
+            { id: 'logic', name: 'Logic', mastery: 0 },
+            { id: 'memory', name: 'Memory', mastery: 0 }
+        ];
+
+        // Question Database (organized by difficulty and skill)
+        const questionDatabase = {
+            easy: [
+                { q: "What is the powerhouse of the cell?", answers: ["Mitochondria", "Nucleus", "Ribosome", "Golgi Body"], correct: 0, skill: "biology" },
+                { q: "What is H2O commonly known as?", answers: ["Water", "Oxygen", "Hydrogen", "Carbon Dioxide"], correct: 0, skill: "chemistry" },
+                { q: "What force keeps us on the ground?", answers: ["Gravity", "Magnetism", "Friction", "Pressure"], correct: 0, skill: "physics" },
+                { q: "What is 15 + 27?", answers: ["42", "40", "43", "41"], correct: 0, skill: "math" },
+                { q: "If all roses are flowers, and some flowers fade quickly, can we say all roses fade quickly?", answers: ["No, we cannot", "Yes, definitely", "Only in summer", "It depends"], correct: 0, skill: "logic" },
+                { q: "Complete the sequence: 2, 4, 6, 8, ?", answers: ["10", "9", "11", "12"], correct: 0, skill: "memory" }
+            ],
+            medium: [
+                { q: "What type of blood cell carries oxygen?", answers: ["Red blood cells", "White blood cells", "Platelets", "Plasma"], correct: 0, skill: "biology" },
+                { q: "What is the atomic number of Carbon?", answers: ["6", "8", "12", "14"], correct: 0, skill: "chemistry" },
+                { q: "What is the speed of light in a vacuum (approximately)?", answers: ["300,000 km/s", "150,000 km/s", "450,000 km/s", "600,000 km/s"], correct: 0, skill: "physics" },
+                { q: "What is the square root of 144?", answers: ["12", "14", "11", "13"], correct: 0, skill: "math" },
+                { q: "If A implies B, and B implies C, then A implies:", answers: ["C", "B only", "Nothing", "A"], correct: 0, skill: "logic" },
+                { q: "What comes next: 1, 1, 2, 3, 5, 8, ?", answers: ["13", "11", "12", "14"], correct: 0, skill: "memory" }
+            ],
+            hard: [
+                { q: "What enzyme is responsible for DNA replication?", answers: ["DNA Polymerase", "RNA Polymerase", "Helicase", "Ligase"], correct: 0, skill: "biology" },
+                { q: "What is the electron configuration of Nitrogen?", answers: ["1s2 2s2 2p3", "1s2 2s2 2p4", "1s2 2s2 2p2", "1s2 2s1 2p4"], correct: 0, skill: "chemistry" },
+                { q: "What is the formula for kinetic energy?", answers: ["(1/2)mv^2", "mv^2", "mgh", "Fd"], correct: 0, skill: "physics" },
+                { q: "What is the derivative of sin(x)?", answers: ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"], correct: 0, skill: "math" },
+                { q: "In propositional logic, what is the contrapositive of 'If P then Q'?", answers: ["If not Q then not P", "If Q then P", "If not P then not Q", "P and Q"], correct: 0, skill: "logic" },
+                { q: "Memorize and recall: 7, 3, 9, 1, 5 - What was the third number?", answers: ["9", "3", "1", "5"], correct: 0, skill: "memory" }
+            ],
+            expert: [
+                { q: "What is the Michaelis-Menten constant (Km) a measure of?", answers: ["Enzyme affinity for substrate", "Maximum reaction rate", "Enzyme concentration", "Product inhibition"], correct: 0, skill: "biology" },
+                { q: "What is the hybridization of carbon in benzene?", answers: ["sp2", "sp3", "sp", "sp3d"], correct: 0, skill: "chemistry" },
+                { q: "In quantum mechanics, what does the Heisenberg Uncertainty Principle state?", answers: ["Position and momentum cannot both be precisely known", "Energy is conserved", "Matter has wave properties", "Light is quantized"], correct: 0, skill: "physics" },
+                { q: "What is the integral of e^x * cos(x)?", answers: ["(e^x/2)(sin(x) + cos(x)) + C", "e^x * sin(x) + C", "e^x * cos(x) + C", "(e^x)(sin(x) - cos(x)) + C"], correct: 0, skill: "math" },
+                { q: "In Godel's incompleteness theorems, what is proven about consistent formal systems?", answers: ["They cannot prove their own consistency", "They are complete", "They have no axioms", "They are decidable"], correct: 0, skill: "logic" },
+                { q: "After seeing: 42, 17, 85, 93, 28, 64 - What was the sum of the 2nd and 5th numbers?", answers: ["45", "42", "47", "50"], correct: 0, skill: "memory" }
+            ]
+        };
+
+        // Timer variables
+        let timerInterval = null;
+        let timeRemaining = 20;
+        let maxTime = 20;
+        let questionStartTime = 0;
+        let isSessionActive = false;
+        let isPaused = false;
+        let currentQuestion = null;
+        let questionNumber = 0;
+
+        // Personalized feedback messages
+        const feedbackMessages = {
+            correctStreak: [
+                "Fantastic! Your streak is building momentum!",
+                "You're on fire! Keep this energy going!",
+                "Excellent work! The system is increasing difficulty to match your skills.",
+                "Perfect! Your mastery is showing clear improvement."
+            ],
+            correct: [
+                "Well done! That's the right answer.",
+                "Correct! Your accuracy is improving.",
+                "Great job! Moving to the next challenge.",
+                "Right! You're making solid progress."
+            ],
+            incorrect: [
+                "Not quite. Take your time on the next one.",
+                "That's okay. Learning happens through mistakes too.",
+                "Incorrect, but don't worry - difficulty is adjusting.",
+                "Wrong answer. Let's try a different approach."
+            ],
+            incorrectStreak: [
+                "I notice you're struggling. Let me make this easier.",
+                "Having trouble? The system is adapting to help you.",
+                "Take a breath. I'm adjusting the difficulty for you.",
+                "It's okay to find this challenging. I'm here to help."
+            ],
+            timeout: [
+                "Time's up! Try to answer a bit faster next time.",
+                "The timer ran out. Speed is improving with practice.",
+                "Timeout! The system noted your response time."
+            ],
+            flowOptimal: [
+                "You're in the zone! Perfect balance of challenge and skill.",
+                "Optimal flow state detected. Maximum learning efficiency!",
+                "This is the sweet spot - challenging but achievable."
+            ],
+            flowAnxious: [
+                "Detected some difficulty. Reducing challenge level.",
+                "Let's slow down and build confidence.",
+                "Adjusting difficulty to reduce frustration."
+            ],
+            flowBored: [
+                "You seem to be finding this easy. Increasing the challenge!",
+                "Time to step it up - more difficult questions incoming.",
+                "Your accuracy suggests you're ready for harder challenges."
+            ]
+        };
+
+        // Initialize the simulation
+        function init() {
+            initSkillCards();
+            generateQuestion();
+            updateAllDisplays();
+            setupAnswerListeners();
+        }
+
+        // Initialize skill mastery cards
+        function initSkillCards() {
+            const grid = document.getElementById('mastery-grid');
+            grid.innerHTML = '';
+
+            skills.forEach(skill => {
+                playerState.skillMastery[skill.id] = 0;
+
+                const card = document.createElement('div');
+                card.className = 'skill-card';
+                card.id = `skill-${skill.id}`;
+                card.innerHTML = `
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-ring">
+                        <svg width="50" height="50">
+                            <circle class="bg" cx="25" cy="25" r="20"></circle>
+                            <circle class="progress" cx="25" cy="25" r="20"
+                                    stroke-dasharray="125.6"
+                                    stroke-dashoffset="125.6"
+                                    id="skill-ring-${skill.id}"></circle>
+                        </svg>
+                        <span class="skill-percent" id="skill-percent-${skill.id}">0%</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Setup answer button listeners
+        function setupAnswerListeners() {
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.addEventListener('click', () => handleAnswer(index));
+            });
+        }
+
+        // Generate a new question based on current difficulty
+        function generateQuestion() {
+            if (!isSessionActive) return;
+
+            questionNumber++;
+            const difficulties = ['easy', 'medium', 'hard', 'expert'];
+            const difficultyLevel = difficulties[playerState.currentDifficulty - 1];
+            const questions = questionDatabase[difficultyLevel];
+
+            // Select a random question from the appropriate difficulty
+            currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+            // Update question display
+            document.getElementById('question-number').textContent = `Question ${questionNumber}`;
+            document.getElementById('question-text').textContent = currentQuestion.q;
+
+            // Update difficulty badge
+            const badge = document.getElementById('difficulty-badge');
+            badge.textContent = difficultyLevel.toUpperCase();
+            badge.className = `difficulty-badge diff-${difficultyLevel}`;
+
+            // Update answer buttons
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.textContent = currentQuestion.answers[index];
+                btn.className = 'answer-btn';
+                btn.disabled = false;
+            });
+
+            // Reset and start timer
+            resetTimer();
+            questionStartTime = Date.now();
+        }
+
+        // Handle answer selection
+        function handleAnswer(selectedIndex) {
+            if (!isSessionActive || isPaused) return;
+
+            clearInterval(timerInterval);
+            const responseTime = (Date.now() - questionStartTime) / 1000;
+            const isCorrect = selectedIndex === currentQuestion.correct;
+
+            // Update player state
+            playerState.totalAnswered++;
+            playerState.responseTimes.push(responseTime);
+            const avgTime = playerState.responseTimes.length > 0 ? playerState.responseTimes.reduce((a, b) => a + b, 0) / playerState.responseTimes.length : 0;
+            playerState.averageResponseTime = isFinite(avgTime) ? avgTime : 0;
+
+            // Disable buttons and show result
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === currentQuestion.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (isCorrect) {
+                handleCorrectAnswer(responseTime);
+            } else {
+                handleIncorrectAnswer();
+            }
+
+            // Add to history
+            addToHistory(isCorrect, currentQuestion.skill, responseTime);
+
+            // Update skill mastery
+            updateSkillMastery(currentQuestion.skill, isCorrect);
+
+            // Calculate metrics and adjust difficulty
+            calculateFlowState();
+            adjustDifficulty();
+            updateAllDisplays();
+
+            // Next question after delay
+            setTimeout(() => {
+                generateQuestion();
+            }, 2000);
+        }
+
+        // Handle correct answer
+        function handleCorrectAnswer(responseTime) {
+            playerState.totalCorrect++;
+            playerState.streak++;
+            playerState.maxStreak = Math.max(playerState.maxStreak, playerState.streak);
+
+            // Reduce frustration on correct answer
+            playerState.frustrationLevel = Math.max(0, playerState.frustrationLevel - 15);
+
+            // Increase engagement
+            playerState.engagementLevel = Math.min(100, playerState.engagementLevel + 5);
+
+            // Show feedback
+            let feedback;
+            if (playerState.streak >= 3) {
+                feedback = getRandomFeedback('correctStreak');
+            } else {
+                feedback = getRandomFeedback('correct');
+            }
+            showFeedback(feedback, 'positive');
+        }
+
+        // Handle incorrect answer
+        function handleIncorrectAnswer() {
+            playerState.streak = 0;
+
+            // Increase frustration
+            playerState.frustrationLevel = Math.min(100, playerState.frustrationLevel + 20);
+
+            // Decrease engagement slightly
+            playerState.engagementLevel = Math.max(20, playerState.engagementLevel - 10);
+
+            // Show feedback
+            let feedback;
+            if (playerState.frustrationLevel > 50) {
+                feedback = getRandomFeedback('incorrectStreak');
+            } else {
+                feedback = getRandomFeedback('incorrect');
+            }
+            showFeedback(feedback, 'negative');
+        }
+
+        // Handle timeout
+        function handleTimeout() {
+            if (!isSessionActive) return;
+
+            playerState.totalAnswered++;
+            playerState.streak = 0;
+            playerState.frustrationLevel = Math.min(100, playerState.frustrationLevel + 25);
+            playerState.responseTimes.push(maxTime);
+            const avgTimeOut = playerState.responseTimes.length > 0 ? playerState.responseTimes.reduce((a, b) => a + b, 0) / playerState.responseTimes.length : 0;
+            playerState.averageResponseTime = isFinite(avgTimeOut) ? avgTimeOut : 0;
+
+            // Show correct answer
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === currentQuestion.correct) {
+                    btn.classList.add('correct');
+                }
+            });
+
+            addToHistory(false, currentQuestion.skill, maxTime);
+            showFeedback(getRandomFeedback('timeout'), 'negative');
+
+            calculateFlowState();
+            adjustDifficulty();
+            updateAllDisplays();
+
+            setTimeout(() => {
+                generateQuestion();
+            }, 2000);
+        }
+
+        // Calculate flow state based on player metrics
+        function calculateFlowState() {
+            const accuracy = playerState.totalAnswered > 0 ? (playerState.totalCorrect / playerState.totalAnswered) * 100 : 50;
+            const avgTime = playerState.averageResponseTime;
+
+            // Flow state determination
+            if (accuracy > 85 && avgTime < maxTime * 0.4) {
+                // Too easy - player is bored
+                playerState.flowState = 'bored';
+            } else if (accuracy < 40 || playerState.frustrationLevel > 60) {
+                // Too hard - player is anxious
+                playerState.flowState = 'anxious';
+            } else {
+                // Just right - optimal flow
+                playerState.flowState = 'optimal';
+            }
+
+            // Update flow state display
+            const flowElement = document.getElementById('flow-state');
+            flowElement.className = `flow-state flow-${playerState.flowState}`;
+            flowElement.textContent = playerState.flowState.toUpperCase();
+
+            // Show flow-related feedback occasionally
+            if (playerState.totalAnswered % 5 === 0 && playerState.totalAnswered > 0) {
+                const flowFeedback = getRandomFeedback(`flow${playerState.flowState.charAt(0).toUpperCase() + playerState.flowState.slice(1)}`);
+                if (flowFeedback) {
+                    showFeedback(flowFeedback, 'neutral');
+                }
+            }
+        }
+
+        // Adjust difficulty based on flow state
+        function adjustDifficulty() {
+            if (playerState.flowState === 'bored' && playerState.currentDifficulty < 4) {
+                playerState.currentDifficulty++;
+                maxTime = Math.max(10, maxTime - 2);
+            } else if (playerState.flowState === 'anxious' && playerState.currentDifficulty > 1) {
+                playerState.currentDifficulty--;
+                maxTime = Math.min(30, maxTime + 3);
+            }
+
+            // Gradual frustration decay
+            playerState.frustrationLevel = Math.max(0, playerState.frustrationLevel - 2);
+        }
+
+        // Update skill mastery
+        function updateSkillMastery(skillId, isCorrect) {
+            if (!playerState.skillMastery.hasOwnProperty(skillId)) {
+                playerState.skillMastery[skillId] = 0;
+            }
+
+            if (isCorrect) {
+                playerState.skillMastery[skillId] = Math.min(100, playerState.skillMastery[skillId] + 8);
+            } else {
+                playerState.skillMastery[skillId] = Math.max(0, playerState.skillMastery[skillId] - 3);
+            }
+
+            // Update visual
+            const ring = document.getElementById(`skill-ring-${skillId}`);
+            const percent = document.getElementById(`skill-percent-${skillId}`);
+            const card = document.getElementById(`skill-${skillId}`);
+
+            if (ring && percent && card) {
+                const mastery = playerState.skillMastery[skillId];
+                const circumference = 125.6;
+                const offset = circumference - (mastery / 100) * circumference;
+                ring.style.strokeDashoffset = offset;
+                percent.textContent = `${Math.round(mastery)}%`;
+
+                if (mastery >= 80) {
+                    card.classList.add('mastered');
+                } else {
+                    card.classList.remove('mastered');
+                }
+            }
+        }
+
+        // Add answer to history
+        function addToHistory(isCorrect, skill, time) {
+            const historyItem = {
+                correct: isCorrect,
+                skill: skill,
+                time: time
+            };
+            playerState.history.unshift(historyItem);
+            if (playerState.history.length > 10) {
+                playerState.history.pop();
+            }
+
+            updateHistoryDisplay();
+        }
+
+        // Update history display
+        function updateHistoryDisplay() {
+            const log = document.getElementById('history-log');
+            log.innerHTML = '';
+
+            if (playerState.history.length === 0) {
+                log.innerHTML = '<div class="history-item" style="color: #888;">No answers yet...</div>';
+                return;
+            }
+
+            playerState.history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <span class="history-icon ${item.correct ? 'history-correct' : 'history-incorrect'}">
+                        ${item.correct ? '&#10003;' : '&#10007;'}
+                    </span>
+                    <span>${item.skill}</span>
+                    <span style="margin-left: auto; color: #888;">${item.time.toFixed(1)}s</span>
+                `;
+                log.appendChild(div);
+            });
+        }
+
+        // Timer functions
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = maxTime;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (isPaused) return;
+                timeRemaining -= 0.1;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            }, 100);
+        }
+
+        function updateTimerDisplay() {
+            const fill = document.getElementById('timer-fill');
+            const percentage = (timeRemaining / maxTime) * 100;
+            fill.style.width = `${percentage}%`;
+
+            if (percentage > 50) {
+                fill.className = 'timer-fill';
+            } else if (percentage > 25) {
+                fill.className = 'timer-fill warning';
+            } else {
+                fill.className = 'timer-fill danger';
+            }
+        }
+
+        // Update all metric displays
+        function updateAllDisplays() {
+            // Accuracy
+            const accuracy = playerState.totalAnswered > 0 ?
+                Math.round((playerState.totalCorrect / playerState.totalAnswered) * 100) : 0;
+            document.getElementById('accuracy-value').textContent = `${accuracy}%`;
+            document.getElementById('accuracy-bar').style.width = `${accuracy}%`;
+
+            // Response time
+            document.getElementById('response-time-value').textContent =
+                `${playerState.averageResponseTime.toFixed(1)}s`;
+            const timePercentage = Math.max(0, 100 - (playerState.averageResponseTime / maxTime) * 100);
+            document.getElementById('response-time-bar').style.width = `${timePercentage}%`;
+
+            // Engagement
+            const engagementLabels = ['Very Low', 'Low', 'Medium', 'High', 'Very High'];
+            const engagementIndex = Math.min(4, Math.floor(playerState.engagementLevel / 20));
+            document.getElementById('engagement-value').textContent = engagementLabels[engagementIndex];
+            document.getElementById('engagement-bar').style.width = `${playerState.engagementLevel}%`;
+
+            // Frustration
+            const frustrationLabels = ['None', 'Low', 'Medium', 'High', 'Critical'];
+            const frustrationIndex = Math.min(4, Math.floor(playerState.frustrationLevel / 20));
+            document.getElementById('frustration-value').textContent = frustrationLabels[frustrationIndex];
+            document.getElementById('frustration-bar').style.width = `${playerState.frustrationLevel}%`;
+
+            // Streak
+            document.getElementById('streak-count').textContent = playerState.streak;
+            const streakIcon = document.getElementById('streak-icon');
+            if (playerState.streak >= 5) {
+                streakIcon.innerHTML = '&#128293;';
+                streakIcon.classList.add('streak-fire');
+            } else if (playerState.streak >= 3) {
+                streakIcon.innerHTML = '&#11088;';
+                streakIcon.classList.remove('streak-fire');
+            } else {
+                streakIcon.innerHTML = '&#9899;';
+                streakIcon.classList.remove('streak-fire');
+            }
+        }
+
+        // Show feedback message
+        function showFeedback(message, type) {
+            const feedbackEl = document.getElementById('feedback-text');
+            feedbackEl.textContent = message;
+            feedbackEl.className = `feedback-text feedback-${type}`;
+        }
+
+        // Get random feedback from category
+        function getRandomFeedback(category) {
+            const messages = feedbackMessages[category];
+            if (!messages || messages.length === 0) return null;
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // Session controls
+        function startNewSession() {
+            isSessionActive = true;
+            isPaused = false;
+            questionNumber = 0;
+
+            // Reset player state
+            playerState.totalCorrect = 0;
+            playerState.totalAnswered = 0;
+            playerState.streak = 0;
+            playerState.responseTimes = [];
+            playerState.averageResponseTime = 0;
+            playerState.frustrationLevel = 0;
+            playerState.engagementLevel = 80;
+            playerState.currentDifficulty = 2;
+            playerState.flowState = 'optimal';
+            playerState.history = [];
+
+            // Reset skills
+            skills.forEach(skill => {
+                playerState.skillMastery[skill.id] = 0;
+                const ring = document.getElementById(`skill-ring-${skill.id}`);
+                const percent = document.getElementById(`skill-percent-${skill.id}`);
+                const card = document.getElementById(`skill-${skill.id}`);
+                if (ring) ring.style.strokeDashoffset = 125.6;
+                if (percent) percent.textContent = '0%';
+                if (card) card.classList.remove('mastered');
+            });
+
+            maxTime = 20;
+            updateHistoryDisplay();
+            updateAllDisplays();
+
+            document.getElementById('start-btn').textContent = 'Restart Session';
+            document.getElementById('pause-btn').textContent = 'Pause';
+
+            showFeedback('Session started! Answer questions to build your skills.', 'neutral');
+            generateQuestion();
+        }
+
+        function togglePause() {
+            if (!isSessionActive) return;
+
+            isPaused = !isPaused;
+            document.getElementById('pause-btn').textContent = isPaused ? 'Resume' : 'Pause';
+
+            if (isPaused) {
+                showFeedback('Session paused. Click Resume to continue.', 'neutral');
+            } else {
+                showFeedback('Session resumed. Keep going!', 'neutral');
+            }
+        }
+
+        function resetProgress() {
+            isSessionActive = false;
+            isPaused = false;
+            clearInterval(timerInterval);
+
+            questionNumber = 0;
+            playerState.totalCorrect = 0;
+            playerState.totalAnswered = 0;
+            playerState.streak = 0;
+            playerState.maxStreak = 0;
+            playerState.responseTimes = [];
+            playerState.averageResponseTime = 0;
+            playerState.frustrationLevel = 0;
+            playerState.engagementLevel = 80;
+            playerState.currentDifficulty = 2;
+            playerState.flowState = 'optimal';
+            playerState.history = [];
+
+            skills.forEach(skill => {
+                playerState.skillMastery[skill.id] = 0;
+            });
+
+            initSkillCards();
+            updateHistoryDisplay();
+            updateAllDisplays();
+
+            document.getElementById('question-number').textContent = 'Question 1';
+            document.getElementById('question-text').textContent = 'Click "Start New Session" to begin.';
+            document.getElementById('timer-fill').style.width = '100%';
+            document.getElementById('timer-fill').className = 'timer-fill';
+            document.getElementById('start-btn').textContent = 'Start New Session';
+            document.getElementById('pause-btn').textContent = 'Pause';
+
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.textContent = ['Option A', 'Option B', 'Option C', 'Option D'][index];
+                btn.className = 'answer-btn';
+                btn.disabled = true;
+            });
+
+            showFeedback('All progress reset. Start a new session when ready.', 'neutral');
+        }
+
+        // Initialize on page load
+        init();
+
+        /* ===== MOBILE TOUCH SUPPORT ===== */
+        (function() {
+            if (!/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
+            document.querySelectorAll('.answer-btn').forEach(function(btn) {
+                btn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    btn.click();
+                }, {passive: false});
+            });
+        })();
+        /* ===== END MOBILE TOUCH SUPPORT ===== */
+    </script>
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

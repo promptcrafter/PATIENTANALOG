@@ -1,0 +1,390 @@
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))i(t);new MutationObserver(t=>{for(const a of t)if(a.type==="childList")for(const n of a.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function o(t){const a={};return t.integrity&&(a.integrity=t.integrity),t.referrerPolicy&&(a.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?a.credentials="include":t.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function i(t){if(t.ep)return;t.ep=!0;const a=o(t);fetch(t.href,a)}})();class z{constructor(){"ontouchstart"in window||window.matchMedia("(prefers-reduced-motion: reduce)").matches||(this.cursor=document.createElement("div"),this.cursor.className="bio-cursor",this.cursor.innerHTML=`
+      <div class="bio-nucleus"></div>
+      <div class="bio-membrane"></div>
+    `,document.body.appendChild(this.cursor),document.addEventListener("mousemove",e=>{this.cursor.style.transform=`translate(${e.clientX}px, ${e.clientY}px)`},{passive:!0}),document.addEventListener("mouseover",e=>{e.target.closest('a, button, [role="button"], input, select, .clickable')&&this.cursor.classList.add("bio-active")},{passive:!0}),document.addEventListener("mouseout",e=>{e.target.closest('a, button, [role="button"], input, select, .clickable')&&this.cursor.classList.remove("bio-active")},{passive:!0}),document.addEventListener("mouseleave",()=>{this.cursor.style.opacity="0"},{passive:!0}),document.addEventListener("mouseenter",()=>{this.cursor.style.opacity="1"},{passive:!0}))}dispose(){var e;(e=this.cursor)!=null&&e.parentNode&&this.cursor.parentNode.removeChild(this.cursor)}}class P{constructor(e="live-ticker"){if(this.container=document.getElementById(e),!this.container){console.warn("[LiveTicker] Container not found:",e);return}this.tickerItems=[],this.currentIndex=0,this.rotationInterval=5e3,this.cache={},this.cacheExpiry=15*60*1e3,this.init()}async init(){this.createTickerHTML(),await this.fetchAllData(),this.startRotation(),setInterval(()=>this.fetchAllData(),this.cacheExpiry)}createTickerHTML(){this.container.innerHTML=`
+      <div class="live-ticker-bar">
+        <div class="live-ticker-inner">
+          <div class="live-ticker-row">
+            <div class="live-ticker-items">
+              <span class="ticker-highlight">HUMAN-RELEVANT MEDICINE</span>
+              <span class="ticker-item" data-type="fda">Loading FDA data...</span>
+              <span class="ticker-item" data-type="trials">Loading clinical trials...</span>
+              <span class="ticker-item" data-type="pubmed">Loading publications...</span>
+              <span class="ticker-static">NIH NCATS Tissue Chip</span>
+              <span class="ticker-static">DARPA MPS Program</span>
+              <span class="ticker-static">IQ MPS Consortium</span>
+              <span class="ticker-static">Saudi Vision 2030</span>
+              <span class="ticker-static">Emulate Bio</span>
+              <span class="ticker-static">Tumor Microenvironment</span>
+              <span class="ticker-static">Organovo</span>
+              <span class="ticker-static">ARPA-H Precision Health</span>
+              <span class="ticker-static">Recursion Pharma</span>
+              <span class="ticker-static">CRISPR Organoid Editing</span>
+              <span class="ticker-static">High-Throughput Screening</span>
+              <span class="ticker-static">Liver Toxicity Testing</span>
+              <span class="ticker-static">Cardiac Safety Assessment</span>
+              <span class="ticker-static">Rare Disease Modeling</span>
+              <span class="ticker-static">FDA Approved: EPINEPHRINE</span>
+              <span class="ticker-static">FDA Approved: IBUPROFEN</span>
+              <span class="ticker-static">Quris AI</span>
+              <span class="ticker-static">CN Bio Innovations</span>
+              <span class="ticker-static">EPA NAMs Roadmap 2025</span>
+              <span class="ticker-static">Organ-on-Chip CAGR 28.3%</span>
+              <span class="ticker-static">Digital Twin Simulation</span>
+              <span class="ticker-static">AI Drug Discovery $4B+</span>
+              <span class="ticker-static">Horizon Europe MPS</span>
+              <span class="ticker-static">CAAT Johns Hopkins</span>
+              <span class="ticker-static">TissUse GmbH</span>
+              <span class="ticker-static">Patient-Derived Organoids</span>
+              <span class="ticker-static">iPSC Disease Modeling</span>
+              <span class="ticker-static">Multi-Organ MPS</span>
+              <span class="ticker-static">InSphero</span>
+              <span class="ticker-static">Mimetas</span>
+              <span class="ticker-static">Hesperos</span>
+              <span class="ticker-static">Kidney-on-Chip</span>
+              <span class="ticker-static">Lung-on-Chip</span>
+              <span class="ticker-static">Heart-on-Chip</span>
+              <span class="ticker-static">Brain-on-Chip</span>
+              <span class="ticker-static">Skin-on-Chip</span>
+              <span class="ticker-static">Gut-on-Chip</span>
+              <span class="ticker-static">Liver-on-Chip</span>
+              <span class="ticker-static">Body-on-Chip</span>
+              <span class="ticker-static">CAR-T Cell Therapy</span>
+              <span class="ticker-static">Gene Therapy</span>
+              <span class="ticker-static">mRNA Therapeutics</span>
+              <span class="ticker-static">CRISPR-Cas9</span>
+              <span class="ticker-static">Base Editing</span>
+              <span class="ticker-static">Prime Editing</span>
+              <span class="ticker-static">AlphaFold AI</span>
+              <span class="ticker-static">Bioprinting</span>
+              <span class="ticker-static">Stem Cell Research</span>
+              <span class="ticker-static">Immunotherapy</span>
+              <span class="ticker-static">Precision Oncology</span>
+              <span class="ticker-static">Liquid Biopsy</span>
+              <span class="ticker-static">Single Cell Sequencing</span>
+              <span class="ticker-static">Spatial Transcriptomics</span>
+              <span class="ticker-static">Proteomics</span>
+              <span class="ticker-static">Metabolomics</span>
+              <span class="ticker-static">Microbiome Research</span>
+              <span class="ticker-static">Nanoparticle Delivery</span>
+              <span class="ticker-static">Exosome Therapy</span>
+              <span class="ticker-static">Antibody Conjugates</span>
+              <span class="ticker-static">Bispecific Antibodies</span>
+              <span class="ticker-static">NK Cell Therapy</span>
+              <span class="ticker-static">TIL Therapy</span>
+              <span class="ticker-static">Checkpoint Inhibitors</span>
+              <span class="ticker-static">Oncolytic Viruses</span>
+              <span class="ticker-static">siRNA Therapeutics</span>
+              <span class="ticker-static">Antisense Oligos</span>
+              <span class="ticker-static">Pharmacogenomics</span>
+              <span class="ticker-static">Digital Biomarkers</span>
+              <span class="ticker-static">Wearable Biosensors</span>
+              <span class="ticker-static">Lab Automation</span>
+              <span class="ticker-static">Robotic Discovery</span>
+              <span class="ticker-static">Quantum Pharma</span>
+              <span class="ticker-static">ML Drug Design</span>
+              <span class="ticker-static">Virtual Screening</span>
+              <span class="ticker-static">Molecular Dynamics</span>
+              <span class="ticker-static">EMA 3Rs Initiative</span>
+              <span class="ticker-static">UK NC3Rs Program</span>
+              <span class="ticker-static">PMDA Japan Guidance</span>
+              <span class="ticker-static">Health Canada NAMs</span>
+              <span class="ticker-static">TGA Australia</span>
+              <span class="ticker-static">$127B Market 2030</span>
+              <span class="ticker-static">Wyss Institute Harvard</span>
+              <span class="ticker-static">MIT Koch Institute</span>
+              <span class="ticker-static">Stanford Bio-X</span>
+              <span class="ticker-static">Broad Institute</span>
+              <span class="ticker-static">Salk Institute</span>
+              <span class="ticker-static">UCSF Gladstone</span>
+              <span class="ticker-static">Scripps Research</span>
+              <span class="ticker-static">Max Planck Society</span>
+              <span class="ticker-static">Fraunhofer Institute</span>
+              <span class="ticker-static">RIKEN Japan</span>
+              <span class="ticker-static">Karolinska Institute</span>
+              <span class="ticker-static">Cambridge Biomedical</span>
+              <span class="ticker-static">Oxford Drug Discovery</span>
+              <span class="ticker-static">Imperial College</span>
+              <span class="ticker-static">ETH Zurich Biotech</span>
+              <span class="ticker-static">EPFL Bioengineering</span>
+              <span class="ticker-static">Hubrecht Institute</span>
+              <span class="ticker-static">Leiden Bio Science</span>
+              <span class="ticker-static">A*STAR Singapore</span>
+              <span class="ticker-static">KAUST Saudi Arabia</span>
+              <span class="ticker-static">Tsinghua Medicine</span>
+              <span class="ticker-static">Peking University Health</span>
+              <span class="ticker-static">Seoul National Biotech</span>
+              <span class="ticker-static">KRIBB Korea</span>
+              <span class="ticker-static">Tissue Genesis</span>
+              <span class="ticker-static">Nortis Bio</span>
+              <span class="ticker-static">AxoSim</span>
+              <span class="ticker-static">Ananda Devices</span>
+              <span class="ticker-static">Cherry Biotech</span>
+              <span class="ticker-static">Bi/ond</span>
+              <span class="ticker-static">AlveoliX</span>
+              <span class="ticker-static">Dynamic42 GmbH</span>
+              <span class="ticker-static">Aracari Bio</span>
+              <span class="ticker-static">System1 Bio</span>
+              <span class="ticker-static">Xellar Biosystems</span>
+              <span class="ticker-static">Tara Biosystems</span>
+              <span class="ticker-static">BiomimX</span>
+              <span class="ticker-static">Kirkstall Ltd</span>
+              <span class="ticker-static">Draper Laboratory</span>
+              <span class="ticker-static">Altis Biosystems</span>
+              <span class="ticker-static">Finch Therapeutics</span>
+              <span class="ticker-static">Seres Therapeutics</span>
+              <span class="ticker-static">Assembly Bio</span>
+              <span class="ticker-static">Tenaya Therapeutics</span>
+              <span class="ticker-static">Vor Biopharma</span>
+              <span class="ticker-static">Prime Medicine</span>
+              <span class="ticker-static">Beam Therapeutics</span>
+              <span class="ticker-static">Verve Therapeutics</span>
+              <span class="ticker-static">Intellia Therapeutics</span>
+              <span class="ticker-static">Editas Medicine</span>
+              <span class="ticker-static">CRISPR Therapeutics</span>
+              <span class="ticker-static">Caribou Biosciences</span>
+              <span class="ticker-static">Mammoth Biosciences</span>
+              <span class="ticker-static">Arbor Biotechnologies</span>
+              <span class="ticker-static">Synthego Corporation</span>
+              <span class="ticker-static">Inscripta Inc</span>
+              <span class="ticker-static">Twist Bioscience</span>
+              <span class="ticker-static">Ginkgo Bioworks</span>
+              <span class="ticker-static">Zymergen</span>
+              <span class="ticker-static">Codexis</span>
+              <span class="ticker-static">Arzeda</span>
+              <span class="ticker-static">Absci Corporation</span>
+              <span class="ticker-static">Generate Biomedicines</span>
+              <span class="ticker-static">Insilico Medicine</span>
+              <span class="ticker-static">Exscientia</span>
+              <span class="ticker-static">BenevolentAI</span>
+              <span class="ticker-static">Atomwise</span>
+              <span class="ticker-static">Schrodinger Inc</span>
+              <span class="ticker-static">XtalPi</span>
+              <span class="ticker-static">Relay Therapeutics</span>
+              <span class="ticker-static">Tempus Labs</span>
+              <span class="ticker-static">Flatiron Health</span>
+              <span class="ticker-static">Foundation Medicine</span>
+              <span class="ticker-static">Guardant Health</span>
+              <span class="ticker-static">GRAIL Inc</span>
+              <span class="ticker-static">Freenome</span>
+              <span class="ticker-static">Exact Sciences</span>
+              <span class="ticker-static">Natera Inc</span>
+              <span class="ticker-static">10x Genomics</span>
+              <span class="ticker-static">Illumina</span>
+              <span class="ticker-static">Pacific Biosciences</span>
+              <span class="ticker-static">Oxford Nanopore</span>
+              <span class="ticker-static">BGI Genomics</span>
+              <span class="ticker-static">Ultima Genomics</span>
+              <span class="ticker-static">Element Biosciences</span>
+              <span class="ticker-static">Singular Genomics</span>
+              <span class="ticker-static">QIAGEN</span>
+              <span class="ticker-static">Agilent Technologies</span>
+              <span class="ticker-static">Thermo Fisher</span>
+              <span class="ticker-static">Danaher Cytiva</span>
+              <span class="ticker-static">Sartorius</span>
+              <span class="ticker-static">Merck KGaA</span>
+              <span class="ticker-static">Lonza Group</span>
+              <span class="ticker-static">Charles River Labs</span>
+              <span class="ticker-static">Labcorp Drug Dev</span>
+              <span class="ticker-static">ICON plc</span>
+              <span class="ticker-static">IQVIA</span>
+              <span class="ticker-static">PPD Pharma Services</span>
+              <span class="ticker-static">Syneos Health</span>
+              <span class="ticker-static">Parexel International</span>
+              <span class="ticker-static">WuXi AppTec</span>
+              <span class="ticker-static">WuXi Biologics</span>
+              <span class="ticker-static">Samsung Biologics</span>
+              <span class="ticker-static">Catalent Pharma</span>
+              <span class="ticker-static">Patheon by Thermo</span>
+              <span class="ticker-static">Fujifilm Diosynth</span>
+              <span class="ticker-static">AGC Biologics</span>
+              <span class="ticker-static">Boehringer CDM0</span>
+            </div>
+            <div class="live-ticker-status">
+              <span class="ticker-live-dot"></span>
+              <span class="ticker-live-text">LIVE</span>
+              <span class="ticker-time"></span>
+            </div>
+          </div>
+          <div class="live-ticker-row ticker-row-secondary">
+            <span class="ticker-scroll">
+              <span class="ticker-scroll-content"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    `,this.updateTime(),setInterval(()=>this.updateTime(),1e3)}updateTime(){const e=this.container.querySelector(".ticker-time");if(e){const o=new Date;e.textContent=o.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:!1})}}async fetchAllData(){await Promise.allSettled([this.fetchPubMedCount(),this.fetchClinicalTrialsCount(),this.fetchFDANews()]),this.updateTickerDisplay()}async fetchPubMedCount(){var i;const e=["organoid","organ-on-chip","microphysiological system"],o=new Date().getFullYear();try{const a=`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(`(${e.join(" OR ")}) AND ${o}[pdat]`)}&rettype=count&retmode=json`,n=await fetch(a);if(!n.ok)throw new Error("PubMed API error");const r=await n.json(),l=parseInt(((i=r.esearchresult)==null?void 0:i.count)||0);this.cache.pubmed={count:l,timestamp:Date.now()};const c=this.container.querySelector('[data-type="pubmed"]');return c&&(c.textContent=`${l.toLocaleString()} NAMs Publications (${o})`,c.classList.add("ticker-loaded")),l}catch(t){console.warn("[LiveTicker] PubMed fetch failed:",t);const a=this.container.querySelector('[data-type="pubmed"]');return a&&(a.textContent="3,200+ NAMs Publications (2025)"),null}}async fetchClinicalTrialsCount(){try{const o=`https://clinicaltrials.gov/api/v2/studies?query.term=${encodeURIComponent("organoid OR organ-on-chip OR microphysiological")}&countTotal=true&pageSize=1`,i=await fetch(o);if(!i.ok)throw new Error("ClinicalTrials API error");const a=(await i.json()).totalCount||0;this.cache.trials={count:a,timestamp:Date.now()};const n=this.container.querySelector('[data-type="trials"]');return n&&(n.textContent=`${a} Active NAMs Clinical Trials`,n.classList.add("ticker-loaded")),a}catch(e){console.warn("[LiveTicker] ClinicalTrials fetch failed:",e);const o=this.container.querySelector('[data-type="trials"]');return o&&(o.textContent="180+ Active NAMs Clinical Trials"),null}}async fetchFDANews(){var e,o;try{const t=await fetch("https://api.fda.gov/drug/drugsfda.json?search=submissions.submission_status_date:[2024-01-01+TO+2026-12-31]&limit=5");if(!t.ok)throw new Error("FDA API error");const a=await t.json(),n=((o=(e=a.meta)==null?void 0:e.results)==null?void 0:o.total)||0;this.cache.fda={count:n,data:a.results,timestamp:Date.now()};const r=this.container.querySelector('[data-type="fda"]');return r&&(r.textContent="FDA Modernization Act 3.0 Active",r.classList.add("ticker-loaded")),this.updateScrollContent(a.results),a}catch(i){console.warn("[LiveTicker] FDA fetch failed:",i);const t=this.container.querySelector('[data-type="fda"]');return t&&(t.textContent="FDA Modernization Act 3.0 Active"),null}}updateScrollContent(e=[]){const o=this.container.querySelector(".ticker-scroll-content");if(!o)return;const i=["FDA Modernization Act 2.0 & 3.0","EMA 3Rs Initiative","ICH S9 Guidelines","EPA NAMs Roadmap 2025","OECD Test Guidelines","UK NC3Rs Program","21st Century Cures Act","ICCVAM Strategic Roadmap","PMDA Japan Guidance","NMPA China Standards","Health Canada NAMs","TGA Australia Framework","ANVISA Brazil Modernization","SFDA Saudi Arabia Vision 2030","NIH NCATS Tissue Chip","DARPA MPS Program","ARPA-H Precision Health","NIH SBIR/STTR Funding","Horizon Europe MPS","IQ MPS Consortium","CAAT Johns Hopkins","$127B Market by 2030","Organ-on-Chip CAGR 28.3%","Digital Twin Healthcare Growth","AI Drug Discovery $4B+","Emulate Bio","CN Bio Innovations","TissUse GmbH","Mimetas","InSphero","Hesperos","Organovo","Recursion Pharma","Quris AI","Organ-on-Chip Systems","Patient-Derived Organoids","iPSC Disease Modeling","Multi-Organ MPS","AI/ML Drug Discovery","Digital Twin Simulation","CRISPR Organoid Editing","High-Throughput Screening","Liver Toxicity Testing","Cardiac Safety Assessment","Blood-Brain Barrier Models","Tumor Microenvironment","Gut-Immune Axis","Personalized Medicine","Rare Disease Modeling","Kidney-on-Chip","Lung-on-Chip","Heart-on-Chip","Brain-on-Chip","Skin-on-Chip","Intestine-on-Chip","Pancreas-on-Chip","Placenta-on-Chip","Retina-on-Chip","Bone Marrow-on-Chip","Lymph Node-on-Chip","Vascular-on-Chip","Body-on-Chip","Human-on-Chip Platform","Microfluidic Systems","Bioprinting Technology","3D Tissue Engineering","Stem Cell Research","CAR-T Cell Therapy","Gene Therapy Platforms","mRNA Therapeutics","Antibody Drug Conjugates","Bispecific Antibodies","Cell Line Development","Preclinical Testing","Phase I Clinical Trials","Pharmacokinetics Modeling","ADME Studies","Toxicology Screening","Drug Metabolism Studies","Biomarker Discovery","Companion Diagnostics","Precision Oncology","Immunotherapy Research","Checkpoint Inhibitors","Adoptive Cell Transfer","Tumor Infiltrating Lymphocytes","Natural Killer Cells","Dendritic Cell Vaccines","Cancer Vaccines","Oncolytic Viruses","Targeted Drug Delivery","Nanoparticle Therapeutics","Liposomal Formulations","Exosome Research","Extracellular Vesicles","Microbiome Therapeutics","Fecal Microbiota Transplant","Synthetic Biology","Metabolic Engineering","Enzyme Engineering","Protein Engineering","Directed Evolution","Machine Learning Drug Design","AlphaFold Protein Structure","De Novo Drug Design","Virtual Screening","Molecular Dynamics","Quantum Computing Pharma","Lab Automation","Robotic Drug Discovery","Organ Preservation","Cryopreservation Tech","Biobanking Systems","Tissue Banking","Clinical Data Management","Real World Evidence","Electronic Health Records","Wearable Biosensors","Point of Care Testing","Liquid Biopsy","Circulating Tumor DNA","Single Cell Sequencing","Spatial Transcriptomics","Proteomics Analysis","Metabolomics Studies","Lipidomics Research","Glycomics Platform","Epigenetics Research","DNA Methylation","Histone Modification","Non-coding RNA","Long Non-coding RNA","microRNA Therapeutics","siRNA Delivery","Antisense Oligonucleotides","Splice Modulating Therapy","Base Editing","Prime Editing","CRISPR-Cas9","CRISPR-Cas12","CRISPR-Cas13","Gene Drive Technology","Synthetic Lethality","Combination Therapy","Drug Repurposing","Phenotypic Screening","Target Identification","Lead Optimization","DMPK Studies","In Silico Modeling","Physiologically Based PK","Systems Pharmacology","Network Pharmacology","Polypharmacology","Fragment Based Design","Structure Based Design","Ligand Based Design","Pharmacophore Modeling","QSAR Studies","Cheminformatics","Bioinformatics Pipeline","Clinical Genomics","Population Genetics","Pharmacogenomics","Theranostics","Image Guided Therapy","Molecular Imaging","PET Imaging Agents","MRI Contrast Agents","Ultrasound Therapeutics","Focused Ultrasound","Photodynamic Therapy","Photothermal Therapy","Radiopharmaceuticals","Alpha Particle Therapy","Boron Neutron Capture","Proton Therapy","Heavy Ion Therapy","Stereotactic Radiosurgery","Brachytherapy Innovation","Immunoradiology","Radioimmunotherapy","Theranostic Pairs","Lu-177 PSMA Therapy","Ac-225 Targeted Alpha","I-131 Therapy","Y-90 Microspheres","Re-188 Therapeutics","At-211 Research","Tb-161 Development","Pb-212 Innovation","Ra-223 Dichloride","FDA 505(b)(2) Pathway","Accelerated Approval","Breakthrough Therapy","Fast Track Designation","Priority Review","Orphan Drug Status","Rare Pediatric Disease","Regenerative Medicine Advanced Therapy","EMA PRIME Designation","Conditional Marketing Authorization","Adaptive Pathways","Japan SAKIGAKE","China Priority Review","Korea Innovative Track","Singapore HSA Innovation","Australia TGA Priority","Brazil ANVISA Fast Track","Mexico COFEPRIS Innovation","Argentina ANMAT Expedited","Colombia INVIMA Priority","Chile ISP Innovation","WHO Prequalification","ICH E6 R3 Guidelines","ICH Q12 Lifecycle","ICH Q14 Analytical","Good Manufacturing Practice","Good Laboratory Practice","Good Clinical Practice","Good Distribution Practice","Good Pharmacovigilance","Quality by Design","Process Analytical Technology","Continuous Manufacturing","Single Use Systems","Modular Facilities","Flexible Manufacturing","Digital Twin Factory","Industry 4.0 Pharma","Smart Manufacturing","Connected Lab Systems","Laboratory Information Management","Electronic Lab Notebook","Scientific Data Management","AI Lab Assistant","Automated Documentation","Regulatory Intelligence","Competitive Intelligence","Patent Analytics","Freedom to Operate","IP Landscape Analysis","Licensing Agreements","Technology Transfer","Academic Partnerships","Consortium Research","Public Private Partnership","Venture Philanthropy","Impact Investing","ESG Pharma","Sustainable Chemistry","Green Manufacturing","Carbon Neutral Facilities","Circular Economy Pharma","Biodegradable Packaging","Cold Chain Innovation","Last Mile Delivery","Patient Access Programs","Compassionate Use","Expanded Access","Named Patient Supply","Parallel Import","Compulsory Licensing","TRIPS Flexibilities","Doha Declaration","Pandemic Preparedness","Coalition for Epidemic Preparedness","CEPI Funding","BARDA Support","Operation Warp Speed Legacy","mRNA Platform Technology","Viral Vector Manufacturing","Lipid Nanoparticle Scale-up","Adjuvant Development","Universal Vaccine Platform","Mucosal Immunity","Intranasal Delivery","Oral Vaccine Development","Thermostable Formulations","Needle Free Injection","Microneedle Patches","Implantable Devices","Drug Eluting Stents","Bioresorbable Scaffolds","Tissue Engineering Scaffolds","Decellularized Matrices","Hydrogel Systems","Injectable Hydrogels","Self-assembling Peptides","Stimuli Responsive Materials","Shape Memory Polymers","Electrospun Nanofibers","3D Printed Implants","Bioactive Ceramics","Titanium Alloy Innovation","PEEK Implants","Zirconia Dental","Osseointegration","Surface Modification","Antimicrobial Coatings","Drug Releasing Coatings","Biofilm Prevention","Infection Control","Antibiotic Stewardship","AMR Surveillance","Novel Antibiotics","Beta-lactamase Inhibitors","Efflux Pump Inhibitors","Quorum Sensing Inhibitors","Phage Therapy","Lysins Development","Antimicrobial Peptides","CRISPR Antimicrobials","Microbiome Modulators","Wyss Institute Harvard","MIT Koch Institute","Stanford Bio-X","Broad Institute MIT Harvard","Salk Institute","UCSF Gladstone Institutes","Scripps Research Institute","Max Planck Institutes","Fraunhofer Society","RIKEN Institute Japan","Karolinska Institutet","Cambridge Biomedical Campus","Oxford Drug Discovery Institute","Imperial College London","ETH Zurich","EPFL Lausanne","Hubrecht Institute","A*STAR Singapore","KAUST Saudi Arabia","Tsinghua University","Peking University Health","Seoul National University","KRIBB Korea","Tissue Genesis Inc","Nortis Bio","AxoSim Technologies","Ananda Devices","Cherry Biotech","Bi/ond","AlveoliX","Dynamic42 GmbH","Aracari Biosciences","System1 Biosciences","Xellar Biosystems","Tara Biosystems","BiomimX","Kirkstall Ltd","Draper Laboratory","Altis Biosystems","Finch Therapeutics","Seres Therapeutics","Assembly Biosciences","Tenaya Therapeutics","Vor Biopharma","Prime Medicine","Beam Therapeutics","Verve Therapeutics","Intellia Therapeutics","Editas Medicine","CRISPR Therapeutics","Caribou Biosciences","Mammoth Biosciences","Arbor Biotechnologies","Synthego","Inscripta","Twist Bioscience","Ginkgo Bioworks","Zymergen","Codexis","Arzeda","Absci Corporation","Generate Biomedicines","Insilico Medicine","Exscientia","BenevolentAI","Atomwise","Schrodinger","XtalPi","Relay Therapeutics","Tempus Labs","Flatiron Health","Foundation Medicine","Guardant Health","GRAIL","Freenome","Exact Sciences","Natera","10x Genomics","Illumina","Pacific Biosciences","Oxford Nanopore","BGI Genomics","Ultima Genomics","Element Biosciences","Singular Genomics","QIAGEN","Agilent Technologies","Thermo Fisher Scientific","Danaher Cytiva","Sartorius","Merck Life Science","Lonza Group","Charles River Labs","Labcorp Drug Development","ICON plc","IQVIA","PPD Thermo Fisher","Syneos Health","Parexel","WuXi AppTec","WuXi Biologics","Samsung Biologics","Catalent Pharma","Patheon Thermo","Fujifilm Diosynth","AGC Biologics","Evotec","Cellectis","bluebird bio","Sana Biotechnology","Century Therapeutics","Arsenal Biosciences","Poseida Therapeutics","Precision BioSciences","Allogene Therapeutics","Fate Therapeutics","Lyell Immunopharma","2seventy bio","Arcellx","Autolus","Gracell Biotechnologies","JW Therapeutics","Legend Biotech","NKARTA"];e&&e.length>0&&e.slice(0,3).forEach(n=>{var r,l;(l=(r=n.products)==null?void 0:r[0])!=null&&l.brand_name&&i.push(`FDA Approved: ${n.products[0].brand_name}`)});const a=i.sort(()=>Math.random()-.5).map(n=>`<span class="scroll-item">${n}</span>`).join('<span class="scroll-separator">•</span>');o.innerHTML=a+'<span class="scroll-separator">•</span>'+a}updateTickerDisplay(){this.container.querySelectorAll(".ticker-item").forEach(o=>{o.classList.add("ticker-pulse"),setTimeout(()=>o.classList.remove("ticker-pulse"),1e3)})}startRotation(){const e=this.container.querySelectorAll(".ticker-item, .ticker-static");e.length!==0&&setInterval(()=>{e.forEach((o,i)=>{o.style.opacity=i===this.currentIndex?"1":"0.7"}),this.currentIndex=(this.currentIndex+1)%e.length},this.rotationInterval)}destroy(){this.container&&(this.container.innerHTML="")}}typeof document<"u"&&document.addEventListener("DOMContentLoaded",()=>{document.getElementById("live-ticker")&&(window.liveTicker=new P("live-ticker"))});class B{constructor(e,o={}){this.container=e,this.canvas=null,this.ctx=null,this.tooltip=null,this.modal=null,this.nodes=[],this.connections=[],this.mouse={x:0,y:0,targetX:0,targetY:0},this.parallaxOffset={x:0,y:0},this.hoveredNode=null,this.scrollProgress=0,this.time=0,this.rafId=null,this.isVisible=!1,this.revealed=!1,this.colors={brain:"#c9a0a0",neck:"#d4a574",shoulders:"#c9a0a0",lungs:"#deb3ad",heart:"#8b0000",heartPulse:"#cc0000",heartGlow:"#990000",liver:"#6b3a3a",kidneys:"#722f37",gut:"#d4a5a5",pelvis:"#c9a0a0",legs:"#d4a574",arabic:"#d4af37",chinese:"#c41e3a",floating:"#5c8a8a",rna:"#f0c040",eyes:"#4a9090",digitalOverlay:"#3a7a8a",connection:"rgba(90, 140, 160, 0.05)",connectionHover:"rgba(140, 180, 200, 0.35)"},this.domainBody=this.createDomainMapping(),this.init()}createDomainMapping(){return{brain:[{domain:"braincomputerai.com",x:50,y:5,region:"brain"},{domain:"neurochip.app",x:45,y:8,region:"brain"},{domain:"brainrift.com",x:55,y:8,region:"brain"},{domain:"neuralchipai.com",x:48,y:12,region:"brain"},{domain:"synapchip.com",x:52,y:12,region:"brain"},{domain:"synaptrack.com",x:50,y:10,region:"brain"}],eyes:[{domain:"biocircuitai.com",x:47,y:9,region:"eyes",glow:!0},{domain:"biocomputeai.com",x:53,y:9,region:"eyes",glow:!0}],neck:[{domain:"neuropeptidey.com",x:50,y:18,region:"neck"}],shoulders:[{domain:"tissuechip.com",x:30,y:23,region:"shoulders"},{domain:"tissuechips.com",x:70,y:23,region:"shoulders"}],lungs:[{domain:"lungchip.com",x:35,y:28,region:"lungs"},{domain:"humanonchip.com",x:65,y:28,region:"lungs"},{domain:"cellonchip.com",x:32,y:32,region:"lungs"},{domain:"tissueonchip.com",x:68,y:32,region:"lungs"},{domain:"humanmps.com",x:38,y:30,region:"lungs"},{domain:"humanmps.io",x:62,y:30,region:"lungs"}],heart:[{domain:"patientanalog.com",x:50,y:35,region:"heart",pulse:!0,primary:!0},{domain:"heartdigitaltwin.com",x:55,y:33,region:"heart"}],rna:[{domain:"rna0.com",x:44,y:38,region:"rna",flagship:!0},{domain:"nextgenrna.com",x:56,y:40,region:"rna"},{domain:"mrnamodification.com",x:44,y:43,region:"rna"},{domain:"selfamplifying.com",x:56,y:46,region:"rna"},{domain:"epitranscript.com",x:44,y:49,region:"rna"}],liver:[{domain:"liverdigitaltwin.com",x:42,y:42,region:"liver"},{domain:"digitaltwinhuman.com",x:50,y:45,region:"liver"},{domain:"digitaltwinbio.com",x:58,y:42,region:"liver"},{domain:"dilichip.com",x:45,y:44,region:"liver"}],kidneys:[{domain:"kidneydigitaltwin.com",x:38,y:48,region:"kidneys"},{domain:"kidneychip.com",x:62,y:48,region:"kidneys"}],gut:[{domain:"microphysio.com",x:50,y:55,region:"gut"},{domain:"biomps.com",x:48,y:58,region:"gut"},{domain:"glp1bio.com",x:52,y:56,region:"gut"},{domain:"incretinhealth.com",x:46,y:60,region:"gut"},{domain:"incretinclinic.com",x:54,y:60,region:"gut"}],pelvis:[{domain:"celltherapy.app",x:45,y:65,region:"pelvis"},{domain:"organoidmedicine.com",x:55,y:65,region:"pelvis"},{domain:"organoids.app",x:50,y:68,region:"pelvis"},{domain:"geneediting.app",x:42,y:67,region:"pelvis"},{domain:"regenerativemed.app",x:58,y:67,region:"pelvis"}],leftArm:[{domain:"tcellengager.com",x:22,y:28,region:"leftArm"},{domain:"tcellbio.com",x:18,y:35,region:"leftArm"},{domain:"tcellai.com",x:15,y:42,region:"leftArm"},{domain:"tcellrx.com",x:12,y:50,region:"leftArm"},{domain:"immuncore.com",x:20,y:32,region:"leftArm"},{domain:"vaccinecore.com",x:10,y:55,region:"leftArm"}],rightArm:[{domain:"antigencore.com",x:78,y:28,region:"rightArm"},{domain:"quantumdrugdiscovery.com",x:82,y:35,region:"rightArm"},{domain:"quantummolsim.com",x:85,y:42,region:"rightArm"},{domain:"synthbiox.com",x:88,y:50,region:"rightArm"},{domain:"bioprintcore.com",x:80,y:32,region:"rightArm"}],leftLeg:[{domain:"drugscreening.app",x:40,y:72,region:"leftLeg"},{domain:"clinicaldoc.app",x:38,y:78,region:"leftLeg"},{domain:"clinicaldocai.com",x:36,y:84,region:"leftLeg"},{domain:"circdna.com",x:35,y:88,region:"leftLeg"},{domain:"circulatingdna.com",x:34,y:92,region:"leftLeg"}],rightLeg:[{domain:"patientdigitaltwin.app",x:60,y:72,region:"rightLeg"},{domain:"patienttwin.app",x:62,y:78,region:"rightLeg"},{domain:"drugdigitaltwin.com",x:64,y:84,region:"rightLeg"},{domain:"genomedigitaltwin.com",x:65,y:88,region:"rightLeg"},{domain:"genetwin.com",x:66,y:92,region:"rightLeg"}],arabic:[{domain:"أموال.com",x:8,y:25,region:"arabic",orbit:!0,flagship:!0},{domain:"مستقبل.com",x:5,y:35,region:"arabic",orbit:!0,flagship:!0},{domain:"ملكة.com",x:8,y:45,region:"arabic",orbit:!0},{domain:"روح.com",x:5,y:55,region:"arabic",orbit:!0},{domain:"حكمة.com",x:8,y:65,region:"arabic",orbit:!0},{domain:"زمرد.com",x:5,y:75,region:"arabic",orbit:!0},{domain:"ياقوت.com",x:8,y:85,region:"arabic",orbit:!0},{domain:"إدارة.com",x:3,y:40,region:"arabic",orbit:!0},{domain:"إمارة.com",x:3,y:50,region:"arabic",orbit:!0},{domain:"سمو.com",x:3,y:60,region:"arabic",orbit:!0},{domain:"شرف.com",x:3,y:70,region:"arabic",orbit:!0},{domain:"حرير.com",x:6,y:30,region:"arabic",orbit:!0},{domain:"لؤلؤ.com",x:6,y:80,region:"arabic",orbit:!0}],chinese:[{domain:"精准医疗.com",x:92,y:25,region:"chinese",orbit:!0,flagship:!0},{domain:"免疫治疗.com",x:95,y:45,region:"chinese",orbit:!0},{domain:"神经芯片.com",x:92,y:65,region:"chinese",orbit:!0}],floating:[{domain:"omniomicsai.com",x:15,y:15,region:"floating"},{domain:"medicalaiplatform.com",x:85,y:15,region:"floating"},{domain:"biologyfirstai.com",x:12,y:85,region:"floating"},{domain:"biologyfirstai.app",x:88,y:85,region:"floating"},{domain:"aitrustnetwork.com",x:18,y:95,region:"floating"},{domain:"memristorcore.com",x:82,y:95,region:"floating"},{domain:"admechip.com",x:25,y:38,region:"floating"},{domain:"emulationchip.com",x:75,y:38,region:"floating"},{domain:"biohybridchip.com",x:28,y:52,region:"floating"},{domain:"emulatorchip.com",x:72,y:52,region:"floating"},{domain:"senolytichealth.com",x:25,y:62,region:"floating"},{domain:"celltherapybiobank.com",x:75,y:62,region:"floating"},{domain:"therapeuticbiobank.com",x:22,y:72,region:"floating"},{domain:"syntheticbiology.app",x:78,y:72,region:"floating"},{domain:"cellularfermentation.com",x:20,y:82,region:"floating"},{domain:"swarmnano.com",x:80,y:82,region:"floating"}],fragrance:[{domain:"rosedamascena.com",x:30,y:95,region:"fragrance"},{domain:"grassejasmine.com",x:40,y:97,region:"fragrance"},{domain:"oudextract.com",x:50,y:96,region:"fragrance"},{domain:"vetiverroot.com",x:60,y:97,region:"fragrance"},{domain:"agarwoodextract.com",x:70,y:95,region:"fragrance"}]}}init(){this.createCanvas(),this.createTooltip(),this.createModal(),this.buildNodes(),this.buildConnections(),this.bindEvents(),this.setupScrollObserver(),this.animate()}createCanvas(){this.canvas=document.createElement("canvas"),this.canvas.id="humanoid-constellation-canvas",this.canvas.style.cssText=`
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: auto;
+    `,this.container.appendChild(this.canvas),this.ctx=this.canvas.getContext("2d"),this.resize()}createTooltip(){this.tooltip=document.createElement("div"),this.tooltip.className="constellation-tooltip",this.tooltip.style.cssText=`
+      position: fixed;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(8, 8, 12, 0.97) 0%, rgba(15, 10, 10, 0.97) 100%);
+      border: 1px solid rgba(180, 140, 100, 0.25);
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 1px rgba(200, 160, 120, 0.3);
+      pointer-events: none;
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      backdrop-filter: blur(16px);
+      font-family: 'Sora', sans-serif;
+      min-width: 200px;
+      transform: translateY(10px);
+    `,document.body.appendChild(this.tooltip)}createModal(){this.modal=document.createElement("div"),this.modal.className="constellation-modal",this.modal.style.cssText=`
+      position: fixed;
+      bottom: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 420px;
+      background: linear-gradient(180deg, rgba(12, 8, 8, 0.98) 0%, rgba(8, 5, 5, 0.99) 100%);
+      border: 1px solid rgba(160, 100, 80, 0.25);
+      border-bottom: none;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(200, 160, 120, 0.1);
+      z-index: 10001;
+      padding: 32px 28px 40px;
+      transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Sora', sans-serif;
+    `,this.modal.innerHTML=`
+      <div class="modal-content">
+        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+          <span class="modal-domain" style="font-size: 1.4rem; font-weight: 700; color: #d4a574;"></span>
+          <button class="modal-close" style="background: none; border: none; color: rgba(255,255,255,0.4); font-size: 28px; cursor: pointer; line-height: 1; padding: 0; margin: -8px -8px 0 0;">&times;</button>
+        </div>
+        <div class="modal-body" style="color: rgba(255,255,255,0.75); line-height: 1.6;">
+          <p class="modal-tier" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; color: #c9a080;"></p>
+          <p class="modal-category" style="font-size: 14px; margin-bottom: 16px; color: rgba(255,255,255,0.5);"></p>
+          <p class="modal-desc" style="font-size: 14px; color: rgba(255,255,255,0.6);">Part of the Patient Analog 140+ domain portfolio</p>
+        </div>
+        <div class="modal-actions" style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <a href="#" class="modal-offer-btn" target="_blank" style="display: block; padding: 16px 24px; background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; letter-spacing: 1px; box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);">MAKE AN OFFER</a>
+          <button class="modal-view-all" style="padding: 14px 24px; background: transparent; border: 1px solid rgba(180, 140, 100, 0.3); color: #c9a080; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer;">VIEW ALL DOMAINS</button>
+        </div>
+      </div>
+    `,document.body.appendChild(this.modal),this.modal.querySelector(".modal-close").addEventListener("click",()=>this.hideModal()),this.modal.querySelector(".modal-view-all").addEventListener("click",()=>{this.hideModal(),window.location.href="/portfolio"}),document.addEventListener("click",e=>{this.modal.style.bottom==="0px"&&!this.modal.contains(e.target)&&e.target!==this.canvas&&this.hideModal()})}buildNodes(){this.nodes=[];let e=0;Object.entries(this.domainBody).forEach(([o,i])=>{i.forEach(t=>{const a={...t,index:e++,color:this.getRegionColor(t.region),size:this.getNodeSize(t),revealed:!1,opacity:0,scale:.1,pulsePhase:Math.random()*Math.PI*2,orbitPhase:Math.random()*Math.PI*2,orbitRadius:t.orbit?3+Math.random()*4:0,floatOffset:Math.random()*Math.PI*2};this.nodes.push(a)})})}getRegionColor(e){return{brain:this.colors.brain,eyes:this.colors.eyes,neck:this.colors.neck,shoulders:this.colors.shoulders,lungs:this.colors.lungs,heart:this.colors.heart,rna:this.colors.rna,liver:this.colors.liver,kidneys:this.colors.kidneys,gut:this.colors.gut,pelvis:this.colors.pelvis,leftArm:this.colors.floating,rightArm:this.colors.floating,leftLeg:this.colors.legs,rightLeg:this.colors.legs,arabic:this.colors.arabic,chinese:this.colors.chinese,floating:this.colors.floating,fragrance:"#deb3ad"}[e]||this.colors.floating}getNodeSize(e){return e.primary?16:e.flagship?10:e.glow?7:4}buildConnections(){this.connections=[];const e=this.nodes.find(i=>i.domain==="patientanalog.com");if(!e)return;["lungchip.com","liverdigitaltwin.com","kidneydigitaltwin.com","braincomputerai.com","rna0.com","heartdigitaltwin.com","organoidmedicine.com","celltherapy.app","humanmps.com","tissuechip.com","tissuechips.com"].forEach(i=>{const t=this.nodes.find(a=>a.domain===i);t&&this.connections.push({from:e,to:t})}),this.nodes.forEach((i,t)=>{this.nodes.slice(t+1).forEach(a=>{if(i.region===a.region){const n=i.x-a.x,r=i.y-a.y;Math.sqrt(n*n+r*r)<12&&Math.random()>.4&&this.connections.push({from:i,to:a})}})})}bindEvents(){window.addEventListener("resize",()=>this.resize()),this.container.addEventListener("mousemove",e=>this.onMouseMove(e)),this.canvas.addEventListener("click",e=>this.onClick(e)),this.container.addEventListener("mouseleave",()=>this.onMouseLeave()),this.canvas.addEventListener("touchstart",e=>this.onTouch(e),{passive:!0})}setupScrollObserver(){new IntersectionObserver(o=>{o.forEach(i=>{this.isVisible=i.isIntersecting,this.isVisible&&!this.revealed&&(this.revealNodes(),this.revealed=!0)})},{threshold:.15}).observe(this.container),window.addEventListener("scroll",()=>{const o=this.container.getBoundingClientRect(),i=window.innerHeight,t=Math.max(0,Math.min(1,(i-o.top)/(i+o.height)));this.scrollProgress=t})}revealNodes(){const e=this.nodes.find(i=>i.domain==="patientanalog.com");if(!e)return;[...this.nodes].sort((i,t)=>{const a=Math.hypot(i.x-e.x,i.y-e.y),n=Math.hypot(t.x-e.x,t.y-e.y);return a-n}).forEach((i,t)=>{setTimeout(()=>{i.revealed=!0},t*25)})}resize(){const e=this.container.getBoundingClientRect(),o=Math.min(window.devicePixelRatio||1,2);this.canvas.width=e.width*o,this.canvas.height=e.height*o,this.ctx.scale(o,o),this.width=e.width,this.height=e.height}onMouseMove(e){const o=this.container.getBoundingClientRect();this.mouse.targetX=e.clientX-o.left,this.mouse.targetY=e.clientY-o.top;const i=this.width/2,t=this.height/2;this.parallaxOffset.x=(this.mouse.targetX-i)/i*15,this.parallaxOffset.y=(this.mouse.targetY-t)/t*10,this.hoveredNode=null;for(const a of this.nodes){if(!a.revealed)continue;const n=a.x/100*this.width+this.parallaxOffset.x*(a.orbit?.5:.3),r=a.y/100*this.height+this.parallaxOffset.y*(a.orbit?.5:.3);if(Math.hypot(this.mouse.targetX-n,this.mouse.targetY-r)<a.size*4+10){this.hoveredNode=a;break}}this.hoveredNode?(this.showTooltip(this.hoveredNode,e.clientX,e.clientY),this.canvas.style.cursor="pointer"):(this.hideTooltip(),this.canvas.style.cursor="default")}onTouch(e){if(e.touches.length===1){const o=e.touches[0],i=this.canvas.getBoundingClientRect(),t=o.clientX-i.left,a=o.clientY-i.top;for(const n of this.nodes){if(!n.revealed)continue;const r=n.x/100*this.width,l=n.y/100*this.height;if(Math.hypot(t-r,a-l)<n.size*4+15){this.showModal(n);break}}}}onClick(e){this.hoveredNode&&this.showModal(this.hoveredNode)}onMouseLeave(){this.hoveredNode=null,this.hideTooltip(),this.parallaxOffset.x=0,this.parallaxOffset.y=0}showTooltip(e,o,i){const t=e.primary?"PRIMARY ASSET":e.flagship?"FLAGSHIP DOMAIN":"PORTFOLIO DOMAIN",a=e.primary?"#cc0000":e.flagship?"#d4af37":"rgba(200, 160, 120, 0.7)",n=this.getCategoryName(e.region);this.tooltip.innerHTML=`
+      <div style="font-size: 15px; font-weight: 600; color: #e8e0d8; margin-bottom: 8px; letter-spacing: 0.3px;">
+        ${e.domain}
+      </div>
+      <div style="font-size: 10px; color: ${a}; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 500;">
+        ${t}
+      </div>
+      <div style="font-size: 12px; color: rgba(200, 180, 160, 0.7); margin-bottom: 4px;">
+        ${n}
+      </div>
+      <div style="font-size: 10px; color: rgba(180, 140, 100, 0.8); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(160, 120, 80, 0.2);">
+        Click to inquire
+      </div>
+    `,this.tooltip.getBoundingClientRect();let r=o+15,l=i-20;r+220>window.innerWidth&&(r=o-220),l<10&&(l=10),this.tooltip.style.left=`${r}px`,this.tooltip.style.top=`${l}px`,this.tooltip.style.opacity="1",this.tooltip.style.transform="translateY(0)"}getCategoryName(e){return{brain:"Neural Technology",eyes:"AI Vision",neck:"Neural Tech",shoulders:"Tissue Engineering",lungs:"Organ-on-Chip",heart:"Digital Twin",rna:"RNA Technology",liver:"Digital Twin",kidneys:"Organ Modeling",gut:"MPS Systems",pelvis:"Cell Therapy",leftArm:"Immunology",rightArm:"Drug Discovery",leftLeg:"Clinical AI",rightLeg:"Digital Twin",arabic:"Premium IDN",chinese:"Premium IDN",floating:"AI & Compute",fragrance:"Specialty"}[e]||"Biotech"}hideTooltip(){this.tooltip.style.opacity="0",this.tooltip.style.transform="translateY(10px)"}showModal(e){const o=`https://sedo.com/search/details/?domain=${encodeURIComponent(e.domain)}`,i=e.primary?"PRIMARY ASSET":e.flagship?"FLAGSHIP DOMAIN":"PORTFOLIO DOMAIN",t=this.getCategoryName(e.region),a=this.modal.querySelector(".modal-domain");a.textContent=e.domain,a.style.color=e.primary?"#00d4ff":e.flagship?"#ffd700":"#00d4ff",this.modal.querySelector(".modal-tier").textContent=i,this.modal.querySelector(".modal-tier").style.color=e.primary?"#00d4ff":e.flagship?"#ffd700":"rgba(255,255,255,0.5)",this.modal.querySelector(".modal-category").textContent=`Category: ${t}`,this.modal.querySelector(".modal-offer-btn").href=o,this.modal.style.bottom="0",this.hideTooltip()}hideModal(){this.modal.style.bottom="-100%"}animate(){this.rafId=requestAnimationFrame(()=>this.animate()),this.isVisible&&(this.time+=.016,this.mouse.x+=(this.mouse.targetX-this.mouse.x)*.1,this.mouse.y+=(this.mouse.targetY-this.mouse.y)*.1,this.render())}render(){const e=this.ctx,o=this.width,i=this.height;e.fillStyle="#000810",e.fillRect(0,0,o,i),this.drawBodySilhouette(e,o,i),this.drawConnections(e,o,i),this.drawNodes(e,o,i)}drawBodySilhouette(e,o,i){e.save(),e.strokeStyle="rgba(0, 150, 255, 0.03)",e.lineWidth=1.5;const t=this.parallaxOffset.x*.2,a=this.parallaxOffset.y*.2,n=o*.5+t;e.beginPath(),e.ellipse(n,i*.08+a,o*.055,i*.055,0,0,Math.PI*2),e.moveTo(n-o*.018+t,i*.135+a),e.lineTo(n-o*.018+t,i*.18+a),e.moveTo(n+o*.018+t,i*.135+a),e.lineTo(n+o*.018+t,i*.18+a),e.moveTo(n-o*.018+t,i*.19+a),e.quadraticCurveTo(n-o*.15+t,i*.2+a,n-o*.2+t,i*.24+a),e.moveTo(n+o*.018+t,i*.19+a),e.quadraticCurveTo(n+o*.15+t,i*.2+a,n+o*.2+t,i*.24+a),e.moveTo(n-o*.12+t,i*.25+a),e.lineTo(n-o*.08+t,i*.65+a),e.moveTo(n+o*.12+t,i*.25+a),e.lineTo(n+o*.08+t,i*.65+a),e.moveTo(n-o*.06+t,i*.68+a),e.lineTo(n-o*.1+t,i*.95+a),e.moveTo(n+o*.06+t,i*.68+a),e.lineTo(n+o*.1+t,i*.95+a),e.stroke(),e.restore()}drawConnections(e,o,i){e.save(),this.connections.forEach(t=>{if(!t.from.revealed||!t.to.revealed||t.from.opacity<.3||t.to.opacity<.3)return;const a=this.parallaxOffset.x*.3,n=this.parallaxOffset.y*.3,r=t.from.x/100*o+a,l=t.from.y/100*i+n,c=t.to.x/100*o+a,d=t.to.y/100*i+n,p=this.hoveredNode&&(t.from===this.hoveredNode||t.to===this.hoveredNode),h=Math.min(t.from.opacity,t.to.opacity);e.strokeStyle=p?this.colors.connectionHover:this.colors.connection,e.globalAlpha=h,e.lineWidth=p?2:1,e.beginPath(),e.moveTo(r,l),e.lineTo(c,d),e.stroke()}),e.restore()}drawNodes(e,o,i){this.nodes.forEach(t=>{if(t.revealed&&t.opacity<1&&(t.opacity=Math.min(1,t.opacity+.04),t.scale=Math.min(1,t.scale+.06)),t.opacity<=0)return;const a=t.orbit?.5:.3;let n=t.x/100*o+this.parallaxOffset.x*a,r=t.y/100*i+this.parallaxOffset.y*a;if(t.orbit){const y=Math.sin(this.time*.4+t.orbitPhase)*t.orbitRadius;n+=y,r+=Math.cos(this.time*.25+t.orbitPhase)*t.orbitRadius*.6}r+=Math.sin(this.time*.5+t.floatOffset)*1.5;const l=t.size*t.scale,c=this.hoveredNode===t,d=c?l*2:l;e.save(),e.globalAlpha=t.opacity;const p=d*(c?5:3),h=e.createRadialGradient(n,r,0,n,r,p);if(h.addColorStop(0,t.color+"60"),h.addColorStop(.4,t.color+"20"),h.addColorStop(1,"transparent"),e.fillStyle=h,e.beginPath(),e.arc(n,r,p,0,Math.PI*2),e.fill(),t.pulse){const y=this.getHeartbeatPulse(),v=d*(1+y*.5),g=this.time*.7%1.5;if(g<1){const b=d*(1+g*5),x=Math.max(0,1-g);e.strokeStyle=`rgba(180, 20, 20, ${x*.6})`,e.lineWidth=2.5,e.beginPath(),e.arc(n,r,b,0,Math.PI*2),e.stroke()}const u=(this.time*.7+.4)%1.5;if(u<1){const b=d*(1+u*4),x=Math.max(0,1-u);e.strokeStyle=`rgba(140, 0, 0, ${x*.4})`,e.lineWidth=1.5,e.beginPath(),e.arc(n,r,b,0,Math.PI*2),e.stroke()}const f=e.createRadialGradient(n,r,0,n,r,v*5);f.addColorStop(0,"#cc0000"),f.addColorStop(.15,"rgba(180, 20, 20, 0.8)"),f.addColorStop(.35,"rgba(140, 0, 0, 0.4)"),f.addColorStop(.6,"rgba(100, 0, 0, 0.15)"),f.addColorStop(1,"transparent"),e.fillStyle=f,e.beginPath(),e.arc(n,r,v*5,0,Math.PI*2),e.fill(),e.fillStyle=this.colors.heartPulse,e.shadowColor="#ff2020",e.shadowBlur=30+y*20,e.beginPath(),e.arc(n,r,v,0,Math.PI*2),e.fill(),e.shadowBlur=0,e.fillStyle="#ff4040",e.beginPath(),e.arc(n,r,v*.4,0,Math.PI*2),e.fill()}else e.fillStyle=t.color,c&&(e.shadowColor=t.color,e.shadowBlur=25),e.beginPath(),e.arc(n,r,d,0,Math.PI*2),e.fill(),e.shadowBlur=0;t.region==="rna"&&(e.strokeStyle=t.color+"50",e.lineWidth=1.5,e.beginPath(),e.arc(n,r,d*1.8,0,Math.PI*2),e.stroke()),e.restore()})}getHeartbeatPulse(){const e=this.time%.833/.833;return e<.12?Math.sin(e/.12*Math.PI):e>=.18&&e<.3?Math.sin((e-.18)/.12*Math.PI)*.7:0}dispose(){this.rafId&&cancelAnimationFrame(this.rafId),window.removeEventListener("resize",this.resize),this.canvas&&this.canvas.remove(),this.tooltip&&this.tooltip.remove(),this.modal&&this.modal.remove()}}const k={},L={home:["cursor","constellation","ticker"],portfolio:["cursor","constellation","ticker"],default:["cursor","ticker"],games:["cursor"]};function H(){const s=window.location.pathname;return s==="/"||s==="/index.html"?"home":s.includes("/games/")?"games":"default"}function $(){if(k.cursor)return;const s=document.createElement("link");s.rel="stylesheet",s.href="/assets/CursorEffects.css",document.head.appendChild(s),k.cursor=new z,console.log("[Engines] Cursor loaded")}function Y(){if(k.ticker)return;document.getElementById("live-ticker")&&(k.ticker=new P("live-ticker"),console.log("[Engines] LiveTicker loaded"))}function q(){if(k.constellation)return;const s=document.getElementById("humanoid-constellation");s&&(k.constellation=new B(s),console.log("[Engines] HumanoidConstellation loaded"))}function I(){const s=H(),e=L[s]||L.default;console.log(`[Engines] Page type: ${s}, loading:`,e),e.forEach(o=>{switch(o){case"cursor":$();break;case"ticker":Y();break;case"constellation":q();break}})}typeof document<"u"&&(document.readyState==="loading"?document.addEventListener("DOMContentLoaded",I):I());document.addEventListener("DOMContentLoaded",()=>{F(),G(),V(),X(),K(),Z(),J()});function F(){if(document.querySelector(".space-stars"))return;var s=document.createElement("div");s.className="space-stars";var e=document.createElement("div");e.className="space-nebula-deep";var o=document.createElement("div");o.className="deep-particles";var i=document.createElement("div");i.className="space-nebula",document.body.insertBefore(i,document.body.firstChild),document.body.insertBefore(o,document.body.firstChild),document.body.insertBefore(e,document.body.firstChild),document.body.insertBefore(s,document.body.firstChild);for(var t=0;t<30;t++){var a=document.createElement("div");a.className="deep-particle",a.style.left=Math.random()*100+"vw",a.style.top=Math.random()*100+"vh",a.style.animationDelay=Math.random()*8+"s",o.appendChild(a)}for(var n=0;n<80;n++){var r=document.createElement("div"),l=Math.random();r.className="twinkle-star "+(l<.6?"small":l<.9?"medium":"large"),r.style.left=Math.random()*100+"vw",r.style.top=Math.random()*100+"vh",r.style.animationDelay=Math.random()*5+"s",document.body.appendChild(r)}for(var c=0;c<40;c++){var d=document.createElement("div");d.className="particle "+(Math.random()>.7?"spark":"dust"),d.style.left=Math.random()*100+"vw",d.style.animationDelay=Math.random()*25+"s",d.style.animationDuration=15+Math.random()*15+"s",document.body.appendChild(d)}var p=document.createElement("div");p.className="cursor-glow",document.body.appendChild(p);var h=document.createElement("div");h.className="cursor-glow-inner",document.body.appendChild(h);var y=0,v=0,g=0,u=0,f=0,b=0,x=0,A=0,C=0,T=0,w=0;document.addEventListener("mousemove",function(m){y=m.clientX/window.innerWidth-.5,v=m.clientY/window.innerHeight-.5,C=m.clientX,T=m.clientY});function E(){w+=.003,g+=(y-g)*.05,u+=(v-u)*.05;var m=Math.sin(w)*25,M=Math.sin(w*.7)*20,D=Math.sin(w*.5)*15,R=Math.cos(w*.4)*12;s.style.transform="translate3d("+g*-15+"px, "+u*-15+"px, 0)",e.style.transform="translate3d("+(g*-22+D*.5)+"px, "+(u*-22+R*.5)+"px, 0)",o.style.transform="translate3d("+g*-28+"px, "+u*-28+"px, 0)",i.style.transform="translate3d("+(g*-35+m*.5)+"px, "+(u*-35+M*.5)+"px, 0)",f+=(C-f)*.08,b+=(T-b)*.08,p.style.left=f+"px",p.style.top=b+"px",x+=(C-x)*.15,A+=(T-A)*.15,h.style.left=x+"px",h.style.top=A+"px",requestAnimationFrame(E)}E();var S=document.querySelectorAll("section, .card, .pyramid-container");S.forEach(function(m){m.classList.add("reveal")});var O=new IntersectionObserver(function(m){m.forEach(function(M){M.isIntersecting&&M.target.classList.add("visible")})},{threshold:.1});S.forEach(function(m){O.observe(m)})}function G(){const s=document.getElementById("main-nav");if(!s)return;s.style.cssText="position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:999999!important;background:rgba(0,0,0,0.9)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;height:28px!important;max-height:28px!important;min-height:28px!important;overflow:visible!important;display:flex!important;flex-direction:row!important;align-items:center!important;padding:0 1rem!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;";s.innerHTML=`
+    <div class="nav-content" style="display:flex;flex-direction:row;align-items:center;width:100%;height:28px;justify-content:space-between;gap:0.75rem;">
+      <a href="/" class="nav-logo" title="Return to Home" style="display:flex;align-items:center;gap:0.3rem;color:#fff;text-decoration:none;font-size:0.8rem;font-weight:600;">
+        <span class="home-icon" style="font-size:1rem;">&#8962;</span>
+        <span class="logo-text">Patient Analog</span>
+      </a>
+      <div class="global-clocks" id="global-clocks" style="display:flex;align-items:center;gap:0.4rem;font-size:9px;color:#0ff;">
+        <span class="live-indicator" style="color:#f00;display:flex;align-items:center;gap:3px;"><span class="live-dot" style="width:5px;height:5px;background:#f00;border-radius:50%;"></span>LIVE</span>
+        <span class="clock-item" id="clock-DC" title="FDA - Washington DC"></span>
+        <span class="clock-item" id="clock-LON" title="EMA - London"></span>
+        <span class="clock-item" id="clock-EU" title="EU - Brussels"></span>
+        <span class="clock-item" id="clock-KSA" title="Saudi Arabia - Riyadh"></span>
+        <span class="clock-item" id="clock-TYO" title="PMDA - Tokyo"></span>
+        <span class="clock-item" id="clock-BEI" title="NMPA - Beijing"></span>
+      </div>
+      <div class="nav-links" id="nav-links" style="display:flex;align-items:center;gap:0.6rem;">
+        <a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
+        <a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a>
+        <a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Science</a>
+        <a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a>
+        <a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a>
+        <a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>News</a>
+        <a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Technology</a>
+        <a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a>
+        <a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>Regulatory</a>
+        <a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a>
+        <a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a>
+        <a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a>
+        <a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>Legal</a>
+        <a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a>
+      </div>
+    </div>
+  `}function X(){const d=document.querySelector(".nav-dropdown-toggle");const dd=document.querySelector(".nav-dropdown");const dm=document.querySelector(".nav-dropdown-menu");if(d&&dd&&dm){d.addEventListener("click",(t)=>{t.preventDefault();t.stopPropagation();dd.classList.toggle("active")});dd.addEventListener("mouseenter",()=>{dm.style.display="block";dm.style.visibility="visible";dm.style.opacity="1"});dd.addEventListener("mouseleave",()=>{if(!dd.classList.contains("active")){dm.style.display="none";dm.style.visibility="hidden";dm.style.opacity="0"}})}document.addEventListener("click",(t)=>{const dropdown=document.querySelector(".nav-dropdown");if(dropdown&&!dropdown.contains(t.target)){dropdown.classList.remove("active");const menu=dropdown.querySelector(".nav-dropdown-menu");if(menu){menu.style.display="none";menu.style.visibility="hidden";menu.style.opacity="0"}}})}function U(){const s=window.location.pathname,e=`
+    <div class="contextual-footer footer-authority">
+      <h3>PATIENT ANALOG</h3>
+      <p>486+ curated resources | Framework aligned with NIH NCATS | FDA NAMs | DARPA MPS</p>
+      <p class="portfolio-note">Part of a 140+ premium biotech domain portfolio.</p>
+      <div class="contextual-links">
+        <a href="/research" class="ctx-btn">Research Links</a>
+        <a href="/contact" class="ctx-btn ctx-btn-outline">Strategic Inquiries</a>
+      </div>
+    </div>
+  `,o=`
+    <div class="contextual-footer footer-games">
+      <h3>Try our interactive experiences:</h3>
+      <p class="games-list">Science Lab - 6 simulations | Discovery Zone | Kenneth's Adventure</p>
+      <div class="contextual-links">
+        <a href="/games" class="ctx-btn">View All BioLab</a>
+      </div>
+    </div>
+  `,i=`
+    <div class="contextual-footer footer-research">
+      <h3>Want to learn more?</h3>
+      <p class="research-list">486+ Research Links | Regulatory Updates | Latest Science</p>
+      <div class="contextual-links">
+        <a href="/research" class="ctx-btn">Explore Research Hub</a>
+      </div>
+    </div>
+  `;return s.includes("platform")||s.includes("companies")||s.includes("regulatory")||s.includes("market")?e:s.includes("technology")||s.includes("science")||s.includes("news")?o:s.includes("games")||s.includes("research")||s.includes("kids")?i:""}function V(){const s=document.getElementById("main-footer");if(!s)return;const e=U();s.innerHTML=`
+    ${e}
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Platform</h4>
+        <a href="/technology">Technology</a>
+        <a href="/science">Science</a>
+        <a href="/framework">Framework</a>
+      </div>
+      <div class="footer-section">
+        <h4>Research</h4>
+        <a href="/companies">Companies</a>
+        <a href="/regulatory">Regulatory</a>
+        <a href="/market">Market</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="/research">Research Links</a>
+        <a href="/glossary">Glossary</a>
+        <a href="/portfolio">Scientific Terminology</a>
+        <a href="/news">News</a>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/kids">Discovery Zone</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Patient Analog</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/pages/legal">Legal</a>
+        <a href="/portfolio">Research Assets</a>
+      </div>
+    </div>
+  `}const j=[{id:"DC",zone:"America/New_York",label:"DC"},{id:"LON",zone:"Europe/London",label:"LON"},{id:"EU",zone:"Europe/Brussels",label:"EU"},{id:"KSA",zone:"Asia/Riyadh",label:"KSA"},{id:"TYO",zone:"Asia/Tokyo",label:"TYO"},{id:"BEI",zone:"Asia/Shanghai",label:"BEI"}];function W(s){const e=new Date,o={timeZone:s,hour:"numeric",hour12:!1},i=parseInt(e.toLocaleString("en-US",o)),t={timeZone:s,weekday:"short"},a=e.toLocaleString("en-US",t);return!(a==="Sat"||a==="Sun")&&i>=9&&i<17}function N(){j.forEach(s=>{const e=document.getElementById(`clock-${s.id}`);if(e){const o=new Date().toLocaleTimeString("en-US",{timeZone:s.zone,hour:"2-digit",minute:"2-digit",hour12:!1}),i=W(s.zone);e.innerHTML=`<span class="clock-label">${s.label}</span><span class="clock-time">${o}</span><span class="clock-status ${i?"open":"closed"}"></span>`}})}function K(){N(),setInterval(N,1e3)}function Z(){var s=localStorage.getItem("pa-organism-birth"),e=Date.now();s||(localStorage.setItem("pa-organism-birth",e),s=e);var o=e-parseInt(s),i=Math.floor(o/(1e3*60*60*24)),t;i<1?t=1:i<7?t=2:i<30?t=3:i<180?t=4:t=5;var a={index:{bottom:"20px",right:"30px"},platform:{top:"150px",left:"20px"},technology:{top:"300px",right:"20px"},science:{bottom:"100px",left:"40px"},companies:{top:"200px",right:"40px"},regulatory:{bottom:"150px",right:"60px"},market:{top:"250px",left:"30px"},research:{bottom:"80px",left:"50px"},games:{bottom:"200px",right:"50px"},news:{top:"350px",left:"25px"},default:{bottom:"30px",right:"30px"}},n=window.location.pathname,r="default";n==="/"||n.includes("index")?r="index":n.includes("platform")?r="platform":n.includes("technology")?r="technology":n.includes("science")?r="science":n.includes("companies")?r="companies":n.includes("regulatory")?r="regulatory":n.includes("market")?r="market":n.includes("research")?r="research":n.includes("games")?r="games":n.includes("news")&&(r="news");var l=a[r]||a.default,c=document.createElement("div");c.className="biotech-organism organism-stage-"+t,c.innerHTML=_(t),Object.keys(l).forEach(function(d){c.style[d]=l[d]}),c.title="Day "+i+" · Stage "+t+"/5",c.style.pointerEvents="auto",c.addEventListener("click",function(){Q(i,t)}),document.body.appendChild(c)}function _(s){var e='<div class="organism-core"></div>';return e+='<div class="organism-membrane"></div>',s>=2&&(e+='<div class="organism-child" style="width:8px;height:8px;top:-10px;left:50%;"></div>'),s>=3&&(e+='<div class="organism-child" style="width:10px;height:10px;bottom:-12px;right:20%;"></div>',e+='<div class="organism-child" style="width:6px;height:6px;top:30%;left:-8px;"></div>'),s>=4&&(e+='<div class="organism-child" style="width:12px;height:12px;top:-15px;right:20%;"></div>',e+='<div class="organism-child" style="width:8px;height:8px;bottom:-10px;left:10%;"></div>',e+='<div class="organism-tendril" style="width:20px;top:50%;right:-20px;"></div>'),s>=5&&(e+='<div class="organism-child" style="width:14px;height:14px;top:50%;left:-18px;"></div>',e+='<div class="organism-child" style="width:10px;height:10px;bottom:20%;right:-12px;"></div>',e+='<div class="organism-tendril" style="width:25px;bottom:30%;left:-25px;transform:rotate(180deg);"></div>',e+='<div class="organism-tendril" style="width:30px;top:20%;right:-30px;transform:rotate(-20deg);"></div>'),e}function Q(s,e){var o=["","Nascent Cell","Young Colony","Growing Cluster","Thriving Network","Mature Organism"],i="";e===1?i="Next stage in "+(1-s)+" days":e===2?i="Next stage in "+(7-s)+" days":e===3?i="Next stage in "+(30-s)+" days":e===4?i="Next stage in "+(180-s)+" days":i="Fully evolved!";var t=document.createElement("div");t.style.cssText="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,20,40,0.95);border:1px solid rgba(0,212,255,0.5);border-radius:16px;padding:32px;z-index:10000;max-width:320px;text-align:center;box-shadow:0 0 40px rgba(0,212,255,0.3);",t.innerHTML=`
+    <div style="font-size:48px;margin-bottom:16px;">🧬</div>
+    <h3 style="color:#00d4ff;margin:0 0 8px;font-size:18px;">Patient Analog Organism</h3>
+    <p style="color:#94a3b8;margin:0 0 16px;font-size:14px;">${o[e]}</p>
+    <div style="display:flex;justify-content:space-around;margin-bottom:16px;">
+      <div><div style="color:#fff;font-size:24px;font-weight:bold;">${s}</div><div style="color:#64748b;font-size:11px;">DAYS OLD</div></div>
+      <div><div style="color:#00ff99;font-size:24px;font-weight:bold;">${e}/5</div><div style="color:#64748b;font-size:11px;">STAGE</div></div>
+    </div>
+    <p style="color:#64748b;font-size:12px;margin:0 0 16px;">${i}</p>
+    <button style="background:linear-gradient(135deg,#0284c7,#0ea5e9);border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;" onclick="this.parentElement.remove()">Close</button>
+  `;var a=document.createElement("div");a.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;",a.onclick=function(){a.remove(),t.remove()},document.body.appendChild(a),document.body.appendChild(t)}function J(){if(localStorage.getItem("pa-cookie-consent"))return;const s=document.createElement("div");s.id="cookie-banner",s.innerHTML=`<style>#cookie-banner{position:fixed;bottom:0;left:0;right:0;background:rgba(8,12,24,0.98);border-top:1px solid rgba(0,170,255,0.2);padding:16px 24px;z-index:10000;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-family:Inter,sans-serif;box-shadow:0 -4px 20px rgba(0,0,0,0.4)}#cookie-banner p{color:rgba(255,255,255,0.8);font-size:14px;margin:0;flex:1;min-width:280px}#cookie-banner .cookie-btns{display:flex;gap:10px;flex-wrap:wrap}#cookie-banner button{font-family:Inter,sans-serif;font-size:13px;font-weight:500;padding:10px 20px;border-radius:6px;cursor:pointer;transition:all 0.2s;border:none}#cookie-banner .accept-btn{background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff}#cookie-banner .accept-btn:hover{background:linear-gradient(135deg,#0369a1,#0284c7)}#cookie-banner .reject-btn{background:transparent;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.8)}#cookie-banner .reject-btn:hover{border-color:#00aaff;color:#00aaff}#cookie-banner .prefs-btn{background:transparent;color:rgba(255,255,255,0.6)}#cookie-banner .prefs-btn:hover{color:#00aaff}@media(max-width:600px){#cookie-banner{flex-direction:column;text-align:center}#cookie-banner .cookie-btns{justify-content:center}}</style><p>We use cookies to improve your experience. By using our site, you consent to cookies.</p><div class="cookie-btns"><button class="accept-btn" onclick="window.setCookieConsent('all')">Accept All</button><button class="reject-btn" onclick="window.setCookieConsent('reject')">Reject</button><button class="prefs-btn" onclick="window.showCookiePrefs()">Preferences</button></div>`,document.body.appendChild(s);window.setCookieConsent=function(e){localStorage.setItem("pa-cookie-consent",e),document.getElementById("cookie-banner").remove()};window.showCookiePrefs=function(){const e=document.createElement("div");e.id="cookie-prefs-modal",e.innerHTML=`<style>#cookie-prefs-modal .overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:10001}#cookie-prefs-modal .modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(8,12,24,0.98);border:1px solid rgba(0,170,255,0.3);border-radius:12px;padding:24px;z-index:10002;max-width:400px;width:90%;font-family:Inter,sans-serif}#cookie-prefs-modal h3{color:#fff;margin:0 0 16px;font-size:18px}#cookie-prefs-modal .pref-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1)}#cookie-prefs-modal .pref-item:last-of-type{border-bottom:none}#cookie-prefs-modal .pref-label{color:rgba(255,255,255,0.8);font-size:14px}#cookie-prefs-modal .pref-desc{color:rgba(255,255,255,0.5);font-size:12px}#cookie-prefs-modal input[type="checkbox"]{width:18px;height:18px;accent-color:#0ea5e9}#cookie-prefs-modal .save-btn{width:100%;margin-top:16px;background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;border:none;padding:12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500}</style><div class="overlay" onclick="this.parentElement.remove()"></div><div class="modal"><h3>Cookie Preferences</h3><div class="pref-item"><div><div class="pref-label">Essential</div><div class="pref-desc">Required for site functionality</div></div><input type="checkbox" checked disabled></div><div class="pref-item"><div><div class="pref-label">Analytics</div><div class="pref-desc">Help us improve the site</div></div><input type="checkbox" id="pref-analytics" checked></div><div class="pref-item"><div><div class="pref-label">Marketing</div><div class="pref-desc">Personalized content</div></div><input type="checkbox" id="pref-marketing"></div><button class="save-btn" onclick="window.saveCookiePrefs()">Save Preferences</button></div>`,document.body.appendChild(e)};window.saveCookiePrefs=function(){const e={essential:!0,analytics:document.getElementById("pref-analytics").checked,marketing:document.getElementById("pref-marketing").checked};localStorage.setItem("pa-cookie-consent",JSON.stringify(e)),document.getElementById("cookie-prefs-modal").remove(),document.getElementById("cookie-banner").remove()}}

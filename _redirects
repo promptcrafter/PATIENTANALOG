@@ -1,0 +1,56 @@
+# Cloudflare Pages Redirects
+# Only redirect .html URLs to clean URLs (Cloudflare auto-serves folder/index.html)
+
+# Redirect .html to clean URLs
+/index.html / 301
+/about.html /about 301
+/contact.html /contact 301
+/games.html /games 301
+/portfolio.html /portfolio 301
+/portfolio-assets.html /portfolio-assets 301
+/platform.html /platform 301
+/science.html /science 301
+/news.html /news 301
+/technology.html /technology 301
+/companies.html /companies 301
+/regulatory.html /regulatory 301
+/market.html /market 301
+/glossary.html /glossary 301
+/haptic.html /haptic 301
+/offline.html /offline 301
+/research.html /research 301
+/thank-you.html /thank-you 301
+/portfolio-inquiry.html /portfolio-inquiry 301
+/games-bioforge.html /games-bioforge 301
+/games-kenneth.html /games-kenneth 301
+
+# Simulations .html redirects
+/simulations/index.html /simulations 301
+/simulations/brain-organoid-simulator.html /simulations/brain-organoid-simulator 301
+/simulations/cardiac-safety-testing.html /simulations/cardiac-safety-testing 301
+/simulations/car-t-cell-therapy.html /simulations/car-t-cell-therapy 301
+/simulations/ecosystem-dynamics.html /simulations/ecosystem-dynamics 301
+/simulations/epidemiological-transmission.html /simulations/epidemiological-transmission 301
+/simulations/gene-regulatory-network.html /simulations/gene-regulatory-network 301
+/simulations/liver-toxicity-testing.html /simulations/liver-toxicity-testing 301
+/simulations/metabolic-network-flux.html /simulations/metabolic-network-flux 301
+/simulations/multi-organ-digital-twin.html /simulations/multi-organ-digital-twin 301
+/simulations/neural-plasticity.html /simulations/neural-plasticity 301
+/simulations/organoid-assembly-builder.html /simulations/organoid-assembly-builder 301
+/simulations/protein-folding-dynamics.html /simulations/protein-folding-dynamics 301
+/simulations/quantum-drug-docking.html /simulations/quantum-drug-docking 301
+/simulations/ar-bio-viewer.html /simulations/ar-bio-viewer 301
+/simulations/adaptive-learning-engine.html /simulations/adaptive-learning-engine 301
+/simulations/biometric-learning-engine.html /simulations/biometric-learning-engine 301
+
+# Legal .html redirects
+/legal/index.html /legal 301
+/legal/privacy.html /legal/privacy 301
+/legal/terms.html /legal/terms 301
+/legal/cookies.html /legal/cookies 301
+/legal/dmca.html /legal/dmca 301
+/legal/accessibility.html /legal/accessibility 301
+
+# Backward compatibility
+/interactive/research /research 301
+/interactive/research-links /research 301

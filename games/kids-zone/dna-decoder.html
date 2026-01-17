@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNA Decoder | Discovery Zone | Patient Analog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard', sans-serif;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: #fff; font-size: 2.2rem; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); margin-bottom: 10px; }
+    .subtitle { color: #d1fae5; font-size: 1.1rem; }
+    .game-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .instructions {
+      background: #ecfdf5;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #065f46;
+    }
+    .dna-strand {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .base {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .base-A { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .base-T { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .base-G { background: linear-gradient(135deg, #22c55e, #16a34a); }
+    .base-C { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .codon-group {
+      display: flex;
+      gap: 5px;
+      padding: 10px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 10px;
+      margin: 0 5px;
+    }
+    .arrow { font-size: 2rem; color: #00e5a0; margin: 20px 0; text-align: center; }
+    .protein-result {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+    .protein-name {
+      font-size: 1.8rem;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+    .protein-emoji { font-size: 3rem; }
+    .codon-table {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0fdf4;
+      border-radius: 10px;
+    }
+    .codon-item {
+      padding: 10px;
+      background: #fff;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.9rem;
+      border: 2px solid #d1fae5;
+    }
+    .codon-code { font-weight: bold; color: #059669; }
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #00e5a0, #059669);
+      color: #fff;
+    }
+    .btn-primary:hover { transform: scale(1.05); }
+    .controls { text-align: center; margin-top: 20px; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #fff;
+      color: #059669;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .level-info {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #065f46;
+      font-size: 1.1rem;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+  <div class="container">
+    <header>
+      <h1>DNA Decoder</h1>
+      <p class="subtitle">Use the DNA code to discover which protein gets made!</p>
+    </header>
+
+    <div class="game-area">
+      <div class="instructions">
+        DNA uses 4 letters: <strong style="color:#ef4444">A</strong>, <strong style="color:#3b82f6">T</strong>, <strong style="color:#22c55e">G</strong>, <strong style="color:#f59e0b">C</strong><br>
+        Every 3 letters (a codon) codes for one amino acid!
+      </div>
+
+      <div class="level-info">Level: <span id="level">1</span> | Score: <span id="score">0</span></div>
+
+      <div class="dna-strand" id="dna-strand"></div>
+
+      <div class="arrow">↓</div>
+
+      <div class="protein-result">
+        <div class="protein-emoji" id="protein-emoji">?</div>
+        <div class="protein-name" id="protein-name">What protein will be made?</div>
+      </div>
+
+      <div class="codon-table">
+        <div class="codon-item"><span class="codon-code">ATG</span> = Start</div>
+        <div class="codon-item"><span class="codon-code">GGG</span> = Glycine</div>
+        <div class="codon-item"><span class="codon-code">AAA</span> = Lysine</div>
+        <div class="codon-item"><span class="codon-code">TTT</span> = Phenylalanine</div>
+        <div class="codon-item"><span class="codon-code">CCC</span> = Proline</div>
+        <div class="codon-item"><span class="codon-code">TAA</span> = Stop</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="decode-btn">Decode DNA!</button>
+        <button class="btn btn-primary" id="next-btn" style="display:none; margin-left:10px;">Next Sequence</button>
+      </div>
+    </div>
+
+    <center><a href="index.html" class="back-btn">Back to Discovery Zone</a></center>
+  </div>
+
+  <script>
+    const codons = {
+      'ATG': { name: 'Start Signal', emoji: '🚀' },
+      'GGG': { name: 'Glycine', emoji: '🔵' },
+      'AAA': { name: 'Lysine', emoji: '🟡' },
+      'TTT': { name: 'Phenylalanine', emoji: '🟣' },
+      'CCC': { name: 'Proline', emoji: '🟢' },
+      'TAA': { name: 'Stop Signal', emoji: '🛑' },
+      'GCA': { name: 'Alanine', emoji: '🔴' },
+      'TGC': { name: 'Cysteine', emoji: '🟠' }
+    };
+
+    const sequences = [
+      ['ATG', 'GGG', 'TAA'],
+      ['ATG', 'AAA', 'TAA'],
+      ['ATG', 'TTT', 'GGG', 'TAA'],
+      ['ATG', 'CCC', 'AAA', 'TAA'],
+      ['ATG', 'GGG', 'TTT', 'CCC', 'TAA']
+    ];
+
+    let currentLevel = 0;
+    let score = 0;
+    let decoded = false;
+
+    function renderSequence() {
+      const strand = document.getElementById('dna-strand');
+      strand.innerHTML = '';
+      decoded = false;
+
+      const sequence = sequences[currentLevel];
+      sequence.forEach(codon => {
+        const group = document.createElement('div');
+        group.className = 'codon-group';
+
+        codon.split('').forEach(base => {
+          const baseEl = document.createElement('div');
+          baseEl.className = `base base-${base}`;
+          baseEl.textContent = base;
+          group.appendChild(baseEl);
+        });
+
+        strand.appendChild(group);
+      });
+
+      document.getElementById('protein-emoji').textContent = '?';
+      document.getElementById('protein-name').textContent = 'What protein will be made?';
+      document.getElementById('decode-btn').style.display = 'inline-block';
+      document.getElementById('next-btn').style.display = 'none';
+      document.getElementById('level').textContent = currentLevel + 1;
+    }
+
+    function decode() {
+      if (decoded) return;
+      decoded = true;
+
+      const sequence = sequences[currentLevel];
+      let result = [];
+
+      sequence.forEach(codon => {
+        if (codons[codon]) {
+          result.push(codons[codon]);
+        }
+      });
+
+      const emoji = result.map(r => r.emoji).join(' → ');
+      const names = result.map(r => r.name).join(' + ');
+
+      document.getElementById('protein-emoji').textContent = emoji;
+      document.getElementById('protein-name').textContent = names;
+
+      score += 10;
+      document.getElementById('score').textContent = score;
+
+      document.getElementById('decode-btn').style.display = 'none';
+      document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextLevel() {
+      currentLevel++;
+      if (currentLevel >= sequences.length) {
+        currentLevel = 0;
+        alert('Amazing! You decoded all sequences! Starting over with bonus points!');
+      }
+      renderSequence();
+    }
+
+    document.getElementById('decode-btn').addEventListener('click', decode);
+    document.getElementById('next-btn').addEventListener('click', nextLevel);
+
+    renderSequence();
+  </script>
+<!-- Restore nav after main JS runs -->
+<script>
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483646!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;border-bottom:1px solid rgba(0,255,255,0.2)!important;padding:8px 16px!important;min-height:44px!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 2px 10px rgba(0,0,0,0.5)!important;backdrop-filter:blur(10px)!important;';
+      nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex!important;font-size:16px!important;font-weight:700!important;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3)!important;text-decoration:none!important;">Patient Analog</a><div class="nav-links" style="display:flex!important;gap:8px!important;margin-left:auto!important;"><a href="/portfolio" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Portfolio</a><a href="/research" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Research</a><a href="/haptic" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Haptic</a><a href="/games" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Games</a><a href="/legal" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Legal</a></div>';
+    }
+  });
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

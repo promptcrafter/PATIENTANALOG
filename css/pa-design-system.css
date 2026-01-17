@@ -1,0 +1,65 @@
+/* ============================================
+   PATIENT ANALOG - DESIGN SYSTEM LOADER
+   Version 1.0 - Modular CSS Architecture
+
+   Include this file BEFORE styles.css for
+   access to the new design token system.
+   ============================================ */
+
+/* Design Tokens */
+@import url('tokens/colors.css');
+@import url('tokens/motion.css');
+@import url('tokens/effects.css');
+
+/* Components */
+@import url('components/glass.css');
+@import url('components/media-modules.css');
+
+/* ============================================
+   USAGE INSTRUCTIONS
+   ============================================
+
+   In your HTML, include in this order:
+
+   <link rel="stylesheet" href="/css/pa-design-system.css">
+   <link rel="stylesheet" href="/css/styles.css">
+   <link rel="stylesheet" href="/css/styles-enhancements.css">
+
+   The design tokens will be available globally
+   and backward-compatible with existing styles.
+
+   NEW FEATURES AVAILABLE:
+
+   1. Color Tokens (colors.css):
+      - --pa-cyan, --pa-magenta, --pa-violet, --pa-green, --pa-gold
+      - --pa-gradient-digital-twin, --pa-gradient-organoid
+      - --pa-glow-cyan-sm/md/lg, --pa-shadow-xs/sm/md/lg/xl
+
+   2. Motion Tokens (motion.css):
+      - --pa-duration-instant/fast/standard/slow/cinematic
+      - --pa-ease-standard/smooth/bounce/cinematic-out
+      - Animation classes: .pa-animate-breathe, .pa-animate-pulse
+      - Reveal classes: .pa-reveal, .pa-reveal-left, .pa-reveal-scale
+
+   3. Effect Tokens (effects.css):
+      - Backdrop filters: --pa-backdrop-glass/glass-heavy
+      - Border radius: --pa-radius-xs/sm/md/lg/xl/full
+      - Z-index layers: --pa-z-nav, --pa-z-modal, --pa-z-tooltip
+      - Utility classes: .pa-glass, .pa-hover-lift, .pa-gradient-text
+
+   4. Glass Card System (glass.css):
+      - .pa-card - Base glass card with hover effects
+      - .pa-card--flagship - Premium gold-accented card
+      - .pa-card--cyan/magenta/violet/green - Theme variants
+      - .pa-stat-card - Statistics display card
+      - .pa-card-grid - Responsive grid layouts
+
+   5. Media Modules (media-modules.css):
+      - .pa-hero-visual - Full-bleed hero with image/video bg
+      - .pa-diagram - Scientific diagrams with captions
+      - .pa-inline-image - Text-wrapped content images
+      - .pa-video-explainer - Video player with poster
+      - .pa-media-gallery - Grid layout for images/videos
+      - .pa-media-placeholder - Loading/empty states
+
+   ============================================ */

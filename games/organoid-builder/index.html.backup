@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organoid Builder | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --amber: #ffaa00; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .score { font-size: 1.5rem; margin-bottom: 20px; color: var(--emerald); }
+    .cell-tray { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+    .cell { width: 60px; height: 60px; border-radius: 50%; cursor: grab; display: flex; align-items: center; justify-content: center; font-size: 28px; transition: transform 0.2s; }
+    .cell:hover { transform: scale(1.1); }
+    .cell.stem { background: rgba(0,85,255,0.3); border: 2px solid var(--sapphire); }
+    .cell.neural { background: rgba(138,43,226,0.3); border: 2px solid #8a2be2; }
+    .cell.glial { background: rgba(0,204,102,0.3); border: 2px solid var(--emerald); }
+    .growth-chamber {
+      width: 300px; height: 300px; margin: 0 auto 20px;
+      background: radial-gradient(circle, rgba(0,85,255,0.1) 0%, transparent 70%);
+      border: 2px dashed rgba(0,85,255,0.4); border-radius: 50%;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 5px; padding: 20px;
+    }
+    .placed-cell { width: 40px; height: 40px; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; animation: grow 0.5s ease-out; }
+    @keyframes grow { from { transform: scale(0); } to { transform: scale(1); } }
+    .btn { padding: 12px 24px; background: var(--sapphire); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; margin: 5px; }
+    .btn:hover { background: #0066ff; }
+    .instructions { color: #666; font-size: 13px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧫 Organoid Builder</h1>
+    <p class="subtitle">Drag stem cells to build a brain organoid!</p>
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <p style="margin-bottom: 15px; font-size: 14px;">Click cells to add to growth chamber:</p>
+    <div class="cell-tray">
+      <div class="cell stem" onclick="addCell('stem', '🔵')">🔵</div>
+      <div class="cell neural" onclick="addCell('neural', '🟣')">🟣</div>
+      <div class="cell glial" onclick="addCell('glial', '🟢')">🟢</div>
+    </div>
+
+    <div class="growth-chamber" id="chamber"></div>
+
+    <button class="btn" onclick="clearChamber()">Clear</button>
+    <button class="btn" onclick="checkOrganoid()">Check Structure</button>
+
+    <p class="instructions">Build pattern: Stem (🔵) → Neural (🟣) → Glial (🟢)<br>Correct order = +10 points</p>
+  </div>
+
+  <script>
+    let score = 0;
+    let cells = [];
+    const correctPattern = ['stem', 'neural', 'glial'];
+
+    function addCell(type, emoji) {
+      const chamber = document.getElementById('chamber');
+      const cell = document.createElement('div');
+      cell.className = 'placed-cell';
+      cell.style.background = type === 'stem' ? 'rgba(0,85,255,0.5)' : type === 'neural' ? 'rgba(138,43,226,0.5)' : 'rgba(0,204,102,0.5)';
+      cell.textContent = emoji;
+      chamber.appendChild(cell);
+      cells.push(type);
+    }
+
+    function clearChamber() {
+      document.getElementById('chamber').innerHTML = '';
+      cells = [];
+    }
+
+    function checkOrganoid() {
+      let points = 0;
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i] === correctPattern[i % 3]) points += 10;
+      }
+      if (cells.length >= 3) {
+        score += points;
+        document.getElementById('score').textContent = score;
+        alert(points > 0 ? `Great! +${points} points!` : 'Try the correct pattern: Stem → Neural → Glial');
+      } else {
+        alert('Add at least 3 cells!');
+      }
+    }
+  </script>
+</body>
+</html>

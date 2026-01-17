@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lung-on-Chip Flow Challenge | Patient Analog</title>
+    <style>
+    :root { --bg: #0a1018; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .game-container { max-width: 500px; padding: 30px; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+    .stat-value { font-size: 2rem; font-weight: bold; }
+    .stat-label { font-size: 12px; color: #666; }
+    .lung-visual {
+      width: 300px; height: 200px; margin: 0 auto 30px;
+      background: linear-gradient(180deg, rgba(0,85,255,0.1), rgba(0,85,255,0.05));
+      border: 2px solid rgba(0,85,255,0.3); border-radius: 100px 100px 50px 50px;
+      position: relative; overflow: hidden;
+    }
+    .lung-fill {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(180deg, rgba(0,200,255,0.4), rgba(0,100,255,0.6));
+      transition: height 0.1s;
+    }
+    .o2-bar, .co2-bar { height: 20px; border-radius: 10px; margin: 10px 0; transition: width 0.3s; }
+    .o2-bar { background: var(--sapphire); }
+    .co2-bar { background: var(--crimson); }
+    .inhale-btn {
+      width: 200px; height: 200px; border-radius: 50%;
+            aspect-ratio: 1;
+      background: linear-gradient(145deg, #003399, #0055ff);
+      border: 4px solid rgba(255,255,255,0.2);
+      color: white; font-size: 1.2rem; font-weight: bold;
+      cursor: pointer; transition: all 0.1s; user-select: none;
+    }
+    .inhale-btn:active, .inhale-btn.active {
+      transform: scale(0.95);
+      background: linear-gradient(145deg, #0055ff, #0077ff);
+      box-shadow: 0 0 40px rgba(0,85,255,0.5);
+    }
+    .warning { color: var(--crimson); font-weight: bold; margin-top: 15px; min-height: 24px; }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+  <div class="game-container">
+    <h1>🫁 Lung-on-Chip Flow Challenge</h1>
+    <p class="subtitle">Control airflow through a breathing lung chip! Maintain optimal oxygen exchange.</p>
+
+    <div class="stats">
+      <div><div class="stat-value" id="o2sat">98%</div><div class="stat-label">O₂ Saturation</div></div>
+      <div><div class="stat-value" id="breaths">0</div><div class="stat-label">Breaths</div></div>
+    </div>
+
+    <div class="lung-visual">
+      <div class="lung-fill" id="lungFill" style="height: 20%;"></div>
+    </div>
+
+    <div style="max-width: 300px; margin: 0 auto 20px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px;"><span>O₂</span><span id="o2val">50%</span></div>
+      <div class="o2-bar" id="o2bar" style="width: 50%;"></div>
+      <div style="display: flex; justify-content: space-between; font-size: 12px;"><span>CO₂</span><span id="co2val">20%</span></div>
+      <div class="co2-bar" id="co2bar" style="width: 20%;"></div>
+    </div>
+
+    <button class="inhale-btn" id="inhaleBtn">🌬️ INHALE<br><small>Hold to breathe in</small></button>
+    <div class="warning" id="warning"></div>
+  </div>
+
+  <script>
+    const lungFill = document.getElementById('lungFill');
+    const inhaleBtn = document.getElementById('inhaleBtn');
+    const o2bar = document.getElementById('o2bar');
+    const co2bar = document.getElementById('co2bar');
+    const o2val = document.getElementById('o2val');
+    const co2val = document.getElementById('co2val');
+    const o2sat = document.getElementById('o2sat');
+    const breathsEl = document.getElementById('breaths');
+    const warning = document.getElementById('warning');
+
+    let isInhaling = false;
+    let lungCapacity = 20;
+    let o2 = 50;
+    let co2 = 20;
+    let breaths = 0;
+    let saturation = 98;
+
+    function update() {
+      if (isInhaling && lungCapacity < 100) {
+        lungCapacity += 3;
+        o2 = Math.min(100, o2 + 2);
+        co2 = Math.max(0, co2 - 1);
+      } else if (!isInhaling && lungCapacity > 10) {
+        lungCapacity -= 2;
+        if (lungCapacity < 30) {
+          o2 = Math.max(0, o2 - 0.5);
+          co2 = Math.min(100, co2 + 0.3);
+        }
+      }
+
+      // Calculate saturation
+      saturation = Math.min(100, Math.max(70, 70 + (o2 * 0.3) - (co2 * 0.1)));
+
+      lungFill.style.height = lungCapacity + '%';
+      o2bar.style.width = o2 + '%';
+      co2bar.style.width = co2 + '%';
+      o2val.textContent = Math.round(o2) + '%';
+      co2val.textContent = Math.round(co2) + '%';
+      o2sat.textContent = Math.round(saturation) + '%';
+
+      // Warnings
+      if (saturation < 90) warning.textContent = '⚠️ LOW OXYGEN - BREATHE!';
+      else if (co2 > 60) warning.textContent = '⚠️ HIGH CO₂ - EXHALE!';
+      else warning.textContent = '';
+
+      requestAnimationFrame(update);
+    }
+
+    inhaleBtn.addEventListener('mousedown', () => { isInhaling = true; inhaleBtn.classList.add('active'); });
+    inhaleBtn.addEventListener('mouseup', () => { isInhaling = false; inhaleBtn.classList.remove('active'); breaths++; breathsEl.textContent = breaths; });
+    inhaleBtn.addEventListener('mouseleave', () => { isInhaling = false; inhaleBtn.classList.remove('active'); });
+    inhaleBtn.addEventListener('touchstart', (e) => { e.preventDefault(); isInhaling = true; inhaleBtn.classList.add('active'); });
+    inhaleBtn.addEventListener('touchend', () => { isInhaling = false; inhaleBtn.classList.remove('active'); breaths++; breathsEl.textContent = breaths; });
+
+    update();
+  </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

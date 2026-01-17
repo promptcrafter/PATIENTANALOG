@@ -1,0 +1,524 @@
+/* ═══════════════════════════════════════════════════════════════
+   KENNETH'S BIOTECH ADVENTURE - CSS VARIABLES
+   All colors extracted from inline styles for easy modification
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* GOLD/TROPHY COLORS */
+  --game-gold: #ffd700;
+  --game-gold-glow: rgba(255, 215, 0, 0.7);
+  --game-silver: #e0e0e0;
+  --game-bronze: #cd9b50;
+
+  /* CYAN/NEON COLORS */
+  --game-cyan: #00f5ff;
+  --game-cyan-glow: rgba(0, 245, 255, 0.3);
+  --game-cyan-soft: rgba(0, 245, 255, 0.1);
+  --game-cyan-border: #7fdbff;
+
+  /* PURPLE COLORS */
+  --game-purple: #0033cc;
+  --game-purple-glow: rgba(0, 51, 204, 0.6);
+
+  /* PINK COLORS */
+  --game-pink: #ff69b4;
+  --game-pink-glow: rgba(255, 105, 180, 0.6);
+  --game-magenta: #ffaa00;
+
+  /* RED/ORANGE COLORS */
+  --game-red: #ff6b6b;
+  --game-orange: #ff8c00;
+
+  /* GREEN COLORS */
+  --game-green: #00ff88;
+  --game-green-dark: #00cc66;
+  --game-success: #0f0;
+  --game-error: #f00;
+
+  /* NEUTRAL COLORS */
+  --game-white: #fff;
+  --game-black: #000;
+  --game-gray-light: #888;
+  --game-gray-dark: #444;
+  --game-gray-darker: #333;
+  --game-text-dark: #333;
+
+  /* BACKGROUND COLORS */
+  --game-bg-dark: rgba(10, 15, 30, 0.95);
+  --game-bg-darker: rgba(20, 30, 50, 0.95);
+  --game-bg-modal: #0a0a1a;
+  --game-bg-modal-light: #1a1a3a;
+  --game-bg-button: #1a2a4a;
+  --game-bg-button-mid: #2a3a5a;
+  --game-bg-button-light: #3a4a6a;
+
+  /* GRADIENTS */
+  --game-gradient-primary: linear-gradient(135deg, var(--game-cyan), var(--game-magenta));
+  --game-gradient-gold: linear-gradient(135deg, var(--game-gold), var(--game-orange));
+  --game-gradient-purple: linear-gradient(135deg, var(--game-purple), var(--game-magenta));
+  --game-gradient-red: linear-gradient(135deg, var(--game-red), var(--game-purple));
+  --game-gradient-green: linear-gradient(135deg, var(--game-green), var(--game-green-dark));
+  --game-gradient-dark: linear-gradient(135deg, var(--game-bg-dark), var(--game-bg-darker));
+  --game-gradient-modal: linear-gradient(135deg, var(--game-bg-modal), var(--game-bg-modal-light));
+  --game-gradient-button-dark: linear-gradient(135deg, #1a2a4a, #2a3a5a);
+  --game-gradient-button-dark-hover: linear-gradient(135deg, #2a3a5a, #3a4a6a);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HALL OF FAME STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.hall-of-fame-title {
+  text-align: center;
+  font-size: 16px;
+  color: var(--game-gold);
+  text-shadow: 0 0 15px var(--game-gold-glow);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.hall-first-place {
+  color: var(--game-gold);
+  font-weight: bold;
+}
+
+.hall-score {
+  color: var(--game-white);
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: 0 0 10px var(--game-gold);
+}
+
+.hall-second-place {
+  color: var(--game-silver);
+  font-weight: bold;
+}
+
+.hall-score-2 {
+  color: var(--game-white);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.hall-third-place {
+  color: var(--game-bronze);
+  font-weight: bold;
+}
+
+.hall-score-3 {
+  color: var(--game-white);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hall-subtitle {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--game-gray-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   KENNETH CONTROLS PANEL
+   ═══════════════════════════════════════════════════════════════ */
+
+.kenneth-controls-panel {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: var(--game-gradient-dark);
+  padding: 20px;
+  border-radius: 16px;
+  z-index: 99999;
+  font-family: 'Nunito', sans-serif;
+  border: 2px solid var(--game-cyan);
+  box-shadow: 0 0 30px var(--game-cyan-glow), inset 0 0 20px var(--game-cyan-soft);
+  transition: all 0.3s ease;
+}
+
+.kenneth-lab-title {
+  margin: 0;
+  color: var(--game-cyan);
+  font-family: 'Fredoka One', cursive;
+  font-size: 18px;
+  text-shadow: 0 0 10px var(--game-cyan);
+}
+
+.kenneth-minimize-btn {
+  background: none;
+  border: 1px solid var(--game-cyan);
+  color: var(--game-cyan);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buddy-speech {
+  background: white;
+  color: var(--game-text-dark);
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  position: relative;
+}
+
+.buddy-treats-text {
+  font-size: 11px;
+  color: var(--game-gray-light);
+  margin-top: 5px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GAME BUTTONS
+   ═══════════════════════════════════════════════════════════════ */
+
+.game-btn-play {
+  padding: 14px 28px;
+  background: var(--game-gradient-primary);
+  color: var(--game-white);
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-btn-play:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(0, 245, 255, 0.6);
+}
+
+.game-btn-secondary {
+  padding: 12px 24px;
+  background: var(--game-gradient-button-dark);
+  color: var(--game-white);
+  border: 2px solid var(--game-cyan);
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+}
+
+.game-btn-secondary:hover {
+  background: var(--game-gradient-button-dark-hover);
+  border-color: var(--game-magenta);
+}
+
+.game-btn-buddies {
+  padding: 12px 24px;
+  background: var(--game-gradient-red);
+  color: var(--game-white);
+  border: 2px solid var(--game-gold);
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+}
+
+.game-btn-buddies:hover {
+  transform: scale(1.02);
+}
+
+.game-btn-tutorial {
+  padding: 12px 24px;
+  background: var(--game-gradient-gold);
+  color: var(--game-black);
+  border: 2px solid var(--game-gold);
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+}
+
+.game-btn-tutorial:hover {
+  transform: scale(1.02);
+}
+
+.game-btn-settings {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--game-gray-light);
+  border: 1px solid var(--game-gray-dark);
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+}
+
+.game-btn-settings:hover {
+  border-color: var(--game-cyan);
+  color: var(--game-white);
+}
+
+.game-btn-help {
+  padding: 10px 20px;
+  background: var(--game-gradient-green);
+  color: var(--game-black);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+  margin-top: 5px;
+}
+
+.game-btn-help:hover {
+  transform: scale(1.02);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAB BUDDIES MODAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.buddies-modal {
+  background: var(--game-gradient-modal);
+  border: 2px solid var(--game-cyan);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 50px var(--game-cyan-glow);
+}
+
+.buddies-modal-title {
+  color: var(--game-cyan);
+  font-family: 'Fredoka One', cursive;
+  margin: 0;
+}
+
+.buddies-modal-close {
+  background: none;
+  border: none;
+  color: var(--game-white);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.buddies-actions-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--game-gray-darker);
+}
+
+.buddies-actions-title {
+  color: var(--game-gold);
+  margin-bottom: 15px;
+}
+
+.game-btn-feed {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--game-red), var(--game-orange));
+  color: var(--game-white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.game-btn-pet {
+  padding: 12px 20px;
+  background: var(--game-gradient-purple);
+  color: var(--game-white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BOB CHARACTER STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.bob-speech {
+  background: linear-gradient(135deg, #e8f5ff, var(--game-white));
+  color: var(--game-text-dark);
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  max-width: 120px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 245, 255, 0.4);
+  border: 2px solid var(--game-cyan-border);
+  display: none;
+  animation: speechPop 0.3s ease-out;
+}
+
+.bob-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2px dashed var(--game-purple);
+  animation: bobRingSpin 10s linear infinite;
+  opacity: 0.6;
+}
+
+.bob-img-cyan {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--game-cyan-border);
+  box-shadow: 0 0 15px rgba(127, 219, 255, 0.6);
+}
+
+.bob-img-purple {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--game-purple);
+  box-shadow: 0 0 15px var(--game-purple-glow);
+}
+
+.bob-img-pink {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--game-pink);
+  box-shadow: 0 0 15px var(--game-pink-glow);
+}
+
+.bob-img-cyan-flip {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--game-cyan);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+  transform: scaleX(-1);
+}
+
+.bob-nametag {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--game-purple), var(--game-pink));
+  color: white;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  font-family: 'Fredoka One', cursive;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px var(--game-purple-glow);
+  z-index: 5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DYNAMIC CONTENT (JS-generated)
+   ═══════════════════════════════════════════════════════════════ */
+
+.check-success {
+  color: var(--game-success);
+}
+
+.check-error {
+  color: var(--game-error);
+}
+
+.buddy-card-name {
+  color: var(--game-white);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.buddy-card-ability {
+  color: var(--game-gray-light);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.buddy-card-level {
+  color: var(--game-green);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.buddy-card-locked {
+  color: var(--game-gold);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAME ENTRY MODAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.name-content {
+  text-align: center;
+  padding: 40px;
+  max-width: 400px;
+}
+
+.name-content h2 {
+  color: var(--game-cyan);
+  font-family: 'Fredoka One', cursive;
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px var(--game-cyan-glow);
+}
+
+.name-prompt {
+  color: var(--game-white);
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.name-input-container {
+  margin-bottom: 25px;
+}
+
+.name-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  background: rgba(0, 245, 255, 0.1);
+  border: 2px solid var(--game-cyan);
+  border-radius: 12px;
+  color: var(--game-white);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.name-input:focus {
+  background: rgba(0, 245, 255, 0.2);
+  box-shadow: 0 0 20px var(--game-cyan-glow);
+}
+
+.name-input::placeholder {
+  color: var(--game-gray-light);
+}

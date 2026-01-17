@@ -1,0 +1,34 @@
+# PatientAnalog Redirects
+# Format: /from /to [status]
+
+# Redirect old framework URL to root
+/complete-framework.html / 301
+
+# Preserve static assets
+/css/*          /css/:splat         200
+/js/*           /js/:splat          200
+/images/*       /images/:splat      200
+/assets/*       /assets/:splat      200
+
+# Preserve page folders
+/pages/*        /pages/:splat       200
+
+# Language directories
+/ar/*           /ar/:splat          200
+/de/*           /de/:splat          200
+/es/*           /es/:splat          200
+/fr/*           /fr/:splat          200
+/ja/*           /ja/:splat          200
+/pt/*           /pt/:splat          200
+/zh-hans/*      /zh-hans/:splat     200
+
+# Legacy path cleanup
+/original/*     /                   301
+/pages/legal/*  /legal/:splat       301
+
+# Language fallbacks
+/zh/*           /zh-hans/:splat     301
+/pt-br/*        /pt/:splat          301
+
+# Domains page
+/domains        /domains.html       200

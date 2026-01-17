@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css?v=20260116">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <title>486+ FDA, NIH & Global NAMs Research Links | Patient Analog Database</title>
+    <meta name="description" content="Curated database of 486+ official resources: FDA Modernization Act, NIH Tissue Chip Program, OECD guidelines, EMA regulations & global NAMs policies.">
+    <meta name="keywords" content="FDA Modernization Act 3.0, NIH Tissue Chip, NAMs research, organ-on-chip, organoids, digital twin, OECD guidelines, EMA regulations">
+    
+
+    <meta property="og:title" content="486+ FDA, NIH & Global NAMs Research Links | Patient Analog">
+    <meta property="og:description" content="Curated database: FDA Modernization Act, NIH Tissue Chip Program, OECD guidelines, EMA regulations & global NAMs policies.">
+    <meta property="og:url" content="https://patientanalog.com/research">
+    <meta property="og:type" content="website">
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+
+    <!-- GA4 Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-548SNKZ7RC');
+    </script>
+
+    <!-- Fonts: Sora, Orbitron, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Main Site Scripts and Styles -->
+    <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+
+    <style>
+        /* ============================================
+           RESEARCH LINKS - PREMIUM STYLING
+           Consistent with Patient Analog Design System
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Rebel Unicorn $50M+ Design System - ENHANCED */
+            --bg-deep: #0a1018;
+            --bg-surface: #0f1620;
+            --bg-elevated: #151d28;
+            --bg-card: rgba(26, 35, 50, 0.95);
+            --cyan: #00c8ff;
+            --cyan-bright: #47d4ff;
+            --cyan-glow: rgba(0, 200, 255, 0.6);
+            --cyan-dim: rgba(0, 200, 255, 0.2);
+            --green: #00e5a0;
+            --white: #ffffff;
+            --gray: #a8b8c8;
+            --gray-dark: #8899aa;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            min-height: 100vh;
+            color: var(--gray);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           CLEAN BACKGROUND - No animations
+           ============================================ */
+
+        .space-bg,
+        .stars,
+        .grid-overlay,
+        .floating-particles,
+        .particle,
+        .glow-orb,
+        .glow-orb-1,
+        .glow-orb-2,
+        .glow-orb-3 {
+            display: none !important;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding: 140px 40px 60px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 0 0 30px var(--cyan-glow);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .page-header p {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            line-height: 1.7;
+        }
+
+        /* Stats display */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(13, 21, 32, 0.8);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px var(--cyan-dim);
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 0%, #00c8ff 50%, #00e5a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.5));
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 8px;
+        }
+
+        /* ============================================
+           CONTROLS
+           ============================================ */
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 24px;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 12px;
+            background: var(--bg-card);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px var(--cyan-dim);
+        }
+
+        .search-box input::placeholder {
+            color: var(--gray-dark);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+        }
+
+        .view-btn {
+            padding: 14px 18px;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            background: var(--bg-card);
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .view-btn:first-child { border-radius: 10px 0 0 10px; }
+        .view-btn:last-child { border-radius: 0 10px 10px 0; }
+
+        .view-btn.active {
+            background: rgba(0, 200, 255, 0.15);
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        .view-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* ============================================
+           FILTER SECTION
+           ============================================ */
+
+        .filter-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan-dim);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 200, 255, 0.15);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan-dim);
+        }
+
+        /* Results info */
+        .results-info {
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           LINKS GRID
+           ============================================ */
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            border-color: var(--cyan);
+            background: rgba(20, 29, 43, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 30px var(--cyan-dim);
+        }
+
+        .link-category {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        /* Category colors - Rebel Unicorn Palette */
+        .category-FDA { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+        .category-NIH { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+        .category-Congress { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .category-EMA { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+        .category-OECD { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .category-Academic { background: rgba(16, 185, 129, 0.2); color: #00e5a0; }
+        .category-Industry { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .category-Market-Research { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .category-Scientific-Literature { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+        .category-Global-Regulatory { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+        .category-Standards { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .category-Educational { background: rgba(16, 185, 129, 0.2); color: #00e5a0; }
+        .category-EPA { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .category-Federal-Programs { background: rgba(0, 200, 255, 0.2); color: #00c8ff; }
+
+        .link-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .link-url {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--cyan);
+            word-break: break-all;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           LIST VIEW
+           ============================================ */
+
+        .links-list {
+            display: none;
+        }
+
+        .links-list.active {
+            display: block;
+        }
+
+        .links-grid.active {
+            display: grid;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 25px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .list-item:hover {
+            border-color: var(--cyan);
+            background: rgba(20, 29, 43, 0.95);
+            box-shadow: 0 0 25px var(--cyan-dim);
+        }
+
+        .list-item .link-category { margin-bottom: 0; white-space: nowrap; }
+        .list-item .link-title { flex: 1; margin-bottom: 0; }
+        .list-item .link-url { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* ============================================
+           NO RESULTS & LOADING
+           ============================================ */
+
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--gray-dark);
+        }
+
+        .no-results h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--cyan);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 200, 255, 0.2);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           NAV BAR STYLING (injected by main.js)
+           ============================================ */
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+            padding: 12px 40px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+
+        @media (max-width: 768px) {
+            .main-content { padding: 120px 20px 40px; }
+            .links-grid { grid-template-columns: 1fr; }
+            .controls { flex-direction: column; }
+            .search-box { min-width: 100%; }
+            .stats { gap: 20px; }
+            .stat { padding: 15px 25px; }
+            .list-item { flex-direction: column; align-items: flex-start; }
+            .list-item .link-url { max-width: 100%; }
+        }
+    </style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+    <!-- Nav injected by main.js -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <!-- LIVE REGULATORY TICKER - Below nav with gap -->
+    <div id="live-ticker"></div>
+
+    <main class="main-content">
+        <div class="page-header" style="position: relative; overflow: hidden; background: transparent !important;">
+            <!-- Background Image Layer -->
+            <div style="position: absolute; inset: 0; z-index: 0;">
+                <img src="/assets/images/sections/researcher.jpg" alt="" aria-hidden="true" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.20; filter: saturate(0.5) brightness(0.7);">
+                <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,39,0.4) 0%, rgba(10,14,39,0.95) 100%);"></div>
+            </div>
+            <div style="position: relative; z-index: 1;">
+                <h1>NAMs Research Database</h1>
+                <p>Curated collection of FDA Modernization Act, NIH Tissue Chip, organ-on-chip, organoids, and global regulatory resources</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value" id="totalLinks">486</div>
+                        <div class="stat-label">Curated Resources</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="totalCategories">14</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="displayedLinks">-</div>
+                        <div class="stat-label">Displayed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by title, URL, or keyword...">
+            </div>
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="grid" title="Grid View">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                    </svg>
+                </button>
+                <button class="view-btn" data-view="list" title="List View">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="3" y="4" width="18" height="3"/>
+                        <rect x="3" y="10" width="18" height="3"/>
+                        <rect x="3" y="16" width="18" height="3"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-section" id="filterSection">
+            <button class="filter-btn active" data-category="all">All</button>
+        </div>
+
+        <div class="results-info">
+            <span id="resultsText">Loading...</span>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading research links...</p>
+        </div>
+
+        <div class="links-grid active" id="linksGrid"></div>
+        <div class="links-list" id="linksList"></div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <h3>No results found</h3>
+            <p>Try adjusting your search or filter criteria</p>
+        </div>
+
+        <section class="related-tools" style="margin-top: 60px; padding: 40px 0; border-top: 1px solid rgba(0, 200, 255, 0.2);">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--cyan); margin-bottom: 24px; text-align: center;">Interactive Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                <a href="/games/3d-lab/" style="display: block; padding: 24px; background: var(--bg-card); border: 1px solid rgba(0, 200, 255, 0.2); border-radius: 12px; text-decoration: none; transition: all 0.3s;">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--white); margin-bottom: 8px;">3D Visualization Lab</h3>
+                    <p style="color: var(--gray); font-size: 14px;">Explore interactive 3D models of organs, cells, and biotech systems.</p>
+                </a>
+                <a href="/technology/digital-twins" style="display: block; padding: 24px; background: var(--bg-card); border: 1px solid rgba(0, 200, 255, 0.2); border-radius: 12px; text-decoration: none; transition: all 0.3s;">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--white); margin-bottom: 8px;">Digital Twin Explorer</h3>
+                    <p style="color: var(--gray); font-size: 14px;">Browse our portfolio of human simulation domain assets.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer injected by main.js -->
+    <footer class="site-footer" id="main-footer"></footer>
+
+    <script>
+        // Research Links Module
+        const ResearchLinks = (function() {
+            let allLinks = [];
+            let categories = [];
+            let currentFilter = 'all';
+            let currentSearch = '';
+            let currentView = 'grid';
+
+            const elements = {
+                searchInput: document.getElementById('searchInput'),
+                filterSection: document.getElementById('filterSection'),
+                linksGrid: document.getElementById('linksGrid'),
+                linksList: document.getElementById('linksList'),
+                loading: document.getElementById('loading'),
+                noResults: document.getElementById('noResults'),
+                resultsText: document.getElementById('resultsText'),
+                totalLinks: document.getElementById('totalLinks'),
+                totalCategories: document.getElementById('totalCategories'),
+                displayedLinks: document.getElementById('displayedLinks')
+            };
+
+            async function init() {
+                await loadData();
+                setupEventListeners();
+                renderLinks();
+            }
+
+            async function loadData() {
+                try {
+                    const paths = [
+                        '/data/research-links.json',
+                        '../data/research-links.json',
+                        '/src/data/research-links.json'
+                    ];
+
+                    let data = null;
+                    for (const path of paths) {
+                        try {
+                            const response = await fetch(path);
+                            if (response.ok) {
+                                data = await response.json();
+                                break;
+                            }
+                        } catch (e) { continue; }
+                    }
+
+                    if (!data) throw new Error('Could not load data');
+
+                    allLinks = data.links || [];
+
+                    const categorySet = new Set();
+                    allLinks.forEach(link => {
+                        if (link.category) categorySet.add(link.category);
+                    });
+                    categories = Array.from(categorySet).sort();
+
+                    elements.totalLinks.textContent = allLinks.length;
+                    elements.totalCategories.textContent = categories.length;
+
+                    generateCategoryButtons();
+                    elements.loading.style.display = 'none';
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    elements.loading.innerHTML = '<p style="color:#ff5757;">Error loading data.</p>';
+                }
+            }
+
+            function generateCategoryButtons() {
+                categories.forEach(category => {
+                    const btn = document.createElement('button');
+                    btn.className = 'filter-btn';
+                    btn.dataset.category = category;
+                    btn.textContent = category.replace(/-/g, ' ');
+                    btn.addEventListener('click', () => setFilter(category));
+                    elements.filterSection.appendChild(btn);
+                });
+            }
+
+            function setupEventListeners() {
+                elements.searchInput.addEventListener('input', (e) => {
+                    currentSearch = e.target.value.toLowerCase();
+                    renderLinks();
+                });
+
+                document.querySelector('[data-category="all"]').addEventListener('click', () => setFilter('all'));
+
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentView = btn.dataset.view;
+                        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        if (currentView === 'grid') {
+                            elements.linksGrid.classList.add('active');
+                            elements.linksList.classList.remove('active');
+                        } else {
+                            elements.linksGrid.classList.remove('active');
+                            elements.linksList.classList.add('active');
+                        }
+                        renderLinks();
+                    });
+                });
+            }
+
+            function setFilter(category) {
+                currentFilter = category;
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === category);
+                });
+                renderLinks();
+            }
+
+            function getFilteredLinks() {
+                return allLinks.filter(link => {
+                    if (currentFilter !== 'all' && link.category !== currentFilter) return false;
+                    if (currentSearch) {
+                        const searchStr = `${link.title} ${link.url} ${link.category}`.toLowerCase();
+                        return searchStr.includes(currentSearch);
+                    }
+                    return true;
+                });
+            }
+
+            function renderLinks() {
+                const filtered = getFilteredLinks();
+
+                elements.displayedLinks.textContent = filtered.length;
+                elements.resultsText.textContent = `Showing ${filtered.length} of ${allLinks.length} links`;
+
+                if (filtered.length === 0) {
+                    elements.noResults.style.display = 'block';
+                    elements.linksGrid.innerHTML = '';
+                    elements.linksList.innerHTML = '';
+                    return;
+                }
+
+                elements.noResults.style.display = 'none';
+
+                elements.linksGrid.innerHTML = filtered.map(link => `
+                    <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <span class="link-category category-${link.category.replace(/\s+/g, '-')}">${escapeHtml(link.category)}</span>
+                        <div class="link-title">${escapeHtml(link.title)}</div>
+                        <div class="link-url">${escapeHtml(link.url)}</div>
+                    </a>
+                `).join('');
+
+                elements.linksList.innerHTML = filtered.map(link => `
+                    <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="list-item">
+                        <span class="link-category category-${link.category.replace(/\s+/g, '-')}">${escapeHtml(link.category)}</span>
+                        <div class="link-title">${escapeHtml(link.title)}</div>
+                        <div class="link-url">${escapeHtml(link.url)}</div>
+                    </a>
+                `).join('');
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+            return { init };
+        })();
+    </script>
+    <!-- Live RSS Breaking News Ticker -->
+    <script src="/js/live-news-ticker.js"></script>
+<script src="/js/ticker-fix.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

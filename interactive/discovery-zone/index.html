@@ -1,0 +1,1300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#000814">
+    <title>Science Discovery Zone - Patient Analog Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a1018;
+            --cyan-bright: #00bbff;
+            --gold-accent: #ffcc00;
+            --plasma-pink: #f72585;
+            --bio-green: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #1a1a3e, #0a0a1e);
+            color: #e0f2fe;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: rgba(224, 242, 254, 0.8);
+            font-size: 1.2rem;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Score Panel */
+        .kids-score-panel {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(254, 202, 87, 0.1));
+            border: 2px solid rgba(254, 202, 87, 0.3);
+            border-radius: 20px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .score-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #feca57;
+            text-shadow: 0 0 20px rgba(254, 202, 87, 0.5);
+        }
+
+        /* Tech Cards Grid */
+        .kids-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .kids-tech-card {
+            background: rgba(0, 20, 60, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .kids-tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .kids-tech-card.completed {
+            border-color: var(--bio-green);
+        }
+
+        .kids-card-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kids-card-emoji {
+            font-size: 2.5rem;
+        }
+
+        .kids-card-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .kids-card-body {
+            padding: 25px;
+            background: rgba(0, 10, 30, 0.5);
+        }
+
+        .kids-illustration {
+            width: 100%;
+            height: 120px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kids-svg {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .kids-explanation {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 15px;
+        }
+
+        .kids-fun-fact {
+            font-size: 14px;
+            color: #feca57;
+            padding: 12px 15px;
+            background: rgba(254, 202, 87, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #feca57;
+            margin-bottom: 20px;
+        }
+
+        .kids-quiz-btn {
+            width: 100%;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #48dbfb, #0099ff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .kids-quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(72, 219, 251, 0.4);
+        }
+
+        .kids-card-status {
+            padding: 12px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .status-badge {
+            font-size: 12px;
+            padding: 5px 15px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .status-badge.completed {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--bio-green);
+        }
+
+        /* Quiz Modal */
+        .kids-quiz-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .quiz-modal-content {
+            background: linear-gradient(135deg, #1a1a3e, #0a0a2e);
+            border: 2px solid var(--cyan-bright);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .quiz-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+            color: #ff6b6b;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-close-btn:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .quiz-question {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            padding: 18px 25px;
+            background: rgba(0, 187, 255, 0.1);
+            border: 2px solid rgba(0, 187, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background: rgba(0, 187, 255, 0.2);
+            border-color: var(--cyan-bright);
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 255, 136, 0.3);
+            border-color: var(--bio-green);
+        }
+
+        .quiz-option.wrong {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #ff6b6b;
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .quiz-result-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .quiz-result-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .quiz-points {
+            font-size: 2rem;
+            color: #feca57;
+        }
+
+        /* Leaderboard */
+        .kids-leaderboard {
+            background: linear-gradient(135deg, rgba(254, 202, 87, 0.1), rgba(255, 107, 107, 0.1));
+            border: 2px solid rgba(254, 202, 87, 0.3);
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 50px;
+        }
+
+        .kids-leaderboard h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #feca57;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .leaderboard-list {
+            margin-bottom: 25px;
+        }
+
+        .leaderboard-entry {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0, 10, 30, 0.5);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard-entry .rank {
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .leaderboard-entry .name {
+            flex: 1;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: white;
+        }
+
+        .leaderboard-entry .score {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #feca57;
+        }
+
+        .leaderboard-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .leaderboard-actions input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(0, 10, 30, 0.5);
+            border: 2px solid rgba(0, 187, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .leaderboard-actions input:focus {
+            border-color: var(--cyan-bright);
+        }
+
+        .save-score-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #feca57, #ff9f43);
+            border: none;
+            border-radius: 12px;
+            color: #1a1a3e;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .save-score-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(254, 202, 87, 0.4);
+        }
+
+        /* Certificate */
+        .kids-certificate {
+            padding: 40px;
+        }
+
+        .certificate-content {
+            background: linear-gradient(135deg, #feca57, #ff9f43);
+            border-radius: 25px;
+            padding: 10px;
+        }
+
+        .certificate-border {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            color: #1a1a3e;
+        }
+
+        .certificate-border h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #ff9f43;
+            margin-bottom: 20px;
+        }
+
+        .certificate-text {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .certificate-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #1a1a3e;
+            margin: 20px 0;
+        }
+
+        .certificate-border h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #48dbfb;
+            margin: 20px 0;
+        }
+
+        .certificate-score {
+            font-size: 1.5rem;
+            color: #feca57;
+            margin: 20px 0;
+        }
+
+        .certificate-badges {
+            font-size: 2rem;
+            margin-top: 30px;
+        }
+
+        .certificate-badges span {
+            margin: 0 10px;
+        }
+
+        /* Games Section */
+        .games-section {
+            margin-top: 60px;
+        }
+
+        .games-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #feca57;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(0, 20, 60, 0.8), rgba(10, 22, 40, 0.9));
+            border: 2px solid rgba(72, 219, 251, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            border-color: #48dbfb;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(72, 219, 251, 0.2);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .game-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .game-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .play-game-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #48dbfb, #0099ff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-game-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(72, 219, 251, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .kids-score-panel {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .kids-tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leaderboard-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+  <link rel="canonical" href="https://patientanalog.com/interactive/discovery-zone/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Science Discovery Zone - Patient Analog Kids",
+    "description": "Biotech education platform for microphysiological systems and organ-on-chip technology",
+    "url": "https://patientanalog.com/interactive/discovery-zone/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Patient Analog"
+    }
+  }
+  </script>
+
+  <!-- Hreflang Tags for International SEO -->
+  <link rel="alternate" hreflang="en" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="en-US" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="en-GB" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="es" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="fr" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="de" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="it" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="pt" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="ja" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="ko" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="zh" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="ar" href="https://patientanalog.com/interactive/discovery-zone">
+  <link rel="alternate" hreflang="x-default" href="https://patientanalog.com/interactive/discovery-zone">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div class="container">
+        <div class="section-header">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12 13c-4 0-7 2-7 5v2h14v-2c0-3-3-5-7-5z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="section-badge">Kids Zone</div>
+            <h1 class="section-title">Science Discovery Zone</h1>
+            <p class="section-subtitle">Learn about amazing technologies that help scientists create medicines without testing on animals!</p>
+        </div>
+
+        <p class="section-intro">
+            Welcome, young scientist! Explore how real scientists are building tiny organs, computer simulations,
+            and amazing chips to help people get better medicines faster. Complete challenges to earn points and
+            see your name on the leaderboard!
+        </p>
+
+        <!-- Score Display -->
+        <div class="kids-score-panel">
+            <div class="score-item">
+                <span class="score-label">Your Score</span>
+                <span class="score-value" id="kidsCurrentScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">High Score</span>
+                <span class="score-value" id="kidsHighScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Completed</span>
+                <span class="score-value" id="kidsCompletedCount">0/6</span>
+            </div>
+        </div>
+
+        <!-- Technology Cards -->
+        <div class="kids-tech-grid">
+            <!-- Organ-on-Chip -->
+            <div class="kids-tech-card" data-tech="chip">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #00d4ff, #0099ff);">
+                    <span class="kids-card-emoji">🔬</span>
+                    <h3>Organ-on-a-Chip</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <rect x="10" y="20" width="100" height="40" rx="5" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="2"/>
+                            <circle cx="30" cy="40" r="10" fill="#ff6b6b"><animate attributeName="r" values="10;12;10" dur="1s" repeatCount="indefinite"/></circle>
+                            <circle cx="60" cy="40" r="10" fill="#feca57"><animate attributeName="r" values="10;12;10" dur="1s" repeatCount="indefinite" begin="0.3s"/></circle>
+                            <circle cx="90" cy="40" r="10" fill="#48dbfb"><animate attributeName="r" values="10;12;10" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle>
+                            <path d="M40 40 L50 40 M70 40 L80 40" stroke="#00ff88" stroke-width="3" stroke-linecap="round">
+                                <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="0.5s" repeatCount="indefinite"/>
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> A tiny chip (smaller than your thumb!) that has real human cells inside.
+                        The cells act just like organs in your body - a mini lung, heart, or liver!
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> These chips can breathe, pump, and even get "sick" like real organs!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('chip')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-chip">Not Started</span>
+                </div>
+            </div>
+
+            <!-- Organoids -->
+            <div class="kids-tech-card" data-tech="organoid">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #ff9ff3, #f368e0);">
+                    <span class="kids-card-emoji">🧫</span>
+                    <h3>Organoids</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <circle cx="60" cy="40" r="25" fill="rgba(255,159,243,0.3)" stroke="#ff9ff3" stroke-width="2">
+                                <animate attributeName="r" values="25;28;25" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="50" cy="35" r="6" fill="#ff6b6b"/>
+                            <circle cx="65" cy="30" r="5" fill="#feca57"/>
+                            <circle cx="70" cy="45" r="7" fill="#48dbfb"/>
+                            <circle cx="55" cy="50" r="4" fill="#00ff88"/>
+                            <circle cx="45" cy="45" r="5" fill="#ff9ff3"/>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> Mini organs grown from stem cells! They're like tiny 3D balls
+                        made of real human cells that organize themselves into brain, gut, or kidney structures.
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> Brain organoids can even make electrical signals like a real brain!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('organoid')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-organoid">Not Started</span>
+                </div>
+            </div>
+
+            <!-- Digital Twins -->
+            <div class="kids-tech-card" data-tech="digital">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #feca57, #ff9f43);">
+                    <span class="kids-card-emoji">💻</span>
+                    <h3>Digital Twins</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <rect x="15" y="15" width="40" height="50" rx="3" fill="rgba(254,202,87,0.3)" stroke="#feca57" stroke-width="2"/>
+                            <circle cx="35" cy="30" r="8" fill="#ff6b6b"/>
+                            <rect x="25" y="42" width="20" height="15" rx="2" fill="#48dbfb"/>
+                            <text x="35" y="73" font-size="8" fill="#feca57" text-anchor="middle">REAL</text>
+                            <path d="M60 40 L75 40" stroke="#00ff88" stroke-width="2" stroke-dasharray="4">
+                                <animate attributeName="stroke-dashoffset" from="8" to="0" dur="0.5s" repeatCount="indefinite"/>
+                            </path>
+                            <rect x="65" y="15" width="40" height="50" rx="3" fill="rgba(72,219,251,0.3)" stroke="#48dbfb" stroke-width="2"/>
+                            <circle cx="85" cy="30" r="8" fill="rgba(255,107,107,0.5)" stroke="#ff6b6b" stroke-dasharray="2"/>
+                            <rect x="75" y="42" width="20" height="15" rx="2" fill="rgba(72,219,251,0.5)" stroke="#48dbfb" stroke-dasharray="2"/>
+                            <text x="85" y="73" font-size="8" fill="#48dbfb" text-anchor="middle">DIGITAL</text>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> A computer copy of a real person! Scientists can test medicines
+                        on the digital twin to see what might happen before giving it to real patients.
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> Digital twins can explore how biological systems may respond to medicine!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('digital')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-digital">Not Started</span>
+                </div>
+            </div>
+
+            <!-- iPSC Stem Cells -->
+            <div class="kids-tech-card" data-tech="ipsc">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #00ff88, #1dd1a1);">
+                    <span class="kids-card-emoji">🧬</span>
+                    <h3>iPSC Stem Cells</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <circle cx="35" cy="40" r="12" fill="rgba(0,255,136,0.3)" stroke="#00ff88" stroke-width="2"/>
+                            <text x="35" y="44" font-size="10" fill="#00ff88" text-anchor="middle">SKIN</text>
+                            <path d="M50 40 L70 40" stroke="#feca57" stroke-width="3">
+                                <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1s" repeatCount="indefinite"/>
+                            </path>
+                            <text x="60" y="55" font-size="6" fill="#feca57">MAGIC!</text>
+                            <circle cx="85" cy="40" r="12" fill="rgba(255,159,243,0.3)" stroke="#ff9ff3" stroke-width="2">
+                                <animate attributeName="fill" values="rgba(255,159,243,0.3);rgba(72,219,251,0.3);rgba(255,107,107,0.3);rgba(255,159,243,0.3)" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="85" y="44" font-size="8" fill="#ff9ff3" text-anchor="middle">ANY!</text>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> Scientists can turn a regular skin cell back into a "super cell"
+                        that can become ANY type of cell - heart, brain, liver, anything!
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> The scientist who discovered this won a Nobel Prize in 2012!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('ipsc')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-ipsc">Not Started</span>
+                </div>
+            </div>
+
+            <!-- Quantum Computers -->
+            <div class="kids-tech-card" data-tech="quantum">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #a55eea, #8854d0);">
+                    <span class="kids-card-emoji">⚛️</span>
+                    <h3>Quantum Computers</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <circle cx="60" cy="40" r="20" fill="none" stroke="#a55eea" stroke-width="1" stroke-dasharray="3">
+                                <animateTransform attributeName="transform" type="rotate" from="0 60 40" to="360 60 40" dur="4s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="60" cy="40" r="12" fill="none" stroke="#48dbfb" stroke-width="1" stroke-dasharray="3">
+                                <animateTransform attributeName="transform" type="rotate" from="360 60 40" to="0 60 40" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="60" cy="40" r="5" fill="#a55eea">
+                                <animate attributeName="fill" values="#a55eea;#48dbfb;#ff9ff3;#a55eea" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="60" cy="20" r="3" fill="#ff6b6b"><animate attributeName="cy" values="20;60;20" dur="2s" repeatCount="indefinite"/></circle>
+                            <circle cx="80" cy="40" r="3" fill="#feca57"><animate attributeName="cx" values="80;40;80" dur="2s" repeatCount="indefinite"/></circle>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> Super-powerful computers that use quantum physics to solve
+                        problems regular computers can't. They help find new medicines incredibly fast!
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> A quantum computer can try millions of medicine combinations at once!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('quantum')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-quantum">Not Started</span>
+                </div>
+            </div>
+
+            <!-- Body-on-a-Chip -->
+            <div class="kids-tech-card" data-tech="body">
+                <div class="kids-card-header" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                    <span class="kids-card-emoji">🫀</span>
+                    <h3>Body-on-a-Chip</h3>
+                </div>
+                <div class="kids-card-body">
+                    <div class="kids-illustration">
+                        <svg viewBox="0 0 120 80" class="kids-svg">
+                            <rect x="10" y="10" width="100" height="60" rx="5" fill="rgba(255,107,107,0.1)" stroke="#ff6b6b" stroke-width="2"/>
+                            <circle cx="25" cy="30" r="8" fill="#ff9ff3"><animate attributeName="r" values="8;10;8" dur="1.5s" repeatCount="indefinite"/></circle>
+                            <text x="25" y="50" font-size="6" fill="#ff9ff3" text-anchor="middle">Brain</text>
+                            <circle cx="50" cy="25" r="8" fill="#ff6b6b"><animate attributeName="r" values="8;10;8" dur="0.8s" repeatCount="indefinite"/></circle>
+                            <text x="50" y="45" font-size="6" fill="#ff6b6b" text-anchor="middle">Heart</text>
+                            <circle cx="75" cy="30" r="8" fill="#8b4513"><animate attributeName="r" values="8;9;8" dur="2s" repeatCount="indefinite"/></circle>
+                            <text x="75" y="50" font-size="6" fill="#8b4513" text-anchor="middle">Liver</text>
+                            <circle cx="100" cy="35" r="7" fill="#feca57"><animate attributeName="r" values="7;8;7" dur="1.2s" repeatCount="indefinite"/></circle>
+                            <text x="100" y="55" font-size="6" fill="#feca57" text-anchor="middle">Kidney</text>
+                            <path d="M33 30 L42 25 M58 25 L67 30 M83 30 L93 35" stroke="#00ff88" stroke-width="2">
+                                <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="0.5s" repeatCount="indefinite"/>
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="kids-explanation">
+                        <strong>What is it?</strong> Multiple organ-chips connected together to act like a whole
+                        human body! Scientists can see how medicine travels through ALL organs at once.
+                    </p>
+                    <p class="kids-fun-fact">🎯 <strong>Fun Fact:</strong> One body-on-chip can replace testing on hundreds of animals!</p>
+                    <button class="kids-quiz-btn" onclick="KidsEducation.startQuiz('body')">🧠 Take the Quiz!</button>
+                </div>
+                <div class="kids-card-status">
+                    <span class="status-badge" id="status-body">Not Started</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Modal -->
+        <div class="kids-quiz-modal" id="kidsQuizModal" style="display: none;">
+            <div class="quiz-modal-content">
+                <button class="quiz-close-btn" onclick="KidsEducation.closeQuiz()">✕</button>
+                <div id="quizContent"></div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="kids-leaderboard">
+            <h3>🏆 Science Champions Leaderboard</h3>
+            <div class="leaderboard-list" id="leaderboardList">
+                <div class="leaderboard-entry">
+                    <span class="rank">🥇</span>
+                    <span class="name">Future Scientist</span>
+                    <span class="score">0</span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="rank">🥈</span>
+                    <span class="name">—</span>
+                    <span class="score">—</span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="rank">🥉</span>
+                    <span class="name">—</span>
+                    <span class="score">—</span>
+                </div>
+            </div>
+            <div class="leaderboard-actions">
+                <input type="text" id="playerNameInput" placeholder="Enter your name..." maxlength="20">
+                <button class="save-score-btn" onclick="KidsEducation.saveScore()">💾 Save My Score</button>
+            </div>
+        </div>
+
+        <!-- Certificate (hidden until complete) -->
+        <div class="kids-certificate" id="kidsCertificate" style="display: none;">
+            <div class="certificate-content">
+                <div class="certificate-border">
+                    <h2>🎓 Certificate of Achievement 🎓</h2>
+                    <p class="certificate-text">This certifies that</p>
+                    <p class="certificate-name" id="certificateName">Young Scientist</p>
+                    <p class="certificate-text">has successfully completed the</p>
+                    <h3>Patient Analog Science Discovery Program</h3>
+                    <p class="certificate-score">Final Score: <span id="certificateScore">0</span> points</p>
+                    <p class="certificate-date" id="certificateDate"></p>
+                    <div class="certificate-badges">
+                        <span>🔬</span><span>🧬</span><span>💻</span><span>⚛️</span><span>🧫</span><span>🫀</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div class="games-section">
+            <h3 class="games-title">🎮 Interactive Challenges</h3>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">🧬</div>
+                    <h4>Kenneth's Biotech Adventure</h4>
+                    <p>Build bio-systems by connecting organs, organoids, and high-tech components!</p>
+                    <a href="../games/kenneth-biotech/" class="play-game-btn">Play Now!</a>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">⚡</div>
+                    <h4>Organogenesis Micro</h4>
+                    <p>Defend your cells against pathogens in this microscopic warfare game!</p>
+                    <a href="../games/organogenesis/" class="play-game-btn">Play Now!</a>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🧫</div>
+                    <h4>Organoid Medicine</h4>
+                    <p>Grow patient organoids and test drugs for personalized medicine!</p>
+                    <a href="../games/organoid-medicine/" class="play-game-btn">Play Now!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kids Education Module
+        const KidsEducation = (function() {
+            // Quiz data
+            const quizzes = {
+                chip: {
+                    title: "Organ-on-a-Chip Quiz",
+                    questions: [
+                        {
+                            q: "What is an organ-on-a-chip?",
+                            options: [
+                                "A tiny chip with real human cells that act like organs",
+                                "A video game about organs",
+                                "A computer chip shaped like a heart"
+                            ],
+                            correct: 0
+                        },
+                        {
+                            q: "What can organ-chips do?",
+                            options: [
+                                "Play music",
+                                "Breathe, pump, and even get 'sick' like real organs",
+                                "Cook food"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                },
+                organoid: {
+                    title: "Organoids Quiz",
+                    questions: [
+                        {
+                            q: "What are organoids made from?",
+                            options: [
+                                "Plastic",
+                                "Stem cells",
+                                "Metal"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            q: "What can brain organoids do?",
+                            options: [
+                                "Make electrical signals like a real brain",
+                                "Walk around",
+                                "Talk"
+                            ],
+                            correct: 0
+                        }
+                    ]
+                },
+                digital: {
+                    title: "Digital Twins Quiz",
+                    questions: [
+                        {
+                            q: "What is a digital twin?",
+                            options: [
+                                "A robot that looks like you",
+                                "A computer copy of a real person",
+                                "A photo of someone"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            q: "Why are digital twins useful?",
+                            options: [
+                                "They can play games",
+                                "Scientists can test medicines on them safely",
+                                "They can do homework"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                },
+                ipsc: {
+                    title: "iPSC Stem Cells Quiz",
+                    questions: [
+                        {
+                            q: "What can iPSC cells become?",
+                            options: [
+                                "Only skin cells",
+                                "Any type of cell in the body",
+                                "Only blood cells"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            q: "When was this discovery awarded a Nobel Prize?",
+                            options: [
+                                "2012",
+                                "1990",
+                                "2020"
+                            ],
+                            correct: 0
+                        }
+                    ]
+                },
+                quantum: {
+                    title: "Quantum Computers Quiz",
+                    questions: [
+                        {
+                            q: "What makes quantum computers special?",
+                            options: [
+                                "They are really big",
+                                "They use quantum physics to solve hard problems",
+                                "They have cool colors"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            q: "How can quantum computers help find medicines?",
+                            options: [
+                                "They can try millions of combinations at once",
+                                "They make medicine taste better",
+                                "They deliver medicine to patients"
+                            ],
+                            correct: 0
+                        }
+                    ]
+                },
+                body: {
+                    title: "Body-on-a-Chip Quiz",
+                    questions: [
+                        {
+                            q: "What is a body-on-a-chip?",
+                            options: [
+                                "A chip inside your body",
+                                "Multiple organ-chips connected together",
+                                "A body made of chips"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            q: "Why is body-on-a-chip important?",
+                            options: [
+                                "It can replace testing on many animals",
+                                "It makes bodies stronger",
+                                "It helps people exercise"
+                            ],
+                            correct: 0
+                        }
+                    ]
+                }
+            };
+
+            let currentScore = 0;
+            let highScore = parseInt(localStorage.getItem('kidsHighScore') || '0');
+            let completedQuizzes = JSON.parse(localStorage.getItem('kidsCompletedQuizzes') || '[]');
+            let currentQuiz = null;
+            let currentQuestion = 0;
+            let quizScore = 0;
+
+            function init() {
+                updateDisplay();
+                loadLeaderboard();
+                updateStatusBadges();
+            }
+
+            function updateDisplay() {
+                document.getElementById('kidsCurrentScore').textContent = currentScore;
+                document.getElementById('kidsHighScore').textContent = highScore;
+                document.getElementById('kidsCompletedCount').textContent = `${completedQuizzes.length}/6`;
+            }
+
+            function updateStatusBadges() {
+                completedQuizzes.forEach(tech => {
+                    const badge = document.getElementById(`status-${tech}`);
+                    if (badge) {
+                        badge.textContent = '✓ Completed';
+                        badge.classList.add('completed');
+                    }
+                    const card = document.querySelector(`[data-tech="${tech}"]`);
+                    if (card) {
+                        card.classList.add('completed');
+                    }
+                });
+            }
+
+            function startQuiz(tech) {
+                if (completedQuizzes.includes(tech)) {
+                    alert('You already completed this quiz! Try another one.');
+                    return;
+                }
+
+                currentQuiz = tech;
+                currentQuestion = 0;
+                quizScore = 0;
+                showQuestion();
+                document.getElementById('kidsQuizModal').style.display = 'flex';
+            }
+
+            function showQuestion() {
+                const quiz = quizzes[currentQuiz];
+                const q = quiz.questions[currentQuestion];
+                const container = document.getElementById('quizContent');
+
+                container.innerHTML = `
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: #feca57; margin-bottom: 20px; text-align: center;">${quiz.title}</h3>
+                    <p style="color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 20px;">Question ${currentQuestion + 1} of ${quiz.questions.length}</p>
+                    <div class="quiz-question">${q.q}</div>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="KidsEducation.selectAnswer(${i})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            function selectAnswer(index) {
+                const quiz = quizzes[currentQuiz];
+                const q = quiz.questions[currentQuestion];
+                const options = document.querySelectorAll('.quiz-option');
+
+                options.forEach((opt, i) => {
+                    opt.style.pointerEvents = 'none';
+                    if (i === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (i === index) {
+                        opt.classList.add('wrong');
+                    }
+                });
+
+                if (index === q.correct) {
+                    quizScore += 50;
+                }
+
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < quiz.questions.length) {
+                        showQuestion();
+                    } else {
+                        showResult();
+                    }
+                }, 1500);
+            }
+
+            function showResult() {
+                const container = document.getElementById('quizContent');
+                const totalPoints = quizScore;
+                const perfect = quizScore === quizzes[currentQuiz].questions.length * 50;
+
+                currentScore += totalPoints;
+                if (currentScore > highScore) {
+                    highScore = currentScore;
+                    localStorage.setItem('kidsHighScore', highScore);
+                }
+
+                if (!completedQuizzes.includes(currentQuiz)) {
+                    completedQuizzes.push(currentQuiz);
+                    localStorage.setItem('kidsCompletedQuizzes', JSON.stringify(completedQuizzes));
+                }
+
+                updateDisplay();
+                updateStatusBadges();
+
+                container.innerHTML = `
+                    <div class="quiz-result">
+                        <div class="quiz-result-icon">${perfect ? '🌟' : '👏'}</div>
+                        <div class="quiz-result-text">${perfect ? 'Perfect Score!' : 'Great Job!'}</div>
+                        <div class="quiz-points">+${totalPoints} points</div>
+                        <button class="kids-quiz-btn" style="margin-top: 30px; width: auto; padding: 15px 40px;" onclick="KidsEducation.closeQuiz()">Continue</button>
+                    </div>
+                `;
+
+                // Check if all quizzes completed
+                if (completedQuizzes.length === 6) {
+                    setTimeout(showCertificate, 2000);
+                }
+            }
+
+            function closeQuiz() {
+                document.getElementById('kidsQuizModal').style.display = 'none';
+            }
+
+            function showCertificate() {
+                const cert = document.getElementById('kidsCertificate');
+                const name = localStorage.getItem('kidsPlayerName') || 'Young Scientist';
+                document.getElementById('certificateName').textContent = name;
+                document.getElementById('certificateScore').textContent = currentScore;
+                document.getElementById('certificateDate').textContent = new Date().toLocaleDateString();
+                cert.style.display = 'block';
+                cert.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function saveScore() {
+                const name = document.getElementById('playerNameInput').value.trim();
+                if (!name) {
+                    alert('Please enter your name!');
+                    return;
+                }
+                localStorage.setItem('kidsPlayerName', name);
+                updateLeaderboard(name, currentScore);
+                alert(`Score saved for ${name}!`);
+            }
+
+            function updateLeaderboard(name, score) {
+                let leaderboard = JSON.parse(localStorage.getItem('kidsLeaderboard') || '[]');
+                leaderboard.push({ name, score, date: new Date().toISOString() });
+                leaderboard.sort((a, b) => b.score - a.score);
+                leaderboard = leaderboard.slice(0, 10);
+                localStorage.setItem('kidsLeaderboard', JSON.stringify(leaderboard));
+                loadLeaderboard();
+            }
+
+            function loadLeaderboard() {
+                const list = document.getElementById('leaderboardList');
+                const leaderboard = JSON.parse(localStorage.getItem('kidsLeaderboard') || '[]');
+                const ranks = ['🥇', '🥈', '🥉'];
+
+                if (leaderboard.length === 0) return;
+
+                list.innerHTML = leaderboard.slice(0, 3).map((entry, i) => `
+                    <div class="leaderboard-entry">
+                        <span class="rank">${ranks[i] || (i + 1)}</span>
+                        <span class="name">${entry.name}</span>
+                        <span class="score">${entry.score}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Initialize on load
+            document.addEventListener('DOMContentLoaded', init);
+
+            return {
+                startQuiz,
+                selectAnswer,
+                closeQuiz,
+                saveScore
+            };
+        })();
+    </script>
+    <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

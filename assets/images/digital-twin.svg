@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" width="120" height="200">
+  <defs>
+    <!-- Gradients for realistic body -->
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a6e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0d2444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061428;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a5a9a;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1a3a6a;stop-opacity:0.6" />
+    </linearGradient>
+
+    <linearGradient id="organGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4466;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#cc2244;stop-opacity:0.7" />
+    </linearGradient>
+
+    <linearGradient id="lungGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3388ff;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#0055cc;stop-opacity:0.5" />
+    </linearGradient>
+
+    <linearGradient id="neuralGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffaa;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#00aa66;stop-opacity:0.6" />
+    </linearGradient>
+
+    <!-- Glow filters -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="pulseGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Data stream pattern -->
+    <pattern id="dataPattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.5" fill="#00aaff" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background grid -->
+  <g opacity="0.1">
+    <line x1="0" y1="50" x2="120" y2="50" stroke="#0088ff" stroke-width="0.5"/>
+    <line x1="0" y1="100" x2="120" y2="100" stroke="#0088ff" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="120" y2="150" stroke="#0088ff" stroke-width="0.5"/>
+    <line x1="30" y1="0" x2="30" y2="200" stroke="#0088ff" stroke-width="0.5"/>
+    <line x1="60" y1="0" x2="60" y2="200" stroke="#0088ff" stroke-width="0.5"/>
+    <line x1="90" y1="0" x2="90" y2="200" stroke="#0088ff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Human body outline -->
+  <g id="bodyOutline" filter="url(#glow)">
+    <!-- Head -->
+    <ellipse cx="60" cy="22" rx="16" ry="18" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="1"/>
+
+    <!-- Neck -->
+    <rect x="54" y="38" width="12" height="10" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+
+    <!-- Torso with breathing animation -->
+    <g id="torso">
+      <path d="M38 48 L82 48 L88 110 L32 110 Z" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="1">
+        <animate attributeName="d"
+          values="M38 48 L82 48 L88 110 L32 110 Z;M36 48 L84 48 L90 110 L30 110 Z;M38 48 L82 48 L88 110 L32 110 Z"
+          dur="4s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Pelvis -->
+    <path d="M32 110 L88 110 L82 130 L38 130 Z" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+
+    <!-- Left Arm -->
+    <path d="M38 50 L22 55 L15 95 L20 97 L28 60 L38 56" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+
+    <!-- Right Arm -->
+    <path d="M82 50 L98 55 L105 95 L100 97 L92 60 L82 56" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+
+    <!-- Left Leg -->
+    <path d="M38 130 L35 180 L30 185 L28 180 L30 130" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+
+    <!-- Right Leg -->
+    <path d="M82 130 L85 180 L90 185 L92 180 L90 130" fill="url(#skinGrad)" stroke="#3388ff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Internal organs -->
+  <g id="organs">
+    <!-- Brain neural network -->
+    <g id="brain" filter="url(#pulseGlow)">
+      <ellipse cx="60" cy="18" rx="10" ry="8" fill="url(#neuralGrad)" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+      </ellipse>
+      <!-- Neural connections -->
+      <path d="M55 15 Q60 20 65 15" stroke="#00ffaa" stroke-width="0.5" fill="none" opacity="0.7"/>
+      <path d="M52 18 Q60 22 68 18" stroke="#00ffaa" stroke-width="0.5" fill="none" opacity="0.7"/>
+    </g>
+
+    <!-- Heart with pulse -->
+    <g id="heart" filter="url(#pulseGlow)">
+      <path d="M55 62 C50 58 45 65 55 75 C65 65 60 58 55 62" fill="url(#organGrad)">
+        <animate attributeName="transform"
+          values="scale(1);scale(1.1);scale(1)"
+          dur="0.8s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate"
+          values="0,0;2,0;0,0" dur="0.8s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Lungs with breathing -->
+    <g id="lungs">
+      <!-- Left lung -->
+      <ellipse cx="45" cy="70" rx="10" ry="18" fill="url(#lungGrad)" opacity="0.6">
+        <animate attributeName="rx" values="10;12;10" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="ry" values="18;20;18" dur="4s" repeatCount="indefinite"/>
+      </ellipse>
+      <!-- Right lung -->
+      <ellipse cx="75" cy="70" rx="10" ry="18" fill="url(#lungGrad)" opacity="0.6">
+        <animate attributeName="rx" values="10;12;10" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="ry" values="18;20;18" dur="4s" repeatCount="indefinite"/>
+      </ellipse>
+    </g>
+
+    <!-- Liver -->
+    <ellipse cx="70" cy="88" rx="12" ry="6" fill="#aa6622" opacity="0.5" filter="url(#glow)"/>
+
+    <!-- Stomach -->
+    <ellipse cx="55" cy="92" rx="8" ry="5" fill="#669933" opacity="0.4"/>
+
+    <!-- Kidneys -->
+    <ellipse cx="48" cy="98" rx="5" ry="4" fill="#996644" opacity="0.5"/>
+    <ellipse cx="72" cy="98" rx="5" ry="4" fill="#996644" opacity="0.5"/>
+
+    <!-- Intestines representation -->
+    <path d="M50 102 Q55 108 60 102 Q65 108 70 102" stroke="#55aa66" stroke-width="2" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Circulatory system -->
+  <g id="circulation" stroke="#ff3366" stroke-width="0.8" fill="none" opacity="0.5">
+    <!-- Main arteries -->
+    <path d="M60 75 L60 105">
+      <animate attributeName="opacity" values="0.5;0.8;0.5" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M55 68 L45 55 L30 70"/>
+    <path d="M65 68 L75 55 L90 70"/>
+    <path d="M60 105 L50 130 L45 170"/>
+    <path d="M60 105 L70 130 L75 170"/>
+  </g>
+
+  <!-- Data monitoring points -->
+  <g id="dataPoints" filter="url(#glow)">
+    <!-- Heart rate monitor -->
+    <circle cx="55" cy="68" r="3" fill="#ff4466">
+      <animate attributeName="r" values="3;4;3" dur="0.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.6;1" dur="0.8s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Brain activity -->
+    <circle cx="60" cy="18" r="2" fill="#00ffaa">
+      <animate attributeName="opacity" values="1;0.3;1" dur="0.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Lung sensors -->
+    <circle cx="45" cy="70" r="2" fill="#3388ff">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="75" cy="70" r="2" fill="#3388ff">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Liver function -->
+    <circle cx="70" cy="88" r="2" fill="#ffaa00">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Kidney function -->
+    <circle cx="48" cy="98" r="1.5" fill="#00cc66"/>
+    <circle cx="72" cy="98" r="1.5" fill="#00cc66"/>
+  </g>
+
+  <!-- Data flow lines -->
+  <g id="dataFlow" stroke="#00aaff" stroke-width="0.5" fill="none" opacity="0.4">
+    <path d="M60 18 L60 0">
+      <animate attributeName="stroke-dasharray" values="0,100;50,50;100,0" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M55 68 L20 68 L10 68">
+      <animate attributeName="stroke-dasharray" values="0,100;50,50;100,0" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M75 70 L100 70 L110 70">
+      <animate attributeName="stroke-dasharray" values="0,100;50,50;100,0" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Floating data particles -->
+  <g id="particles">
+    <circle cx="20" cy="30" r="1" fill="#00aaff" opacity="0.6">
+      <animate attributeName="cy" values="30;10;30" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="100" cy="50" r="1" fill="#00ffaa" opacity="0.5">
+      <animate attributeName="cy" values="50;30;50" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="15" cy="120" r="1" fill="#ffaa00" opacity="0.4">
+      <animate attributeName="cx" values="15;25;15" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="105" cy="140" r="1" fill="#ff4466" opacity="0.5">
+      <animate attributeName="cy" values="140;160;140" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Scan line effect -->
+  <rect x="0" y="0" width="120" height="4" fill="url(#dataPattern)" opacity="0.3">
+    <animate attributeName="y" values="0;196;0" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Status indicator -->
+  <g id="status" transform="translate(5, 190)">
+    <rect x="0" y="0" width="30" height="8" rx="2" fill="#001833" stroke="#0055ff" stroke-width="0.5"/>
+    <text x="15" y="6" text-anchor="middle" fill="#00ff88" font-size="5" font-family="monospace">LIVE</text>
+    <circle cx="6" cy="4" r="1.5" fill="#00ff88">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

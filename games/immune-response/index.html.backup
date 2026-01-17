@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immune Response Challenge | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 500px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .score { font-size: 1.2rem; margin-bottom: 20px; color: var(--emerald); }
+    .game-area { display: flex; justify-content: space-around; margin-bottom: 30px; }
+    .column { width: 45%; }
+    .column-title { font-size: 14px; color: #888; margin-bottom: 15px; }
+    .cell {
+      padding: 15px; margin: 10px 0; border-radius: 12px; cursor: pointer;
+      transition: all 0.2s; font-size: 20px;
+    }
+    .cell:hover { transform: scale(1.05); }
+    .tcell { background: rgba(0,85,255,0.2); border: 2px solid var(--sapphire); }
+    .tcell.selected { background: rgba(0,85,255,0.5); box-shadow: 0 0 15px rgba(0,85,255,0.5); }
+    .antigen { background: rgba(255,51,102,0.2); border: 2px solid var(--crimson); }
+    .antigen.selected { background: rgba(255,51,102,0.5); box-shadow: 0 0 15px rgba(255,51,102,0.5); }
+    .cell.matched { background: rgba(0,204,102,0.3); border-color: var(--emerald); opacity: 0.5; pointer-events: none; }
+    .message { min-height: 30px; margin-top: 20px; font-weight: 500; }
+    .message.good { color: var(--emerald); }
+    .message.bad { color: var(--crimson); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ Immune Response Challenge</h1>
+    <p class="subtitle">Match T-cells to their target antigens!</p>
+    <div class="score">Score: <span id="score">0</span> | Matches: <span id="matches">0</span>/4</div>
+
+    <div class="game-area">
+      <div class="column">
+        <div class="column-title">T-Cells</div>
+        <div class="cell tcell" data-type="A" onclick="selectCell(this, 'tcell')">🦠 CD4-A</div>
+        <div class="cell tcell" data-type="B" onclick="selectCell(this, 'tcell')">🦠 CD8-B</div>
+        <div class="cell tcell" data-type="C" onclick="selectCell(this, 'tcell')">🦠 NK-C</div>
+        <div class="cell tcell" data-type="D" onclick="selectCell(this, 'tcell')">🦠 Treg-D</div>
+      </div>
+      <div class="column">
+        <div class="column-title">Antigens</div>
+        <div class="cell antigen" data-type="C" onclick="selectCell(this, 'antigen')">🎯 Viral-C</div>
+        <div class="cell antigen" data-type="A" onclick="selectCell(this, 'antigen')">🎯 Bacterial-A</div>
+        <div class="cell antigen" data-type="D" onclick="selectCell(this, 'antigen')">🎯 Self-D</div>
+        <div class="cell antigen" data-type="B" onclick="selectCell(this, 'antigen')">🎯 Tumor-B</div>
+      </div>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    let score = 0;
+    let matches = 0;
+    let selectedTcell = null;
+    let selectedAntigen = null;
+
+    function selectCell(el, type) {
+      if (el.classList.contains('matched')) return;
+
+      if (type === 'tcell') {
+        document.querySelectorAll('.tcell').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedTcell = el;
+      } else {
+        document.querySelectorAll('.antigen').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedAntigen = el;
+      }
+
+      if (selectedTcell && selectedAntigen) {
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const msg = document.getElementById('message');
+      if (selectedTcell.dataset.type === selectedAntigen.dataset.type) {
+        selectedTcell.classList.add('matched');
+        selectedAntigen.classList.add('matched');
+        score += 25;
+        matches++;
+        msg.textContent = '✓ Match! T-cell activated!';
+        msg.className = 'message good';
+      } else {
+        score = Math.max(0, score - 5);
+        msg.textContent = '✗ Wrong target! Try again.';
+        msg.className = 'message bad';
+      }
+
+      document.getElementById('score').textContent = score;
+      document.getElementById('matches').textContent = matches;
+
+      selectedTcell.classList.remove('selected');
+      selectedAntigen.classList.remove('selected');
+      selectedTcell = null;
+      selectedAntigen = null;
+
+      if (matches === 4) {
+        setTimeout(() => { msg.textContent = '🎉 All pathogens neutralized! +50 bonus!'; score += 50; document.getElementById('score').textContent = score; }, 500);
+      }
+    }
+  </script>
+</body>
+</html>

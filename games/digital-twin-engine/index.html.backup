@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Twin Engine | Patient Analog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oxanium:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Cyber-Medical Theme */
+    :root {
+      --cyber-bg: #050a12;
+      --cyber-panel: #0a1628;
+      --cyber-electric: #00e5ff;
+      --cyber-matrix: #39ff14;
+      --cyber-pulse: #ff1744;
+      --cyber-amber: #ffab00;
+      --cyber-violet: #d500f9;
+      --cyber-text: #b0bec5;
+      --cyber-dim: #546e7a;
+      --cyber-border: #1e3a5f;
+    }
+
+    body {
+      font-family: 'Oxanium', sans-serif;
+      background: linear-gradient(145deg, var(--cyber-bg) 0%, #030810 100%);
+    }
+
+    .game-container {
+      background: transparent;
+    }
+
+    .twin-container {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 20px;
+      max-width: 1400px;
+      width: 100%;
+      padding: 20px;
+      height: 90vh;
+    }
+
+    .visualization-panel {
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .viz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .viz-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--cyber-electric);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .patient-id {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--cyber-matrix);
+      background: var(--cyber-bg);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--cyber-matrix);
+    }
+
+    .body-canvas {
+      flex: 1;
+      background: var(--cyber-bg);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .body-outline {
+      position: absolute;
+      inset: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .body-svg {
+      max-height: 100%;
+      max-width: 300px;
+    }
+
+    .data-point {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--cyber-electric);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: dataPulse 2s ease-in-out infinite;
+    }
+
+    .data-point:hover {
+      transform: translate(-50%, -50%) scale(1.5);
+      z-index: 10;
+    }
+
+    .data-point.warning {
+      background: var(--cyber-amber);
+    }
+
+    .data-point.critical {
+      background: var(--cyber-pulse);
+      animation: criticalPulse 0.5s ease-in-out infinite;
+    }
+
+    @keyframes dataPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(0, 229, 255, 0); }
+    }
+
+    @keyframes criticalPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.6); }
+      50% { box-shadow: 0 0 0 12px rgba(255, 23, 68, 0); }
+    }
+
+    .data-tooltip {
+      position: absolute;
+      background: rgba(5, 10, 18, 0.95);
+      border: 1px solid var(--cyber-border);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 100;
+      min-width: 150px;
+    }
+
+    .data-point:hover + .data-tooltip {
+      opacity: 1;
+    }
+
+    .tooltip-title {
+      font-weight: bold;
+      color: var(--cyber-amber);
+      margin-bottom: 8px;
+    }
+
+    .tooltip-value {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--cyber-electric);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .control-panel {
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto;
+    }
+
+    .panel-section {
+      background: var(--cyber-bg);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--cyber-amber);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 14px;
+      background: var(--cyber-amber);
+      border-radius: 2px;
+    }
+
+    .vitals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .vital-item {
+      background: rgba(10, 22, 40, 0.8);
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid var(--cyber-border);
+    }
+
+    .vital-label {
+      font-size: 10px;
+      color: var(--cyber-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .vital-value {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--cyber-electric);
+      margin-top: 4px;
+    }
+
+    .vital-value.warning {
+      color: var(--cyber-amber);
+    }
+
+    .vital-value.critical {
+      color: var(--cyber-pulse);
+    }
+
+    .vital-unit {
+      font-size: 10px;
+      color: var(--cyber-dim);
+    }
+
+    .simulation-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sim-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sim-btn.primary {
+      background: linear-gradient(135deg, var(--cyber-electric), #0097a7);
+      color: #000;
+    }
+
+    .sim-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--cyber-text);
+      border: 1px solid var(--cyber-border);
+    }
+
+    .sim-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    }
+
+    .scenario-select {
+      width: 100%;
+      padding: 10px;
+      background: var(--cyber-bg);
+      border: 1px solid var(--cyber-border);
+      border-radius: 6px;
+      color: var(--cyber-text);
+      font-size: 14px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .timeline-event {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      padding: 8px;
+      background: rgba(10, 22, 40, 0.5);
+      border-radius: 6px;
+      border-left: 3px solid var(--cyber-electric);
+    }
+
+    .timeline-event.warning {
+      border-left-color: var(--cyber-amber);
+    }
+
+    .timeline-event.critical {
+      border-left-color: var(--cyber-pulse);
+    }
+
+    .event-time {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--cyber-dim);
+      min-width: 50px;
+    }
+
+    .event-text {
+      color: var(--cyber-text);
+    }
+
+    .prediction-chart {
+      height: 120px;
+      background: var(--cyber-bg);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--cyber-border);
+    }
+
+    .chart-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--cyber-electric);
+    }
+
+    .chart-area {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 229, 255, 0.3), transparent);
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--cyber-text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      z-index: 100;
+    }
+
+    .back-btn:hover {
+      border-color: var(--cyber-electric);
+      background: rgba(0, 229, 255, 0.2);
+    }
+
+    @media (max-width: 1000px) {
+      .twin-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .body-canvas {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <a href="/games.html" class="back-btn">← Back to Games</a>
+
+    <div class="twin-container">
+      <div class="visualization-panel">
+        <div class="viz-header">
+          <div class="viz-title">Patient Digital Twin</div>
+          <div class="patient-id">ID: PA-2024-0847</div>
+        </div>
+
+        <div class="body-canvas" id="body-canvas">
+          <div class="body-outline">
+            <svg class="body-svg" viewBox="0 0 200 400" fill="none">
+              <!-- Head -->
+              <ellipse cx="100" cy="40" rx="30" ry="35" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Neck -->
+              <rect x="90" y="70" width="20" height="20" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Torso -->
+              <path d="M60 90 L140 90 L150 200 L50 200 Z" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Arms -->
+              <path d="M60 95 L20 180 L30 185 L65 110" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <path d="M140 95 L180 180 L170 185 L135 110" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Pelvis -->
+              <path d="M50 200 L150 200 L140 230 L60 230 Z" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Legs -->
+              <path d="M60 230 L55 380 L75 380 L85 230" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <path d="M115 230 L125 380 L145 380 L140 230" stroke="#00e5ff" stroke-width="1" fill="rgba(0, 229, 255, 0.1)"/>
+              <!-- Heart indicator -->
+              <circle cx="110" cy="130" r="15" stroke="#ff1744" stroke-width="1" fill="rgba(255, 23, 68, 0.2)"/>
+              <!-- Liver -->
+              <ellipse cx="80" cy="160" rx="20" ry="15" stroke="#ffab00" stroke-width="1" fill="rgba(255, 171, 0, 0.2)"/>
+              <!-- Kidneys -->
+              <ellipse cx="75" cy="185" rx="10" ry="8" stroke="#39ff14" stroke-width="1" fill="rgba(57, 255, 20, 0.2)"/>
+              <ellipse cx="125" cy="185" rx="10" ry="8" stroke="#39ff14" stroke-width="1" fill="rgba(57, 255, 20, 0.2)"/>
+            </svg>
+          </div>
+
+          <!-- Data points will be added dynamically -->
+          <div class="data-point" style="left: 55%; top: 32%;" data-organ="heart"></div>
+          <div class="data-tooltip" style="left: 60%; top: 25%;">
+            <div class="tooltip-title">Heart Rate</div>
+            <div class="tooltip-value" id="heart-tooltip">72 BPM</div>
+          </div>
+
+          <div class="data-point" style="left: 40%; top: 40%;" data-organ="liver"></div>
+          <div class="data-tooltip" style="left: 45%; top: 33%;">
+            <div class="tooltip-title">Liver Function</div>
+            <div class="tooltip-value" id="liver-tooltip">Normal</div>
+          </div>
+
+          <div class="data-point" style="left: 35%; top: 47%;" data-organ="kidney-l"></div>
+          <div class="data-point" style="left: 65%; top: 47%;" data-organ="kidney-r"></div>
+
+          <div class="data-point" style="left: 50%; top: 10%;" data-organ="brain"></div>
+          <div class="data-tooltip" style="left: 55%; top: 3%;">
+            <div class="tooltip-title">Brain Activity</div>
+            <div class="tooltip-value" id="brain-tooltip">Active</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-panel">
+        <div class="panel-section">
+          <div class="section-title">Real-Time Vitals</div>
+          <div class="vitals-grid">
+            <div class="vital-item">
+              <div class="vital-label">Heart Rate</div>
+              <div class="vital-value" id="vital-hr">72</div>
+              <div class="vital-unit">BPM</div>
+            </div>
+            <div class="vital-item">
+              <div class="vital-label">Blood Pressure</div>
+              <div class="vital-value" id="vital-bp">120/80</div>
+              <div class="vital-unit">mmHg</div>
+            </div>
+            <div class="vital-item">
+              <div class="vital-label">Temperature</div>
+              <div class="vital-value" id="vital-temp">98.6</div>
+              <div class="vital-unit">°F</div>
+            </div>
+            <div class="vital-item">
+              <div class="vital-label">O2 Saturation</div>
+              <div class="vital-value" id="vital-o2">98</div>
+              <div class="vital-unit">%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="section-title">Simulation Scenario</div>
+          <select class="scenario-select" id="scenario-select">
+            <option value="baseline">Baseline - Healthy State</option>
+            <option value="exercise">Physical Exercise</option>
+            <option value="stress">Stress Response</option>
+            <option value="medication">Medication Administration</option>
+            <option value="illness">Viral Infection</option>
+          </select>
+          <div class="simulation-controls" style="margin-top: 12px;">
+            <button class="sim-btn primary" id="run-sim">Run Simulation</button>
+            <button class="sim-btn secondary" id="reset-sim">Reset</button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="section-title">Prediction Model</div>
+          <div class="prediction-chart" id="prediction-chart">
+            <div class="chart-area" style="height: 60%;"></div>
+            <canvas id="chart-canvas"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="section-title">Event Timeline</div>
+          <div class="timeline" id="timeline">
+            <div class="timeline-event">
+              <span class="event-time">0:00</span>
+              <span class="event-text">Digital twin initialized</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Digital Twin Engine Simulation
+    let simRunning = false;
+    let simTime = 0;
+    let simInterval = null;
+
+    const vitals = {
+      hr: { value: 72, min: 60, max: 100, baseline: 72 },
+      bp: { sys: 120, dia: 80, baseline: { sys: 120, dia: 80 } },
+      temp: { value: 98.6, baseline: 98.6 },
+      o2: { value: 98, baseline: 98 }
+    };
+
+    const scenarios = {
+      baseline: {
+        name: 'Baseline',
+        hrMod: 0,
+        bpMod: { sys: 0, dia: 0 },
+        tempMod: 0,
+        o2Mod: 0,
+        events: ['Monitoring stable vitals']
+      },
+      exercise: {
+        name: 'Exercise',
+        hrMod: 50,
+        bpMod: { sys: 30, dia: 10 },
+        tempMod: 1.5,
+        o2Mod: -2,
+        events: ['Physical activity detected', 'Heart rate increasing', 'Metabolic rate elevated']
+      },
+      stress: {
+        name: 'Stress',
+        hrMod: 25,
+        bpMod: { sys: 20, dia: 15 },
+        tempMod: 0.3,
+        o2Mod: 0,
+        events: ['Stress response activated', 'Cortisol levels rising', 'Blood pressure elevated']
+      },
+      medication: {
+        name: 'Medication',
+        hrMod: -10,
+        bpMod: { sys: -15, dia: -10 },
+        tempMod: 0,
+        o2Mod: 1,
+        events: ['Medication administered', 'Drug absorption phase', 'Therapeutic effect detected']
+      },
+      illness: {
+        name: 'Illness',
+        hrMod: 15,
+        bpMod: { sys: -10, dia: -5 },
+        tempMod: 2.5,
+        o2Mod: -3,
+        events: ['Immune response detected', 'Temperature rising', 'Inflammatory markers elevated']
+      }
+    };
+
+    const runBtn = document.getElementById('run-sim');
+    const resetBtn = document.getElementById('reset-sim');
+    const scenarioSelect = document.getElementById('scenario-select');
+    const timeline = document.getElementById('timeline');
+
+    // Update vital displays
+    function updateVitals() {
+      document.getElementById('vital-hr').textContent = Math.round(vitals.hr.value);
+      document.getElementById('vital-bp').textContent = `${Math.round(vitals.bp.sys)}/${Math.round(vitals.bp.dia)}`;
+      document.getElementById('vital-temp').textContent = vitals.temp.value.toFixed(1);
+      document.getElementById('vital-o2').textContent = Math.round(vitals.o2.value);
+
+      // Color coding
+      const hrEl = document.getElementById('vital-hr');
+      hrEl.classList.remove('warning', 'critical');
+      if (vitals.hr.value > 100 || vitals.hr.value < 55) {
+        hrEl.classList.add('critical');
+      } else if (vitals.hr.value > 90 || vitals.hr.value < 60) {
+        hrEl.classList.add('warning');
+      }
+
+      const tempEl = document.getElementById('vital-temp');
+      tempEl.classList.remove('warning', 'critical');
+      if (vitals.temp.value > 101) {
+        tempEl.classList.add('critical');
+      } else if (vitals.temp.value > 99.5) {
+        tempEl.classList.add('warning');
+      }
+
+      const o2El = document.getElementById('vital-o2');
+      o2El.classList.remove('warning', 'critical');
+      if (vitals.o2.value < 92) {
+        o2El.classList.add('critical');
+      } else if (vitals.o2.value < 95) {
+        o2El.classList.add('warning');
+      }
+
+      // Update data points
+      updateDataPoints();
+    }
+
+    function updateDataPoints() {
+      const points = document.querySelectorAll('.data-point');
+      points.forEach(point => {
+        point.classList.remove('warning', 'critical');
+
+        const organ = point.dataset.organ;
+        if (organ === 'heart' && (vitals.hr.value > 100 || vitals.hr.value < 55)) {
+          point.classList.add('critical');
+        } else if (organ === 'heart' && (vitals.hr.value > 90 || vitals.hr.value < 60)) {
+          point.classList.add('warning');
+        }
+
+        if (organ === 'brain' && vitals.o2.value < 95) {
+          point.classList.add(vitals.o2.value < 92 ? 'critical' : 'warning');
+        }
+      });
+
+      // Update tooltips
+      document.getElementById('heart-tooltip').textContent = `${Math.round(vitals.hr.value)} BPM`;
+      document.getElementById('brain-tooltip').textContent = vitals.o2.value < 95 ? 'Hypoxic' : 'Active';
+    }
+
+    function addTimelineEvent(text, type = 'normal') {
+      const mins = Math.floor(simTime / 60);
+      const secs = simTime % 60;
+      const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+      const event = document.createElement('div');
+      event.className = `timeline-event ${type}`;
+      event.innerHTML = `
+        <span class="event-time">${timeStr}</span>
+        <span class="event-text">${text}</span>
+      `;
+
+      timeline.insertBefore(event, timeline.firstChild);
+
+      // Limit timeline entries
+      while (timeline.children.length > 10) {
+        timeline.removeChild(timeline.lastChild);
+      }
+    }
+
+    function runSimulation() {
+      if (simRunning) return;
+
+      simRunning = true;
+      runBtn.textContent = 'Running...';
+      runBtn.disabled = true;
+
+      const scenario = scenarios[scenarioSelect.value];
+      addTimelineEvent(`Starting ${scenario.name} scenario`, 'normal');
+
+      let eventIndex = 0;
+      const eventInterval = 3000;
+
+      simInterval = setInterval(() => {
+        simTime++;
+
+        // Gradually change vitals towards scenario targets
+        const progress = Math.min(simTime / 30, 1);
+        const eased = 1 - Math.pow(1 - progress, 2);
+
+        vitals.hr.value = vitals.hr.baseline + scenario.hrMod * eased + (Math.random() - 0.5) * 3;
+        vitals.bp.sys = vitals.bp.baseline.sys + scenario.bpMod.sys * eased + (Math.random() - 0.5) * 2;
+        vitals.bp.dia = vitals.bp.baseline.dia + scenario.bpMod.dia * eased + (Math.random() - 0.5) * 2;
+        vitals.temp.value = vitals.temp.baseline + scenario.tempMod * eased + (Math.random() - 0.5) * 0.1;
+        vitals.o2.value = Math.max(88, vitals.o2.baseline + scenario.o2Mod * eased + (Math.random() - 0.5));
+
+        updateVitals();
+
+        // Add scenario events
+        if (simTime % 5 === 0 && eventIndex < scenario.events.length) {
+          const eventType = vitals.hr.value > 100 || vitals.temp.value > 100 ? 'warning' : 'normal';
+          addTimelineEvent(scenario.events[eventIndex], eventType);
+          eventIndex++;
+        }
+
+        // Stop after 60 seconds
+        if (simTime >= 60) {
+          stopSimulation();
+          addTimelineEvent('Simulation complete', 'normal');
+        }
+      }, 1000);
+    }
+
+    function stopSimulation() {
+      simRunning = false;
+      if (simInterval) {
+        clearInterval(simInterval);
+        simInterval = null;
+      }
+      runBtn.textContent = 'Run Simulation';
+      runBtn.disabled = false;
+    }
+
+    function resetSimulation() {
+      stopSimulation();
+      simTime = 0;
+
+      vitals.hr.value = vitals.hr.baseline;
+      vitals.bp.sys = vitals.bp.baseline.sys;
+      vitals.bp.dia = vitals.bp.baseline.dia;
+      vitals.temp.value = vitals.temp.baseline;
+      vitals.o2.value = vitals.o2.baseline;
+
+      updateVitals();
+
+      timeline.innerHTML = `
+        <div class="timeline-event">
+          <span class="event-time">0:00</span>
+          <span class="event-text">Digital twin reset</span>
+        </div>
+      `;
+    }
+
+    runBtn.addEventListener('click', runSimulation);
+    resetBtn.addEventListener('click', resetSimulation);
+
+    // Draw prediction chart
+    function drawChart() {
+      const canvas = document.getElementById('chart-canvas');
+      const ctx = canvas.getContext('2d');
+      const container = document.getElementById('prediction-chart');
+
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw grid
+      ctx.strokeStyle = 'rgba(0, 85, 255, 0.1)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 5; i++) {
+        const y = (canvas.height / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw prediction line
+      ctx.strokeStyle = '#0055ff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+
+      const points = [];
+      for (let i = 0; i <= 20; i++) {
+        const x = (canvas.width / 20) * i;
+        const baseY = canvas.height * 0.6;
+        const variance = Math.sin(i * 0.5) * 20 + Math.random() * 10;
+        const y = baseY - variance;
+        points.push({ x, y });
+      }
+
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.stroke();
+
+      // Fill area under line
+      ctx.fillStyle = 'rgba(0, 85, 255, 0.1)';
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.lineTo(0, canvas.height);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Initialize
+    updateVitals();
+    drawChart();
+
+    // Redraw chart on resize
+    window.addEventListener('resize', drawChart);
+  </script>
+</body>
+</html>

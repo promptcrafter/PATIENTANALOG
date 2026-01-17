@@ -1,0 +1,409 @@
+/* Games page specific styles */
+
+/* Game Grid */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-8);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--glow-intense);
+}
+
+.game-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+  background: var(--gradient-accent);
+}
+
+/* Game Container */
+.game-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  min-height: 400px;
+  padding: var(--space-6);
+}
+
+.game-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: var(--space-4);
+}
+
+/* BioForge Game Styles */
+.bioforge {
+  text-align: center;
+}
+
+.bioforge-header {
+  margin-bottom: var(--space-8);
+}
+
+.bioforge-header h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.lab-card:hover:not(.locked) {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.lab-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lab-card.completed {
+  border-color: var(--color-success);
+}
+
+.lab-status {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.lab-name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lab-description {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Lab Active State */
+.lab-active {
+  text-align: left;
+}
+
+.lab-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.lab-header h2 {
+  flex: 1;
+}
+
+.lab-game {
+  background: var(--color-gray-900);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  min-height: 300px;
+  margin-bottom: var(--space-6);
+}
+
+.lab-controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* CRISPR Game */
+.crispr-game h3,
+.protein-game h3 {
+  margin-bottom: var(--space-4);
+}
+
+.dna-sequence {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  margin: var(--space-6) 0;
+}
+
+.dna-strand {
+  padding: var(--space-2);
+  letter-spacing: 0.5em;
+}
+
+.dna-strand.top {
+  color: var(--color-primary);
+}
+
+.dna-strand.bottom {
+  color: var(--color-secondary);
+}
+
+/* Protein Game */
+.amino-acids {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.amino {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-gray-800);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: grab;
+  font-family: var(--font-mono);
+}
+
+.amino[data-type="hydrophobic"] { border-color: var(--color-accent-orange); }
+.amino[data-type="polar"] { border-color: var(--color-primary); }
+.amino[data-type="charged"] { border-color: var(--color-accent-purple); }
+
+.folding-area {
+  min-height: 150px;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.amino.dropped {
+  cursor: default;
+}
+
+/* Kenneth Game Styles */
+.kenneth-game,
+.kenneth-play,
+.kenneth-pets,
+.kenneth-settings {
+  padding: var(--space-4);
+}
+
+.kenneth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+.kenneth-info h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+
+.coins-display {
+  font-weight: 600;
+  color: var(--color-accent-orange);
+}
+
+.active-pet-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.kenneth-menu {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.kenneth-level-info {
+  background: var(--color-gray-900);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* Pet avatars */
+.pet-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-accent);
+}
+
+.pet-avatar.pet-squeaky { background: var(--color-gray-500); }
+.pet-avatar.pet-whiskers { background: var(--color-accent-orange); }
+.pet-avatar.pet-beaker { background: var(--color-primary); }
+.pet-avatar.pet-hoot { background: var(--color-accent-purple); }
+
+/* Pets Grid */
+.pets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.pet-card {
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.pet-card .pet-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-4);
+}
+
+.pet-card h3 {
+  margin-bottom: var(--space-1);
+}
+
+.pet-type {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.pet-ability {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.pet-card.active {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+/* Game Area */
+.game-area {
+  background: var(--color-gray-900);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  min-height: 300px;
+  margin-bottom: var(--space-4);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+.game-header h2 {
+  flex: 1;
+  text-align: center;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+}
+
+/* Samples */
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.sample {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-color);
+  background: var(--color-gray-800);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sample:hover:not(.collected) {
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.sample.collected {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.sample-cell { background-color: var(--color-accent-green); }
+.sample-dna { background-color: var(--color-primary); }
+.sample-protein { background-color: var(--color-accent-purple); }
+.sample-organoid { background-color: var(--color-secondary); }
+
+/* Settings */
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.setting-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+}
+
+.setting-item select {
+  background: var(--color-gray-800);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-primary);
+}
+
+/* Progress Tracker */
+.progress-tracker {
+  margin-top: var(--space-4);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--color-gray-800);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-accent);
+  transition: width var(--transition-base);
+}

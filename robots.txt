@@ -1,0 +1,223 @@
+# Patient Analog - Maximum SEO Crawling Configuration
+# Last Updated: 2026-01-14
+
+# ===========================================
+# DEFAULT - All Bots Welcome
+# ===========================================
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Crawl-delay: 1
+
+# ===========================================
+# GOOGLE - Premium Access (No Delay)
+# ===========================================
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 0
+
+User-agent: Googlebot-News
+Allow: /
+Allow: /news/
+Allow: /regulatory/
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /images/
+Crawl-delay: 0
+
+User-agent: Googlebot-Video
+Allow: /
+Crawl-delay: 0
+
+User-agent: AdsBot-Google
+Allow: /
+Crawl-delay: 0
+
+User-agent: Google-InspectionTool
+Allow: /
+
+User-agent: Storebot-Google
+Allow: /
+
+# ===========================================
+# BING / MICROSOFT
+# ===========================================
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Crawl-delay: 0
+
+User-agent: BingPreview
+Allow: /
+
+User-agent: MicrosoftPreview
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+User-agent: msnbot-media
+Allow: /
+
+# ===========================================
+# OTHER MAJOR SEARCH ENGINES
+# ===========================================
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+User-agent: Naverbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yeti
+Allow: /
+Crawl-delay: 1
+
+User-agent: Sogou
+Allow: /
+Crawl-delay: 1
+
+User-agent: Exabot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Teoma
+Allow: /
+Crawl-delay: 1
+
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 1
+
+# ===========================================
+# SOCIAL MEDIA BOTS - Full Access
+# ===========================================
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 0
+
+User-agent: Pinterest
+Allow: /
+Crawl-delay: 0
+
+User-agent: Pinterestbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Discordbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slackbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: WhatsApp
+Allow: /
+Crawl-delay: 0
+
+User-agent: TelegramBot
+Allow: /
+Crawl-delay: 0
+
+# ===========================================
+# AI / LLM CRAWLERS - Allow for Visibility
+# ===========================================
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# ===========================================
+# BLOCK AGGRESSIVE SEO COMPETITOR SCRAPERS
+# ===========================================
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# ===========================================
+# SITEMAPS
+# ===========================================
+Sitemap: https://patientanalog.com/sitemap.xml
+Sitemap: https://patientanalog.com/sitemap-pages.xml
+Sitemap: https://patientanalog.com/sitemap-news.xml
+Sitemap: https://patientanalog.com/sitemap-domains.xml
+
+# ===========================================
+# HOST DIRECTIVE
+# ===========================================
+Host: https://patientanalog.com
+
+# ===========================================
+# INDEXNOW KEY
+# ===========================================
+# IndexNow key file: /paNindexNow.txt

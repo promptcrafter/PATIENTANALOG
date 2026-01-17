@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Builder | Discovery Zone | Patient Analog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard', sans-serif;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: #fff; font-size: 2.2rem; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); margin-bottom: 10px; }
+    .subtitle { color: #fed7aa; font-size: 1.1rem; }
+    .game-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .instructions {
+      background: #fff7ed;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #9a3412;
+    }
+    .game-layout {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .body-outline {
+      position: relative;
+      width: 250px;
+      height: 450px;
+      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 20px;
+      border: 3px dashed #f59e0b;
+    }
+    .drop-zone {
+      position: absolute;
+      border: 2px dashed #d97706;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.5);
+    }
+    .drop-zone.highlight { background: rgba(249, 115, 22, 0.3); border-color: #f97316; }
+    .drop-zone.correct { background: #dcfce7; border-color: #22c55e; border-style: solid; }
+    .drop-zone[data-organ="brain"] { width: 70px; height: 50px; top: 20px; left: 50%; transform: translateX(-50%); }
+    .drop-zone[data-organ="heart"] { width: 50px; height: 50px; top: 120px; left: 50%; transform: translateX(-50%); }
+    .drop-zone[data-organ="lungs"] { width: 100px; height: 60px; top: 110px; left: 50%; transform: translateX(-50%); }
+    .drop-zone[data-organ="stomach"] { width: 60px; height: 50px; top: 190px; left: 50%; transform: translateX(-50%); }
+    .drop-zone[data-organ="liver"] { width: 55px; height: 45px; top: 180px; left: 30%; }
+    .drop-zone[data-organ="kidneys"] { width: 80px; height: 40px; top: 250px; left: 50%; transform: translateX(-50%); }
+    .organs-tray {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      min-width: 180px;
+    }
+    .organ {
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 12px;
+      cursor: grab;
+      text-align: center;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      user-select: none;
+    }
+    .organ:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+    .organ.dragging { opacity: 0.5; cursor: grabbing; }
+    .organ.placed { opacity: 0.3; pointer-events: none; }
+    .organ-emoji { font-size: 1.5rem; margin-right: 8px; }
+    .score-bar {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff7ed;
+      border-radius: 10px;
+    }
+    .score { font-size: 1.3rem; color: #c2410c; }
+    .message {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      display: none;
+    }
+    .message.show { display: block; }
+    .message.success { background: #dcfce7; color: #16a34a; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #fff;
+      color: #ea580c;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .reset-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #f97316;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+  <div class="container">
+    <header>
+      <h1>Body Builder</h1>
+      <p class="subtitle">Put the organs in the right place to build a healthy body!</p>
+    </header>
+
+    <div class="game-area">
+      <div class="instructions">
+        Drag each organ and drop it in the correct spot on the body!
+      </div>
+
+      <div class="game-layout">
+        <div class="body-outline">
+          <div class="drop-zone" data-organ="brain">🧠</div>
+          <div class="drop-zone" data-organ="lungs">🫁</div>
+          <div class="drop-zone" data-organ="heart">❤️</div>
+          <div class="drop-zone" data-organ="liver">🫀</div>
+          <div class="drop-zone" data-organ="stomach">🟤</div>
+          <div class="drop-zone" data-organ="kidneys">🫘</div>
+        </div>
+
+        <div class="organs-tray" id="organs-tray">
+          <div class="organ" draggable="true" data-organ="brain">
+            <span class="organ-emoji">🧠</span> Brain
+          </div>
+          <div class="organ" draggable="true" data-organ="heart">
+            <span class="organ-emoji">❤️</span> Heart
+          </div>
+          <div class="organ" draggable="true" data-organ="lungs">
+            <span class="organ-emoji">🫁</span> Lungs
+          </div>
+          <div class="organ" draggable="true" data-organ="stomach">
+            <span class="organ-emoji">🟤</span> Stomach
+          </div>
+          <div class="organ" draggable="true" data-organ="liver">
+            <span class="organ-emoji">🫀</span> Liver
+          </div>
+          <div class="organ" draggable="true" data-organ="kidneys">
+            <span class="organ-emoji">🫘</span> Kidneys
+          </div>
+        </div>
+      </div>
+
+      <div class="score-bar">
+        <span class="score">Organs Placed: <span id="score">0</span> / 6</span>
+        <br><button class="reset-btn" onclick="resetGame()">Start Over</button>
+      </div>
+
+      <div class="message" id="message"></div>
+    </div>
+
+    <center><a href="index.html" class="back-btn">Back to Discovery Zone</a></center>
+  </div>
+
+  <script>
+    let score = 0;
+    let draggedOrgan = null;
+
+    const organs = document.querySelectorAll('.organ');
+    const dropZones = document.querySelectorAll('.drop-zone');
+
+    organs.forEach(organ => {
+      organ.addEventListener('dragstart', (e) => {
+        draggedOrgan = organ;
+        organ.classList.add('dragging');
+      });
+
+      organ.addEventListener('dragend', () => {
+        organ.classList.remove('dragging');
+        draggedOrgan = null;
+        dropZones.forEach(zone => zone.classList.remove('highlight'));
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('highlight');
+      });
+
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('highlight');
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('highlight');
+
+        if (!draggedOrgan) return;
+        if (zone.classList.contains('correct')) return;
+
+        const organType = draggedOrgan.dataset.organ;
+        const zoneType = zone.dataset.organ;
+
+        if (organType === zoneType) {
+          // Correct placement
+          zone.classList.add('correct');
+          zone.innerHTML = draggedOrgan.innerHTML;
+          draggedOrgan.classList.add('placed');
+          score++;
+          document.getElementById('score').textContent = score;
+
+          if (score === 6) {
+            showMessage('Amazing! You built a complete body! All organs are in place!', 'success');
+          }
+        } else {
+          // Wrong placement - shake animation
+          zone.style.animation = 'shake 0.3s';
+          setTimeout(() => zone.style.animation = '', 300);
+        }
+      });
+    });
+
+    function showMessage(text, type) {
+      const msg = document.getElementById('message');
+      msg.textContent = text;
+      msg.className = 'message show ' + type;
+    }
+
+    function resetGame() {
+      score = 0;
+      document.getElementById('score').textContent = 0;
+      document.getElementById('message').className = 'message';
+
+      organs.forEach(organ => organ.classList.remove('placed'));
+
+      dropZones.forEach(zone => {
+        zone.classList.remove('correct');
+        const type = zone.dataset.organ;
+        const emojis = { brain: '🧠', heart: '❤️', lungs: '🫁', stomach: '🟤', liver: '🫀', kidneys: '🫘' };
+        zone.innerHTML = emojis[type];
+      });
+    }
+
+    // Add shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(-50%); }
+        25% { transform: translateX(calc(-50% - 10px)); }
+        75% { transform: translateX(calc(-50% + 10px)); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+<!-- Restore nav after main JS runs -->
+<script>
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483646!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;border-bottom:1px solid rgba(0,255,255,0.2)!important;padding:8px 16px!important;min-height:44px!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 2px 10px rgba(0,0,0,0.5)!important;backdrop-filter:blur(10px)!important;';
+      nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex!important;font-size:16px!important;font-weight:700!important;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3)!important;text-decoration:none!important;">Patient Analog</a><div class="nav-links" style="display:flex!important;gap:8px!important;margin-left:auto!important;"><a href="/portfolio" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Portfolio</a><a href="/research" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Research</a><a href="/haptic" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Haptic</a><a href="/games" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Games</a><a href="/legal" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Legal</a></div>';
+    }
+  });
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kidney Filtration Challenge | Patient Analog</title>
+    <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .game { max-width: 500px; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; }
+    .stat-value { font-size: 1.5rem; font-weight: bold; }
+    .stat-label { font-size: 11px; color: #666; }
+    .filter-zone {
+      width: 400px; height: 300px; margin: 0 auto 20px;
+      background: linear-gradient(180deg, rgba(0,85,255,0.05), rgba(0,85,255,0.1));
+      border: 2px solid rgba(0,85,255,0.3); border-radius: 20px;
+      position: relative; overflow: hidden; cursor: crosshair;
+    }
+    .molecule {
+      position: absolute; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; cursor: pointer; transition: transform 0.1s;
+      animation: float 3s ease-in-out infinite;
+    }
+    .molecule:hover { transform: scale(1.2); }
+    .molecule.waste { background: rgba(255,51,102,0.3); border: 2px solid var(--crimson); }
+    .molecule.nutrient { background: rgba(0,204,102,0.3); border: 2px solid var(--emerald); }
+    .molecule.filtered { animation: filterOut 0.5s forwards; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes filterOut {
+      to { transform: scale(0) rotate(180deg); opacity: 0; }
+    }
+    .legend { display: flex; justify-content: center; gap: 30px; font-size: 13px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; }
+    .legend-dot { width: 16px; height: 16px; border-radius: 50%; }
+    .legend-dot.waste { background: var(--crimson); }
+    .legend-dot.nutrient { background: var(--emerald); }
+    .message { margin-top: 15px; min-height: 24px; font-weight: 500; }
+    .message.good { color: var(--emerald); }
+    .message.bad { color: var(--crimson); }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>🫘 Kidney Filtration Challenge</h1>
+    <p class="subtitle">Filter waste molecules (🔴) - Don't click nutrients (🟢)!</p>
+
+    <div class="stats">
+      <div><div class="stat-value" id="filtered">0</div><div class="stat-label">Filtered</div></div>
+      <div><div class="stat-value" id="errors">0</div><div class="stat-label">Errors</div></div>
+      <div><div class="stat-value" id="gfr">100</div><div class="stat-label">GFR %</div></div>
+    </div>
+
+    <div class="filter-zone" id="filterZone"></div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot waste"></div> Waste (click to filter)</div>
+      <div class="legend-item"><div class="legend-dot nutrient"></div> Nutrients (don't click!)</div>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const filterZone = document.getElementById('filterZone');
+    const filteredEl = document.getElementById('filtered');
+    const errorsEl = document.getElementById('errors');
+    const gfrEl = document.getElementById('gfr');
+    const messageEl = document.getElementById('message');
+
+    let filtered = 0;
+    let errors = 0;
+
+    const wasteEmojis = ['🔴', '💀', '🦠', '⚫'];
+    const nutrientEmojis = ['🟢', '💊', '🧬', '⭐'];
+
+    function spawnMolecule() {
+      const isWaste = Math.random() > 0.4;
+      const mol = document.createElement('div');
+      mol.className = 'molecule ' + (isWaste ? 'waste' : 'nutrient');
+      mol.textContent = isWaste ? wasteEmojis[Math.floor(Math.random() * wasteEmojis.length)] : nutrientEmojis[Math.floor(Math.random() * nutrientEmojis.length)];
+      mol.style.left = Math.random() * 340 + 'px';
+      mol.style.top = Math.random() * 240 + 'px';
+      mol.style.animationDelay = Math.random() * 2 + 's';
+
+      mol.onclick = () => {
+        if (isWaste) {
+          filtered++;
+          filteredEl.textContent = filtered;
+          mol.classList.add('filtered');
+          showMessage('✓ Filtered!', 'good');
+          setTimeout(() => mol.remove(), 500);
+        } else {
+          errors++;
+          errorsEl.textContent = errors;
+          const gfr = Math.max(0, 100 - errors * 10);
+          gfrEl.textContent = gfr;
+          showMessage('✗ That was a nutrient!', 'bad');
+          mol.style.animation = 'none';
+          mol.style.border = '3px solid yellow';
+          setTimeout(() => { mol.style.border = ''; mol.style.animation = ''; }, 500);
+        }
+      };
+
+      filterZone.appendChild(mol);
+
+      // Auto-remove after time
+      setTimeout(() => {
+        if (mol.parentNode && isWaste && !mol.classList.contains('filtered')) {
+          mol.remove();
+        }
+      }, 8000);
+    }
+
+    function showMessage(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = 'message ' + type;
+      setTimeout(() => { messageEl.textContent = ''; messageEl.className = 'message'; }, 1500);
+    }
+
+    // Spawn molecules periodically
+    setInterval(spawnMolecule, 1500);
+    // Initial spawn
+    for (let i = 0; i < 5; i++) setTimeout(spawnMolecule, i * 300);
+  </script>
+</body>
+</html>

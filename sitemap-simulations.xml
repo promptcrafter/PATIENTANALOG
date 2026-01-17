@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Simulations Hub -->
+  <url><loc>https://patientanalog.com/simulations</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- Advanced Biotech Simulations -->
+  <url><loc>https://patientanalog.com/simulations/brain-organoid-simulator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/liver-toxicity-testing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/cardiac-safety-testing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/car-t-cell-therapy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/organoid-assembly-builder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/quantum-drug-docking</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://patientanalog.com/simulations/multi-organ-digital-twin</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <!-- Computational Biology Simulations -->
+  <url><loc>https://patientanalog.com/simulations/protein-folding-dynamics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/gene-regulatory-network</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/metabolic-network-flux</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/ecosystem-dynamics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/epidemiological-transmission</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/neural-plasticity</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Advanced Learning Engines -->
+  <url><loc>https://patientanalog.com/simulations/adaptive-learning-engine</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/ar-bio-viewer</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://patientanalog.com/simulations/biometric-learning-engine</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

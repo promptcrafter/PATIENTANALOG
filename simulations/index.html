@@ -1,0 +1,591 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <title>Biotech Simulation Suite | 13+ Interactive Simulators | Patient Analog</title>
+    <meta name="description" content="13+ interactive biotech simulations: Brain organoids, liver toxicity testing, cardiac safety, protein folding, gene networks, digital twins. FDA Modernization Act compliant research tools.">
+    <meta name="keywords" content="biotech simulation, organ-on-chip, brain organoid, liver toxicity, cardiac safety, protein folding, gene regulatory network, digital twin">
+
+    <link rel="canonical" href="https://patientanalog.com/simulations/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Biotech Simulation Suite | Patient Analog">
+    <meta property="og:description" content="13+ interactive biotech simulations covering organ-on-chip, digital twins, and molecular systems.">
+    <meta property="og:url" content="https://patientanalog.com/simulations/">
+    <meta property="og:type" content="website">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1147 50%, #2d1b69 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        h1 {
+            font-size: 4em;
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+        @keyframes glow {
+            0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)); }
+            50% { background-position: 100% 50%; filter: drop-shadow(0 0 50px rgba(255, 0, 255, 0.8)); }
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: #00ffff;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .sim-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        .sim-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+        }
+        .sim-card.organoid { border-color: rgba(0, 255, 255, 0.3); }
+        .sim-card.organoid:hover { border-color: #00ffff; box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4); }
+        .sim-card.liver { border-color: rgba(255, 136, 68, 0.3); }
+        .sim-card.liver:hover { border-color: #ff8844; box-shadow: 0 20px 60px rgba(255, 136, 68, 0.4); }
+        .sim-card.cardiac { border-color: rgba(255, 68, 102, 0.3); }
+        .sim-card.cardiac:hover { border-color: #ff4466; box-shadow: 0 20px 60px rgba(255, 68, 102, 0.4); }
+        .sim-card.protein { border-color: rgba(68, 255, 136, 0.3); }
+        .sim-card.protein:hover { border-color: #44ff88; box-shadow: 0 20px 60px rgba(68, 255, 136, 0.4); }
+        .sim-icon {
+            font-size: 4em;
+            text-align: center;
+            padding: 40px 20px 20px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent);
+        }
+        .sim-content {
+            padding: 20px 30px 30px;
+        }
+        .sim-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .sim-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .sim-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .tag {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+        }
+        .launch-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ffff, #0088ff);
+            border: none;
+            border-radius: 10px;
+            color: #0a0e27;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        .launch-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #00ccff);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        .category-header {
+            margin: 60px 0 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(0, 255, 255, 0.3);
+        }
+        .category-header h2 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .category-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 2px solid rgba(0, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0 60px;
+        }
+        .stat-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #00ffff;
+            font-size: 1.1em;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .sim-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+          body { overflow-x: hidden; }
+          canvas, #gameCanvas, .game-canvas, #simulationCanvas {
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            touch-action: none;
+          }
+          button, .btn, .sim-btn, .control-btn, .launch-btn {
+            min-height: 48px !important;
+            min-width: 48px !important;
+            padding: 12px 24px !important;
+            font-size: 16px !important;
+          }
+          .simulation-container, .sim-container, .container {
+            width: 100% !important;
+            max-width: 100vw !important;
+            padding: 10px !important;
+          }
+          .controls, .control-panel {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+          }
+          input[type="range"] {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+          h1, .title { font-size: 1.5rem !important; }
+          h2 { font-size: 1.2rem !important; }
+          .info-panel, .stats-panel {
+            font-size: 14px !important;
+          }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+
+    <div class="container">
+        <header>
+            <a href="/" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: #00ffff; margin-bottom: 20px; font-size: 0.9em;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back to Home
+            </a>
+            <h1>🧬 Patient Analog</h1>
+            <p class="subtitle">Interactive Biotech Simulation Suite</p>
+            <p class="tagline">
+                Comprehensive biotech educational platform featuring human-relevant medicine technologies,
+                organ-on-chip systems, digital twins, and FDA Modernization Act-compliant research models
+            </p>
+        </header>
+
+        <div class="stats-banner">
+            <div class="stat-box">
+                <div class="stat-number">13</div>
+                <div class="stat-label">Live Interactive Simulations</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">87%</div>
+                <div class="stat-label">DILI Prediction Accuracy</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">$2B</div>
+                <div class="stat-label">Annual Savings Potential</div>
+            </div>
+        </div>
+
+        <div class="category-header">
+            <h2>🔬 Organoid & Organ-on-Chip Models</h2>
+            <p>Patient-derived 3D tissue models revolutionizing disease research and drug development</p>
+        </div>
+
+        <div class="sim-grid">
+            <div class="sim-card organoid">
+                <div class="sim-icon">🧠</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Brain Organoid Simulator</h3>
+                    <p class="sim-description">
+                        Patient-derived cerebral organoids modeling Alzheimer's, Parkinson's, Glioblastoma, 
+                        and Zika virus infection. Interactive 3D visualization with disease progression, 
+                        drug treatment simulation, and neural activity monitoring.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Neuroscience</span>
+                        <span class="tag">Disease Modeling</span>
+                        <span class="tag">Drug Screening</span>
+                    </div>
+                    <a href="brain-organoid-simulator" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card liver">
+                <div class="sim-icon">🫀</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Liver Toxicity Testing</h3>
+                    <p class="sim-description">
+                        Drug-Induced Liver Injury (DILI) prediction system with 87% accuracy. Test hepatotoxicity 
+                        of pharmaceutical compounds using human liver-on-chip models. Real-time CYP450 metabolism 
+                        and multi-parameter toxicity assessment.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Hepatology</span>
+                        <span class="tag">DILI Prediction</span>
+                        <span class="tag">Drug Safety</span>
+                    </div>
+                    <a href="liver-toxicity-testing" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card cardiac">
+                <div class="sim-icon">❤️</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Cardiac Safety Testing</h3>
+                    <p class="sim-description">
+                        Cardiotoxicity assessment platform detecting arrhythmia risks missed by animal models. 
+                        Features live ECG visualization, hERG channel assays, QT prolongation analysis, and 
+                        contractility measurements in human cardiomyocytes.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Cardiology</span>
+                        <span class="tag">QT Prolongation</span>
+                        <span class="tag">hERG Assay</span>
+                    </div>
+                    <a href="cardiac-safety-testing" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card" style="border-color: rgba(136, 170, 255, 0.3);">
+                <div class="sim-icon">🔬</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">CAR-T Cell Therapy Designer</h3>
+                    <p class="sim-description">
+                        Engineer chimeric antigen receptor T-cells for cancer immunotherapy. Design CAR constructs 
+                        with multiple generations, select tumor antigens (CD19, BCMA, HER2), transduce T-cells, 
+                        expand cultures, and simulate patient infusion with real-time tumor killing visualization.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Immunotherapy</span>
+                        <span class="tag">CAR-T</span>
+                        <span class="tag">Cancer Treatment</span>
+                    </div>
+                    <a href="car-t-cell-therapy" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card" style="border-color: rgba(255, 136, 68, 0.3);">
+                <div class="sim-icon">🧫</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Assembloid Builder</h3>
+                    <p class="sim-description">
+                        Multi-tissue organoid fusion platform. Build complex assembloids by layering different cell types 
+                        (neurons, astrocytes, endothelial cells, cardiomyocytes). Add vasculature, fuse organoids, 
+                        monitor maturation. Pre-built protocols for brain-vascular, cortical-interneuron assembloids.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Assembloids</span>
+                        <span class="tag">Tissue Engineering</span>
+                        <span class="tag">Vascularization</span>
+                    </div>
+                    <a href="organoid-assembly-builder" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-header">
+            <h2>🧬 Molecular & Cellular Systems</h2>
+            <p>Computational models of fundamental biological processes</p>
+        </div>
+
+        <div class="sim-grid">
+            <div class="sim-card protein" style="border-color: rgba(0, 255, 255, 0.5); box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);">
+                <div class="sim-icon">⚛️</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Quantum Drug Docking</h3>
+                    <p class="sim-description">
+                        AI-powered molecular dynamics engine with cyberpunk visualization. Dock drug candidates to viral 
+                        proteins (SARS-CoV-2 Spike, HIV Protease), cancer targets (EGFR Kinase), calculate binding 
+                        affinities, run MD simulations. Real drugs: Remdesivir, Paxlovid, Imatinib. Quantum-themed interface 
+                        with animated particle fields and energy visualization.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Drug Discovery</span>
+                        <span class="tag">Molecular Docking</span>
+                        <span class="tag">ULTRA BADASS</span>
+                    </div>
+                    <a href="quantum-drug-docking" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card protein">
+                <div class="sim-icon">🧬</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Protein Folding Dynamics</h3>
+                    <p class="sim-description">
+                        Visualize amino acid chains folding into 3D structures. Explore thermodynamic stability, 
+                        secondary structure formation (α-helix, β-sheet), and environmental factors affecting 
+                        protein folding including temperature, pH, and ionic strength.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Structural Biology</span>
+                        <span class="tag">Thermodynamics</span>
+                        <span class="tag">Biophysics</span>
+                    </div>
+                    <a href="protein-folding-dynamics" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-icon">🧫</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Gene Regulatory Network</h3>
+                    <p class="sim-description">
+                        Model transcription factors, gene expression, and regulatory feedback loops. 
+                        Interactive network visualization showing gene activation/repression cascades 
+                        and cellular differentiation pathways.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Gene Expression</span>
+                        <span class="tag">Network Biology</span>
+                        <span class="tag">Systems Biology</span>
+                    </div>
+                    <a href="gene-regulatory-network" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-icon">⚡</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Metabolic Network Flux</h3>
+                    <p class="sim-description">
+                        Flux balance analysis of metabolic pathways. Visualize cellular energy production, 
+                        glycolysis, TCA cycle, and oxidative phosphorylation. Optimize metabolic engineering 
+                        for biotechnology applications.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Metabolism</span>
+                        <span class="tag">FBA</span>
+                        <span class="tag">Bioengineering</span>
+                    </div>
+                    <a href="metabolic-network-flux" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-header">
+            <h2>🌍 Population & Systems Biology</h2>
+            <p>Modeling complex biological systems from ecosystems to epidemics</p>
+        </div>
+
+        <div class="sim-grid">
+            <div class="sim-card">
+                <div class="sim-icon">🦁</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Ecosystem Dynamics</h3>
+                    <p class="sim-description">
+                        Lotka-Volterra predator-prey models simulating population dynamics. Explore carrying 
+                        capacity, competitive exclusion, and trophic cascades in ecological systems. Real-time 
+                        parameter adjustment for educational demonstrations.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Ecology</span>
+                        <span class="tag">Population Dynamics</span>
+                        <span class="tag">Lotka-Volterra</span>
+                    </div>
+                    <a href="ecosystem-dynamics" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-icon">🦠</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Epidemiological Transmission</h3>
+                    <p class="sim-description">
+                        SIR/SEIR disease spread modeling for infectious disease dynamics. Simulate outbreak 
+                        scenarios, vaccination strategies, and intervention effectiveness. Interactive 
+                        visualization of transmission parameters and epidemic curves.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Epidemiology</span>
+                        <span class="tag">SIR Model</span>
+                        <span class="tag">Public Health</span>
+                    </div>
+                    <a href="epidemiological-transmission" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-icon">🧠</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Neural Plasticity</h3>
+                    <p class="sim-description">
+                        Hebbian learning and synaptic plasticity models. Visualize long-term potentiation (LTP), 
+                        long-term depression (LTD), and spike-timing-dependent plasticity (STDP). Educational 
+                        tool for understanding learning and memory at the synaptic level.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Neuroscience</span>
+                        <span class="tag">Synaptic Plasticity</span>
+                        <span class="tag">Learning</span>
+                    </div>
+                    <a href="neural-plasticity" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-header">
+            <h2>🤖 Digital Twin Technology</h2>
+            <p>Advanced whole-body physiological modeling systems</p>
+        </div>
+
+        <div class="sim-grid">
+            <div class="sim-card">
+                <div class="sim-icon">🫁</div>
+                <div class="sim-content">
+                    <h3 class="sim-title">Multi-Organ Digital Twin</h3>
+                    <p class="sim-description">
+                        Interconnected organ system simulator modeling heart, liver, kidney, and brain interactions. 
+                        Simulate drug distribution, metabolism, and systemic effects across the whole body. 
+                        PBPK modeling for precision medicine applications.
+                    </p>
+                    <div class="sim-tags">
+                        <span class="tag">Digital Twin</span>
+                        <span class="tag">PBPK</span>
+                        <span class="tag">Systems Physiology</span>
+                    </div>
+                    <a href="multi-organ-digital-twin" class="launch-btn">Launch Simulator →</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Patient Analog</strong> - Human-Relevant Medicine Technologies</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                Educational platform showcasing FDA Modernization Act-compliant research methods<br>
+                © 2025 Patient Analog. All rights reserved.
+            </p>
+            <div style="margin-top: 20px;">
+                <a href="/" style="color: #00ffff; margin: 0 15px;">Home</a>
+                <a href="/games" style="color: #00ffff; margin: 0 15px;">All Games</a>
+                <a href="/haptic" style="color: #00ffff; margin: 0 15px;">Haptic Engine</a>
+                <a href="/about" style="color: #00ffff; margin: 0 15px;">About</a>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script src="/js/ticker-fix.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

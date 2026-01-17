@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+    <title>Ecosystem Dynamics | Patient Analog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a2a0a 0%, #2a4a1a 50%, #3a6a2a 100%);
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #88ff44, #aaff88, #ccffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { font-size: 1.2em; color: #aaff88; opacity: 0.9; margin-top: 10px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 350px; gap: 20px; margin-bottom: 30px; }
+        #canvas-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 2px solid rgba(136, 255, 68, 0.4);
+            min-height: 600px;
+            position: relative;
+        }
+        canvas { width: 100%; height: 600px; display: block; }
+        .controls {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(170, 255, 136, 0.4);
+        }
+        .control-section { margin-bottom: 25px; }
+        .control-section h3 {
+            color: #aaff88;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid rgba(170, 255, 136, 0.3);
+            padding-bottom: 8px;
+        }
+        button {
+            background: linear-gradient(135deg, #2a4a1a, #3a6a2a);
+            color: #fff;
+            border: 2px solid #aaff88;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            border-color: #88ff44;
+            box-shadow: 0 0 20px rgba(136, 255, 68, 0.5);
+            transform: translateY(-2px);
+        }
+        button.active {
+            background: linear-gradient(135deg, #88ff44, #aaff88);
+            border-color: #fff;
+            color: #1a2a0a;
+            font-weight: bold;
+        }
+        .slider-group { margin-bottom: 15px; }
+        .slider-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaff88;
+            font-size: 0.9em;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: rgba(170, 255, 136, 0.2);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #88ff44, #ccffaa);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .pop-stats {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(136, 255, 68, 0.3);
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-label { color: #aaff88; }
+        .stat-value { font-weight: bold; font-size: 1.1em; }
+        .chart { height: 200px; margin-top: 20px; position: relative; }
+        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+          body { overflow-x: hidden; }
+          canvas, #gameCanvas, .game-canvas, #simulationCanvas {
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            touch-action: none;
+          }
+          button, .btn, .sim-btn, .control-btn {
+            min-height: 48px !important;
+            min-width: 48px !important;
+            padding: 12px 24px !important;
+            font-size: 16px !important;
+          }
+          .simulation-container, .sim-container, .container {
+            width: 100% !important;
+            max-width: 100vw !important;
+            padding: 10px !important;
+          }
+          .controls, .control-panel {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+          }
+          input[type="range"] {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+          h1, .title { font-size: 1.5rem !important; }
+          h2 { font-size: 1.2rem !important; }
+          .info-panel, .stats-panel {
+            font-size: 14px !important;
+          }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+    <div class="container">
+        <header>
+            <h1>Ecosystem Dynamics</h1>
+            <p class="subtitle">Lotka-Volterra Predator-Prey Population Modeling</p>
+        </header>
+
+        <div class="main-grid">
+            <div id="canvas-container">
+                <canvas id="ecosystem-canvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-section">
+                    <h3>Species Parameters</h3>
+                    <div class="slider-group">
+                        <label>Prey Birth Rate: <span id="prey-birth-val">0.1</span></label>
+                        <input type="range" id="prey-birth" min="0" max="0.5" step="0.01" value="0.1" 
+                               oninput="updatePreyBirth(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Predation Rate: <span id="predation-val">0.02</span></label>
+                        <input type="range" id="predation" min="0" max="0.1" step="0.001" value="0.02" 
+                               oninput="updatePredation(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Predator Death Rate: <span id="pred-death-val">0.1</span></label>
+                        <input type="range" id="pred-death" min="0" max="0.5" step="0.01" value="0.1" 
+                               oninput="updatePredDeath(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Conversion Efficiency: <span id="efficiency-val">0.01</span></label>
+                        <input type="range" id="efficiency" min="0" max="0.05" step="0.001" value="0.01" 
+                               oninput="updateEfficiency(this.value)">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Scenarios</h3>
+                    <button onclick="loadScenario('balanced')">Balanced Ecosystem</button>
+                    <button onclick="loadScenario('collapse')">Predator Dominance</button>
+                    <button onclick="loadScenario('boom')">Prey Boom</button>
+                    <button onclick="loadScenario('cycles')">Oscillating Cycles</button>
+                </div>
+
+                <div class="pop-stats">
+                    <h3 style="color: #aaff88; margin-bottom: 10px;">Population Levels</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Prey Population:</span>
+                        <span class="stat-value" id="prey-pop">100</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Predator Population:</span>
+                        <span class="stat-value" id="pred-pop">10</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Time Elapsed:</span>
+                        <span class="stat-value" id="time-elapsed">0</span>
+                    </div>
+                    <div class="chart" id="population-chart"></div>
+                </div>
+
+                <div class="control-section">
+                    <button onclick="toggleSimulation()">Play/Pause</button>
+                    <button onclick="resetSimulation()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let canvas, ctx;
+        let preyPop = 100, predPop = 10;
+        let preyBirth = 0.1, predation = 0.02, predDeath = 0.1, efficiency = 0.01;
+        let timeStep = 0;
+        let isRunning = true;
+        let history = { prey: [], pred: [] };
+        const maxHistory = 200;
+
+        function init() {
+            canvas = document.getElementById('ecosystem-canvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 600;
+            animate();
+        }
+
+        function updatePreyBirth(v) { preyBirth = parseFloat(v); document.getElementById('prey-birth-val').textContent = v; }
+        function updatePredation(v) { predation = parseFloat(v); document.getElementById('predation-val').textContent = v; }
+        function updatePredDeath(v) { predDeath = parseFloat(v); document.getElementById('pred-death-val').textContent = v; }
+        function updateEfficiency(v) { efficiency = parseFloat(v); document.getElementById('efficiency-val').textContent = v; }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (isRunning) {
+                updatePopulations();
+                draw();
+            }
+        }
+
+        function updatePopulations() {
+            const dt = 0.1;
+            const dPrey = (preyBirth * preyPop - predation * preyPop * predPop) * dt;
+            const dPred = (efficiency * predation * preyPop * predPop - predDeath * predPop) * dt;
+
+            preyPop = Math.max(1, preyPop + dPrey);
+            predPop = Math.max(1, predPop + dPred);
+
+            history.prey.push(preyPop);
+            history.pred.push(predPop);
+            if (history.prey.length > maxHistory) {
+                history.prey.shift();
+                history.pred.shift();
+            }
+
+            timeStep++;
+            document.getElementById('prey-pop').textContent = Math.round(preyPop);
+            document.getElementById('pred-pop').textContent = Math.round(predPop);
+            document.getElementById('time-elapsed').textContent = Math.round(timeStep * 0.1);
+        }
+
+        function draw() {
+            ctx.fillStyle = '#1a2a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw prey (green circles)
+            ctx.fillStyle = '#88ff44';
+            for (let i = 0; i < Math.min(preyPop, 100); i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Draw predators (red triangles)
+            ctx.fillStyle = '#ff4444';
+            for (let i = 0; i < Math.min(predPop, 50); i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                ctx.beginPath();
+                ctx.moveTo(x, y - 8);
+                ctx.lineTo(x - 6, y + 6);
+                ctx.lineTo(x + 6, y + 6);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            // Draw population graph
+            if (history.prey.length > 1) {
+                const graphHeight = 150;
+                const graphY = canvas.height - graphHeight - 20;
+                const scale = graphHeight / Math.max(...history.prey, ...history.pred, 200);
+
+                ctx.strokeStyle = '#88ff44';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let i = 0; i < history.prey.length; i++) {
+                    const x = (i / maxHistory) * canvas.width;
+                    const y = graphY + graphHeight - history.prey[i] * scale;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                ctx.strokeStyle = '#ff4444';
+                ctx.beginPath();
+                for (let i = 0; i < history.pred.length; i++) {
+                    const x = (i / maxHistory) * canvas.width;
+                    const y = graphY + graphHeight - history.pred[i] * scale;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function loadScenario(type) {
+            const scenarios = {
+                balanced: { prey: 100, pred: 10, birth: 0.1, predation: 0.02, death: 0.1, eff: 0.01 },
+                collapse: { prey: 50, pred: 30, birth: 0.05, predation: 0.05, death: 0.05, eff: 0.02 },
+                boom: { prey: 200, pred: 5, birth: 0.15, predation: 0.01, death: 0.15, eff: 0.005 },
+                cycles: { prey: 100, pred: 10, birth: 0.12, predation: 0.025, death: 0.12, eff: 0.015 }
+            };
+            const s = scenarios[type];
+            preyPop = s.prey; predPop = s.pred;
+            preyBirth = s.birth; predation = s.predation; predDeath = s.death; efficiency = s.eff;
+            document.getElementById('prey-birth').value = s.birth; updatePreyBirth(s.birth);
+            document.getElementById('predation').value = s.predation; updatePredation(s.predation);
+            document.getElementById('pred-death').value = s.death; updatePredDeath(s.death);
+            document.getElementById('efficiency').value = s.eff; updateEfficiency(s.eff);
+            history = { prey: [], pred: [] };
+            timeStep = 0;
+        }
+
+        function toggleSimulation() { isRunning = !isRunning; }
+        function resetSimulation() { loadScenario('balanced'); }
+
+        init();
+
+        /* ===== MOBILE TOUCH SUPPORT ===== */
+        (function() {
+          if (!/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
+          document.querySelectorAll('canvas').forEach(function(canvas) {
+            canvas.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchmove', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchend', function(e) {
+              e.preventDefault();
+              canvas.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+            }, {passive: false});
+          });
+        })();
+        /* ===== END MOBILE TOUCH SUPPORT ===== */
+    </script>
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

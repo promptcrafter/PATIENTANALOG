@@ -1,0 +1,181 @@
+/* Language pages specific styles - Uses CSS variables from _variables.css */
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] nav a {
+  margin-right: 0;
+  margin-left: var(--space-5);
+}
+
+[dir="rtl"] .back-link {
+  direction: rtl;
+}
+
+/* Language page container */
+.lang-container {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-5);
+}
+
+/* Language title */
+.lang-title {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  color: var(--color-primary);
+  margin-bottom: var(--space-5);
+  font-family: var(--font-heading);
+  text-shadow: var(--glow-primary);
+}
+
+/* Language description */
+.lang-desc {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 800px;
+  line-height: var(--leading-relaxed);
+}
+
+/* Language switcher */
+.lang-switcher {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  z-index: 1000;
+  max-width: 300px;
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .lang-switcher {
+  right: auto;
+  left: var(--space-5);
+  justify-content: flex-start;
+}
+
+.lang-switcher a {
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  transition: all var(--transition-fast);
+  background: var(--bg-card);
+}
+
+.lang-switcher a:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+.lang-switcher a.active {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-8);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--text-base);
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  color: var(--text-primary);
+}
+
+/* Language navigation */
+.lang-nav {
+  margin: var(--space-8) 0;
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lang-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-right: var(--space-5);
+  transition: color var(--transition-fast);
+  font-size: var(--text-sm);
+}
+
+[dir="rtl"] .lang-nav a {
+  margin-right: 0;
+  margin-left: var(--space-5);
+}
+
+.lang-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* Language content area */
+.lang-content {
+  margin-top: var(--space-10);
+}
+
+/* Language CTA button */
+.lang-cta {
+  display: inline-block;
+  margin-top: var(--space-8);
+  padding: var(--space-3) var(--space-6);
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  box-shadow: var(--glow-primary);
+}
+
+.lang-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-primary-lg);
+}
+
+/* Skip link accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  left: var(--space-5);
+  top: var(--space-5);
+  background: var(--color-primary);
+  color: var(--bg-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+/* Nav icons for language pages */
+.nav-icon {
+  margin-right: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+[dir="rtl"] .nav-icon {
+  margin-right: 0;
+  margin-left: var(--space-1);
+}
+
+.nav-icon.tech { color: var(--color-primary); }
+.nav-icon.science { color: var(--color-accent-purple); }
+.nav-icon.companies { color: var(--color-accent-green); }
+.nav-icon.industry { color: var(--color-accent-orange); }
+.nav-icon.regulatory { color: var(--color-secondary); }
+.nav-icon.market { color: var(--color-accent-yellow); }
+.nav-icon.legal { color: var(--color-tertiary); }
+.nav-icon.framework { color: var(--color-primary); }

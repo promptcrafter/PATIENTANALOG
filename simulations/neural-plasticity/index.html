@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+    <title>Neural Plasticity | Patient Analog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a1a2a 0%, #1a2a4a 50%, #2a3a6a 100%);
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #4488ff, #88aaff, #aaccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { font-size: 1.2em; color: #88aaff; opacity: 0.9; margin-top: 10px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 360px; gap: 20px; }
+        #canvas-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 2px solid rgba(68, 136, 255, 0.4);
+            min-height: 700px;
+        }
+        canvas { width: 100%; height: 700px; display: block; }
+        .controls {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(136, 170, 255, 0.4);
+        }
+        .control-section { margin-bottom: 25px; }
+        .control-section h3 {
+            color: #88aaff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid rgba(136, 170, 255, 0.3);
+            padding-bottom: 8px;
+        }
+        button {
+            background: linear-gradient(135deg, #1a2a4a, #2a3a6a);
+            color: #fff;
+            border: 2px solid #88aaff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            border-color: #4488ff;
+            box-shadow: 0 0 20px rgba(68, 136, 255, 0.5);
+        }
+        button.active {
+            background: linear-gradient(135deg, #4488ff, #88aaff);
+            color: #0a1a2a;
+            font-weight: bold;
+        }
+        .slider-group { margin-bottom: 15px; }
+        .slider-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #88aaff;
+            font-size: 0.9em;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: rgba(136, 170, 255, 0.2);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #4488ff, #aaccff);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .stats-panel {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(68, 136, 255, 0.3);
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-label { font-size: 0.8em; color: #88aaff; margin-bottom: 5px; }
+        .stat-value { font-size: 1.5em; font-weight: bold; }
+        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+          body { overflow-x: hidden; }
+          canvas, #gameCanvas, .game-canvas, #simulationCanvas {
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            touch-action: none;
+          }
+          button, .btn, .sim-btn, .control-btn {
+            min-height: 48px !important;
+            min-width: 48px !important;
+            padding: 12px 24px !important;
+            font-size: 16px !important;
+          }
+          .simulation-container, .sim-container, .container {
+            width: 100% !important;
+            max-width: 100vw !important;
+            padding: 10px !important;
+          }
+          .controls, .control-panel {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+          }
+          input[type="range"] {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+          h1, .title { font-size: 1.5rem !important; }
+          h2 { font-size: 1.2rem !important; }
+          .info-panel, .stats-panel {
+            font-size: 14px !important;
+          }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+    <div class="container">
+        <header>
+            <h1>Neural Plasticity</h1>
+            <p class="subtitle">Hebbian Learning & Synaptic Plasticity Modeling</p>
+        </header>
+
+        <div class="main-grid">
+            <div id="canvas-container">
+                <canvas id="neural-canvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-section">
+                    <h3>Plasticity Types</h3>
+                    <button onclick="setPlasticity('hebbian')" id="btn-hebbian" class="active">Hebbian Learning</button>
+                    <button onclick="setPlasticity('stdp')" id="btn-stdp">STDP</button>
+                    <button onclick="setPlasticity('ltp')" id="btn-ltp">LTP (Potentiation)</button>
+                    <button onclick="setPlasticity('ltd')" id="btn-ltd">LTD (Depression)</button>
+                </div>
+
+                <div class="control-section">
+                    <h3>Stimulation Parameters</h3>
+                    <div class="slider-group">
+                        <label>Stimulus Frequency: <span id="freq-val">10</span> Hz</label>
+                        <input type="range" id="frequency" min="1" max="100" value="10" 
+                               oninput="updateFrequency(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Stimulus Intensity: <span id="intensity-val">50</span>%</label>
+                        <input type="range" id="intensity" min="0" max="100" value="50" 
+                               oninput="updateIntensity(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Learning Rate: <span id="learning-val">0.1</span></label>
+                        <input type="range" id="learning" min="0.01" max="0.5" step="0.01" value="0.1" 
+                               oninput="updateLearning(this.value)">
+                    </div>
+                    <div class="slider-group">
+                        <label>Decay Rate: <span id="decay-val">0.01</span></label>
+                        <input type="range" id="decay" min="0.001" max="0.1" step="0.001" value="0.01" 
+                               oninput="updateDecay(this.value)">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Training Patterns</h3>
+                    <button onclick="trainPattern('sequence')">Sequential Pattern</button>
+                    <button onclick="trainPattern('random')">Random Stimulation</button>
+                    <button onclick="trainPattern('paired')">Paired Association</button>
+                    <button onclick="clearWeights()">Clear Weights</button>
+                </div>
+
+                <div class="stats-panel">
+                    <h3 style="color: #88aaff; margin-bottom: 15px;">Network Statistics</h3>
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Avg Strength</div>
+                            <div class="stat-value" id="avg-strength">0.5</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Active Synapses</div>
+                            <div class="stat-value" id="active-syn">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Total Spikes</div>
+                            <div class="stat-value" id="total-spikes">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Learning</div>
+                            <div class="stat-value" id="learning-state">Inactive</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <button onclick="toggleSimulation()">Play/Pause</button>
+                    <button onclick="resetNetwork()">Reset Network</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let canvas, ctx;
+        let neurons = [];
+        let synapses = [];
+        let frequency = 10, intensity = 50, learningRate = 0.1, decayRate = 0.01;
+        let plasticityType = 'hebbian';
+        let isRunning = true, time = 0, totalSpikes = 0;
+        const neuronCount = 30;
+
+        function init() {
+            canvas = document.getElementById('neural-canvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 700;
+            createNetwork();
+            animate();
+        }
+
+        function createNetwork() {
+            neurons = [];
+            synapses = [];
+            const radius = 250;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            for (let i = 0; i < neuronCount; i++) {
+                const angle = (i / neuronCount) * Math.PI * 2;
+                neurons.push({
+                    x: centerX + Math.cos(angle) * radius,
+                    y: centerY + Math.sin(angle) * radius,
+                    activity: 0,
+                    lastSpike: 0
+                });
+            }
+
+            for (let i = 0; i < neuronCount; i++) {
+                for (let j = 0; j < neuronCount; j++) {
+                    if (i !== j && Math.random() < 0.15) {
+                        synapses.push({
+                            from: i,
+                            to: j,
+                            weight: 0.5,
+                            lastUpdate: 0
+                        });
+                    }
+                }
+            }
+        }
+
+        function setPlasticity(type) {
+            plasticityType = type;
+            ['hebbian', 'stdp', 'ltp', 'ltd'].forEach(t => {
+                document.getElementById('btn-' + t).classList.remove('active');
+            });
+            document.getElementById('btn-' + type).classList.add('active');
+        }
+
+        function updateFrequency(v) { frequency = parseInt(v); document.getElementById('freq-val').textContent = v; }
+        function updateIntensity(v) { intensity = parseInt(v); document.getElementById('intensity-val').textContent = v; }
+        function updateLearning(v) { learningRate = parseFloat(v); document.getElementById('learning-val').textContent = v; }
+        function updateDecay(v) { decayRate = parseFloat(v); document.getElementById('decay-val').textContent = v; }
+
+        function animate() {
+            if (!isRunning) return;
+            requestAnimationFrame(animate);
+            
+            time += 0.016;
+            updateNeurons();
+            draw();
+        }
+
+        function updateNeurons() {
+            // Random spontaneous activity based on frequency
+            neurons.forEach((n, i) => {
+                if (Math.random() < (frequency / 1000) * (intensity / 100)) {
+                    n.activity = 1;
+                    n.lastSpike = time;
+                    totalSpikes++;
+                } else {
+                    n.activity *= 0.95;
+                }
+            });
+
+            // Update synaptic weights based on plasticity type
+            synapses.forEach(syn => {
+                const preNeuron = neurons[syn.from];
+                const postNeuron = neurons[syn.to];
+
+                if (plasticityType === 'hebbian') {
+                    if (preNeuron.activity > 0.5 && postNeuron.activity > 0.5) {
+                        syn.weight = Math.min(1, syn.weight + learningRate * 0.01);
+                    }
+                } else if (plasticityType === 'stdp') {
+                    const timeDiff = postNeuron.lastSpike - preNeuron.lastSpike;
+                    if (Math.abs(timeDiff) < 0.1) {
+                        if (timeDiff > 0) syn.weight = Math.min(1, syn.weight + learningRate * 0.01);
+                        else syn.weight = Math.max(0, syn.weight - learningRate * 0.005);
+                    }
+                } else if (plasticityType === 'ltp') {
+                    if (preNeuron.activity > 0.5) {
+                        syn.weight = Math.min(1, syn.weight + learningRate * 0.02);
+                    }
+                } else if (plasticityType === 'ltd') {
+                    if (preNeuron.activity > 0.5) {
+                        syn.weight = Math.max(0, syn.weight - learningRate * 0.01);
+                    }
+                }
+
+                syn.weight = Math.max(0, syn.weight - decayRate * 0.001);
+
+                if (preNeuron.activity > 0.5 && syn.weight > 0.3) {
+                    postNeuron.activity = Math.min(1, postNeuron.activity + syn.weight * 0.1);
+                }
+            });
+
+            updateStats();
+        }
+
+        function draw() {
+            ctx.fillStyle = '#0a1a2a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw synapses
+            synapses.forEach(syn => {
+                const from = neurons[syn.from];
+                const to = neurons[syn.to];
+                
+                ctx.strokeStyle = `rgba(68, 136, 255, ${syn.weight * 0.6})`;
+                ctx.lineWidth = syn.weight * 3;
+                ctx.beginPath();
+                ctx.moveTo(from.x, from.y);
+                ctx.lineTo(to.x, to.y);
+                ctx.stroke();
+            });
+
+            // Draw neurons
+            neurons.forEach((n, i) => {
+                const size = 10 + n.activity * 15;
+                const brightness = Math.floor(136 + n.activity * 119);
+                
+                ctx.fillStyle = `rgb(${brightness}, ${brightness + 50}, 255)`;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (n.activity > 0.7) {
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            });
+        }
+
+        function updateStats() {
+            const avgWeight = synapses.reduce((sum, s) => sum + s.weight, 0) / synapses.length;
+            const activeSynapses = synapses.filter(s => s.weight > 0.5).length;
+            
+            document.getElementById('avg-strength').textContent = avgWeight.toFixed(2);
+            document.getElementById('active-syn').textContent = activeSynapses;
+            document.getElementById('total-spikes').textContent = totalSpikes;
+            document.getElementById('learning-state').textContent = 
+                avgWeight > 0.6 ? 'Active' : avgWeight > 0.4 ? 'Moderate' : 'Low';
+        }
+
+        function trainPattern(type) {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    if (type === 'sequence') {
+                        neurons[i % neuronCount].activity = 1;
+                        neurons[i % neuronCount].lastSpike = time;
+                    } else if (type === 'random') {
+                        neurons[Math.floor(Math.random() * neuronCount)].activity = 1;
+                    } else if (type === 'paired') {
+                        neurons[i % 10].activity = 1;
+                        neurons[10 + (i % 10)].activity = 1;
+                    }
+                }, i * 50);
+            }
+        }
+
+        function clearWeights() {
+            synapses.forEach(s => s.weight = 0.3);
+        }
+
+        function toggleSimulation() {
+            isRunning = !isRunning;
+            if (isRunning) animate();
+        }
+
+        function resetNetwork() {
+            createNetwork();
+            time = 0;
+            totalSpikes = 0;
+        }
+
+        init();
+
+        /* ===== MOBILE TOUCH SUPPORT ===== */
+        (function() {
+          if (!/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
+          document.querySelectorAll('canvas').forEach(function(canvas) {
+            canvas.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchmove', function(e) {
+              e.preventDefault();
+              var touch = e.touches[0];
+              canvas.dispatchEvent(new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                bubbles: true
+              }));
+            }, {passive: false});
+
+            canvas.addEventListener('touchend', function(e) {
+              e.preventDefault();
+              canvas.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+            }, {passive: false});
+          });
+        })();
+        /* ===== END MOBILE TOUCH SUPPORT ===== */
+    </script>
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

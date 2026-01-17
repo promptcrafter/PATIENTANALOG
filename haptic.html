@@ -1,0 +1,1125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css?v=20260116">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>Haptic Bio-Feedback Engine | Patient Analog</title>
+  <meta name="description" content="Experience biological processes through touch. Feel cell division, heartbeat, protein folding, action potentials and more through haptic biofeedback on your mobile device.">
+  <meta name="keywords" content="haptic feedback, biofeedback, cell division, heartbeat, protein folding, action potential, educational haptics">
+
+  <link rel="canonical" href="https://patientanalog.com/haptic">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#000814">
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Haptic Bio-Feedback Engine | Patient Analog">
+  <meta property="og:description" content="Feel biological processes through haptic feedback. Experience cell division, heartbeat, protein folding, and more.">
+  <meta property="og:url" content="https://patientanalog.com/haptic">
+  <meta property="og:type" content="website">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-548SNKZ7RC');
+  </script>
+
+  <style>
+    /* TICKER CSS - MATCH OTHER PAGES EXACTLY */
+    /* Top row - large bold cyan text */
+    .live-ticker-row:first-child, .live-ticker-row:first-child * { font-size: 14px !important; font-weight: 600 !important; }
+    .ticker-highlight { color: #00ffff !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 1px !important; }
+    .ticker-item { color: #00d4ff !important; font-weight: 500 !important; }
+    .ticker-item::before { content: '•'; margin: 0 12px; color: #00d4ff; }
+
+    /* Middle row - slightly smaller */
+    .live-ticker-row.ticker-row-secondary, .live-ticker-row.ticker-row-secondary * { font-size: 12px !important; font-weight: 400 !important; color: #8ecae6 !important; }
+    .ticker-scroll, .ticker-scroll-content { animation: tickerScroll 600s linear infinite !important; }
+
+    /* Ticker container - EXACT MATCH TO INDEX.HTML */
+    #live-ticker, .live-ticker-bar { min-height: 115px !important; max-height: 115px !important; height: 115px !important; padding: 3px 0 !important; overflow: visible !important; z-index: 2147483647 !important; position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; background: rgba(0,0,0,0.95) !important; }
+    .live-ticker-inner { min-height: 105px !important; height: 105px !important; display: flex !important; flex-direction: column !important; justify-content: flex-start !important; gap: 0px !important; padding: 0 !important; overflow: visible !important; }
+    .live-ticker-row { min-height: 32px !important; height: 34px !important; display: flex !important; align-items: center !important; padding: 2px 10px !important; flex-shrink: 0 !important; visibility: visible !important; opacity: 1 !important; }
+    .live-ticker-row.ticker-news-row { min-height: 32px !important; height: 34px !important; display: flex !important; visibility: visible !important; opacity: 1 !important; }
+    .live-ticker-items { display: inline-flex !important; flex-wrap: nowrap !important; white-space: nowrap !important; animation: tickerScrollTop 400s linear infinite !important; }
+    @keyframes tickerScrollTop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0f1a 0%, #0d1525 50%, #0f1a2e 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 1px solid rgba(100, 116, 139, 0.3);
+      background: rgba(10, 15, 26, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #06b6d4, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text p {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(51, 65, 85, 0.5);
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 8px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(71, 85, 105, 0.5);
+      border-color: rgba(100, 116, 139, 0.5);
+    }
+
+    /* Main Content */
+    .main {
+      padding: 48px 0;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: #94a3b8;
+    }
+
+    .support-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      margin-top: 12px;
+    }
+
+    .support-status.supported {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .support-status.not-supported {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Patterns Grid */
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .pattern-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(100, 116, 139, 0.2);
+      transition: all 0.3s;
+    }
+
+    .pattern-card:hover {
+      border-color: rgba(100, 116, 139, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .pattern-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .pattern-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .pattern-card.cell-division::before { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .pattern-card.heartbeat::before { background: linear-gradient(135deg, #f87171, #ec4899); }
+    .pattern-card.protein-folding::before { background: linear-gradient(135deg, #a78bfa, #6366f1); }
+    .pattern-card.action-potential::before { background: linear-gradient(135deg, #fbbf24, #f97316); }
+    .pattern-card.blood-flow::before { background: linear-gradient(135deg, #34d399, #14b8a6); }
+    .pattern-card.muscle-contraction::before { background: linear-gradient(135deg, #f0abfc, #f43f5e); }
+    .pattern-card.enzyme-activity::before { background: linear-gradient(135deg, #a3e635, #22c55e); }
+    .pattern-card.dna-replication::before { background: linear-gradient(135deg, #60a5fa, #06b6d4); }
+
+    .pattern-content {
+      position: relative;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .pattern-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .pattern-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+    }
+
+    .cell-division .pattern-icon { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .heartbeat .pattern-icon { background: linear-gradient(135deg, #f87171, #ec4899); }
+    .protein-folding .pattern-icon { background: linear-gradient(135deg, #a78bfa, #6366f1); }
+    .action-potential .pattern-icon { background: linear-gradient(135deg, #fbbf24, #f97316); }
+    .blood-flow .pattern-icon { background: linear-gradient(135deg, #34d399, #14b8a6); }
+    .muscle-contraction .pattern-icon { background: linear-gradient(135deg, #f0abfc, #f43f5e); }
+    .enzyme-activity .pattern-icon { background: linear-gradient(135deg, #a3e635, #22c55e); }
+    .dna-replication .pattern-icon { background: linear-gradient(135deg, #60a5fa, #06b6d4); }
+
+    .pattern-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .pattern-desc {
+      font-size: 0.875rem;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .pattern-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .play-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: rgba(51, 65, 85, 0.7);
+      color: #e2e8f0;
+    }
+
+    .play-btn:hover {
+      background: rgba(71, 85, 105, 0.7);
+    }
+
+    .play-btn.playing {
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      color: white;
+    }
+
+    .play-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .stop-btn {
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stop-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
+    .stop-btn.visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stop-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .pattern-meta {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(100, 116, 139, 0.2);
+      display: flex;
+      gap: 16px;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    /* Playing Indicator */
+    .playing-indicator {
+      display: none;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 32px;
+    }
+
+    .playing-indicator.visible {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pulse-dot {
+      width: 12px;
+      height: 12px;
+      background: #06b6d4;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .playing-info h4 {
+      font-weight: 600;
+    }
+
+    .playing-info p {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    /* Visual Feedback */
+    .visual-feedback {
+      display: none;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .visual-feedback.visible {
+      display: block;
+    }
+
+    .visual-feedback h4 {
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .waveform {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+    }
+
+    .waveform-bar {
+      width: 8px;
+      background: linear-gradient(180deg, #06b6d4, #3b82f6);
+      border-radius: 4px;
+      animation: wave 0.5s ease-in-out infinite;
+    }
+
+    .waveform-bar:nth-child(1) { animation-delay: 0s; }
+    .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+    .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+    .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+    .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+    .waveform-bar:nth-child(6) { animation-delay: 0.3s; }
+    .waveform-bar:nth-child(7) { animation-delay: 0.2s; }
+    .waveform-bar:nth-child(8) { animation-delay: 0.1s; }
+
+    @keyframes wave {
+      0%, 100% { height: 20px; }
+      50% { height: 50px; }
+    }
+
+    /* Info Section */
+    .info-section {
+      margin-top: 48px;
+      padding: 32px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(100, 116, 139, 0.2);
+      border-radius: 16px;
+    }
+
+    .info-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(6, 182, 212, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: #06b6d4;
+      fill: none;
+    }
+
+    .info-text h4 {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .info-text p {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(100, 116, 139, 0.2);
+      text-align: center;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .footer a {
+      color: #06b6d4;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 640px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .patterns-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body style="padding-top: 60px;">
+  <nav class="nav-bar" id="main-nav"></nav>
+  <div id="live-ticker">
+  <div class="live-ticker-bar">
+    <div class="live-ticker-inner">
+    <div class="live-ticker-row">
+      <div class="live-ticker-items">
+        <span class="ticker-highlight">HUMAN-RELEVANT MEDICINE</span>
+        <span class="ticker-item">🧬 Organoids</span>
+        <span class="ticker-item">🔬 Organ-on-Chip</span>
+        <span class="ticker-item">🧫 Microphysiological Systems</span>
+        <span class="ticker-item">💊 Drug Discovery</span>
+        <span class="ticker-item">🔬 In Vitro Models</span>
+        <span class="ticker-item">🧬 iPSC Technology</span>
+        <span class="ticker-item">🧠 Brain Organoids</span>
+        <span class="ticker-item">❤️ Cardiac Models</span>
+        <span class="ticker-item">🫁 Lung-on-Chip</span>
+        <span class="ticker-item">🔬 Liver Organoids</span>
+      </div>
+    </div>
+    <div class="live-ticker-row ticker-row-secondary">
+      <span class="ticker-scroll">
+        <span class="ticker-scroll-content">
+          FDA Modernization Act 2.0 enables non-animal testing • NIH NCATS Tissue Chip Program advances human-relevant models • EMA accepts organ-on-chip data for drug submissions • Patient Analog: Bridging biotech innovation with human-relevant research
+        </span>
+      </span>
+    </div>
+    <div class="live-ticker-row ticker-news-row">
+      <div class="breaking-news-container">
+        <span class="breaking-badge"><span class="breaking-pulse"></span>NEWS</span>
+        <span class="breaking-headline-wrapper"><span class="breaking-headline">Loading latest biotech news...</span></span>
+        <span class="breaking-source">Patient Analog</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+  <header class="header" style="position: relative; overflow: hidden; background: transparent !important;">
+    <!-- Background Image Layer -->
+    <div style="position: absolute; inset: 0; z-index: 0;">
+      <img src="/assets/images/sections/microscopy.jpg" alt="" aria-hidden="true" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.20; filter: saturate(0.5) brightness(0.7);">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,39,0.4) 0%, rgba(10,14,39,0.95) 100%);"></div>
+    </div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <h1>Haptic Bio-Feedback Engine</h1>
+            <p>Feel biological processes through touch</p>
+          </div>
+        </div>
+        <a href="/" class="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="section-header">
+        <h2>Experience Biology Through Haptics</h2>
+        <p>Tap a pattern to feel it on your device. Best experienced on mobile devices with haptic feedback support.</p>
+        <div id="supportStatus" class="support-status">
+          Checking device support...
+        </div>
+      </div>
+
+      <div class="patterns-grid" id="patternsGrid">
+        <!-- Patterns will be inserted by JavaScript -->
+      </div>
+
+      <div id="playingIndicator" class="playing-indicator">
+        <div class="pulse-dot"></div>
+        <div class="playing-info">
+          <h4>Currently playing: <span id="playingName">-</span></h4>
+          <p>Feel the vibration pattern on your device</p>
+        </div>
+      </div>
+
+      <div id="visualFeedback" class="visual-feedback">
+        <h4>Visual Haptic Simulation</h4>
+        <div class="waveform">
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+        </div>
+        <p style="margin-top: 12px; color: #94a3b8; font-size: 0.875rem;">Haptic feedback not available - showing visual simulation</p>
+      </div>
+
+      <div class="info-section">
+        <h3>About Haptic Bio-Feedback</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Tactile Learning</h4>
+              <p>Transform abstract biological concepts into tangible experiences through haptic patterns.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" stroke-width="2">
+                <path d="M12 2a10 10 0 1 0 10 10H12V2z"/>
+                <path d="M12 2a10 10 0 0 1 10 10"/>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>8 Unique Patterns</h4>
+              <p>From heartbeats to DNA replication, experience the rhythms of life at your fingertips.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12" y2="18"/>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Mobile Optimized</h4>
+              <p>Works best on smartphones with haptic feedback capabilities (iOS/Android).</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4M12 8h.01"/>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Educational Tool</h4>
+              <p>Part of Patient Analog's mission to make biotech education accessible and engaging.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 <a href="/">Patient Analog</a>. Haptic Bio-Feedback Engine for educational purposes.</p>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * HAPTIC BIO ENGINE - Vanilla JavaScript Implementation
+     */
+    class HapticBioEngine {
+      constructor() {
+        this.isSupported = 'vibrate' in navigator;
+        this.currentPattern = null;
+        this.isPlaying = false;
+        this.loopTimeout = null;
+      }
+
+      async playPattern(pattern) {
+        if (!this.isSupported) {
+          console.warn('Haptic feedback not supported on this device');
+          return;
+        }
+
+        this.currentPattern = pattern;
+        this.isPlaying = true;
+        await this.executePattern(pattern);
+
+        if (pattern.loop && this.isPlaying) {
+          this.loopTimeout = window.setTimeout(() => {
+            this.playPattern(pattern);
+          }, pattern.duration + 200);
+        } else {
+          this.isPlaying = false;
+        }
+      }
+
+      async executePattern(pattern) {
+        const vibrationPattern = [];
+        let lastEnd = 0;
+
+        const sortedPulses = [...pattern.pulses].sort((a, b) => a.delay - b.delay);
+
+        sortedPulses.forEach(pulse => {
+          const pauseBefore = pulse.delay - lastEnd;
+          if (pauseBefore > 0) {
+            vibrationPattern.push(0, pauseBefore);
+          }
+
+          const scaledDuration = Math.round(pulse.duration * pulse.intensity);
+          vibrationPattern.push(scaledDuration);
+
+          lastEnd = pulse.delay + pulse.duration;
+        });
+
+        if (navigator.vibrate) {
+          navigator.vibrate(vibrationPattern);
+        }
+      }
+
+      stop() {
+        this.isPlaying = false;
+        if (this.loopTimeout) {
+          clearTimeout(this.loopTimeout);
+          this.loopTimeout = null;
+        }
+        if (navigator.vibrate) {
+          navigator.vibrate(0);
+        }
+      }
+
+      getIsSupported() {
+        return this.isSupported;
+      }
+    }
+
+    // Pattern definitions
+    const HAPTIC_PATTERNS = [
+      {
+        id: 'cell-division',
+        name: 'Cell Division',
+        description: 'Feel a cell divide through mitosis',
+        icon: 'zap',
+        duration: 3000,
+        loop: false,
+        pulses: [
+          { intensity: 0.2, duration: 100, delay: 0 },
+          { intensity: 0.3, duration: 150, delay: 200 },
+          { intensity: 0.4, duration: 200, delay: 450 },
+          { intensity: 0.5, duration: 300, delay: 750 },
+          { intensity: 0.8, duration: 100, delay: 1150 },
+          { intensity: 0.9, duration: 100, delay: 1300 },
+          { intensity: 0.6, duration: 150, delay: 1500 },
+          { intensity: 0.6, duration: 150, delay: 1750 },
+          { intensity: 0.4, duration: 200, delay: 2000 },
+          { intensity: 0.3, duration: 200, delay: 2300 },
+          { intensity: 0.2, duration: 200, delay: 2600 }
+        ]
+      },
+      {
+        id: 'heartbeat',
+        name: 'Heartbeat',
+        description: 'Feel a rhythmic heartbeat',
+        icon: 'heart',
+        duration: 1000,
+        loop: true,
+        pulses: [
+          { intensity: 0.8, duration: 100, delay: 0 },
+          { intensity: 0.9, duration: 100, delay: 150 },
+          { intensity: 0.6, duration: 80, delay: 400 },
+          { intensity: 0.7, duration: 80, delay: 530 }
+        ]
+      },
+      {
+        id: 'protein-folding',
+        name: 'Protein Folding',
+        description: 'Feel a protein fold into 3D structure',
+        icon: 'brain',
+        duration: 4000,
+        loop: false,
+        pulses: [
+          { intensity: 0.1, duration: 100, delay: 0 },
+          { intensity: 0.3, duration: 150, delay: 300 },
+          { intensity: 0.4, duration: 100, delay: 500 },
+          { intensity: 0.5, duration: 200, delay: 800 },
+          { intensity: 0.6, duration: 200, delay: 1100 },
+          { intensity: 0.7, duration: 250, delay: 1500 },
+          { intensity: 0.8, duration: 250, delay: 1850 },
+          { intensity: 0.9, duration: 300, delay: 2200 },
+          { intensity: 0.7, duration: 200, delay: 2600 },
+          { intensity: 0.5, duration: 200, delay: 2900 },
+          { intensity: 0.3, duration: 200, delay: 3200 },
+          { intensity: 0.1, duration: 200, delay: 3500 }
+        ]
+      },
+      {
+        id: 'action-potential',
+        name: 'Action Potential',
+        description: 'Feel a nerve impulse travel',
+        icon: 'volume',
+        duration: 800,
+        loop: false,
+        pulses: [
+          { intensity: 0.1, duration: 50, delay: 0 },
+          { intensity: 0.9, duration: 100, delay: 100 },
+          { intensity: 1.0, duration: 50, delay: 220 },
+          { intensity: 0.7, duration: 100, delay: 300 },
+          { intensity: 0.5, duration: 100, delay: 420 },
+          { intensity: 0.2, duration: 100, delay: 550 },
+          { intensity: 0.1, duration: 100, delay: 680 }
+        ]
+      },
+      {
+        id: 'blood-flow',
+        name: 'Blood Flow',
+        description: 'Feel blood flowing through vessels',
+        icon: 'microscope',
+        duration: 2000,
+        loop: true,
+        pulses: [
+          { intensity: 0.8, duration: 150, delay: 0 },
+          { intensity: 0.9, duration: 150, delay: 200 },
+          { intensity: 0.6, duration: 200, delay: 450 },
+          { intensity: 0.5, duration: 200, delay: 700 },
+          { intensity: 0.4, duration: 200, delay: 950 },
+          { intensity: 0.3, duration: 200, delay: 1200 },
+          { intensity: 0.2, duration: 200, delay: 1450 },
+          { intensity: 0.3, duration: 200, delay: 1700 }
+        ]
+      },
+      {
+        id: 'muscle-contraction',
+        name: 'Muscle Contraction',
+        description: 'Feel muscle fibers contract',
+        icon: 'dna',
+        duration: 2500,
+        loop: false,
+        pulses: [
+          { intensity: 0.3, duration: 100, delay: 0 },
+          { intensity: 0.5, duration: 100, delay: 150 },
+          { intensity: 0.7, duration: 200, delay: 350 },
+          { intensity: 0.9, duration: 300, delay: 650 },
+          { intensity: 1.0, duration: 800, delay: 1050 },
+          { intensity: 0.7, duration: 200, delay: 1950 },
+          { intensity: 0.5, duration: 200, delay: 2200 },
+          { intensity: 0.2, duration: 200, delay: 2450 }
+        ]
+      },
+      {
+        id: 'enzyme-activity',
+        name: 'Enzyme Activity',
+        description: 'Feel enzyme catalyzing reactions',
+        icon: 'zap',
+        duration: 1500,
+        loop: true,
+        pulses: [
+          { intensity: 0.4, duration: 80, delay: 0 },
+          { intensity: 0.5, duration: 80, delay: 120 },
+          { intensity: 0.8, duration: 50, delay: 250 },
+          { intensity: 0.9, duration: 50, delay: 330 },
+          { intensity: 0.8, duration: 50, delay: 410 },
+          { intensity: 0.5, duration: 100, delay: 500 },
+          { intensity: 0.3, duration: 100, delay: 640 },
+          { intensity: 0.2, duration: 100, delay: 780 }
+        ]
+      },
+      {
+        id: 'dna-replication',
+        name: 'DNA Replication',
+        description: 'Feel DNA helix unwinding and copying',
+        icon: 'dna',
+        duration: 3500,
+        loop: false,
+        pulses: [
+          { intensity: 0.4, duration: 150, delay: 0 },
+          { intensity: 0.5, duration: 150, delay: 200 },
+          { intensity: 0.4, duration: 150, delay: 400 },
+          { intensity: 0.6, duration: 100, delay: 650 },
+          { intensity: 0.7, duration: 100, delay: 800 },
+          { intensity: 0.6, duration: 100, delay: 950 },
+          { intensity: 0.7, duration: 100, delay: 1100 },
+          { intensity: 0.6, duration: 100, delay: 1250 },
+          { intensity: 0.7, duration: 100, delay: 1400 },
+          { intensity: 0.9, duration: 80, delay: 1600 },
+          { intensity: 0.9, duration: 80, delay: 1750 },
+          { intensity: 0.9, duration: 80, delay: 1900 },
+          { intensity: 0.5, duration: 200, delay: 2100 },
+          { intensity: 0.3, duration: 200, delay: 2350 }
+        ]
+      }
+    ];
+
+    // Icon SVGs
+    const ICONS = {
+      zap: '<svg viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+      heart: '<svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+      brain: '<svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4c0 1.1.5 2.1 1.3 2.8A5 5 0 0 0 7 13.5 5.5 5.5 0 0 0 12 19c2.8 0 5-2.2 5-5a5 5 0 0 0-2.3-4.2c.8-.7 1.3-1.7 1.3-2.8a4 4 0 0 0-4-4z"/><path d="M12 19v3"/></svg>',
+      volume: '<svg viewBox="0 0 24 24" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
+      microscope: '<svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M8 6h4"/><path d="M13 10V6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5V10a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5V6"/></svg>',
+      dna: '<svg viewBox="0 0 24 24" stroke-width="2"><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m17 6-2.5-2.5"/><path d="m14 8-1-1"/><path d="m7 18 2.5 2.5"/><path d="m3.5 14.5.5.5"/><path d="m20 9 .5.5"/><path d="m6.5 12.5 1 1"/><path d="m16.5 10.5 1 1"/><path d="m10 16 1.5 1.5"/></svg>'
+    };
+
+    // Initialize
+    const engine = new HapticBioEngine();
+    let currentlyPlaying = null;
+
+    // Check support
+    const supportStatus = document.getElementById('supportStatus');
+    if (engine.getIsSupported()) {
+      supportStatus.className = 'support-status supported';
+      supportStatus.innerHTML = '&#10003; Haptic feedback supported on your device. Tap patterns to feel them!';
+    } else {
+      supportStatus.className = 'support-status not-supported';
+      supportStatus.innerHTML = '&#10007; Haptic feedback not supported. Patterns will display visual simulation.';
+    }
+
+    // Render patterns
+    const patternsGrid = document.getElementById('patternsGrid');
+
+    HAPTIC_PATTERNS.forEach(pattern => {
+      const card = document.createElement('div');
+      card.className = `pattern-card ${pattern.id}`;
+      card.innerHTML = `
+        <div class="pattern-content">
+          <div class="pattern-icon">${ICONS[pattern.icon]}</div>
+          <h3 class="pattern-name">${pattern.name}</h3>
+          <p class="pattern-desc">${pattern.description}</p>
+          <div class="pattern-buttons">
+            <button class="play-btn" data-pattern="${pattern.id}">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Feel
+            </button>
+            <button class="stop-btn" data-pattern="${pattern.id}">
+              <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg>
+            </button>
+          </div>
+          <div class="pattern-meta">
+            <span>Duration: ${pattern.duration / 1000}s</span>
+            <span>Type: ${pattern.loop ? 'Looping' : 'Single'}</span>
+          </div>
+        </div>
+      `;
+      patternsGrid.appendChild(card);
+    });
+
+    // Event handlers
+    document.querySelectorAll('.play-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const patternId = e.currentTarget.dataset.pattern;
+        const pattern = HAPTIC_PATTERNS.find(p => p.id === patternId);
+
+        if (!pattern) return;
+
+        // Stop any currently playing
+        if (currentlyPlaying) {
+          stopPattern(currentlyPlaying);
+        }
+
+        // Start new pattern
+        currentlyPlaying = patternId;
+
+        // Update UI
+        const playBtn = e.currentTarget;
+        const stopBtn = playBtn.nextElementSibling;
+        playBtn.classList.add('playing');
+        playBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Playing...';
+        stopBtn.classList.add('visible');
+
+        // Show indicator
+        const indicator = document.getElementById('playingIndicator');
+        const visualFeedback = document.getElementById('visualFeedback');
+        document.getElementById('playingName').textContent = pattern.name;
+        indicator.classList.add('visible');
+
+        // Show visual feedback if haptics not supported
+        if (!engine.getIsSupported()) {
+          visualFeedback.classList.add('visible');
+        }
+
+        // Play pattern
+        await engine.playPattern(pattern);
+
+        // Auto-reset for non-looping patterns
+        if (!pattern.loop) {
+          setTimeout(() => {
+            if (currentlyPlaying === patternId) {
+              stopPattern(patternId);
+            }
+          }, pattern.duration + 500);
+        }
+      });
+    });
+
+    document.querySelectorAll('.stop-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const patternId = e.currentTarget.dataset.pattern;
+        stopPattern(patternId);
+      });
+    });
+
+    function stopPattern(patternId) {
+      engine.stop();
+      currentlyPlaying = null;
+
+      // Reset UI
+      const playBtn = document.querySelector(`.play-btn[data-pattern="${patternId}"]`);
+      const stopBtn = document.querySelector(`.stop-btn[data-pattern="${patternId}"]`);
+
+      if (playBtn) {
+        playBtn.classList.remove('playing');
+        playBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Feel';
+      }
+      if (stopBtn) {
+        stopBtn.classList.remove('visible');
+      }
+
+      // Hide indicators
+      document.getElementById('playingIndicator').classList.remove('visible');
+      document.getElementById('visualFeedback').classList.remove('visible');
+    }
+  </script>
+
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+<!-- Live RSS Breaking News Ticker -->
+<script src="/js/live-news-ticker.js"></script>
+<script src="/js/ticker-fix.js"></script>
+
+<!-- JAVASCRIPT FORCE TICKER SIZE - EXACT MATCH TO INDEX.HTML -->
+<script>
+  (function() {
+    function forceTickerSize() {
+      var ticker = document.getElementById('live-ticker');
+      if (ticker) {
+        ticker.style.cssText = 'height:115px!important;min-height:115px!important;max-height:115px!important;padding:3px 0!important;overflow:visible!important;z-index:2147483647!important;position:fixed!important;bottom:0!important;left:0!important;right:0!important;background:rgba(0,0,0,0.95)!important;';
+      }
+      var tickerBar = document.querySelector('.live-ticker-bar');
+      if (tickerBar) {
+        tickerBar.style.cssText = 'height:110px!important;min-height:110px!important;overflow:visible!important;';
+      }
+      var tickerInner = document.querySelector('.live-ticker-inner');
+      if (tickerInner) {
+        tickerInner.style.cssText = 'height:105px!important;min-height:105px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:0px!important;padding:0!important;overflow:visible!important;';
+      }
+      var rows = document.querySelectorAll('.live-ticker-row');
+      rows.forEach(function(row) {
+        row.style.cssText = 'min-height:32px!important;height:34px!important;display:flex!important;align-items:center!important;visibility:visible!important;opacity:1!important;flex-shrink:0!important;padding:2px 10px!important;margin:0!important;';
+      });
+    }
+    function duplicateTopTicker() {
+      var tickerItems = document.querySelector('.live-ticker-items');
+      if (tickerItems && !tickerItems.dataset.duplicated) {
+        var items = tickerItems.innerHTML;
+        tickerItems.innerHTML = items + items;
+        tickerItems.dataset.duplicated = 'true';
+      }
+    }
+    window.addEventListener('DOMContentLoaded', forceTickerSize);
+    window.addEventListener('load', function() { forceTickerSize(); duplicateTopTicker(); });
+    setTimeout(forceTickerSize, 500);
+    setTimeout(forceTickerSize, 1000);
+    setTimeout(forceTickerSize, 2000);
+  })();
+</script>
+
+<script>
+// Run after a delay to override main.js
+setTimeout(function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:flex-end!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="position:absolute;left:16px;display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+}, 500);
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

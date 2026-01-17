@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cell Detective | Discovery Zone | Patient Analog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #e0e7ff;
+      font-size: 1.2rem;
+    }
+    .game-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .cell-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cell-diagram {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      background: #f0f9ff;
+      border-radius: 50%;
+      border: 8px solid #00c8ff;
+    }
+    .cell-part {
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .cell-part:hover { transform: scale(1.1); }
+    .cell-part.correct { animation: bounce 0.5s; }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    .nucleus {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.9rem;
+    }
+    .mitochondria {
+      width: 70px;
+      height: 35px;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      border-radius: 20px;
+      top: 25%;
+      left: 20%;
+    }
+    .ribosome {
+      width: 25px;
+      height: 25px;
+      background: #22c55e;
+      border-radius: 50%;
+      top: 70%;
+      left: 25%;
+      font-size: 0.6rem;
+    }
+    .membrane {
+      width: 100%;
+      height: 100%;
+      border: 8px dashed #00c8ff;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      background: transparent;
+      font-size: 0.8rem;
+    }
+    .vacuole {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00c8ff, #0891b2);
+      border-radius: 50%;
+      top: 30%;
+      right: 20%;
+    }
+    .er {
+      width: 80px;
+      height: 30px;
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      border-radius: 15px;
+      bottom: 25%;
+      left: 30%;
+      font-size: 0.7rem;
+    }
+    .labels-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 200px;
+    }
+    .label-btn {
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #1f2937;
+      font-weight: bold;
+    }
+    .label-btn:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .label-btn.selected { background: linear-gradient(135deg, #a3e635, #84cc16); }
+    .label-btn.used { opacity: 0.5; pointer-events: none; background: #9ca3af; }
+    .score-bar {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0fdf4;
+      border-radius: 10px;
+    }
+    .score { font-size: 1.5rem; color: #16a34a; }
+    .message {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      display: none;
+    }
+    .message.show { display: block; }
+    .message.success { background: #dcfce7; color: #16a34a; }
+    .message.hint { background: #fef3c7; color: #b45309; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #fff;
+      color: #6d28d9;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .instructions {
+      background: #fef3c7;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #92400e;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+  <div class="container">
+    <header>
+      <h1>Cell Detective</h1>
+      <p class="subtitle">Can you find all the parts of a cell?</p>
+    </header>
+
+    <div class="game-area">
+      <div class="instructions">
+        Click a label on the right, then click the matching cell part!
+      </div>
+
+      <div class="cell-container">
+        <div class="cell-diagram">
+          <div class="cell-part membrane" data-part="membrane">?</div>
+          <div class="cell-part nucleus" data-part="nucleus">?</div>
+          <div class="cell-part mitochondria" data-part="mitochondria">?</div>
+          <div class="cell-part ribosome" data-part="ribosome">?</div>
+          <div class="cell-part vacuole" data-part="vacuole">?</div>
+          <div class="cell-part er" data-part="er">?</div>
+        </div>
+
+        <div class="labels-area">
+          <button class="label-btn" data-label="nucleus">Nucleus (Brain)</button>
+          <button class="label-btn" data-label="mitochondria">Mitochondria (Power)</button>
+          <button class="label-btn" data-label="membrane">Cell Membrane</button>
+          <button class="label-btn" data-label="ribosome">Ribosome</button>
+          <button class="label-btn" data-label="vacuole">Vacuole (Storage)</button>
+          <button class="label-btn" data-label="er">ER (Factory)</button>
+        </div>
+      </div>
+
+      <div class="score-bar">
+        <span class="score">Score: <span id="score">0</span> / 6</span>
+      </div>
+
+      <div class="message" id="message"></div>
+    </div>
+
+    <center><a href="index.html" class="back-btn">Back to Discovery Zone</a></center>
+  </div>
+
+  <script>
+    let selectedLabel = null;
+    let score = 0;
+    const matched = new Set();
+
+    const labels = document.querySelectorAll('.label-btn');
+    const parts = document.querySelectorAll('.cell-part');
+    const scoreEl = document.getElementById('score');
+    const messageEl = document.getElementById('message');
+
+    const partNames = {
+      nucleus: 'Nucleus',
+      mitochondria: 'Mitochondria',
+      membrane: 'Membrane',
+      ribosome: 'Ribosome',
+      vacuole: 'Vacuole',
+      er: 'ER'
+    };
+
+    labels.forEach(btn => {
+      btn.addEventListener('click', () => {
+        labels.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedLabel = btn.dataset.label;
+        showMessage('Now click the matching cell part!', 'hint');
+      });
+    });
+
+    parts.forEach(part => {
+      part.addEventListener('click', () => {
+        if (!selectedLabel) {
+          showMessage('First, click a label on the right!', 'hint');
+          return;
+        }
+
+        if (matched.has(part.dataset.part)) return;
+
+        if (part.dataset.part === selectedLabel) {
+          // Correct!
+          part.textContent = partNames[selectedLabel];
+          part.classList.add('correct');
+          matched.add(selectedLabel);
+          score++;
+          scoreEl.textContent = score;
+
+          document.querySelector(`[data-label="${selectedLabel}"]`).classList.add('used');
+
+          if (score === 6) {
+            showMessage('Amazing! You found all the cell parts! You are a Cell Detective!', 'success');
+          } else {
+            showMessage('Correct! Great job!', 'success');
+          }
+
+          selectedLabel = null;
+          labels.forEach(b => b.classList.remove('selected'));
+        } else {
+          showMessage('Not quite! Try again!', 'hint');
+        }
+      });
+    });
+
+    function showMessage(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = 'message show ' + type;
+    }
+  </script>
+<!-- Restore nav after main JS runs -->
+<script>
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483646!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;border-bottom:1px solid rgba(0,255,255,0.2)!important;padding:8px 16px!important;min-height:44px!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 2px 10px rgba(0,0,0,0.5)!important;backdrop-filter:blur(10px)!important;';
+      nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex!important;font-size:16px!important;font-weight:700!important;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3)!important;text-decoration:none!important;">Patient Analog</a><div class="nav-links" style="display:flex!important;gap:8px!important;margin-left:auto!important;"><a href="/portfolio" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Portfolio</a><a href="/research" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Research</a><a href="/haptic" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Haptic</a><a href="/games" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Games</a><a href="/legal" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Legal</a></div>';
+    }
+  });
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

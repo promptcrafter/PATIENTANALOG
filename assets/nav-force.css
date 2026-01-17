@@ -1,0 +1,986 @@
+/* FORCE NAV VISIBLE - No hamburger, always show nav buttons */
+/* CRITICAL: Navigation must ALWAYS be visible on ALL devices */
+
+/* ==================== NUCLEAR: FORCE NAV BAR ON TOP ==================== */
+/* This overrides ALL other nav positioning rules */
+.nav-bar,
+#main-nav,
+nav.nav-bar,
+body .nav-bar,
+body #main-nav,
+html body .nav-bar,
+html body #main-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 2147483646 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: rgba(5, 10, 15, 0.98) !important;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2) !important;
+  padding: 8px 16px !important;
+  min-height: 44px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Force nav content wrapper visible */
+.nav-bar .nav-content,
+#main-nav .nav-content,
+.nav-content {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 12px !important;
+}
+
+/* Force nav logo visible and sized */
+.nav-logo,
+.nav-bar .nav-logo,
+#main-nav .nav-logo,
+a.nav-logo {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.9), 0 0 20px rgba(138, 43, 226, 0.5), 0 0 30px rgba(0, 153, 255, 0.3) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Force nav links visible with LARGER FONTS */
+/* CRITICAL: margin-left:auto pushes nav-links to the RIGHT side of nav bar */
+.nav-links,
+.nav-bar .nav-links,
+#main-nav .nav-links,
+#nav-links {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  margin-left: auto !important;
+}
+
+/* Force each nav link LARGER and visible */
+.nav-link,
+.nav-links a,
+.nav-links .nav-link,
+#nav-links a,
+.nav-bar a:not(.nav-logo),
+#main-nav a:not(.nav-logo) {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  background: rgba(0, 200, 255, 0.12) !important;
+  border: 1px solid rgba(0, 200, 255, 0.25) !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Nav link hover state */
+.nav-link:hover,
+.nav-links a:hover,
+#nav-links a:hover {
+  background: rgba(0, 200, 255, 0.25) !important;
+  border-color: rgba(0, 200, 255, 0.5) !important;
+  color: #00d4ff !important;
+  transform: translateY(-1px) !important;
+}
+
+/* FORCE ICONS VISIBLE - larger size */
+.nav-icon,
+.nav-link .nav-icon,
+.nav-links .nav-icon,
+.nav-link svg,
+.nav-links svg,
+#nav-links svg {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ==================== HIDE DUPLICATE NAV ELEMENTS ==================== */
+/* Hide the old sticky-nav since we have the main nav-bar now */
+.sticky-nav,
+nav.sticky-nav,
+body .sticky-nav {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Hide trust-bar that overlaps the main nav */
+.trust-bar,
+body .trust-bar {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* ==================== FORCE BACKGROUNDS BEHIND NAV ==================== */
+/* Ensure all background/decorative elements stay behind the nav bar */
+.space-background,
+.space-stars,
+.space-nebula,
+.cosmic-bg,
+.scientific-grid,
+.bg-pattern,
+.hero-bg,
+body::before,
+body::after,
+html::before,
+html::after {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Force body content below nav */
+body {
+  padding-top: 60px !important;
+}
+
+/* ==================== TICKER OVERFLOW PREVENTION ==================== */
+html {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* CRITICAL: Ticker at BOTTOM of screen */
+#live-ticker,
+.live-ticker-bar {
+  position: fixed !important;
+  top: auto !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: auto !important;
+  max-height: 50px !important;
+  min-height: 30px !important;
+  z-index: 999998 !important;
+  display: block !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  contain: layout style paint !important;
+  isolation: isolate !important;
+  background: rgba(5, 10, 15, 0.98) !important;
+  pointer-events: auto !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
+  border-bottom: none !important;
+}
+
+.live-ticker-inner {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* First ticker row - allow horizontal scroll for content */
+.live-ticker-row {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* Ticker scroll animation - must allow overflow for scroll effect */
+.ticker-scroll {
+  display: inline-flex !important;
+  white-space: nowrap !important;
+  will-change: transform !important;
+  animation: tickerScroll 600s linear infinite !important;
+}
+
+.ticker-scroll-content {
+  display: inline-flex !important;
+  white-space: nowrap !important;
+  gap: 0 !important;
+}
+
+.live-ticker-items {
+  display: inline-flex !important;
+  overflow: visible !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  will-change: transform !important;
+  animation: tickerScrollTop 800s linear infinite !important;
+}
+
+@keyframes tickerScrollTop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-news-row,
+.breaking-news-container {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Ticker secondary row needs to allow scroll content to overflow */
+.live-ticker-row.ticker-row-secondary {
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.scroll-item,
+.breaking-headline {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.ticker-item,
+.ticker-static {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 0 8px !important;
+}
+
+/* Hide hamburger button completely on ALL pages */
+.nav-toggle, .hamburger, #nav-toggle, button.nav-toggle, button.hamburger,
+.nav-mobile-toggle, .mobile-toggle, .menu-toggle, .toggle-btn,
+[class*="hamburger"], [class*="nav-toggle"], [id*="nav-toggle"],
+[class*="mobile-toggle"], [class*="menu-toggle"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* FORCE nav links visible on ALL screen sizes */
+#nav-links, .nav-links, nav .nav-links, .nav-bar .nav-links,
+#main-nav .nav-links, #main-nav #nav-links, .navbar .nav-links {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+}
+
+/* FORCE each nav link visible */
+#nav-links > a, .nav-links > a, .nav-links a, #nav-links a,
+nav a.nav-link, .nav-bar a, .navbar a {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Override any .active class toggle attempts */
+#nav-links.active, .nav-links.active,
+#nav-links:not(.active), .nav-links:not(.active),
+#nav-links.show, .nav-links.show,
+#nav-links:not(.show), .nav-links:not(.show) {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  transform: none !important;
+  max-height: none !important;
+}
+
+/* ==================== MOBILE STYLES ==================== */
+@media (max-width: 768px) {
+  /* Nav bar as horizontal scrollable container */
+  .nav-bar, #main-nav, nav.nav-bar, header nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 4px 6px !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: 36px !important;
+    max-height: 44px !important;
+  }
+
+  /* Hide scrollbar on mobile */
+  .nav-bar::-webkit-scrollbar, #main-nav::-webkit-scrollbar,
+  nav::-webkit-scrollbar, .navbar::-webkit-scrollbar,
+  .nav-content::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+
+  /* Nav content wrapper also scrollable */
+  .nav-content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  /* FORCE nav links container visible and horizontal */
+  /* margin-left:auto pushes nav-links to RIGHT side */
+  #nav-links, .nav-links, nav .nav-links, #main-nav .nav-links,
+  .navbar .nav-links, header .nav-links {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-left: auto !important;
+    background: transparent !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* Override any :not(.active) or hidden state rules */
+  #nav-links:not(.active), .nav-links:not(.active),
+  #nav-links:not(.show), .nav-links:not(.show),
+  #nav-links[style*="display: none"], .nav-links[style*="display: none"],
+  #nav-links[hidden], .nav-links[hidden] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* FORCE each link visible and compact - LARGER FONTS */
+  #nav-links a, .nav-links a, nav .nav-links a,
+  #main-nav a:not(.nav-logo), .navbar a:not(.nav-logo) {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 6px 10px !important;
+    min-height: 32px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    background: rgba(0, 200, 255, 0.15) !important;
+    border: 1px solid rgba(0, 200, 255, 0.3) !important;
+    border-radius: 4px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Active/hover states for touch */
+  #nav-links a:active, .nav-links a:active {
+    background: rgba(0, 200, 255, 0.4) !important;
+    transform: scale(0.98) !important;
+  }
+
+  /* SHOW icons on mobile - smaller but visible */
+  #nav-links .nav-icon, .nav-links .nav-icon,
+  #nav-links svg, .nav-links svg,
+  .nav-links span.icon, #nav-links span.icon {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Hide global clocks on mobile */
+  .global-clocks, #global-clocks, .live-ticker-container {
+    display: none !important;
+  }
+
+  /* Compact logo on mobile */
+  .nav-logo, .nav-bar a[href="/"], #main-nav > a:first-child,
+  .nav-content > a:first-child {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Hide logo text on very small screens */
+  @media (max-width: 400px) {
+    .logo-text {
+      display: none !important;
+    }
+    .nav-logo, .nav-bar a[href="/"] {
+      padding: 4px 6px !important;
+    }
+  }
+}
+
+/* ==================== EXTRA SMALL MOBILE ==================== */
+@media (max-width: 480px) {
+  #nav-links a, .nav-links a {
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    min-height: 28px !important;
+    gap: 3px !important;
+  }
+
+  .nav-bar, #main-nav {
+    padding: 4px 6px !important;
+    min-height: 36px !important;
+  }
+
+  /* Smaller icons on extra small screens */
+  #nav-links svg, .nav-links svg,
+  .nav-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
+/* ==================== MAIN CONTENT CLEARANCE ==================== */
+/* Ensure main content clears fixed nav (28px) + ticker (24px) = ~60px total */
+main {
+  padding-top: 60px !important;
+  min-height: calc(100vh - 60px) !important;
+}
+
+/* Pages with hero sections already have padding, don't double up */
+main:has(.games-hero),
+main:has(.page-header),
+main:has(.hero-section),
+main:has([class*="hero"]) {
+  padding-top: 0 !important;
+}
+
+/* ==================== GAME/SIM CONTAINER OVERFLOW FIX ==================== */
+/* Prevent games and simulations from being cut off */
+.arena,
+.game-container,
+.simulation-container,
+.canvas-container,
+#gameCanvas,
+canvas {
+  max-width: 100% !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure game iframes and embeds are visible */
+iframe,
+.game-iframe,
+.simulation-iframe {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* ==================== GAME PAGE LAYOUT FIX ==================== */
+/* Game screens use position:fixed - must clear navbar+ticker (~60px) */
+.screen,
+.game-screen,
+.simulation-screen,
+[class*="game-screen"],
+[class*="sim-screen"] {
+  top: 60px !important;
+  height: calc(100vh - 60px) !important;
+  padding-top: 0 !important;
+}
+
+/* Game containers inside screens */
+.game-container,
+.sim-container,
+.simulation-wrapper,
+.game-wrapper,
+#game-container,
+#simulation-container {
+  margin-top: 60px !important;
+  padding-top: 20px !important;
+  min-height: calc(100vh - 80px) !important;
+}
+
+/* Body on game pages needs padding for fixed nav */
+body:has(.screen),
+body:has(.game-container),
+body:has(#gameCanvas),
+body:has(.simulation-container) {
+  padding-top: 60px !important;
+}
+
+/* Fix position:fixed elements in games to clear nav */
+.screen[style*="position: fixed"],
+.screen[style*="position:fixed"],
+div[style*="position: fixed"][style*="top: 0"],
+div[style*="position:fixed"][style*="top:0"] {
+  top: 60px !important;
+}
+
+/* Simulation panels need proper positioning */
+.sim-panel,
+.control-panel,
+.simulation-controls {
+  top: 70px !important;
+  max-height: calc(100vh - 80px) !important;
+}
+
+/* ==================== SPECIFIC GAME CONTAINER FIXES ==================== */
+/* Organogenesis and similar games using #gameContainer */
+#gameContainer {
+  margin-top: 60px !important;
+  height: calc(100vh - 60px) !important;
+  top: 60px !important;
+}
+
+/* Games using full viewport canvas */
+body:has(#gameContainer) #gameCanvas,
+body:has(#gameContainer) canvas {
+  height: calc(100vh - 60px) !important;
+}
+
+/* HUD elements in games - move down */
+#hud,
+.game-hud,
+.hud-panel {
+  top: 70px !important;
+}
+
+/* Start screens in games - adjust positioning */
+#startScreen {
+  top: 60px !important;
+  height: calc(100vh - 60px) !important;
+}
+
+/* Score displays - move down */
+#score,
+.score-display {
+  top: 70px !important;
+}
+
+/* ==================== SCIENCE/SIMULATION PAGE FIXES ==================== */
+/* Science pages already have padding but ensure they clear nav */
+body.science-page main,
+body.simulation-page main,
+main.science-main,
+main.simulations-main {
+  padding-top: 60px !important;
+}
+
+/* CRITICAL: All simulation pages use .container - ensure it clears navbar */
+/* Nav bar: 28px + Ticker: ~32px = ~60px total header space */
+body:has(#canvas-container) .container,
+body:has(.main-display) .container,
+body:has(.ecg-display) .container,
+body:has(.main-grid) .container {
+  padding-top: 80px !important;
+  margin-top: 0 !important;
+}
+
+/* Ensure simulation body doesn't overlap navbar */
+body:has(#canvas-container),
+body:has(.main-display),
+body:has(.ecg-display),
+body:has(.main-grid) {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Simulation canvas containers shouldn't have extra top margin */
+#canvas-container,
+.main-display,
+.main-grid {
+  margin-top: 0 !important;
+}
+
+/* ==================== TICKER ANIMATION FIX ==================== */
+/* Ensure ticker scroll animation runs */
+.ticker-scroll {
+  animation: tickerScroll 600s linear infinite !important;
+  display: inline-flex !important;
+  will-change: transform !important;
+  padding-left: 100vw !important;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ==================== NUCLEAR: FORCE TICKER TO BOTTOM ==================== */
+/* This overrides ALL other ticker positioning rules */
+#live-ticker,
+.live-ticker-bar,
+body #live-ticker,
+body .live-ticker-bar,
+html body #live-ticker,
+body.hdr-enhanced #live-ticker,
+body.hdr-enhanced .live-ticker-bar {
+  position: fixed !important;
+  top: auto !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 75px !important;
+  max-height: 90px !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding-top: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: rgba(5, 10, 15, 1) !important;
+  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
+  border-bottom: none !important;
+  isolation: isolate !important;
+}
+
+/* Force ticker content visible */
+#live-ticker *,
+.live-ticker-bar *,
+.live-ticker-inner,
+.live-ticker-row,
+.ticker-scroll,
+.ticker-item,
+.ticker-static,
+.breaking-headline,
+.breaking-badge {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Force ticker rows to have proper height and be visible - 3 ROWS */
+.live-ticker-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  min-height: 70px !important;
+  height: auto !important;
+  padding: 4px 0 !important;
+  margin: 0 !important;
+}
+
+.live-ticker-row {
+  display: flex !important;
+  min-height: 20px !important;
+  height: 22px !important;
+  padding: 2px 10px !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.live-ticker-row.ticker-row-secondary {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 20px !important;
+  height: 22px !important;
+  overflow: visible !important;
+  padding: 2px 10px !important;
+  margin: 0 !important;
+}
+
+.live-ticker-row.ticker-news-row {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 50px !important;
+  height: 50px !important;
+  padding: 6px 10px !important;
+  margin: 0 !important;
+  z-index: 2147483647 !important;
+  position: relative !important;
+}
+
+.breaking-headline-wrapper,
+.breaking-headline {
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+.ticker-news-row,
+.breaking-news-container {
+  min-height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ==================== BIOTECH TRACKER - Bottom Right, Reduced 20% ==================== */
+/* DO NOT OVERRIDE - let inline style handle position */
+#biotech-tracker {
+  z-index: 2147483645 !important;
+  transform: scale(0.8) !important;
+  transform-origin: bottom right !important;
+}
+
+/* ==================== BODY PADDING FOR TICKER ==================== */
+html, body {
+  padding-bottom: 60px !important;
+}
+
+main,
+.main-content {
+  z-index: auto !important;
+  padding-bottom: 60px !important;
+  margin-bottom: 60px !important;
+}
+
+/* ==================== HERO SECTION - STOP ABOVE TICKER ==================== */
+/* Limit hero to not cover ticker at bottom (150px for 3-row ticker) */
+.hero,
+#hero,
+section.hero {
+  max-height: calc(100vh - 150px) !important;
+  height: calc(100vh - 150px) !important;
+  overflow: hidden !important;
+}
+
+/* Force ticker content to stay on top */
+#live-ticker .live-ticker-inner,
+#live-ticker .live-ticker-row,
+#live-ticker .ticker-scroll,
+#live-ticker .ticker-item,
+.live-ticker-bar .live-ticker-inner,
+.live-ticker-bar .live-ticker-row {
+  z-index: 2147483647 !important;
+}
+
+/* ==================== GLOBAL RESPONSIVE - ALL PAGES ==================== */
+.container, .main-content, main, .content, .page-content {
+  width: 100%;
+  max-width: min(95vw, 1400px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(12px, 3vw, 40px);
+  padding-right: clamp(12px, 3vw, 40px);
+  box-sizing: border-box;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== GAME & SIMULATION AUTO-SIZE ==================== */
+/* Main game/sim wrappers */
+.game-container,
+.simulation-container,
+.game-wrapper,
+.sim-wrapper,
+.simulator-container,
+.canvas-container {
+  width: 100% !important;
+  max-width: min(95vw, 1200px) !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Simulation visual elements with hardcoded widths */
+.chip-visual,
+.dna-container,
+.viewer-canvas-container,
+.gallery-visual,
+#current-module,
+.module-container {
+  width: 100% !important;
+  max-width: min(95vw, 600px) !important;
+  height: auto !important;
+  min-height: 200px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Canvas scales with container - FORCE override HTML attributes */
+/* IMPORTANT: aspect-ratio maintains proportions since height:auto doesn't work on canvas */
+/* CRITICAL: pointer-events must be preserved for interactivity */
+canvas,
+#canvas,
+.game-canvas,
+.sim-canvas,
+.visualization {
+  width: 100% !important;
+  max-width: 700px !important;
+  height: auto !important;
+  aspect-ratio: 7 / 5 !important;
+  display: block !important;
+  margin: 0 auto !important;
+  pointer-events: auto !important;
+}
+
+/* DNA Repair game has 800x500 canvas (8:5 ratio) */
+#gameCanvas {
+  width: 100% !important;
+  max-width: 800px !important;
+  height: auto !important;
+  aspect-ratio: 8 / 5 !important;
+  display: block !important;
+  margin: 0 auto !important;
+  pointer-events: auto !important;
+}
+
+/* Background/effects canvases - full size, no aspect constraint */
+#particle-canvas,
+#effectsCanvas,
+canvas[id*="canvas-"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
+  pointer-events: none !important;
+}
+
+/* Game app containers - scale with viewport */
+#app,
+#game,
+#menu-screen {
+  width: 100% !important;
+  max-width: min(95vw, 1200px) !important;
+  margin: 0 auto !important;
+  padding-left: clamp(8px, 2vw, 20px) !important;
+  padding-right: clamp(8px, 2vw, 20px) !important;
+  box-sizing: border-box !important;
+}
+
+/* Games page hero and main content */
+.games-hero,
+.games-hero .container,
+.games-stats,
+.game-grid,
+.games-grid {
+  width: 100% !important;
+  max-width: min(95vw, 1400px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Individual game page containers */
+.btns,
+.over-box,
+.start-screen,
+#startScreen,
+.base-selector {
+  width: 100% !important;
+  max-width: min(95vw, 700px) !important;
+  margin: 0 auto !important;
+}
+
+/* Info panel - but NOT inside overlays */
+.game-wrapper .info-panel,
+.game-content .info-panel {
+  width: 100% !important;
+  max-width: min(95vw, 700px) !important;
+  margin: 0 auto !important;
+}
+
+/* CRITICAL: Ensure overlays work correctly - must be above nav bar */
+.overlay.active,
+#menuOverlay.active,
+#pauseOverlay.active,
+#gameOverOverlay.active,
+#over.active {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.overlay-content,
+.overlay .menu-btn,
+.over-box,
+#over .over-box {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 2147483647 !important;
+}
+
+/* Game grids auto-fit */
+.game-grid,
+.simulation-grid,
+.sim-layout,
+.module-selector {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)) !important;
+  gap: clamp(8px, 2vw, 20px) !important;
+  width: 100% !important;
+}
+
+/* Control panels scale */
+.control-panel,
+.controls,
+.parameters,
+.metrics,
+.stats-bar {
+  width: 100% !important;
+  max-width: min(90vw, 320px);
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+}

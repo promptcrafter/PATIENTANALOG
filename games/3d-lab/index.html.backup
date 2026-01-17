@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Visualization Lab | Patient Analog</title>
+  <meta name="description" content="Explore interactive 3D organoid and organ-on-chip models with real-time manipulation in our visualization laboratory.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <header class="lab-header">
+    <a href="/" class="back-link">← Back to Home</a>
+    <div class="section-label">Interactive Experience</div>
+    <h1 class="lab-title">3D Visualization Lab</h1>
+    <p class="lab-subtitle">Explore interactive organoid and organ-on-chip models with real-time manipulation</p>
+    <p class="lab-description">Engage with cutting-edge human simulation technologies through our interactive 3D visualization laboratory. These models demonstrate the structural complexity of organoids and the engineering precision of organ-on-chip platforms.</p>
+    <div class="ar-badge">AR/VR Ready</div>
+  </header>
+
+  <section class="viewers-section">
+    <div class="section-title">Interactive 3D Model</div>
+    <div class="viewers-grid">
+      <div class="viewer-card">
+        <div class="viewer-canvas-container" id="organoid-viewer">
+          <div class="viewer-label">
+            <h3>Brain Organoid Model</h3>
+            <p>Rotate | Zoom | Click cells for details</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="viewer-card">
+        <div class="viewer-canvas-container" id="chip-viewer">
+          <div class="viewer-label">
+            <h3>Multi-Organ Chip Platform</h3>
+            <p>6 organ chambers | Microfluidic flow visualization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-title">Technology Gallery</div>
+    <div class="gallery-grid">
+      <div class="gallery-card" id="card-chip">
+        <div class="gallery-visual">
+          <canvas id="canvas-chip"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Organ-on-Chip</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">Multi-Organ Microfluidic Chip</h3>
+          <p class="gallery-card-desc">PDMS substrate with 6 interconnected organ chambers and continuous media flow</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">pH: 7.4 | O2: 98% | Flow: 2.3uL/min | T: 37C</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" id="card-organoid">
+        <div class="gallery-visual">
+          <canvas id="canvas-organoid"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Organoid</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">Brain Organoid Structure</h3>
+          <p class="gallery-card-desc">Self-organizing 3D tissue with stem cells, neurons, and supporting cells</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">Diameter: 2.4mm | Viability: 94% | Day: 21</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" id="card-lab">
+        <div class="gallery-visual">
+          <canvas id="canvas-lab"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Lab Setup</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">MPS Laboratory Setup</h3>
+          <p class="gallery-card-desc">Incubator, confocal microscope, and microfluidic pump system</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">Temp: 37C | CO2: 5% | Humidity: 95%</div>
+        </div>
+      </div>
+
+      <div class="gallery-card" id="card-twin">
+        <div class="gallery-visual">
+          <canvas id="canvas-twin"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Digital Twin</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">Virtual Patient Model</h3>
+          <p class="gallery-card-desc">AI-powered digital twin with real-time organ simulation and drug response prediction</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">Sync: Real-time | Accuracy: 99.2%</div>
+        </div>
+      </div>
+
+      <div class="gallery-card large" id="card-neural">
+        <div class="gallery-visual">
+          <canvas id="canvas-neural"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Real Imaging</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">Neural Organoid Network</h3>
+          <p class="gallery-card-desc">Multi-lineage organoids showing neural (cyan), hepatic (orange), and cardiac (pink) differentiation pathways</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">Resolution: 0.2um | Z-Stack: 50 slices</div>
+        </div>
+      </div>
+
+      <div class="gallery-card large" id="card-culture">
+        <div class="gallery-visual">
+          <canvas id="canvas-culture"></canvas>
+          <div class="gallery-badge">ONLINE</div>
+          <div class="gallery-type">Lab Culture</div>
+        </div>
+        <div class="gallery-content">
+          <h3 class="gallery-card-title">Organoid Culture Plate</h3>
+          <p class="gallery-card-desc">Patient-derived organoids at various maturation stages - liver (brown), tumor (red), intestinal (orange), neural (white)</p>
+          <div class="gallery-status">
+            <span class="status-online">ONLINE</span>
+            <span class="status-interactive">Interactive</span>
+          </div>
+          <div class="gallery-stats">Passage: P5 | Confluence: 85% | Media: DMEM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

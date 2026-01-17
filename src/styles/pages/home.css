@@ -1,0 +1,347 @@
+/* Home page specific styles */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;  /* Let stars show through */
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;  /* FAR BEHIND the title */
+}
+
+.hero-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 100;  /* WAY IN FRONT of constellation */
+  text-align: center;
+  padding: var(--space-8);
+  padding-top: calc(var(--space-8) + 10vh);  /* Move content down 10% */
+  max-width: 900px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3D TITLE — SOLID BRIGHT WHITE WITH 3D DEPTH
+   ═══════════════════════════════════════════════════════════════ */
+.hero h1,
+.hero-title {
+  font-family: 'Orbitron', 'Rajdhani', sans-serif;
+  font-size: clamp(48px, 6vw, 100px);
+  font-weight: 900 !important;
+  margin-bottom: var(--space-4);
+  color: var(--color-white) !important;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1000;
+  letter-spacing: 2px;
+  /* 3D EXTRUSION - BRIGHTER + MORE INTENSE GLOW */
+  text-shadow:
+    /* 3D EXTRUSION - hard edges, stacked */
+    1px 1px 0 #0077ff,
+    2px 2px 0 #0088ff,
+    3px 3px 0 #0077ff,
+    4px 4px 0 #0066ee,
+    5px 5px 0 #0066ee,
+    6px 6px 0 #0055dd,
+    7px 7px 0 #0055dd,
+    8px 8px 0 #0044cc,
+    /* GLOW - BLAZING BRIGHT */
+    0 0 15px rgba(0, 153, 255, 1),
+    0 0 30px rgba(0, 153, 255, 1),
+    0 0 50px rgba(0, 153, 255, 0.8),
+    0 0 80px rgba(0, 153, 255, 0.6),
+    0 0 120px rgba(0, 119, 255, 0.4),
+    0 0 160px rgba(0, 119, 255, 0.3);
+}
+
+/* Holographic shimmer removed - was causing ghost text */
+
+@keyframes holoShift {
+  0%, 100% { filter: brightness(1.2) hue-rotate(0deg); }
+  33% { filter: brightness(1.3) hue-rotate(10deg); }
+  66% { filter: brightness(1.25) hue-rotate(-5deg); }
+}
+
+@keyframes textFloat {
+  0%, 100% { transform: perspective(1000px) translateZ(50px) translateY(0); }
+  50% { transform: perspective(1000px) translateZ(60px) translateY(-5px); }
+}
+
+@keyframes holographicShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-lead {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--color-white) !important;
+  margin-bottom: var(--space-4);
+  font-weight: 600;
+  text-shadow:
+    0 0 10px rgba(var(--color-primary-rgb), 0.8),
+    0 0 20px rgba(var(--color-primary-rgb), 0.5),
+    0 0 40px rgba(var(--color-accent-purple-rgb), 0.3);
+  letter-spacing: 1px;
+}
+
+.hero-sub {
+  font-size: var(--text-xl);
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: var(--space-8);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow:
+    0 0 10px rgba(var(--color-primary-rgb), 0.4),
+    0 0 20px rgba(var(--color-primary-rgb), 0.2);
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-cta .btn-primary {
+  background: linear-gradient(135deg, #00bbff 0%, #0099ff 100%);
+  color: var(--color-white);
+  font-weight: 700;
+  padding: 18px 40px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow:
+    0 0 30px rgba(0, 153, 255, 1),
+    0 0 60px rgba(0, 153, 255, 0.7),
+    0 0 90px rgba(0, 153, 255, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: buttonPulse 2s ease-in-out infinite;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-cta .btn-primary:hover {
+  box-shadow:
+    0 0 40px rgba(0, 187, 255, 1),
+    0 0 80px rgba(0, 153, 255, 0.9),
+    0 0 120px rgba(0, 153, 255, 0.6),
+    0 0 160px rgba(119, 34, 255, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.3);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.hero-cta .btn-outline {
+  border: 2px solid rgba(0, 153, 255, 0.9);
+  color: #00bbff;
+  background: rgba(0, 153, 255, 0.15);
+  padding: 18px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  box-shadow:
+    0 0 25px rgba(0, 153, 255, 0.5),
+    0 0 50px rgba(0, 153, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-cta .btn-outline:hover {
+  background: rgba(0, 153, 255, 0.25);
+  border-color: #00bbff;
+  box-shadow:
+    0 0 40px rgba(0, 153, 255, 0.8),
+    0 0 80px rgba(0, 153, 255, 0.5),
+    0 0 120px rgba(119, 34, 255, 0.3);
+  transform: translateY(-4px) scale(1.03);
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 30px rgba(0, 153, 255, 0.8),
+      0 0 60px rgba(0, 153, 255, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(0, 187, 255, 1),
+      0 0 80px rgba(0, 153, 255, 0.7),
+      0 0 100px rgba(0, 153, 255, 0.4);
+  }
+}
+
+/* Stats Section */
+.stats-section {
+  background: var(--gradient-dark);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Features Section */
+.features-section {
+  background: var(--bg-body);
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--gradient-hero);
+}
+
+.cta-box {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-box h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-4);
+}
+
+.cta-box p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Content blocks */
+.content-block {
+  max-width: 800px;
+}
+
+.content-block p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* Card list styling */
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-list li {
+  padding: var(--space-2) 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-list li:last-child {
+  border-bottom: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HUMANOID CONSTELLATION SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.humanoid-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 800px;
+  background: #000810;
+  overflow: hidden;
+}
+
+.humanoid-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.humanoid-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: var(--space-8);
+  padding-bottom: var(--space-12);
+  background: linear-gradient(to top, rgba(0, 8, 16, 0.95) 0%, rgba(0, 8, 16, 0.7) 50%, transparent 100%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.humanoid-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: #d4a574;
+  margin-bottom: var(--space-2);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.humanoid-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: rgba(200, 180, 160, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Nebula background effect for humanoid section */
+.humanoid-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(80, 40, 40, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(60, 80, 100, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(40, 30, 30, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .humanoid-section {
+    min-height: 600px;
+    height: auto;
+    padding-bottom: 120px;
+  }
+
+  .humanoid-container {
+    position: relative;
+    height: 500px;
+  }
+
+  .humanoid-overlay {
+    position: relative;
+    background: rgba(0, 8, 16, 0.95);
+    padding: var(--space-6);
+  }
+}

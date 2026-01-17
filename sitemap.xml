@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://patientanalog.com/sitemap-pages.xml</loc>
+    <lastmod>2026-01-16</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://patientanalog.com/sitemap-games.xml</loc>
+    <lastmod>2026-01-16</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://patientanalog.com/sitemap-simulations.xml</loc>
+    <lastmod>2026-01-16</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://patientanalog.com/sitemap-portfolio.xml</loc>
+    <lastmod>2026-01-16</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://patientanalog.com/sitemap-news.xml</loc>
+    <lastmod>2026-01-16</lastmod>
+  </sitemap>
+</sitemapindex>

@@ -1,0 +1,1416 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+    <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000814">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-548SNKZ7RC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-548SNKZ7RC');
+    </script>
+    <title>Biometric Learning Engine | Patient Analog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; max-width: 100vw; }
+        #live-ticker, .live-ticker-bar, .live-ticker-inner {
+            overflow: hidden !important;
+            max-width: 100vw !important;
+            position: relative;
+            width: 100% !important;
+        }
+        .ticker-scroll, .ticker-scroll-content, .live-ticker-items {
+            max-width: 100vw !important;
+            overflow: hidden !important;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 50%, #0a1a2a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            max-width: 100vw;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; padding-top: 80px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #ff6b9d, #c44569, #ff8a5c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { font-size: 1.2em; color: #ff6b9d; opacity: 0.9; margin-top: 10px; }
+
+        /* Sensor Status Banner */
+        .sensor-status {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+        .sensor-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .sensor-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: sensorPulse 2s ease-in-out infinite;
+        }
+        .sensor-available { background: #22cc66; box-shadow: 0 0 10px #22cc66; }
+        .sensor-unavailable { background: #888; }
+        .sensor-simulated { background: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
+        @keyframes sensorPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Grid */
+        .main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 20px; }
+
+        /* Biometric Display Panel */
+        .biometric-panel {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 107, 157, 0.4);
+            padding: 25px;
+        }
+
+        /* Heart Rate Display */
+        .heart-rate-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 50, 100, 0.15), rgba(200, 50, 100, 0.1));
+            border-radius: 15px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .heart-icon {
+            font-size: 4em;
+            color: #ff4466;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+        }
+        .bpm-display {
+            text-align: center;
+        }
+        .bpm-value {
+            font-size: 5em;
+            font-weight: bold;
+            color: #ff6b9d;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+        }
+        .bpm-label {
+            font-size: 1.2em;
+            color: #ffaacc;
+            margin-top: 5px;
+        }
+        .hrv-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 200, 150, 0.2);
+            border: 1px solid #00cc99;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .hrv-value { color: #00ffcc; font-weight: bold; }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .metric-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            border-color: rgba(255, 107, 157, 0.5);
+            transform: translateY(-2px);
+        }
+        .metric-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .metric-title {
+            font-size: 0.85em;
+            color: #ffaacc;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .metric-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .metric-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease, background 0.5s ease;
+        }
+        .fill-stress { background: linear-gradient(90deg, #22cc66, #88cc22, #ffaa00, #ff4444); }
+        .fill-focus { background: linear-gradient(90deg, #4488ff, #00ccff); }
+        .fill-fatigue { background: linear-gradient(90deg, #ffcc00, #ff8800, #ff4444); }
+
+        /* Movement Display */
+        .movement-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .movement-title {
+            font-size: 1.1em;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .movement-axes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .axis-display {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .axis-label {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .axis-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .axis-x { color: #ff6666; }
+        .axis-y { color: #66ff66; }
+        .axis-z { color: #6666ff; }
+        .movement-intensity {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .intensity-label { color: #ffaacc; font-size: 0.9em; }
+        .intensity-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Breathing Pattern */
+        .breathing-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .breathing-title {
+            font-size: 1.1em;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+        }
+        .breathing-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .breath-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.3), rgba(100, 200, 255, 0.1));
+            border: 3px solid #00ccff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            transition: transform 2s ease-in-out, border-color 0.5s ease;
+        }
+        .breath-calm {
+            border-color: #00cc99;
+            animation: breatheCalm 4s ease-in-out infinite;
+        }
+        .breath-stressed {
+            border-color: #ff6644;
+            animation: breatheStressed 1.5s ease-in-out infinite;
+        }
+        .breath-excited {
+            border-color: #ffaa00;
+            animation: breatheExcited 2s ease-in-out infinite;
+        }
+        @keyframes breatheCalm {
+            0%, 100% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes breatheStressed {
+            0%, 100% { transform: scale(0.85); }
+            50% { transform: scale(1.15); }
+        }
+        @keyframes breatheExcited {
+            0%, 100% { transform: scale(0.88); }
+            50% { transform: scale(1.12); }
+        }
+        .breathing-info {
+            text-align: center;
+        }
+        .breathing-state {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breathing-rate {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .state-calm { color: #00cc99; }
+        .state-stressed { color: #ff6644; }
+        .state-excited { color: #ffaa00; }
+
+        /* Real-time Graph */
+        .graph-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .graph-title {
+            font-size: 1.1em;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .graph-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #biometricGraph {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 107, 157, 0.4);
+        }
+        .control-section {
+            margin-bottom: 25px;
+        }
+        .control-section h3 {
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+            padding-bottom: 8px;
+        }
+
+        /* Session Stats */
+        .session-stats {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #ffaacc; font-size: 0.9em; }
+        .stat-value { color: #fff; font-weight: bold; }
+
+        /* Buttons */
+        button {
+            background: linear-gradient(135deg, #1a0a2a, #2a1a3a);
+            color: #fff;
+            border: 2px solid #ff6b9d;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            border-color: #ff8ab0;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+        button.active {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: #fff;
+            font-weight: bold;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-start { border-color: #22cc66; }
+        .btn-start:hover { box-shadow: 0 0 20px rgba(34, 204, 102, 0.5); }
+        .btn-start.active { background: linear-gradient(135deg, #22cc66, #119944); }
+        .btn-stop { border-color: #ff4444; }
+        .btn-stop:hover { box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); }
+
+        /* Alert Messages */
+        .alert-panel {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .alert-title {
+            color: #ff6666;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .alert-message {
+            font-size: 0.9em;
+            color: #ffaaaa;
+            line-height: 1.5;
+        }
+        .alert-hidden { display: none; }
+
+        /* Biometric Insights */
+        .insights-panel {
+            background: rgba(0, 100, 150, 0.15);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .insight-item:last-child { border-bottom: none; }
+        .insight-icon { font-size: 1.2em; }
+        .insight-text {
+            font-size: 0.9em;
+            color: #aaddff;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== MOBILE-ONLY FIXES ===== */
+        @media (max-width: 768px) {
+            body { overflow-x: hidden; }
+            canvas, #biometricGraph {
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: 150px !important;
+                touch-action: none;
+            }
+            button, .btn {
+                min-height: 48px !important;
+                min-width: 48px !important;
+                padding: 12px 24px !important;
+                font-size: 16px !important;
+            }
+            .container {
+                width: 100% !important;
+                max-width: 100vw !important;
+                padding: 10px !important;
+            }
+            h1, .title { font-size: 1.5rem !important; }
+            h2 { font-size: 1.2rem !important; }
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .movement-axes {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .heart-rate-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hrv-badge {
+                position: static;
+                margin-top: 10px;
+            }
+            .bpm-value {
+                font-size: 3.5em;
+            }
+            .sensor-status {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .breathing-visual {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        /* ===== END MOBILE-ONLY FIXES ===== */
+    </style>
+  <link rel="canonical" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Biometric Learning Engine | Patient Analog",
+    "description": "Biotech education platform for microphysiological systems and organ-on-chip technology",
+    "url": "https://patientanalog.com/simulations/biometric-learning-engine.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Patient Analog"
+    }
+  }
+  </script>
+
+  <!-- Hreflang Tags for International SEO -->
+  <link rel="alternate" hreflang="en" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="en-US" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="en-GB" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="es" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="fr" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="de" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="it" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="pt" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="ja" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="ko" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="zh" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="ar" href="https://patientanalog.com/simulations/biometric-learning-engine">
+  <link rel="alternate" hreflang="x-default" href="https://patientanalog.com/simulations/biometric-learning-engine">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- NAV BAR -->
+    <nav class="nav-bar" id="main-nav"></nav>
+    <div id="live-ticker"></div>
+    <div class="container">
+        <header>
+            <h1>Biometric Learning Engine</h1>
+            <p class="subtitle">Real-time Physiological Monitoring and Adaptive Response System</p>
+        </header>
+
+        <!-- Sensor Capability Detection -->
+        <div class="sensor-status" id="sensor-status">
+            <div class="sensor-item">
+                <span class="sensor-dot sensor-unavailable" id="dot-motion"></span>
+                <span>Motion Sensor</span>
+                <span id="status-motion">Checking...</span>
+            </div>
+            <div class="sensor-item">
+                <span class="sensor-dot sensor-unavailable" id="dot-orientation"></span>
+                <span>Orientation</span>
+                <span id="status-orientation">Checking...</span>
+            </div>
+            <div class="sensor-item">
+                <span class="sensor-dot sensor-simulated" id="dot-heartrate"></span>
+                <span>Heart Rate</span>
+                <span id="status-heartrate">Simulated</span>
+            </div>
+            <div class="sensor-item">
+                <span class="sensor-dot sensor-simulated" id="dot-hrv"></span>
+                <span>HRV</span>
+                <span id="status-hrv">Simulated</span>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="biometric-panel">
+                <!-- Heart Rate Display -->
+                <div class="heart-rate-container">
+                    <div class="heart-icon" id="heart-icon">&#10084;</div>
+                    <div class="bpm-display">
+                        <div class="bpm-value" id="bpm-value">72</div>
+                        <div class="bpm-label">BPM</div>
+                    </div>
+                    <div class="hrv-badge">
+                        <span>HRV: </span>
+                        <span class="hrv-value" id="hrv-value">45</span>
+                        <span> ms</span>
+                    </div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">&#128200;</div>
+                        <div class="metric-title">Stress Level</div>
+                        <div class="metric-value" id="stress-value">32</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill fill-stress" id="stress-bar" style="width: 32%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">&#127919;</div>
+                        <div class="metric-title">Focus Level</div>
+                        <div class="metric-value" id="focus-value">75</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill fill-focus" id="focus-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">&#128164;</div>
+                        <div class="metric-title">Fatigue Level</div>
+                        <div class="metric-value" id="fatigue-value">18</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill fill-fatigue" id="fatigue-bar" style="width: 18%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movement Display -->
+                <div class="movement-container">
+                    <div class="movement-title">
+                        <span>&#128694;</span>
+                        <span>Movement / Acceleration</span>
+                    </div>
+                    <div class="movement-axes">
+                        <div class="axis-display">
+                            <div class="axis-label">X-Axis</div>
+                            <div class="axis-value axis-x" id="accel-x">0.00</div>
+                        </div>
+                        <div class="axis-display">
+                            <div class="axis-label">Y-Axis</div>
+                            <div class="axis-value axis-y" id="accel-y">0.00</div>
+                        </div>
+                        <div class="axis-display">
+                            <div class="axis-label">Z-Axis</div>
+                            <div class="axis-value axis-z" id="accel-z">0.00</div>
+                        </div>
+                    </div>
+                    <div class="movement-intensity">
+                        <span class="intensity-label">Movement Intensity:</span>
+                        <span class="intensity-value" id="movement-intensity">Low</span>
+                    </div>
+                </div>
+
+                <!-- Breathing Pattern -->
+                <div class="breathing-container">
+                    <div class="breathing-title">Breathing Pattern Detection</div>
+                    <div class="breathing-visual">
+                        <div class="breath-circle breath-calm" id="breath-circle">
+                            &#127756;
+                        </div>
+                        <div class="breathing-info">
+                            <div class="breathing-state state-calm" id="breathing-state">Calm</div>
+                            <div class="breathing-rate" id="breathing-rate">~14 breaths/min</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Graph -->
+                <div class="graph-container">
+                    <div class="graph-title">
+                        <span>Real-time Biometric Data</span>
+                        <div class="graph-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: #ff6b9d;"></span>
+                                <span>Heart Rate</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: #00ccff;"></span>
+                                <span>Stress</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: #ffaa00;"></span>
+                                <span>Focus</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="biometricGraph"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls Panel -->
+            <div class="controls-panel">
+                <!-- Monitoring Controls -->
+                <div class="control-section">
+                    <h3>Monitoring Controls</h3>
+                    <button class="btn-start" id="btn-start" onclick="startMonitoring()">
+                        &#9654; Start Monitoring
+                    </button>
+                    <button class="btn-stop" id="btn-stop" onclick="stopMonitoring()" disabled>
+                        &#9632; Stop Monitoring
+                    </button>
+                </div>
+
+                <!-- Session Stats -->
+                <div class="control-section">
+                    <h3>Session Statistics</h3>
+                    <div class="session-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Session Duration</span>
+                            <span class="stat-value" id="session-duration">00:00</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Avg Heart Rate</span>
+                            <span class="stat-value" id="avg-hr">-- BPM</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Max Heart Rate</span>
+                            <span class="stat-value" id="max-hr">-- BPM</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Min Heart Rate</span>
+                            <span class="stat-value" id="min-hr">-- BPM</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Avg Stress Level</span>
+                            <span class="stat-value" id="avg-stress">--%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Data Points</span>
+                            <span class="stat-value" id="data-points">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert Panel -->
+                <div class="alert-panel alert-hidden" id="alert-panel">
+                    <div class="alert-title">
+                        <span>&#9888;</span>
+                        <span>Biometric Alert</span>
+                    </div>
+                    <div class="alert-message" id="alert-message">
+                        Elevated stress levels detected. Consider taking a short break.
+                    </div>
+                </div>
+
+                <!-- Insights Panel -->
+                <div class="control-section">
+                    <h3>Biometric Insights</h3>
+                    <div class="insights-panel" id="insights-panel">
+                        <div class="insight-item">
+                            <span class="insight-icon">&#128161;</span>
+                            <span class="insight-text">Start monitoring to receive personalized biometric insights based on your physiological data.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Settings -->
+                <div class="control-section">
+                    <h3>Simulation Settings</h3>
+                    <button onclick="simulateExercise()">&#127939; Simulate Exercise</button>
+                    <button onclick="simulateRelaxation()">&#128524; Simulate Relaxation</button>
+                    <button onclick="simulateStress()">&#128548; Simulate Stress</button>
+                    <button onclick="resetSimulation()">&#128260; Reset to Baseline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // BIOMETRIC LEARNING ENGINE SIMULATION
+        // ============================================
+
+        // Biometric State
+        const biometricState = {
+            isMonitoring: false,
+            sessionStartTime: null,
+
+            // Heart metrics
+            heartRate: 72,
+            targetHeartRate: 72,
+            hrv: 45,
+
+            // Other metrics
+            stressLevel: 32,
+            focusLevel: 75,
+            fatigueLevel: 18,
+
+            // Movement data
+            acceleration: { x: 0, y: 0, z: 0 },
+            movementIntensity: 'Low',
+
+            // Breathing
+            breathingPattern: 'calm',
+            breathingRate: 14,
+
+            // Statistics
+            hrHistory: [],
+            stressHistory: [],
+            focusHistory: [],
+            dataPoints: 0,
+
+            // Sensor availability
+            hasMotionSensor: false,
+            hasOrientationSensor: false,
+
+            // Simulation mode
+            simulationMode: 'baseline'
+        };
+
+        // Graph data
+        const graphData = {
+            heartRate: [],
+            stress: [],
+            focus: [],
+            maxPoints: 100
+        };
+
+        // Canvas and context
+        let canvas, ctx;
+        let animationFrame;
+        let updateInterval;
+
+        // Initialize
+        function init() {
+            canvas = document.getElementById('biometricGraph');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            detectSensors();
+            updateAllDisplays();
+            drawGraph();
+        }
+
+        // Resize canvas
+        function resizeCanvas() {
+            const wrapper = canvas.parentElement;
+            canvas.width = wrapper.clientWidth;
+            canvas.height = wrapper.clientHeight;
+            drawGraph();
+        }
+
+        // Detect available sensors
+        function detectSensors() {
+            // Check for DeviceMotion API
+            if (window.DeviceMotionEvent) {
+                biometricState.hasMotionSensor = true;
+                document.getElementById('dot-motion').className = 'sensor-dot sensor-available';
+                document.getElementById('status-motion').textContent = 'Available';
+            } else {
+                document.getElementById('dot-motion').className = 'sensor-dot sensor-unavailable';
+                document.getElementById('status-motion').textContent = 'Unavailable';
+            }
+
+            // Check for DeviceOrientation API
+            if (window.DeviceOrientationEvent) {
+                biometricState.hasOrientationSensor = true;
+                document.getElementById('dot-orientation').className = 'sensor-dot sensor-available';
+                document.getElementById('status-orientation').textContent = 'Available';
+            } else {
+                document.getElementById('dot-orientation').className = 'sensor-dot sensor-unavailable';
+                document.getElementById('status-orientation').textContent = 'Unavailable';
+            }
+
+            // Heart rate and HRV are always simulated (real sensors would require Web Bluetooth)
+            document.getElementById('dot-heartrate').className = 'sensor-dot sensor-simulated';
+            document.getElementById('status-heartrate').textContent = 'Simulated';
+            document.getElementById('dot-hrv').className = 'sensor-dot sensor-simulated';
+            document.getElementById('status-hrv').textContent = 'Simulated';
+        }
+
+        // Start monitoring
+        function startMonitoring() {
+            if (biometricState.isMonitoring) return;
+
+            biometricState.isMonitoring = true;
+            biometricState.sessionStartTime = Date.now();
+            biometricState.hrHistory = [];
+            biometricState.stressHistory = [];
+            biometricState.focusHistory = [];
+            biometricState.dataPoints = 0;
+            graphData.heartRate = [];
+            graphData.stress = [];
+            graphData.focus = [];
+
+            // Update button states
+            document.getElementById('btn-start').disabled = true;
+            document.getElementById('btn-start').classList.add('active');
+            document.getElementById('btn-stop').disabled = false;
+
+            // Start device motion listener if available
+            if (biometricState.hasMotionSensor) {
+                // Request permission for iOS 13+
+                if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                    DeviceMotionEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                window.addEventListener('devicemotion', handleMotion);
+                            }
+                        })
+                        .catch(console.error);
+                } else {
+                    window.addEventListener('devicemotion', handleMotion);
+                }
+            }
+
+            // Start update loop
+            updateInterval = setInterval(updateBiometrics, 100);
+
+            updateInsights([
+                { icon: '&#128994;', text: 'Monitoring active. Collecting biometric data...' },
+                { icon: '&#128161;', text: 'Heart rate variability (HRV) indicates your autonomic nervous system balance.' }
+            ]);
+        }
+
+        // Stop monitoring
+        function stopMonitoring() {
+            if (!biometricState.isMonitoring) return;
+
+            biometricState.isMonitoring = false;
+
+            // Update button states
+            document.getElementById('btn-start').disabled = false;
+            document.getElementById('btn-start').classList.remove('active');
+            document.getElementById('btn-stop').disabled = true;
+
+            // Remove device motion listener
+            window.removeEventListener('devicemotion', handleMotion);
+
+            // Stop update loop
+            clearInterval(updateInterval);
+
+            // Generate session summary
+            generateSessionSummary();
+        }
+
+        // Handle device motion events
+        function handleMotion(event) {
+            if (!biometricState.isMonitoring) return;
+
+            const accel = event.accelerationIncludingGravity || event.acceleration;
+            if (accel) {
+                biometricState.acceleration = {
+                    x: accel.x || 0,
+                    y: accel.y || 0,
+                    z: accel.z || 0
+                };
+            }
+        }
+
+        // Update biometric data
+        function updateBiometrics() {
+            if (!biometricState.isMonitoring) return;
+
+            // Simulate heart rate changes based on mode
+            simulateHeartRate();
+
+            // Simulate other metrics
+            simulateStress();
+            simulateFocus();
+            simulateFatigue();
+
+            // Simulate movement if no real sensor
+            if (!biometricState.hasMotionSensor) {
+                simulateMovement();
+            }
+
+            // Calculate movement intensity
+            calculateMovementIntensity();
+
+            // Detect breathing pattern
+            detectBreathingPattern();
+
+            // Record data points
+            biometricState.dataPoints++;
+            biometricState.hrHistory.push(biometricState.heartRate);
+            biometricState.stressHistory.push(biometricState.stressLevel);
+            biometricState.focusHistory.push(biometricState.focusLevel);
+
+            // Update graph data
+            graphData.heartRate.push(biometricState.heartRate);
+            graphData.stress.push(biometricState.stressLevel);
+            graphData.focus.push(biometricState.focusLevel);
+
+            // Limit graph data points
+            if (graphData.heartRate.length > graphData.maxPoints) {
+                graphData.heartRate.shift();
+                graphData.stress.shift();
+                graphData.focus.shift();
+            }
+
+            // Check for alerts
+            checkAlerts();
+
+            // Update displays
+            updateAllDisplays();
+            drawGraph();
+        }
+
+        // Simulate heart rate
+        function simulateHeartRate() {
+            const baseRate = {
+                baseline: 72,
+                exercise: 130,
+                relaxation: 58,
+                stress: 95
+            };
+
+            biometricState.targetHeartRate = baseRate[biometricState.simulationMode];
+
+            // Add natural variation
+            const variation = (Math.random() - 0.5) * 4;
+            biometricState.targetHeartRate += variation;
+
+            // Smooth transition
+            const diff = biometricState.targetHeartRate - biometricState.heartRate;
+            biometricState.heartRate += diff * 0.1;
+            biometricState.heartRate = Math.max(40, Math.min(200, biometricState.heartRate));
+
+            // HRV inversely related to stress (higher stress = lower HRV)
+            const baseHRV = biometricState.simulationMode === 'relaxation' ? 65 :
+                           biometricState.simulationMode === 'stress' ? 25 :
+                           biometricState.simulationMode === 'exercise' ? 35 : 45;
+            biometricState.hrv = baseHRV + (Math.random() - 0.5) * 10;
+            biometricState.hrv = Math.max(10, Math.min(100, biometricState.hrv));
+
+            // Update heart animation speed
+            const heartIcon = document.getElementById('heart-icon');
+            const animDuration = 60 / biometricState.heartRate;
+            heartIcon.style.animationDuration = animDuration + 's';
+        }
+
+        // Simulate stress level
+        function simulateStress() {
+            const baseStress = {
+                baseline: 32,
+                exercise: 45,
+                relaxation: 15,
+                stress: 78
+            };
+
+            const target = baseStress[biometricState.simulationMode] + (Math.random() - 0.5) * 10;
+            const diff = target - biometricState.stressLevel;
+            biometricState.stressLevel += diff * 0.05;
+            biometricState.stressLevel = Math.max(0, Math.min(100, biometricState.stressLevel));
+        }
+
+        // Simulate focus level
+        function simulateFocus() {
+            const baseFocus = {
+                baseline: 75,
+                exercise: 85,
+                relaxation: 90,
+                stress: 45
+            };
+
+            const target = baseFocus[biometricState.simulationMode] + (Math.random() - 0.5) * 8;
+            const diff = target - biometricState.focusLevel;
+            biometricState.focusLevel += diff * 0.05;
+            biometricState.focusLevel = Math.max(0, Math.min(100, biometricState.focusLevel));
+        }
+
+        // Simulate fatigue level
+        function simulateFatigue() {
+            // Fatigue slowly increases over time during exercise or stress
+            if (biometricState.simulationMode === 'exercise') {
+                biometricState.fatigueLevel += 0.02;
+            } else if (biometricState.simulationMode === 'stress') {
+                biometricState.fatigueLevel += 0.01;
+            } else if (biometricState.simulationMode === 'relaxation') {
+                biometricState.fatigueLevel -= 0.03;
+            }
+
+            biometricState.fatigueLevel += (Math.random() - 0.5) * 0.5;
+            biometricState.fatigueLevel = Math.max(0, Math.min(100, biometricState.fatigueLevel));
+        }
+
+        // Simulate movement when no real sensor
+        function simulateMovement() {
+            const baseMovement = {
+                baseline: 0.5,
+                exercise: 5,
+                relaxation: 0.2,
+                stress: 1.5
+            };
+
+            const intensity = baseMovement[biometricState.simulationMode];
+            biometricState.acceleration = {
+                x: (Math.random() - 0.5) * intensity * 2,
+                y: (Math.random() - 0.5) * intensity * 2,
+                z: 9.8 + (Math.random() - 0.5) * intensity
+            };
+        }
+
+        // Calculate movement intensity
+        function calculateMovementIntensity() {
+            const { x, y, z } = biometricState.acceleration;
+            const magnitude = Math.sqrt(x*x + y*y + (z-9.8)*(z-9.8));
+
+            if (magnitude < 1) {
+                biometricState.movementIntensity = 'Low';
+            } else if (magnitude < 3) {
+                biometricState.movementIntensity = 'Moderate';
+            } else if (magnitude < 6) {
+                biometricState.movementIntensity = 'High';
+            } else {
+                biometricState.movementIntensity = 'Very High';
+            }
+        }
+
+        // Detect breathing pattern based on HRV and heart rate
+        function detectBreathingPattern() {
+            const hr = biometricState.heartRate;
+            const hrv = biometricState.hrv;
+            const stress = biometricState.stressLevel;
+
+            if (stress > 60 || hr > 100) {
+                biometricState.breathingPattern = 'stressed';
+                biometricState.breathingRate = 18 + Math.random() * 6;
+            } else if (hr > 85 || stress > 40) {
+                biometricState.breathingPattern = 'excited';
+                biometricState.breathingRate = 16 + Math.random() * 4;
+            } else {
+                biometricState.breathingPattern = 'calm';
+                biometricState.breathingRate = 12 + Math.random() * 4;
+            }
+
+            // Update breathing visual
+            const breathCircle = document.getElementById('breath-circle');
+            breathCircle.className = 'breath-circle breath-' + biometricState.breathingPattern;
+
+            const stateEl = document.getElementById('breathing-state');
+            stateEl.textContent = biometricState.breathingPattern.charAt(0).toUpperCase() +
+                                  biometricState.breathingPattern.slice(1);
+            stateEl.className = 'breathing-state state-' + biometricState.breathingPattern;
+        }
+
+        // Check for alerts
+        function checkAlerts() {
+            const alertPanel = document.getElementById('alert-panel');
+            const alertMessage = document.getElementById('alert-message');
+
+            if (biometricState.heartRate > 160) {
+                alertPanel.classList.remove('alert-hidden');
+                alertMessage.textContent = 'Heart rate is very high (' + Math.round(biometricState.heartRate) +
+                    ' BPM). Consider slowing down and taking a rest.';
+            } else if (biometricState.stressLevel > 70) {
+                alertPanel.classList.remove('alert-hidden');
+                alertMessage.textContent = 'Elevated stress levels detected (' + Math.round(biometricState.stressLevel) +
+                    '%). Consider taking deep breaths or a short break.';
+            } else if (biometricState.fatigueLevel > 80) {
+                alertPanel.classList.remove('alert-hidden');
+                alertMessage.textContent = 'High fatigue levels detected. Rest is recommended to maintain optimal performance.';
+            } else {
+                alertPanel.classList.add('alert-hidden');
+            }
+        }
+
+        // Update all display elements
+        function updateAllDisplays() {
+            // Heart rate
+            document.getElementById('bpm-value').textContent = Math.round(biometricState.heartRate);
+            document.getElementById('hrv-value').textContent = Math.round(biometricState.hrv);
+
+            // Metrics
+            document.getElementById('stress-value').textContent = Math.round(biometricState.stressLevel);
+            document.getElementById('stress-bar').style.width = biometricState.stressLevel + '%';
+
+            document.getElementById('focus-value').textContent = Math.round(biometricState.focusLevel);
+            document.getElementById('focus-bar').style.width = biometricState.focusLevel + '%';
+
+            document.getElementById('fatigue-value').textContent = Math.round(biometricState.fatigueLevel);
+            document.getElementById('fatigue-bar').style.width = biometricState.fatigueLevel + '%';
+
+            // Movement
+            document.getElementById('accel-x').textContent = biometricState.acceleration.x.toFixed(2);
+            document.getElementById('accel-y').textContent = biometricState.acceleration.y.toFixed(2);
+            document.getElementById('accel-z').textContent = biometricState.acceleration.z.toFixed(2);
+            document.getElementById('movement-intensity').textContent = biometricState.movementIntensity;
+
+            // Breathing
+            document.getElementById('breathing-rate').textContent =
+                '~' + Math.round(biometricState.breathingRate) + ' breaths/min';
+
+            // Session stats
+            if (biometricState.isMonitoring && biometricState.sessionStartTime) {
+                const elapsed = Math.floor((Date.now() - biometricState.sessionStartTime) / 1000);
+                const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+                const seconds = (elapsed % 60).toString().padStart(2, '0');
+                document.getElementById('session-duration').textContent = minutes + ':' + seconds;
+
+                if (biometricState.hrHistory.length > 0) {
+                    const avgHR = biometricState.hrHistory.reduce((a, b) => a + b) / biometricState.hrHistory.length;
+                    const maxHR = Math.max(...biometricState.hrHistory);
+                    const minHR = Math.min(...biometricState.hrHistory);
+                    const avgStress = biometricState.stressHistory.reduce((a, b) => a + b) / biometricState.stressHistory.length;
+
+                    document.getElementById('avg-hr').textContent = Math.round(avgHR) + ' BPM';
+                    document.getElementById('max-hr').textContent = Math.round(maxHR) + ' BPM';
+                    document.getElementById('min-hr').textContent = Math.round(minHR) + ' BPM';
+                    document.getElementById('avg-stress').textContent = Math.round(avgStress) + '%';
+                }
+
+                document.getElementById('data-points').textContent = biometricState.dataPoints;
+            }
+        }
+
+        // Draw the real-time graph
+        function drawGraph() {
+            if (!ctx || !canvas) return;
+
+            const width = canvas.width;
+            const height = canvas.height;
+
+            // Clear canvas
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw grid lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = (height / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            // Draw data lines
+            if (graphData.heartRate.length > 1) {
+                // Heart rate (scaled to 40-180 BPM range)
+                drawLine(graphData.heartRate, '#ff6b9d', 40, 180);
+
+                // Stress (0-100)
+                drawLine(graphData.stress, '#00ccff', 0, 100);
+
+                // Focus (0-100)
+                drawLine(graphData.focus, '#ffaa00', 0, 100);
+            }
+        }
+
+        // Draw a single line on the graph
+        function drawLine(data, color, minVal, maxVal) {
+            if (data.length < 2) return;
+
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 5;
+            const effectiveHeight = height - padding * 2;
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            for (let i = 0; i < data.length; i++) {
+                const x = (i / (graphData.maxPoints - 1)) * width;
+                const normalizedValue = (data[i] - minVal) / (maxVal - minVal);
+                const y = height - padding - (normalizedValue * effectiveHeight);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+        }
+
+        // Update insights panel
+        function updateInsights(insights) {
+            const panel = document.getElementById('insights-panel');
+            panel.innerHTML = insights.map(insight =>
+                '<div class="insight-item">' +
+                '<span class="insight-icon">' + insight.icon + '</span>' +
+                '<span class="insight-text">' + insight.text + '</span>' +
+                '</div>'
+            ).join('');
+        }
+
+        // Generate session summary
+        function generateSessionSummary() {
+            const insights = [];
+
+            if (biometricState.hrHistory.length > 0) {
+                const avgHR = biometricState.hrHistory.reduce((a, b) => a + b) / biometricState.hrHistory.length;
+                const avgStress = biometricState.stressHistory.reduce((a, b) => a + b) / biometricState.stressHistory.length;
+
+                insights.push({
+                    icon: '&#128147;',
+                    text: 'Average heart rate: ' + Math.round(avgHR) + ' BPM. ' +
+                          (avgHR < 60 ? 'Resting heart rate in athletic range.' :
+                           avgHR < 80 ? 'Normal resting heart rate.' :
+                           'Elevated heart rate during session.')
+                });
+
+                insights.push({
+                    icon: '&#128200;',
+                    text: 'Average stress level: ' + Math.round(avgStress) + '%. ' +
+                          (avgStress < 30 ? 'Low stress - excellent relaxation.' :
+                           avgStress < 50 ? 'Moderate stress - within normal range.' :
+                           'Elevated stress - consider relaxation techniques.')
+                });
+
+                if (biometricState.fatigueLevel > 50) {
+                    insights.push({
+                        icon: '&#128164;',
+                        text: 'Fatigue accumulated during session. Adequate rest recommended before next activity.'
+                    });
+                }
+            } else {
+                insights.push({
+                    icon: '&#128161;',
+                    text: 'Session ended. Start monitoring again to collect biometric data.'
+                });
+            }
+
+            updateInsights(insights);
+        }
+
+        // Simulation mode functions
+        function simulateExercise() {
+            biometricState.simulationMode = 'exercise';
+            updateInsights([
+                { icon: '&#127939;', text: 'Exercise mode activated. Heart rate and movement intensity increasing.' },
+                { icon: '&#128170;', text: 'During exercise, heart rate increases to deliver more oxygen to working muscles.' }
+            ]);
+        }
+
+        function simulateRelaxation() {
+            biometricState.simulationMode = 'relaxation';
+            updateInsights([
+                { icon: '&#128524;', text: 'Relaxation mode activated. Heart rate decreasing, HRV improving.' },
+                { icon: '&#127774;', text: 'Higher HRV during relaxation indicates healthy parasympathetic activity.' }
+            ]);
+        }
+
+        function simulateStress() {
+            biometricState.simulationMode = 'stress';
+            updateInsights([
+                { icon: '&#128548;', text: 'Stress response simulated. Notice the changes in breathing pattern.' },
+                { icon: '&#9888;', text: 'Chronic stress can lead to reduced HRV and elevated baseline heart rate.' }
+            ]);
+        }
+
+        function resetSimulation() {
+            biometricState.simulationMode = 'baseline';
+            biometricState.fatigueLevel = 18;
+            updateInsights([
+                { icon: '&#128260;', text: 'Returned to baseline. All metrics normalizing.' },
+                { icon: '&#128161;', text: 'Baseline represents your resting physiological state.' }
+            ]);
+        }
+
+        // Initialize on page load
+        init();
+
+        /* ===== MOBILE TOUCH SUPPORT ===== */
+        (function() {
+            if (!/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
+            document.querySelectorAll('button').forEach(function(btn) {
+                btn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    btn.click();
+                }, {passive: false});
+            });
+        })();
+        /* ===== END MOBILE TOUCH SUPPORT ===== */
+    </script>
+    <script type="module" src="/assets/main-qZqwn-yL.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

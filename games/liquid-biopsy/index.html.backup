@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Biopsy Flow Lab | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; --amber: #ffaa00; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+    .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--emerald); }
+    .stat-label { font-size: 11px; color: #666; }
+    .blood-vessel {
+      width: 100%; height: 150px; background: linear-gradient(180deg, rgba(139,0,0,0.3), rgba(139,0,0,0.5));
+      border: 2px solid #8b0000; border-radius: 75px;
+      position: relative; overflow: hidden; margin-bottom: 20px;
+    }
+    .biomarker {
+      position: absolute; padding: 8px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: bold; cursor: pointer;
+      animation: flow 4s linear infinite; transition: transform 0.1s;
+    }
+    .biomarker:hover { transform: scale(1.2); }
+    .biomarker.KRAS { background: var(--crimson); top: 20px; }
+    .biomarker.BRAF { background: var(--amber); top: 50px; }
+    .biomarker.EGFR { background: var(--sapphire); top: 80px; }
+    .biomarker.TP53 { background: #8a2be2; top: 110px; }
+    .biomarker.captured { animation: capture 0.3s forwards; }
+    @keyframes flow { from { left: -80px; } to { left: 100%; } }
+    @keyframes capture { to { transform: scale(0); opacity: 0; } }
+    .captured-panel {
+      background: rgba(0,20,40,0.8); border: 1px solid rgba(0,85,255,0.3);
+      border-radius: 12px; padding: 15px; margin-bottom: 20px;
+    }
+    .captured-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; min-height: 40px; }
+    .captured-item { padding: 5px 12px; border-radius: 15px; font-size: 12px; }
+    .stage { margin-bottom: 15px; }
+    .stage-title { font-size: 14px; color: var(--amber); margin-bottom: 5px; }
+    .progress { height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--emerald); transition: width 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧬 Liquid Biopsy Flow Lab</h1>
+    <p class="subtitle">Capture circulating biomarkers from the bloodstream!</p>
+
+    <div class="stats">
+      <div><div class="stat-value" id="captured">0</div><div class="stat-label">Captured</div></div>
+      <div><div class="stat-value" id="stage">1</div><div class="stat-label">Stage</div></div>
+      <div><div class="stat-value" id="accuracy">0%</div><div class="stat-label">Accuracy</div></div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-title">Stage <span id="stageNum">1</span> Progress</div>
+      <div class="progress"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
+    </div>
+
+    <div class="blood-vessel" id="vessel"></div>
+
+    <div class="captured-panel">
+      <p style="font-size: 13px; color: #888; margin-bottom: 10px;">Captured Biomarkers:</p>
+      <div class="captured-list" id="capturedList"></div>
+    </div>
+
+    <p style="font-size: 13px; color: #666;">Click biomarkers as they flow past to capture them!</p>
+  </div>
+
+  <script>
+    const biomarkers = ['KRAS', 'BRAF', 'EGFR', 'TP53', 'HER2'];
+    const colors = { KRAS: '#ff3366', BRAF: '#ffaa00', EGFR: '#0055ff', TP53: '#8a2be2', HER2: '#00cc66' };
+    let captured = 0;
+    let stage = 1;
+    let stageTarget = 5;
+    const vessel = document.getElementById('vessel');
+    const capturedList = document.getElementById('capturedList');
+
+    function spawnBiomarker() {
+      const type = biomarkers[Math.floor(Math.random() * biomarkers.length)];
+      const b = document.createElement('div');
+      b.className = `biomarker ${type}`;
+      b.textContent = type;
+      b.style.top = (20 + Math.random() * 100) + 'px';
+      b.style.animationDuration = (3 + Math.random() * 2) + 's';
+      b.style.animationDelay = Math.random() + 's';
+      b.style.background = colors[type];
+
+      b.onclick = () => {
+        b.classList.add('captured');
+        setTimeout(() => b.remove(), 300);
+        captured++;
+        document.getElementById('captured').textContent = captured;
+
+        const item = document.createElement('div');
+        item.className = 'captured-item';
+        item.style.background = colors[type];
+        item.textContent = type;
+        capturedList.appendChild(item);
+
+        const progress = ((captured % stageTarget) / stageTarget) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+
+        if (captured % stageTarget === 0) {
+          stage++;
+          document.getElementById('stage').textContent = stage;
+          document.getElementById('stageNum').textContent = stage;
+        }
+
+        document.getElementById('accuracy').textContent = Math.min(100, Math.round(captured * 5)) + '%';
+      };
+
+      vessel.appendChild(b);
+      setTimeout(() => { if (b.parentNode) b.remove(); }, 6000);
+    }
+
+    setInterval(spawnBiomarker, 1200);
+    spawnBiomarker();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Lab - Interactive Biotech Simulations | Patient Analog</title>
+    <meta name="description" content="Explore interactive science simulations including pharmacokinetics, quantum biology, organoid cultivation, and RNA sequencing. Educational biotech games for all ages.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="patient analog, human simulation, organoids, organ-on-chip, microphysiological systems, MPS, iPSC, tissue engineering">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://patientanalog.com/games/science-lab.html">
+    <meta property="og:title" content="Science Lab - Interactive Biotech Simulations | Patient Analog">
+    <meta property="og:description" content="Explore interactive science simulations including pharmacokinetics, quantum biology, organoid cultivation, and RNA sequencing. Educational biotech games for all ages.">
+    <meta property="og:image" content="https://patientanalog.com/og-preview.png">
+    <meta property="og:site_name" content="Patient Analog - Human Simulation Technologies">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://patientanalog.com/games/science-lab.html">
+    <meta name="twitter:title" content="Science Lab - Interactive Biotech Simulations | Patient Analog">
+    <meta name="twitter:description" content="Explore interactive science simulations including pharmacokinetics, quantum biology, organoid cultivation, and RNA sequencing. Educational biotech games for all ages.">
+    <meta name="twitter:image" content="https://patientanalog.com/og-preview.png">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+  <!-- GA4 Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game-styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(135deg, var(--game-bg-deep) 0%, var(--game-bg-purple) 50%, var(--game-bg-navy) 100%);
+            color: var(--game-white);
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: ambientPulse 8s ease-in-out infinite;
+        }
+        @keyframes ambientPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .header {
+            text-align: center;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.25) 0%, rgba(157,0,255,0.15) 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 3px solid rgba(0,255,136,0.6);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,255,136,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+            z-index: 1;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 4s infinite;
+        }
+        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes pulse-glow { 0%, 100% { text-shadow: 0 0 20px rgba(0,255,136,0.6), 0 0 40px rgba(0,255,136,0.3); } 50% { text-shadow: 0 0 30px rgba(0,255,136,1), 0 0 60px rgba(0,255,136,0.6); } }
+        h1 { color: var(--game-green); font-size: 52px; margin-bottom: 15px; font-family: 'Syne', sans-serif; font-weight: 800; animation: pulse-glow 2s infinite; }
+        .subtitle { font-size: 16px; color: rgba(255,255,255,0.8); }
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; padding: 20px; background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,20,50,0.2)); border-radius: 15px; border: 2px solid rgba(0,255,136,0.4); z-index: 1; }
+        .stat-box { padding: 18px; background: linear-gradient(135deg, rgba(157,0,255,0.25), rgba(0,200,255,0.15)); border-radius: 12px; border: 2px solid rgba(0,255,136,0.4); text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 800; color: var(--game-green); font-family: 'Syne', sans-serif; }
+        .stat-label { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
+        .module-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; z-index: 1; }
+        .module-btn { padding: 32px; background: linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(0,255,136,0.05) 100%); border: 2px solid rgba(0,255,136,0.5); border-radius: 16px; cursor: pointer; text-align: center; transition: all 0.4s; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(0,255,136,0.15); }
+        .module-btn:hover { background: linear-gradient(135deg, rgba(0,255,136,0.3) 0%, rgba(0,255,136,0.15) 100%); border-color: var(--game-green); transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,255,136,0.4); }
+        .module-btn.active { background: linear-gradient(135deg, rgba(0,255,136,0.5) 0%, rgba(0,255,136,0.25) 100%); border-color: var(--game-green); box-shadow: 0 0 50px rgba(0,255,136,0.6); }
+        .module-container { background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,20,40,0.4) 100%); border: 2px solid rgba(0,255,136,0.4); border-radius: 20px; padding: 20px; min-height: 520px; z-index: 1; }
+        #current-module { width: 100%; height: 480px; max-height: 80vh; overflow: auto; }
+
+        /* Responsive game sizing */
+        @media (max-width: 1200px) {
+            #current-module { height: auto; min-height: 400px; max-height: 70vh; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            h1 { font-size: 32px; }
+            .header { padding: 30px 20px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; }
+            .stat-value { font-size: 24px; }
+            .module-selector { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .module-btn { padding: 15px 10px; }
+            .module-btn div:first-child { font-size: 30px !important; margin-bottom: 8px !important; }
+            .module-btn div:nth-child(2) { font-size: 12px !important; }
+            #current-module { min-height: 300px; max-height: 60vh; }
+            .module-container { padding: 10px; min-height: auto; }
+            button { padding: 12px 20px; font-size: 12px; }
+        }
+        @media (max-width: 480px) {
+            .module-selector { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+        .achievements { position: fixed; top: 20px; right: 20px; z-index: 1000; max-height: 400px; overflow-y: auto; }
+        .achievement-popup { background: linear-gradient(135deg, rgba(255,200,0,0.4), rgba(157,0,255,0.4)); border: 3px solid var(--game-gold); border-radius: 15px; padding: 20px; margin-bottom: 15px; animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 30px rgba(255,215,0,0.6); }
+        @keyframes slideIn { from { transform: translateX(500px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .achievement-title { font-weight: 800; color: var(--game-gold); font-size: 14px; }
+        .achievement-text { font-size: 12px; color: rgba(255,255,255,0.9); margin-top: 8px; }
+        .controls-section { margin-top: 30px; padding: 25px; background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,20,50,0.2)); border-radius: 16px; border: 2px solid rgba(0,255,136,0.3); z-index: 1; }
+        button { padding: 16px 32px; margin: 8px; background: linear-gradient(135deg, rgba(255,100,100,0.5) 0%, rgba(255,100,100,0.25) 100%); border: 2px solid var(--game-red); border-radius: 10px; color: var(--game-red); cursor: pointer; font-size: 14px; font-weight: 700; font-family: 'Space Mono', monospace; transition: all 0.3s; box-shadow: 0 8px 20px rgba(255,107,107,0.2); text-transform: uppercase; letter-spacing: 1.5px; }
+        button:hover { background: linear-gradient(135deg, rgba(255,100,100,0.8) 0%, rgba(255,100,100,0.5) 100%); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,107,107,0.4); }
+        .particle { position: fixed; pointer-events: none; z-index: 999; font-weight: bold; }
+        @keyframes float-up { to { transform: translateY(-150px) scale(0); opacity: 0; } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); } 20%, 40%, 60%, 80% { transform: translateX(4px); } }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Science Lab - Interactive Biotech Simulations",
+        "description": "Explore interactive science simulations including pharmacokinetics, quantum biology, organoid cultivation, and RNA sequencing. Educational biotech games for all ages.",
+        "author": {
+            "@type": "Organization",
+            "name": "Patient Analog",
+            "url": "https://patientanalog.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Patient Analog - Human Simulation Technologies",
+            "url": "https://patientanalog.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://patientanalog.com/favicon-512.png"
+            }
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-01-07",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://patientanalog.com/games/science-lab.html"
+        }
+    }
+    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>?? PATIENT ANALOG SCIENCE LAB ??</h1>
+        <p class="subtitle">ULTRA SCIENCE LABORATORY - Skill-Based Simulations</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-box">
+            <div class="stat-value" id="total-score">0</div>
+            <div class="stat-label">Total Score</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="achievements-count">0</div>
+            <div class="stat-label">Achievements</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="combo">0x</div>
+            <div class="stat-label">Combo Streak</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="level">1</div>
+            <div class="stat-label">Tier</div>
+        </div>
+    </div>
+
+    <div class="module-selector">
+        <div class="module-btn" data-module="lung"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-green);">Lung-on-Chip</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">?? Crises</div></div>
+        <div class="module-btn" data-module="pk"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-violet);">PK Digital Twin</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">??? Precision</div></div>
+        <div class="module-btn" data-module="quantum"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-cyan);">Quantum Discovery</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">???? Expert</div></div>
+        <div class="module-btn" data-module="kidney"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-cyan);">Kidney Nephron</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">?? Resource</div></div>
+        <div class="module-btn" data-module="organoid"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-magenta);">Organoid Culture</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">??? Growth</div></div>
+        <div class="module-btn" data-module="rna"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-gold);">RNA Structure</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">????? INSANE</div></div>
+        <div class="module-btn" data-module="crispr"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-rose);">CRISPR Editor</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">???? Gene Therapy</div></div>
+        <div class="module-btn" data-module="cart"><div style="font-size: 50px; margin-bottom: 15px;">??</div><div style="font-weight: bold; font-size: 18px; margin-bottom: 10px; color:var(--game-pink-light);">CAR-T Designer</div><div style="font-size: 12px; color: rgba(255,255,255,0.7);">????? Immunotherapy</div></div>
+    </div>
+
+    <div class="module-container">
+        <div id="current-module"></div>
+    </div>
+
+    <div class="controls-section">
+        <button id="stop-btn">?? CLEAR & RESET</button>
+        <button class="challenge-btn" id="challenge-btn" style="background:linear-gradient(135deg,rgba(255,0,100,0.5),rgba(255,0,100,0.25));border-color:var(--game-rose-bright);color:var(--game-rose-bright);">? CHALLENGE: OFF</button>
+        <button id="sound-btn">?? SOUND: ON</button>
+    </div>
+
+    <div class="achievements"></div>
+
+    <script>
+        let gameState = { totalScore: 0, achievements: new Set(), combo: 0, level: 1, soundEnabled: true, challengeMode: false, musicPlaying: false };
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let musicOscillators = [];
+        let currentMusic = null;
+        let currentGameType = null;
+
+        // MUSIC GENERATION - Procedural looping music for each game
+        // Music only starts when user explicitly starts the game
+        function playGameMusic(gameType) {
+            if (!gameState.soundEnabled) return;
+            stopAllMusic();
+            
+            const musicPatterns = {
+                lung: { baseFreq: 110, notes: [110, 165, 220, 165, 110, 247, 220, 247], tempo: 200, volume: 0.15 },
+                pk: { baseFreq: 130, notes: [130, 195, 260, 195, 130, 292, 260, 292], tempo: 160, volume: 0.15 },
+                quantum: { baseFreq: 165, notes: [165, 247, 330, 247, 165, 392, 330, 392], tempo: 140, volume: 0.15 },
+                kidney: { baseFreq: 220, notes: [220, 330, 440, 330, 220, 494, 440, 494], tempo: 180, volume: 0.15 },
+                organoid: { baseFreq: 174, notes: [174, 261, 349, 261, 174, 392, 349, 392], tempo: 170, volume: 0.15 },
+                rna: { baseFreq: 196, notes: [196, 294, 392, 294, 196, 440, 392, 440], tempo: 150, volume: 0.15 },
+                crispr: { baseFreq: 147, notes: [147, 220, 294, 220, 175, 262, 349, 262], tempo: 130, volume: 0.15 },
+                cart: { baseFreq: 185, notes: [185, 277, 370, 277, 220, 330, 440, 330], tempo: 120, volume: 0.15 }
+            };
+
+            const pattern = musicPatterns[gameType] || musicPatterns.lung;
+            playLoopingMusic(pattern);
+        }
+
+        function playLoopingMusic(pattern) {
+            const noteLength = (60 / pattern.tempo) * 1000;
+            let noteIndex = 0;
+
+            function playNextNote() {
+                if (!gameState.soundEnabled) return;
+                
+                const freq = pattern.notes[noteIndex % pattern.notes.length];
+                const now = audioCtx.currentTime;
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+                gain.gain.setValueAtTime(pattern.volume, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + (noteLength / 1000) * 0.8);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start(now);
+                osc.stop(now + (noteLength / 1000));
+                
+                musicOscillators.push(osc);
+                noteIndex++;
+                
+                currentMusic = setTimeout(playNextNote, noteLength);
+            }
+            
+            playNextNote();
+            gameState.musicPlaying = true;
+        }
+
+        function stopAllMusic() {
+            if (currentMusic) clearTimeout(currentMusic);
+            currentMusic = null;
+            musicOscillators.forEach(osc => {
+                try { osc.stop(); } catch(e) {}
+            });
+            musicOscillators = [];
+            gameState.musicPlaying = false;
+        }
+
+        // Start music only when user first interacts with game
+        function startMusicIfNeeded() {
+            if (!gameState.musicPlaying && currentGameType && gameState.soundEnabled) {
+                playGameMusic(currentGameType);
+            }
+        }
+        
+        function playSound(type) {
+            if (!gameState.soundEnabled) return;
+            const now = audioCtx.currentTime;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                if (type === 'success') {
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(1000, now + 0.15);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.linearRampToValueAtTime(0.001, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                } else if (type === 'click') {
+                    osc.frequency.setValueAtTime(400, now);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'danger') {
+                    osc.frequency.setValueAtTime(200, now);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.linearRampToValueAtTime(0.001, now + 0.1);
+                    osc.start(now);
+                    osc.stop(now + 0.1);
+                } else if (type === 'achievement') {
+                    [500, 700, 1000].forEach((f, i) => {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.frequency.setValueAtTime(f, now + i * 0.1);
+                        g.gain.setValueAtTime(0.2, now + i * 0.1);
+                        g.gain.linearRampToValueAtTime(0.001, now + i * 0.1 + 0.15);
+                        o.start(now + i * 0.1);
+                        o.stop(now + i * 0.1 + 0.15);
+                    });
+                }
+            } catch(e) {}
+        }
+
+        function createParticle(x, y, text, color, size = 20) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.textContent = text;
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.color = color;
+            p.style.fontSize = size + 'px';
+            p.style.animation = 'float-up 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 1200);
+        }
+
+        // EXPLOSION EFFECT - Multiple particles burst outward
+        function explosionEffect(x, y, color = 'var(--game-green)', count = 12) {
+            for (let i = 0; i < count; i++) {
+                const angle = (i / count) * Math.PI * 2;
+                const vx = Math.cos(angle) * 150;
+                const vy = Math.sin(angle) * 150;
+                
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.textContent = '?';
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                p.style.color = color;
+                p.style.fontSize = Math.random() * 15 + 10 + 'px';
+                p.style.position = 'fixed';
+                p.style.pointerEvents = 'none';
+                p.style.zIndex = '999';
+                
+                const keyframes = `@keyframes burst-${i} { 
+                    to { transform: translate(${vx}px, ${vy}px) scale(0); opacity: 0; }
+                }`;
+                
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
+                
+                p.style.animation = `burst-${i} 0.8s ease-out forwards`;
+                document.body.appendChild(p);
+                
+                setTimeout(() => { p.remove(); style.remove(); }, 800);
+            }
+        }
+
+        // GLITCH EFFECT - RGB shift for errors
+        function glitchEffect() {
+            const container = document.getElementById('current-module');
+            container.style.filter = 'blur(2px)';
+            const glitchStyle = Math.random() > 0.5 ? 'skew(5deg)' : 'skew(-5deg)';
+            container.style.transform = glitchStyle;
+            
+            setTimeout(() => {
+                container.style.filter = 'blur(0px)';
+                container.style.transform = 'skew(0deg)';
+            }, 100);
+        }
+
+        // PULSE EFFECT - Canvas glow pulse
+        function pulseEffect(canvas, color) {
+            const ctx = canvas.getContext('2d');
+            let progress = 0;
+            
+            function animate() {
+                progress += 0.05;
+                if (progress > 1) return;
+                
+                ctx.fillStyle = color.replace(')', `, ${(1 - progress) * 0.3})`).replace('rgb', 'rgba');
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 100 * progress, 0, Math.PI * 2);
+                ctx.fill();
+                
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // LIGHTNING BOLT EFFECT
+        function lightningEffect(x, y, color = 'var(--game-green)') {
+            const p = document.createElement('div');
+            p.style.position = 'fixed';
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.width = '2px';
+            p.style.height = '100px';
+            p.style.background = color;
+            p.style.boxShadow = `0 0 20px ${color}`;
+            p.style.zIndex = '999';
+            p.style.opacity = '1';
+            p.style.pointerEvents = 'none';
+            document.body.appendChild(p);
+            
+            let opacity = 1;
+            const interval = setInterval(() => {
+                opacity -= 0.15;
+                p.style.opacity = opacity;
+                if (opacity <= 0) {
+                    clearInterval(interval);
+                    p.remove();
+                }
+            }, 50);
+        }
+
+        // CRITICAL DISTORTION - Major failure effect
+        function criticalDistortion(intensity = 1) {
+            const container = document.getElementById('current-module');
+            let distort = 0;
+            
+            const interval = setInterval(() => {
+                distort += 0.1;
+                if (distort > 1) {
+                    clearInterval(interval);
+                    container.style.filter = 'none';
+                    container.style.transform = 'none';
+                    return;
+                }
+                
+                const skew = Math.sin(distort * Math.PI * 8) * 15;
+                const rotate = Math.cos(distort * Math.PI * 6) * 8;
+                const scale = 0.95 + Math.sin(distort * Math.PI * 10) * 0.05;
+                
+                container.style.filter = `hue-rotate(${distort * 360}deg) saturate(${1 + distort * 2}) contrast(${1 + distort * 1.5})`;
+                container.style.transform = `skewX(${skew}deg) rotate(${rotate}deg) scale(${scale})`;
+            }, 30);
+        }
+
+        // SPIRAL EFFECT - For achievements
+        function spiralEffect(x, y, color) {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const angle = (i / 8) * Math.PI * 2;
+                    const dist = 80;
+                    const px = x + Math.cos(angle) * dist;
+                    const py = y + Math.sin(angle) * dist;
+                    
+                    const p = document.createElement('div');
+                    p.textContent = '?';
+                    p.style.position = 'fixed';
+                    p.style.left = px + 'px';
+                    p.style.top = py + 'px';
+                    p.style.color = color;
+                    p.style.fontSize = '24px';
+                    p.style.zIndex = '999';
+                    p.style.pointerEvents = 'none';
+                    p.style.animation = 'float-up 1s ease-out forwards';
+                    document.body.appendChild(p);
+                    
+                    setTimeout(() => p.remove(), 1000);
+                }, i * 50);
+            }
+        }
+
+        function screenShake(i = 10) {
+            document.body.style.animation = `shake 0.3s`;
+            setTimeout(() => { document.body.style.animation = ''; }, 300);
+        }
+
+        function unlockAchievement(id, title, desc) {
+            if (gameState.achievements.has(id)) return;
+            gameState.achievements.add(id);
+            gameState.totalScore += 200;
+            gameState.combo += 1;
+            playSound('achievement');
+            screenShake(20);
+            
+            // SPIRAL EFFECT
+            spiralEffect(window.innerWidth / 2, window.innerHeight / 2, 'var(--game-gold)');
+            
+            const popup = document.createElement('div');
+            popup.className = 'achievement-popup';
+            popup.innerHTML = `<div class="achievement-title">?? ${title}</div><div class="achievement-text">+200 POINTS • ${desc}</div>`;
+            document.querySelector('.achievements').appendChild(popup);
+            setTimeout(() => popup.remove(), 4000);
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('total-score').textContent = gameState.totalScore.toLocaleString();
+            document.getElementById('achievements-count').textContent = gameState.achievements.size;
+            document.getElementById('combo').textContent = gameState.combo + 'x';
+            document.getElementById('level').textContent = Math.floor(gameState.achievements.size / 2) + 1;
+        }
+
+        document.getElementById('sound-btn').addEventListener('click', function() {
+            gameState.soundEnabled = !gameState.soundEnabled;
+            this.textContent = gameState.soundEnabled ? '?? SOUND: ON' : '?? SOUND: OFF';
+        });
+
+        let currentAnimationId = null;
+        function cancelCurrentGame() {
+            stopAllMusic();
+            if (currentAnimationId) cancelAnimationFrame(currentAnimationId);
+            currentAnimationId = null;
+        }
+
+        function initLungGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'lung';
+            // Music starts only after first user interaction with game controls
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-deepest),var(--game-bg-dark-purple));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(255,100,100,0.2),rgba(255,100,100,0.1));border-bottom:2px solid rgba(255,100,100,0.4);display:flex;justify-content:space-between;align-items:center;"><div><h3 style="margin:0;font-size:16px;color:var(--game-red);">?? LUNG-ON-CHIP</h3><p style="margin:3px 0 0;font-size:10px;color:rgba(255,255,255,0.6);">Handle CRISES - Difficulty scales!</p></div><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);font-weight:bold;" id="lung-score">0</div></div></div><canvas id="lung-game-canvas" style="flex:1;background:var(--game-bg-void);"></canvas><div style="padding:15px;background:rgba(0,0,0,0.3);border-top:2px solid rgba(255,100,100,0.2);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;"><button id="lung-oxygen" style="background:rgba(0,200,255,0.4);border-color:var(--game-cyan);color:var(--game-cyan);padding:12px;font-size:11px;">?? O2</button><button id="lung-surfactant" style="background:rgba(255,200,0,0.4);border-color:var(--game-gold);color:var(--game-gold);padding:12px;font-size:11px;">?? SURF</button><button id="lung-steroids" style="background:rgba(157,0,255,0.4);border-color:var(--game-violet);color:var(--game-violet);padding:12px;font-size:11px;">?? ANTI</button><button id="lung-vent" style="background:rgba(0,255,136,0.4);border-color:var(--game-green);color:var(--game-green);padding:12px;font-size:11px;">?? VENT</button></div></div>';
+
+            const canvas = document.getElementById('lung-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('lung-score');
+            
+            let state = {
+                o2: 75, co2: 55, inflammation: 30, surfactant: 60, barrier: 70, time: 0, score: 0, running: true,
+                challenge: gameState.challengeMode, crisisMode: false, crisisTimer: 0, difficulty: 1, buttonsPressed: 0
+            };
+
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
+            resizeCanvas();
+
+            document.getElementById('lung-oxygen').addEventListener('click', () => {
+                startMusicIfNeeded();
+                state.o2 = Math.min(100, state.o2 + 20);
+                state.score += 25;
+                gameState.combo += 1;
+                playSound('success');
+                explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-cyan)', 8);
+            });
+
+            document.getElementById('lung-surfactant').addEventListener('click', () => {
+                startMusicIfNeeded();
+                state.surfactant = Math.min(100, state.surfactant + 30);
+                state.score += 30;
+                gameState.combo += 1;
+                playSound('success');
+                explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-gold)', 8);
+            });
+
+            document.getElementById('lung-steroids').addEventListener('click', () => {
+                startMusicIfNeeded();
+                state.inflammation = Math.max(0, state.inflammation - 40);
+                state.barrier = Math.min(100, state.barrier + 25);
+                state.score += 40;
+                gameState.combo += 2;
+                playSound('success');
+                screenShake(12);
+                explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-violet)', 12);
+            });
+
+            document.getElementById('lung-vent').addEventListener('click', () => {
+                startMusicIfNeeded();
+                state.co2 = Math.max(30, state.co2 - 30);
+                state.o2 = Math.min(100, state.o2 + 15);
+                state.score += 35;
+                gameState.combo += 1;
+                playSound('click');
+                lightningEffect(canvas.width/2, canvas.height/2, 'var(--game-green)');
+            });
+
+            function simulate() {
+                state.time += 0.016;
+                state.difficulty = 1 + (state.time / 120);
+
+                state.o2 = Math.max(40, state.o2 - (0.6 * state.difficulty));
+                state.co2 = Math.min(70, state.co2 + (0.35 * state.difficulty));
+                state.surfactant = Math.max(15, state.surfactant - (0.3 * state.difficulty));
+                state.barrier = Math.max(30, state.barrier - (0.2 * state.difficulty));
+                state.inflammation = Math.min(100, state.inflammation + (0.4 * state.difficulty));
+                
+                if (state.challenge) {
+                    state.o2 -= 0.4;
+                    state.inflammation += 0.3;
+                }
+
+                if (Math.random() > 0.95 && !state.crisisMode) {
+                    state.crisisMode = true;
+                    state.crisisTimer = 0;
+                    playSound('danger');
+                    screenShake(20);
+                    explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-red-bright)', 20);
+                    glitchEffect();
+                }
+
+                if (state.crisisMode) {
+                    state.crisisTimer += 0.016;
+                    if (state.crisisTimer > 5) state.crisisMode = false;
+                }
+                
+                if (state.o2 > 80) state.score += 5;
+                if (state.inflammation < 20) state.score += 4;
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                if (state.crisisMode) {
+                    ctx.fillStyle = 'rgba(255,0,0,0.3)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'var(--game-red-pure)';
+                    ctx.font = 'bold 40px "Syne"';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('?? CRISIS MODE ??', canvas.width/2, 50);
+                }
+
+                ctx.fillStyle = 'var(--game-green)';
+                ctx.font = 'bold 14px "Space Mono"';
+                ctx.fillText(`O2: ${Math.round(state.o2)}% | CO2: ${Math.round(state.co2)}% | DIFF: ${state.difficulty.toFixed(1)}x`, 30, 40);
+                
+                ctx.fillStyle = state.crisisMode ? 'var(--game-red-pure)' : 'var(--game-gold)';
+                ctx.fillText(`INFLAMMATION: ${Math.round(state.inflammation)}% | BARRIER: ${Math.round(state.barrier)}%`, 30, 65);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() {
+                simulate();
+                render();
+                currentAnimationId = requestAnimationFrame(gameLoop);
+            }
+            
+            gameLoop();
+        }
+
+        function initPKGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'pk';
+            // Music starts only after first user interaction
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-ultra-deep),var(--game-bg-dark-purple));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(157,0,255,0.2),rgba(157,0,255,0.1));border-bottom:2px solid rgba(157,0,255,0.3);display:flex;justify-content:space-between;"><h3 style="margin:0;font-size:16px;color:var(--game-violet);">?? PK PRECISION DOSING</h3><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);font-weight:bold;" id="pk-score">0</div></div></div><canvas id="pk-game-canvas" style="flex:1;background:var(--game-bg-void);"></canvas><div style="padding:15px;background:rgba(0,0,0,0.3);border-top:2px solid rgba(157,0,255,0.2);display:flex;justify-content:center;gap:10px;"><button id="pk-1" style="background:rgba(0,200,255,0.4);border-color:var(--game-cyan);color:var(--game-cyan);padding:12px;font-size:11px;">? +25</button><button id="pk-2" style="background:rgba(0,255,136,0.4);border-color:var(--game-green);color:var(--game-green);padding:12px;font-size:11px;">?? +12</button><button id="pk-3" style="background:rgba(255,200,0,0.4);border-color:var(--game-gold);color:var(--game-gold);padding:12px;font-size:11px;">?? +3</button></div></div>';
+
+            const canvas = document.getElementById('pk-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('pk-score');
+            
+            let state = {
+                concentration: 0, time: 0, score: 0, therapeuticTime: 0, toxicHits: 0, subHits: 0,
+                challenge: gameState.challengeMode, precision: 0, difficulty: 1
+            };
+
+            function resizeCanvas() { canvas.width = canvas.getBoundingClientRect().width; canvas.height = canvas.getBoundingClientRect().height; }
+            resizeCanvas();
+
+            document.getElementById('pk-1').addEventListener('click', () => { startMusicIfNeeded(); state.concentration += 25; state.score += 5; gameState.combo += 1; playSound('click'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-cyan)', 6); });
+            document.getElementById('pk-2').addEventListener('click', () => { startMusicIfNeeded(); state.concentration += 12; state.score += 15; gameState.combo += 1; playSound('success'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-green)', 8); });
+            document.getElementById('pk-3').addEventListener('click', () => { startMusicIfNeeded(); state.concentration += 3; state.score += 25; gameState.combo += 2; playSound('success'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-gold)', 8); });
+
+            function simulate() {
+                state.time += 0.016;
+                state.difficulty = 1 + (state.time / 90);
+                state.concentration *= 0.975;
+                
+                if (state.challenge) state.concentration *= 0.97;
+
+                const inTherapeutic = state.concentration >= 10 && state.concentration <= 25;
+                
+                if (inTherapeutic) {
+                    state.therapeuticTime += 0.016;
+                    state.precision += 0.5;
+                    state.score += 5;
+                } else {
+                    state.precision = Math.max(0, state.precision - 1);
+                    if (state.concentration > 30) {
+                        state.toxicHits++;
+                        state.score = Math.max(0, state.score - 15);
+                        playSound('danger');
+                    }
+                }
+
+                if (state.therapeuticTime > 60) { stopAllMusic(); unlockAchievement('pk-master', 'Pharma Master', '60s therapeutic window!'); }
+                if (state.precision > 80) unlockAchievement('pk-precision', 'Precision Expert', 'Perfect dosing control!');
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const h = canvas.height;
+                const maxConc = 40;
+                const concY = h - 80 - (state.concentration / maxConc) * (h - 80);
+                const color = (state.concentration >= 10 && state.concentration <= 25) ? 'var(--game-green)' : state.concentration > 30 ? 'var(--game-red-bright)' : 'var(--game-gold)';
+                
+                ctx.fillStyle = 'rgba(0,255,136,0.15)';
+                ctx.fillRect(30, h - 80 - ((25 / maxConc) * (h - 80)), canvas.width - 60, ((25 - 10) / maxConc) * (h - 80));
+                
+                ctx.fillStyle = color;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 25;
+                ctx.fillRect(30, concY - 10, canvas.width - 60, 20);
+
+                ctx.fillStyle = 'var(--game-white)';
+                ctx.font = 'bold 24px "Space Mono"';
+                ctx.fillText(Math.round(state.concentration * 10) / 10 + ' ng/mL', 50, h - 30);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() { simulate(); render(); currentAnimationId = requestAnimationFrame(gameLoop); }
+            gameLoop();
+        }
+
+        function initQuantumGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'quantum';
+            // Music starts only after first user interaction
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-ultra-deep-alt),var(--game-bg-deep-purple));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(0,212,255,0.2),rgba(0,212,255,0.1));border-bottom:2px solid rgba(0,212,255,0.3);display:flex;justify-content:space-between;"><h3 style="margin:0;font-size:16px;color:var(--game-cyan);">?? QUANTUM DISCOVERY</h3><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);" id="quantum-score">0</div></div></div><canvas id="quantum-game-canvas" style="flex:1;background:var(--game-bg-void);cursor:crosshair;"></canvas><div style="padding:14px;background:rgba(0,0,0,0.3);border-top:2px solid rgba(0,212,255,0.2);text-align:center;font-size:12px;">?? CLICK ATOMS • BUILD MOLECULES • TIMING CRITICAL!</div></div>';
+
+            const canvas = document.getElementById('quantum-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('quantum-score');
+            
+            let state = { atoms: [], bonds: [], score: 0, time: 0, stability: 40, molecules: 0, challenge: gameState.challengeMode, difficulty: 1, validMolecules: 0 };
+
+            function resizeCanvas() { canvas.width = canvas.getBoundingClientRect().width; canvas.height = canvas.getBoundingClientRect().height; }
+            resizeCanvas();
+
+            for (let i = 0; i < 10; i++) {
+                state.atoms.push({ x: Math.random() * (canvas.width - 80) + 40, y: Math.random() * (canvas.height - 80) + 40, vx: (Math.random() - 0.5) * 3, vy: (Math.random() - 0.5) * 3, type: ['C', 'N', 'O', 'H', 'S'][Math.floor(Math.random() * 5)] });
+            }
+
+            canvas.addEventListener('click', function(e) {
+                startMusicIfNeeded();
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                for (let i = 0; i < state.atoms.length; i++) {
+                    const dx = x - state.atoms[i].x;
+                    const dy = y - state.atoms[i].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 14) {
+                        let bestAtom = -1;
+                        let bestDist = 120;
+
+                        for (let j = 0; j < state.atoms.length; j++) {
+                            if (i === j) continue;
+                            const d = Math.sqrt((state.atoms[j].x - state.atoms[i].x) ** 2 + (state.atoms[j].y - state.atoms[i].y) ** 2);
+                            if (d < bestDist) { bestDist = d; bestAtom = j; }
+                        }
+
+                        if (bestAtom !== -1) {
+                            const bondExists = state.bonds.some(b => (b.from === i && b.to === bestAtom) || (b.from === bestAtom && b.to === i));
+                            if (!bondExists) {
+                                state.bonds.push({ from: i, to: bestAtom });
+                                state.stability = Math.min(100, state.stability + 15);
+                                state.molecules += 1;
+
+                                const isValidBond = (state.atoms[i].type === 'C' && state.atoms[bestAtom].type === 'O') || (state.atoms[i].type === 'N' && state.atoms[bestAtom].type === 'C');
+                                state.score += isValidBond ? 60 : 40;
+                                if (isValidBond) state.validMolecules++;
+
+                                gameState.combo += isValidBond ? 2 : 1;
+                                playSound('success');
+                                screenShake(8);
+                                explosionEffect(x, y, isValidBond ? 'var(--game-green)' : 'var(--game-gold)', 10);
+                            }
+                        }
+                        break;
+                    }
+                }
+            });
+
+            function simulate() {
+                state.time += 0.016;
+                state.difficulty = 1 + (state.time / 90);
+
+                for (let i = 0; i < state.atoms.length; i++) {
+                    state.atoms[i].x += state.atoms[i].vx * state.difficulty;
+                    state.atoms[i].y += state.atoms[i].vy * state.difficulty;
+
+                    if (state.atoms[i].x < 20) { state.atoms[i].vx = Math.abs(state.atoms[i].vx); state.atoms[i].x = 20; }
+                    if (state.atoms[i].x > canvas.width - 20) { state.atoms[i].vx = -Math.abs(state.atoms[i].vx); state.atoms[i].x = canvas.width - 20; }
+                    if (state.atoms[i].y < 20) { state.atoms[i].vy = Math.abs(state.atoms[i].vy); state.atoms[i].y = 20; }
+                    if (state.atoms[i].y > canvas.height - 20) { state.atoms[i].vy = -Math.abs(state.atoms[i].vy); state.atoms[i].y = canvas.height - 20; }
+                }
+
+                state.stability = Math.max(0, state.stability - (0.4 * state.difficulty));
+                state.score += state.bonds.length * 3;
+
+                if (state.validMolecules > 8) unlockAchievement('quantum-expert', 'Molecular Architect', '8+ valid bonds!');
+                if (state.score > 1000) { stopAllMusic(); unlockAchievement('quantum-master', 'Quantum Master', 'Complex molecules!'); }
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.strokeStyle = 'var(--game-cyan)';
+                ctx.lineWidth = 4;
+                ctx.shadowColor = 'var(--game-cyan)';
+                ctx.shadowBlur = 12;
+                for (let bond of state.bonds) {
+                    const a = state.atoms[bond.from];
+                    const b = state.atoms[bond.to];
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+                ctx.shadowBlur = 0;
+
+                const colors = { C: 'var(--game-gold)', N: 'var(--game-red)', O: 'var(--game-green)', H: 'var(--game-white)', S: 'var(--game-violet)' };
+                for (let atom of state.atoms) {
+                    const color = colors[atom.type];
+                    ctx.fillStyle = color.replace(')', ', 0.3)').replace('rgb', 'rgba');
+                    ctx.beginPath();
+                    ctx.arc(atom.x, atom.y, 15, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.arc(atom.x, atom.y, 10, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.fillStyle = 'var(--game-white)';
+                ctx.font = 'bold 12px "Space Mono"';
+                ctx.fillText(`BONDS: ${state.bonds.length} | VALID: ${state.validMolecules}`, 20, 32);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() { simulate(); render(); currentAnimationId = requestAnimationFrame(gameLoop); }
+            gameLoop();
+        }
+
+        function initKidneyGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'kidney';
+            // Music starts only after first user interaction
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-deep-green),var(--game-bg-ultra-deep));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(0,255,136,0.2),rgba(0,255,136,0.1));border-bottom:2px solid rgba(0,255,136,0.3);display:flex;justify-content:space-between;"><h3 style="margin:0;font-size:16px;color:var(--game-green);">?? KIDNEY MANAGEMENT</h3><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);" id="kidney-score">0</div></div></div><canvas id="kidney-game-canvas" style="flex:1;background:var(--game-bg-void);"></canvas><div style="padding:15px;background:rgba(0,0,0,0.3);border-top:2px solid rgba(0,255,136,0.2);display:flex;gap:10px;justify-content:center;"><button id="kidney-1" style="background:rgba(0,200,255,0.4);border-color:var(--game-cyan);color:var(--game-cyan);padding:12px;font-size:11px;">?? HYDRATE</button><button id="kidney-2" style="background:rgba(255,100,100,0.4);border-color:var(--game-red);color:var(--game-red);padding:12px;font-size:11px;">?? LOWER BP</button><button id="kidney-3" style="background:rgba(0,255,136,0.4);border-color:var(--game-green);color:var(--game-green);padding:12px;font-size:11px;">?? REST</button></div></div>';
+
+            const canvas = document.getElementById('kidney-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('kidney-score');
+            
+            let state = { gfr: 100, bloodPressure: 130, injury: 10, score: 0, time: 0, stage: 0, challenge: gameState.challengeMode, optimal_periods: 0, difficulty: 1, criticalTriggered: false };
+
+            function resizeCanvas() { canvas.width = canvas.getBoundingClientRect().width; canvas.height = canvas.getBoundingClientRect().height; }
+            resizeCanvas();
+
+            document.getElementById('kidney-1').addEventListener('click', () => { startMusicIfNeeded(); state.gfr = Math.min(120, state.gfr + 12); state.score += 30; gameState.combo += 1; playSound('success'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-cyan)', 8); });
+            document.getElementById('kidney-2').addEventListener('click', () => { startMusicIfNeeded(); state.bloodPressure = Math.max(95, state.bloodPressure - 20); state.injury = Math.max(0, state.injury - 18); state.score += 40; gameState.combo += 2; playSound('success'); screenShake(10); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-red)', 12); });
+            document.getElementById('kidney-3').addEventListener('click', () => { startMusicIfNeeded(); state.injury = Math.max(0, state.injury - 30); state.gfr = Math.min(120, state.gfr + 10); state.score += 35; gameState.combo += 1; playSound('click'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-green)', 8); });
+
+            function simulate() {
+                state.time += 0.016;
+                state.difficulty = 1 + (state.time / 150);
+
+                state.bloodPressure = Math.min(170, state.bloodPressure + (0.4 * state.difficulty));
+                state.injury = Math.min(100, state.injury + (state.bloodPressure > 150 ? 0.8 : 0.15));
+                state.gfr = Math.max(20, state.gfr - (0.4 * state.difficulty));
+
+                if (state.challenge) { state.bloodPressure += 0.5; state.injury += 0.2; state.gfr -= 0.2; }
+
+                if (state.gfr >= 90 && state.bloodPressure < 140) { state.stage = 0; state.optimal_periods += 0.016; state.score += 5; }
+                else if (state.gfr >= 60) { state.stage = 1; state.score += 2; }
+                else if (state.gfr >= 30) { state.stage = 2; state.score = Math.max(0, state.score - 3); }
+                else { 
+                    if (state.stage !== 3) {
+                        screenShake(50);
+                        stopAllMusic();
+                        for (let i = 0; i < 40; i++) {
+                            explosionEffect(Math.random() * canvas.width, Math.random() * canvas.height, 'var(--game-red-bright)', 1);
+                        }
+                        state.criticalTriggered = true;
+                    }
+                    state.stage = 3; 
+                    state.score = Math.max(0, state.score - 8);
+                }
+
+                if (state.optimal_periods > 45) { stopAllMusic(); unlockAchievement('kidney-master', 'Nephrologist', 'Optimal function!'); }
+                if (state.score > 900) unlockAchievement('kidney-elite', 'Renal Elite', 'Elite management!');
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const stageColor = state.stage === 0 ? 'var(--game-green)' : state.stage === 1 ? 'var(--game-gold)' : state.stage === 2 ? 'var(--game-orange-bright)' : 'var(--game-red-bright)';
+                
+                ctx.fillStyle = 'rgba(0,255,136,0.2)';
+                ctx.fillRect(20, 20, 240, 30);
+                ctx.fillStyle = stageColor;
+                ctx.fillRect(20, 20, (state.gfr / 120) * 240, 30);
+
+                ctx.fillStyle = 'var(--game-white)';
+                ctx.font = 'bold 16px "Space Mono"';
+                ctx.fillText(`GFR: ${Math.round(state.gfr)}`, 270, 40);
+
+                ctx.fillStyle = stageColor;
+                ctx.textAlign = 'right';
+                ctx.fillText(['NORMAL', 'STAGE 1', 'STAGE 2', 'STAGE 3'][state.stage], canvas.width - 30, 40);
+                ctx.textAlign = 'left';
+
+                ctx.fillStyle = 'var(--game-red)';
+                ctx.font = 'bold 13px "Space Mono"';
+                ctx.fillText(`BP: ${Math.round(state.bloodPressure)} | INJURY: ${Math.round(state.injury)}%`, 20, canvas.height - 20);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() { simulate(); render(); currentAnimationId = requestAnimationFrame(gameLoop); }
+            gameLoop();
+        }
+
+        function initOrganoidGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'organoid';
+            // Music starts only after first user interaction
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-blood-darker),var(--game-bg-blood-dark));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(255,0,150,0.2),rgba(255,0,150,0.1));border-bottom:2px solid rgba(255,0,150,0.3);display:flex;justify-content:space-between;"><h3 style="margin:0;font-size:16px;color:var(--game-magenta);">?? ORGANOID CULTURE</h3><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);" id="organoid-score">0</div></div></div><canvas id="organoid-game-canvas" style="flex:1;background:var(--game-bg-void);"></canvas><div style="padding:15px;background:rgba(0,0,0,0.3);border-top:2px solid rgba(255,0,150,0.2);display:flex;gap:10px;justify-content:center;"><button id="org-1" style="background:rgba(0,200,255,0.4);border-color:var(--game-cyan);color:var(--game-cyan);padding:12px;font-size:11px;">?? O2</button><button id="org-2" style="background:rgba(255,200,0,0.4);border-color:var(--game-gold);color:var(--game-gold);padding:12px;font-size:11px;">?? FEED</button><button id="org-3" style="background:rgba(157,0,255,0.4);border-color:var(--game-violet);color:var(--game-violet);padding:12px;font-size:11px;">? STIM</button></div></div>';
+
+            const canvas = document.getElementById('organoid-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('organoid-score');
+            
+            let state = { growth: 25, oxygen: 70, nutrients: 65, differentiation: 0, maturity: 0, score: 0, time: 0, challenge: gameState.challengeMode, difficulty: 1 };
+
+            function resizeCanvas() { canvas.width = canvas.getBoundingClientRect().width; canvas.height = canvas.getBoundingClientRect().height; }
+            resizeCanvas();
+
+            document.getElementById('org-1').addEventListener('click', () => { startMusicIfNeeded(); state.oxygen = Math.min(100, state.oxygen + 30); state.growth = Math.min(100, state.growth + 10); state.score += 25; gameState.combo += 1; playSound('success'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-cyan)', 8); });
+            document.getElementById('org-2').addEventListener('click', () => { startMusicIfNeeded(); state.nutrients = Math.min(100, state.nutrients + 25); state.growth = Math.min(100, state.growth + 15); state.score += 35; gameState.combo += 1; playSound('click'); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-gold)', 8); });
+            document.getElementById('org-3').addEventListener('click', () => { startMusicIfNeeded(); state.differentiation = Math.min(100, state.differentiation + 22); state.maturity = Math.min(100, state.maturity + 18); state.score += 50; gameState.combo += 2; playSound('success'); screenShake(10); explosionEffect(canvas.width/2, canvas.height/2, 'var(--game-violet)', 12); });
+
+            function simulate() {
+                state.time += 0.016;
+                state.difficulty = 1 + (state.time / 180);
+
+                state.oxygen = Math.max(25, state.oxygen - (0.5 * state.difficulty));
+                state.nutrients = Math.max(15, state.nutrients - (0.6 * state.difficulty));
+                state.growth = Math.max(15, state.growth - (0.4 * state.difficulty));
+
+                if (state.challenge) { state.oxygen -= 0.4; state.nutrients -= 0.4; }
+
+                if (state.oxygen > 75 && state.nutrients > 75) { state.growth = Math.min(100, state.growth + 1.5); state.score += 4; }
+                if (state.differentiation > 50) { state.maturity = Math.min(100, state.maturity + (0.8 * state.differentiation / 100)); }
+
+                if (state.growth > 95 && state.maturity > 85) { stopAllMusic(); unlockAchievement('organoid-mature', 'Tissue Engineer', 'Mature organoid!'); }
+                if (state.score > 1000) unlockAchievement('organoid-elite', 'Bioengineer', 'Culture mastery!');
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const orgSize = 25 + (state.growth / 100) * 70;
+                const color = state.maturity > 75 ? 'var(--game-magenta)' : state.growth > 70 ? 'var(--game-pink-light)' : 'var(--game-pink-soft)';
+
+                ctx.fillStyle = color.replace(')', ', 0.15)').replace('rgb', 'rgba');
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, orgSize + 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = color;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 20;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, orgSize, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = 'var(--game-cyan)';
+                ctx.font = 'bold 13px "Space Mono"';
+                ctx.fillText(`GROWTH: ${Math.round(state.growth)}%`, 20, 30);
+
+                ctx.fillStyle = 'var(--game-gold)';
+                ctx.fillText(`O2: ${Math.round(state.oxygen)}% | NUTRIENTS: ${Math.round(state.nutrients)}%`, 20, 55);
+
+                ctx.fillStyle = color;
+                ctx.fillText(`MATURITY: ${Math.round(state.maturity)}%`, 20, canvas.height - 20);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() { simulate(); render(); currentAnimationId = requestAnimationFrame(gameLoop); }
+            gameLoop();
+        }
+
+        function initRNAGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'rna';
+            // Music starts only after first user interaction
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-ultra-deep),var(--game-bg-dark-purple));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;"><div style="padding:15px;background:linear-gradient(90deg,rgba(157,0,255,0.2),rgba(157,0,255,0.1));border-bottom:2px solid rgba(157,0,255,0.3);display:flex;justify-content:space-between;"><h3 style="margin:0;font-size:16px;color:var(--game-violet);">?? RNA MASTER FOLD</h3><div style="text-align:right;"><div style="font-size:28px;color:var(--game-green);" id="rna-score">0</div></div></div><canvas id="rna-game-canvas" style="flex:1;background:var(--game-bg-void);cursor:crosshair;"></canvas><div style="padding:12px;background:rgba(0,0,0,0.3);text-align:center;font-size:10px;color:rgba(255,255,255,0.8);">?? EXPERT: Pair all bases perfectly • GC=3pts • AU/GU=2pts • Speed matters!</div></div>';
+
+            const canvas = document.getElementById('rna-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('rna-score');
+            
+            let state = { sequence: 'GGGGAAACCCUUUUGGAACCUU', structure: new Array(22).fill(-1), score: 0, time: 0, selectedBase: -1, pairs: 0, challenge: gameState.challengeMode, perfectionBonus: 0, speed: 0 };
+
+            function resizeCanvas() { canvas.width = canvas.getBoundingClientRect().width; canvas.height = canvas.getBoundingClientRect().height; }
+            resizeCanvas();
+
+            canvas.addEventListener('click', function(e) {
+                startMusicIfNeeded();
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(canvas.width, canvas.height) * 0.30;
+                const n = state.sequence.length;
+                const angleStep = (2 * Math.PI) / n;
+
+                for (let i = 0; i < n; i++) {
+                    const angle = i * angleStep - Math.PI / 2;
+                    const bx = centerX + Math.cos(angle) * radius;
+                    const by = centerY + Math.sin(angle) * radius;
+                    const dist = Math.sqrt((x - bx) ** 2 + (y - by) ** 2);
+
+                    if (dist < 18) {
+                        if (state.selectedBase === -1) {
+                            state.selectedBase = i;
+                            playSound('click');
+                        } else {
+                            const canPair = (state.sequence[state.selectedBase] === 'A' && state.sequence[i] === 'U') || (state.sequence[state.selectedBase] === 'U' && state.sequence[i] === 'A') || (state.sequence[state.selectedBase] === 'G' && state.sequence[i] === 'C') || (state.sequence[state.selectedBase] === 'C' && state.sequence[i] === 'G') || (state.sequence[state.selectedBase] === 'G' && state.sequence[i] === 'U') || (state.sequence[state.selectedBase] === 'U' && state.sequence[i] === 'G');
+                            const validDistance = Math.abs(state.selectedBase - i) > 4;
+                            const notAlreadyPaired = state.structure[state.selectedBase] === -1 && state.structure[i] === -1;
+
+                            if (canPair && validDistance && notAlreadyPaired) {
+                                state.structure[state.selectedBase] = i;
+                                state.structure[i] = state.selectedBase;
+                                state.pairs += 1;
+                                
+                                const isGC = (state.sequence[state.selectedBase] === 'G' && state.sequence[i] === 'C') || (state.sequence[state.selectedBase] === 'C' && state.sequence[i] === 'G');
+                                state.score += isGC ? 40 : 25;
+                                gameState.combo += isGC ? 2 : 1;
+                                
+                                playSound('success');
+                                screenShake(6);
+                                explosionEffect(bx, by, isGC ? 'var(--game-green)' : 'var(--game-gold)', 8);
+                            } else {
+                                playSound('danger');
+                                glitchEffect();
+                            }
+                            state.selectedBase = -1;
+                        }
+                        break;
+                    }
+                }
+            });
+
+            function simulate() {
+                state.time += 0.016;
+                state.speed = state.pairs / (state.time + 1);
+                
+                state.score += state.pairs * 0.4;
+
+                if (state.pairs === state.sequence.length / 2) { state.score += 500; stopAllMusic(); unlockAchievement('rna-perfect', 'RNA Perfect Fold', 'All bases folded!'); }
+                if (state.pairs >= 10) unlockAchievement('rna-expert', 'RNA Expert', '10+ pairs!');
+                if (state.score > 1500) unlockAchievement('rna-master', 'RNA Master', 'Structural mastery!');
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(canvas.width, canvas.height) * 0.30;
+                const n = state.sequence.length;
+                const angleStep = (2 * Math.PI) / n;
+                const positions = [];
+
+                for (let i = 0; i < n; i++) {
+                    const angle = i * angleStep - Math.PI / 2;
+                    positions.push({ x: centerX + Math.cos(angle) * radius, y: centerY + Math.sin(angle) * radius });
+                }
+
+                for (let i = 0; i < n; i++) {
+                    if (state.structure[i] > i) {
+                        const j = state.structure[i];
+                        const isGC = (state.sequence[i] === 'G' && state.sequence[j] === 'C') || (state.sequence[i] === 'C' && state.sequence[j] === 'G');
+                        const color = isGC ? 'var(--game-green)' : 'var(--game-gold)';
+                        
+                        ctx.strokeStyle = color.replace(')', ', 0.4)').replace('rgb', 'rgba');
+                        ctx.lineWidth = 12;
+                        ctx.beginPath();
+                        ctx.moveTo(positions[i].x, positions[i].y);
+                        ctx.lineTo(positions[j].x, positions[j].y);
+                        ctx.stroke();
+                        
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 6;
+                        ctx.shadowColor = color;
+                        ctx.shadowBlur = 15;
+                        ctx.beginPath();
+                        ctx.moveTo(positions[i].x, positions[i].y);
+                        ctx.lineTo(positions[j].x, positions[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                const baseColors = { A: 'var(--game-cyan)', U: 'var(--game-red)', G: 'var(--game-green)', C: 'var(--game-gold)' };
+                for (let i = 0; i < n; i++) {
+                    const color = baseColors[state.sequence[i]];
+                    const isPaired = state.structure[i] !== -1;
+                    const isSelected = state.selectedBase === i;
+
+                    ctx.fillStyle = color.replace(')', ', 0.3)').replace('rgb', 'rgba');
+                    ctx.beginPath();
+                    ctx.arc(positions[i].x, positions[i].y, 18, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = color;
+                    ctx.globalAlpha = isPaired ? 1 : 0.7;
+                    ctx.beginPath();
+                    ctx.arc(positions[i].x, positions[i].y, 12, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+
+                    if (isSelected) {
+                        ctx.strokeStyle = 'var(--game-white)';
+                        ctx.lineWidth = 4;
+                        ctx.shadowColor = 'var(--game-white)';
+                        ctx.shadowBlur = 15;
+                        ctx.beginPath();
+                        ctx.arc(positions[i].x, positions[i].y, 17, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+
+                    ctx.fillStyle = 'var(--game-black)';
+                    ctx.font = 'bold 11px "Space Mono"';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(state.sequence[i], positions[i].x, positions[i].y);
+                }
+
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = 'var(--game-green)';
+                ctx.font = 'bold 16px "Space Mono"';
+                ctx.fillText(`PAIRS: ${state.pairs}/${Math.round(state.sequence.length/2)}`, 25, 30);
+
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() { simulate(); render(); currentAnimationId = requestAnimationFrame(gameLoop); }
+            gameLoop();
+        }
+
+        // ---------------------------------------------------------------
+        // CRISPR GENE EDITOR - Cut and repair disease-causing mutations
+        // ---------------------------------------------------------------
+        function initCRISPRGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'crispr';
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-wine-alt),var(--game-bg-deepest));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+                    <div style="padding:15px;background:linear-gradient(90deg,rgba(255,51,102,0.2),rgba(255,51,102,0.1));border-bottom:2px solid rgba(255,51,102,0.3);display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <h3 style="margin:0;font-size:16px;color:var(--game-rose);">?? CRISPR GENE EDITOR</h3>
+                            <p style="margin:3px 0 0;font-size:10px;color:rgba(255,255,255,0.6);">Target mutations • Guide RNA • Repair DNA</p>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:28px;color:var(--game-green);font-weight:bold;" id="crispr-score">0</div>
+                        </div>
+                    </div>
+                    <canvas id="crispr-game-canvas" style="flex:1;background:var(--game-bg-void);cursor:crosshair;"></canvas>
+                    <div style="padding:12px;background:rgba(0,0,0,0.4);border-top:2px solid rgba(255,51,102,0.2);display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                        <button id="crispr-guide" style="background:rgba(0,200,255,0.4);border:2px solid var(--game-cyan);color:var(--game-cyan);padding:10px 15px;font-size:11px;border-radius:8px;cursor:pointer;">?? GUIDE RNA</button>
+                        <button id="crispr-cut" style="background:rgba(255,51,102,0.4);border:2px solid var(--game-rose);color:var(--game-rose);padding:10px 15px;font-size:11px;border-radius:8px;cursor:pointer;">?? CAS9 CUT</button>
+                        <button id="crispr-repair" style="background:rgba(0,255,136,0.4);border:2px solid var(--game-green);color:var(--game-green);padding:10px 15px;font-size:11px;border-radius:8px;cursor:pointer;">?? HDR REPAIR</button>
+                        <button id="crispr-next" style="background:rgba(255,215,0,0.4);border:2px solid var(--game-gold);color:var(--game-gold);padding:10px 15px;font-size:11px;border-radius:8px;cursor:pointer;">?? NEXT GENE</button>
+                    </div>
+                </div>`;
+
+            const canvas = document.getElementById('crispr-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('crispr-score');
+
+            // Gene therapy scenarios - FDA-approved and clinical trial data
+            const scenarios = [
+                {
+                    gene: 'HBB',
+                    disease: 'Sickle Cell Anemia',
+                    sequence: 'ATGGTGCACCTGACTCCTGAGGAGAAGTCT',
+                    mutationPos: 17,
+                    mutation: 'A?T (E6V)',
+                    pamSite: 15,
+                    description: 'Fix beta-globin mutation causing sickling',
+                    clinicalInfo: 'FDA approved Dec 2023 (Casgevy)',
+                    mechanism: 'Disrupt BCL11A to reactivate fetal hemoglobin',
+                    efficacy: '93% transfusion-free at 12 months',
+                    offTargetRisk: 'Low'
+                },
+                {
+                    gene: 'DMD',
+                    disease: 'Duchenne Muscular Dystrophy',
+                    sequence: 'ATGCTTTGGTGGGAAGAAGTAGAGGACTGT',
+                    mutationPos: 12,
+                    mutation: 'Exon 51 skip',
+                    pamSite: 10,
+                    description: 'Restore dystrophin reading frame',
+                    clinicalInfo: 'Phase 1/2 trials (Sarepta, CRISPR Therapeutics)',
+                    mechanism: 'Exon skipping to produce truncated but functional dystrophin',
+                    efficacy: '~20% dystrophin restoration in muscle biopsies',
+                    offTargetRisk: 'Medium'
+                },
+                {
+                    gene: 'CFTR',
+                    disease: 'Cystic Fibrosis',
+                    sequence: 'ATGCAGAGGTCGCCTCTGGAAAAGGCCAGC',
+                    mutationPos: 21,
+                    mutation: 'F508del',
+                    pamSite: 19,
+                    description: 'Repair chloride channel folding defect',
+                    clinicalInfo: 'Preclinical development',
+                    mechanism: 'Direct correction or insertion of functional CFTR',
+                    efficacy: 'In vitro: 40% channel function restored',
+                    offTargetRisk: 'Low'
+                },
+                {
+                    gene: 'TTR',
+                    disease: 'Transthyretin Amyloidosis',
+                    sequence: 'ATGGCGACCCTGGAAAAGCTGATGAAGGCC',
+                    mutationPos: 8,
+                    mutation: 'V30M/V122I',
+                    pamSite: 6,
+                    description: 'Reduce toxic protein aggregation',
+                    clinicalInfo: 'FDA approved Dec 2023 (NTLA-2001)',
+                    mechanism: 'In vivo liver editing to knock down TTR',
+                    efficacy: '87% TTR reduction sustained at 2 years',
+                    offTargetRisk: 'Very Low'
+                },
+                {
+                    gene: 'PCSK9',
+                    disease: 'Familial Hypercholesterolemia',
+                    sequence: 'ATGGATTTATCTGCTCTTCGCGTTGAAGAA',
+                    mutationPos: 15,
+                    mutation: 'Gain-of-function',
+                    pamSite: 13,
+                    description: 'Permanently lower LDL cholesterol',
+                    clinicalInfo: 'Phase 1 trials (Verve Therapeutics)',
+                    mechanism: 'Base editing to introduce stop codon in PCSK9',
+                    efficacy: '55% LDL reduction in non-human primates',
+                    offTargetRisk: 'Low'
+                },
+                {
+                    gene: 'BCL11A',
+                    disease: 'Beta-Thalassemia',
+                    sequence: 'GCCAATCAGGGCAGAGTAGAACTGTGATGA',
+                    mutationPos: 18,
+                    mutation: 'Enhancer disruption',
+                    pamSite: 16,
+                    description: 'Reactivate fetal hemoglobin production',
+                    clinicalInfo: 'FDA approved Dec 2023 (Casgevy)',
+                    mechanism: 'Edit erythroid enhancer of BCL11A',
+                    efficacy: '89% transfusion-independent at 24 months',
+                    offTargetRisk: 'Low'
+                },
+                {
+                    gene: 'CD19-CAR',
+                    disease: 'B-Cell Lymphoma',
+                    sequence: 'ATGCTGCTGCTGCTGATGATGATGCTGCTG',
+                    mutationPos: 10,
+                    mutation: 'CAR insertion',
+                    pamSite: 8,
+                    description: 'Engineer T-cells to target cancer',
+                    clinicalInfo: 'Multiple FDA-approved CAR-T products',
+                    mechanism: 'CRISPR knockout of TRAC + CAR knock-in',
+                    efficacy: '83% complete response in r/r ALL',
+                    offTargetRisk: 'Medium (allogeneic)'
+                }
+            ];
+
+            let state = {
+                currentScenario: 0,
+                phase: 'target', // target, cut, repair, complete
+                score: 0,
+                guideRNA: null,
+                cutMade: false,
+                repairDone: false,
+                cursorPos: { x: 0, y: 0 },
+                helixRotation: 0,
+                particles: [],
+                cas9Position: null,
+                successStreak: 0,
+                time: 0,
+                editingEfficiency: 0,
+                offTargetEvents: 0,
+                patientsHelped: 0,
+                showingInfo: false,
+                totalEdits: 0,
+                perfectEdits: 0
+            };
+
+            function resizeCanvas() {
+                canvas.width = canvas.getBoundingClientRect().width;
+                canvas.height = canvas.getBoundingClientRect().height;
+            }
+            resizeCanvas();
+
+            // Track cursor for Cas9 positioning
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                state.cursorPos.x = e.clientX - rect.left;
+                state.cursorPos.y = e.clientY - rect.top;
+            });
+
+            // Click to select target
+            canvas.addEventListener('click', (e) => {
+                startMusicIfNeeded();
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const scenario = scenarios[state.currentScenario];
+                const baseWidth = canvas.width / (scenario.sequence.length + 2);
+                const clickedBase = Math.floor((x - baseWidth) / baseWidth);
+
+                if (state.phase === 'target' && clickedBase >= 0 && clickedBase < scenario.sequence.length) {
+                    // Check if clicked near PAM site (NGG)
+                    if (Math.abs(clickedBase - scenario.pamSite) <= 2) {
+                        state.guideRNA = clickedBase;
+                        state.phase = 'cut';
+                        state.score += 50;
+                        gameState.combo += 1;
+                        playSound('success');
+                        explosionEffect(x, y, 'var(--game-cyan)', 15);
+                        createParticles(x, y, 'var(--game-cyan)', 20);
+                    } else {
+                        playSound('danger');
+                        glitchEffect();
+                        state.score = Math.max(0, state.score - 10);
+                    }
+                }
+            });
+
+            // Button handlers
+            document.getElementById('crispr-guide').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'target') {
+                    // Highlight the PAM site as hint
+                    createParticles(canvas.width / 2, canvas.height / 2, 'var(--game-cyan)', 10);
+                    playSound('click');
+                }
+            });
+
+            document.getElementById('crispr-cut').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'cut' && state.guideRNA !== null) {
+                    const scenario = scenarios[state.currentScenario];
+                    // Check if cut is at mutation site
+                    if (Math.abs(state.guideRNA - scenario.mutationPos) <= 3) {
+                        state.cutMade = true;
+                        state.phase = 'repair';
+                        state.score += 75;
+                        gameState.combo += 2;
+                        playSound('success');
+                        screenShake(15);
+                        const baseWidth = canvas.width / (scenario.sequence.length + 2);
+                        const cutX = (scenario.mutationPos + 1) * baseWidth;
+                        explosionEffect(cutX, canvas.height / 2, 'var(--game-rose)', 25);
+                        createParticles(cutX, canvas.height / 2, 'var(--game-rose)', 30);
+                    } else {
+                        // Off-target cut!
+                        playSound('danger');
+                        glitchEffect();
+                        state.score = Math.max(0, state.score - 30);
+                        state.successStreak = 0;
+                    }
+                }
+            });
+
+            document.getElementById('crispr-repair').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'repair' && state.cutMade) {
+                    state.repairDone = true;
+                    state.phase = 'complete';
+                    state.successStreak++;
+                    state.totalEdits++;
+                    state.patientsHelped++;
+
+                    const scenario = scenarios[state.currentScenario];
+                    const bonus = state.successStreak * 25;
+                    const efficiencyBonus = state.offTargetEvents === 0 ? 50 : 0;
+
+                    if (state.offTargetEvents === 0) {
+                        state.perfectEdits++;
+                        state.editingEfficiency = (state.perfectEdits / state.totalEdits) * 100;
+                    }
+
+                    state.score += 100 + bonus + efficiencyBonus;
+                    gameState.combo += 3;
+                    playSound('success');
+                    screenShake(20);
+
+                    // Celebration particles
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createParticles(
+                                Math.random() * canvas.width,
+                                Math.random() * canvas.height,
+                                ['var(--game-green)', 'var(--game-gold)', 'var(--game-cyan)'][Math.floor(Math.random() * 3)],
+                                15
+                            );
+                        }, i * 100);
+                    }
+
+                    // Achievement checks
+                    if (state.successStreak >= 3) {
+                        unlockAchievement('crispr-streak', 'Gene Surgeon', '3 consecutive successful edits!');
+                    }
+                    if (state.perfectEdits >= 5) {
+                        unlockAchievement('crispr-precise', 'Precision Editor', '5 perfect edits, zero off-targets!');
+                    }
+                    if (state.patientsHelped >= 7) {
+                        stopAllMusic();
+                        unlockAchievement('crispr-master', 'CRISPR Pioneer', 'Completed all gene therapy scenarios!');
+                    }
+                    if (state.score >= 1000) {
+                        unlockAchievement('crispr-elite', 'Gene Therapy Expert', 'Scored 1000+ points!');
+                    }
+                }
+            });
+
+            document.getElementById('crispr-next').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'complete' || state.phase === 'target') {
+                    state.currentScenario = (state.currentScenario + 1) % scenarios.length;
+                    state.phase = 'target';
+                    state.guideRNA = null;
+                    state.cutMade = false;
+                    state.repairDone = false;
+                    state.cas9Position = null;
+                    playSound('click');
+                }
+            });
+
+            function createParticles(x, y, color, count) {
+                for (let i = 0; i < count; i++) {
+                    state.particles.push({
+                        x, y,
+                        vx: (Math.random() - 0.5) * 8,
+                        vy: (Math.random() - 0.5) * 8,
+                        life: 1,
+                        color,
+                        size: 2 + Math.random() * 4
+                    });
+                }
+            }
+
+            function simulate() {
+                state.time += 0.016;
+                state.helixRotation += 0.02;
+
+                // Update particles
+                state.particles = state.particles.filter(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= 0.02;
+                    p.vy += 0.1; // gravity
+                    return p.life > 0;
+                });
+
+                // Continuous score for being in game
+                if (state.phase !== 'complete') {
+                    state.score += 0.1;
+                }
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const scenario = scenarios[state.currentScenario];
+                const centerY = canvas.height / 2;
+                const baseWidth = canvas.width / (scenario.sequence.length + 2);
+
+                // Draw clinical info panel (top left)
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(10, 10, 280, 85);
+                ctx.strokeStyle = 'rgba(255,51,102,0.5)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(10, 10, 280, 85);
+
+                ctx.fillStyle = 'var(--game-rose)';
+                ctx.font = 'bold 13px "Space Mono"';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${scenario.gene}: ${scenario.disease}`, 18, 28);
+
+                ctx.fillStyle = 'var(--game-cyan)';
+                ctx.font = '10px "Space Mono"';
+                ctx.fillText(scenario.clinicalInfo, 18, 44);
+
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.fillText(`Mechanism: ${scenario.mechanism.substring(0, 40)}...`, 18, 58);
+
+                ctx.fillStyle = 'var(--game-green)';
+                ctx.fillText(`Efficacy: ${scenario.efficacy}`, 18, 72);
+
+                const riskColor = scenario.offTargetRisk === 'Low' || scenario.offTargetRisk === 'Very Low' ? 'var(--game-green)' : 'var(--game-gold)';
+                ctx.fillStyle = riskColor;
+                ctx.fillText(`Off-target risk: ${scenario.offTargetRisk}`, 18, 86);
+
+                // Draw stats panel (top right)
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(canvas.width - 180, 10, 170, 75);
+                ctx.strokeStyle = 'rgba(0,255,136,0.5)';
+                ctx.strokeRect(canvas.width - 180, 10, 170, 75);
+
+                // Phase indicator
+                const phases = ['?? TARGET', '?? CUT', '?? REPAIR', '? COMPLETE'];
+                const phaseIndex = ['target', 'cut', 'repair', 'complete'].indexOf(state.phase);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = 'var(--game-gold)';
+                ctx.font = 'bold 11px "Space Mono"';
+                ctx.fillText(phases[phaseIndex], canvas.width - 18, 26);
+
+                // Stats
+                ctx.font = '10px "Space Mono"';
+                ctx.fillStyle = 'var(--game-green)';
+                ctx.fillText(`Patients: ${state.patientsHelped}/7`, canvas.width - 18, 42);
+                ctx.fillStyle = state.offTargetEvents === 0 ? 'var(--game-green)' : 'var(--game-red)';
+                ctx.fillText(`Off-targets: ${state.offTargetEvents}`, canvas.width - 18, 56);
+                ctx.fillStyle = 'var(--game-cyan)';
+                const eff = state.totalEdits > 0 ? ((state.perfectEdits / state.totalEdits) * 100).toFixed(0) : '100';
+                ctx.fillText(`Efficiency: ${eff}%`, canvas.width - 18, 70);
+
+                // Draw streak
+                if (state.successStreak > 0) {
+                    ctx.fillStyle = 'var(--game-orange-alt)';
+                    ctx.fillText(`?? x${state.successStreak}`, canvas.width - 18, 84);
+                }
+
+                // Draw DNA double helix
+                const helixAmplitude = 30;
+                const helixFreq = 0.15;
+
+                for (let i = 0; i < scenario.sequence.length; i++) {
+                    const x = (i + 1) * baseWidth;
+                    const phase1 = state.helixRotation + i * helixFreq;
+                    const phase2 = phase1 + Math.PI;
+
+                    const y1 = centerY + Math.sin(phase1) * helixAmplitude;
+                    const y2 = centerY + Math.sin(phase2) * helixAmplitude;
+                    const z1 = Math.cos(phase1);
+                    const z2 = Math.cos(phase2);
+
+                    // Base colors
+                    const baseColors = { A: 'var(--game-red)', T: 'var(--game-teal-bright)', G: 'var(--game-yellow-light)', C: 'var(--game-teal)' };
+                    const base = scenario.sequence[i];
+                    const complement = { A: 'T', T: 'A', G: 'C', C: 'G' }[base];
+
+                    // Highlight mutation site
+                    const isMutation = i === scenario.mutationPos;
+                    const isPAM = i >= scenario.pamSite && i <= scenario.pamSite + 2;
+                    const isGuided = state.guideRNA !== null && Math.abs(i - state.guideRNA) <= 2;
+
+                    // Draw backbone
+                    if (i < scenario.sequence.length - 1) {
+                        ctx.strokeStyle = state.cutMade && i === scenario.mutationPos ? 'transparent' : 'rgba(100,100,255,0.3)';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(x, y1);
+                        ctx.lineTo(x + baseWidth, centerY + Math.sin(phase1 + helixFreq) * helixAmplitude);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(x, y2);
+                        ctx.lineTo(x + baseWidth, centerY + Math.sin(phase2 + helixFreq) * helixAmplitude);
+                        ctx.stroke();
+                    }
+
+                    // Draw base pair connection (hydrogen bonds)
+                    if (!state.cutMade || i !== scenario.mutationPos) {
+                        ctx.strokeStyle = isMutation ? 'rgba(255,0,0,0.8)' : 'rgba(255,255,255,0.2)';
+                        ctx.lineWidth = isMutation ? 3 : 1;
+                        ctx.setLineDash(isMutation ? [] : [3, 3]);
+                        ctx.beginPath();
+                        ctx.moveTo(x, y1);
+                        ctx.lineTo(x, y2);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+
+                    // Draw bases
+                    const baseSize = 12;
+
+                    // Top strand base
+                    ctx.globalAlpha = 0.5 + z1 * 0.5;
+                    ctx.fillStyle = isMutation ? 'var(--game-red-bright)' : (isPAM ? 'var(--game-gold)' : baseColors[base]);
+                    if (isGuided) {
+                        ctx.shadowColor = 'var(--game-cyan)';
+                        ctx.shadowBlur = 15;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(x, y1, baseSize * (0.8 + z1 * 0.2), 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+
+                    // Bottom strand base
+                    ctx.globalAlpha = 0.5 + z2 * 0.5;
+                    ctx.fillStyle = baseColors[complement];
+                    ctx.beginPath();
+                    ctx.arc(x, y2, baseSize * (0.8 + z2 * 0.2), 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.globalAlpha = 1;
+
+                    // Draw base letters
+                    ctx.fillStyle = 'var(--game-black)';
+                    ctx.font = 'bold 9px "Space Mono"';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    if (z1 > 0) ctx.fillText(base, x, y1);
+                    if (z2 > 0) ctx.fillText(complement, x, y2);
+                }
+
+                // Draw cut indicator
+                if (state.cutMade && !state.repairDone) {
+                    const cutX = (scenario.mutationPos + 1) * baseWidth;
+                    ctx.strokeStyle = 'var(--game-rose)';
+                    ctx.lineWidth = 4;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(cutX, centerY - 50);
+                    ctx.lineTo(cutX, centerY + 50);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // Draw scissors
+                    ctx.font = '24px sans-serif';
+                    ctx.fillText('??', cutX - 12, centerY - 60);
+                }
+
+                // Draw repair indicator
+                if (state.repairDone) {
+                    const repairX = (scenario.mutationPos + 1) * baseWidth;
+                    ctx.fillStyle = 'var(--game-green)';
+                    ctx.font = 'bold 12px "Space Mono"';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('? REPAIRED', repairX, centerY + 80);
+
+                    // Draw corrected base
+                    ctx.fillStyle = 'var(--game-green)';
+                    ctx.shadowColor = 'var(--game-green)';
+                    ctx.shadowBlur = 20;
+                    ctx.beginPath();
+                    ctx.arc(repairX, centerY, 15, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
+                // Draw Cas9 at cursor when in cut phase
+                if (state.phase === 'cut') {
+                    ctx.font = '32px sans-serif';
+                    ctx.fillText('??', state.cursorPos.x - 16, state.cursorPos.y - 16);
+                }
+
+                // Draw particles
+                state.particles.forEach(p => {
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.globalAlpha = 1;
+
+                // Draw legend
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                ctx.font = '10px "Space Mono"';
+                ctx.textAlign = 'left';
+                ctx.fillText('?? Mutation  ?? PAM Site (NGG)  ?? Guide RNA Target', 20, canvas.height - 15);
+
+                // Update score
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() {
+                simulate();
+                render();
+                currentAnimationId = requestAnimationFrame(gameLoop);
+            }
+            gameLoop();
+        }
+
+        // ---------------------------------------------------------------
+        // CAR-T CELL DESIGNER - Engineer T-cells to fight cancer
+        // ---------------------------------------------------------------
+        function initCARTGame(containerId) {
+            cancelCurrentGame();
+            currentGameType = 'cart';
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--game-bg-wine),var(--game-bg-deep-teal));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+                    <div style="padding:12px 15px;background:linear-gradient(90deg,rgba(255,107,157,0.2),rgba(157,0,255,0.1));border-bottom:2px solid rgba(255,107,157,0.3);display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <h3 style="margin:0;font-size:15px;color:var(--game-pink-light);">?? CAR-T CELL DESIGNER</h3>
+                            <p style="margin:2px 0 0;font-size:9px;color:rgba(255,255,255,0.6);">Engineer chimeric antigen receptors • Fight cancer</p>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:24px;color:var(--game-green);font-weight:bold;" id="cart-score">0</div>
+                        </div>
+                    </div>
+                    <canvas id="cart-game-canvas" style="flex:1;background:var(--game-bg-void);"></canvas>
+                    <div style="padding:10px;background:rgba(0,0,0,0.4);border-top:2px solid rgba(255,107,157,0.2);display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                        <button id="cart-target" style="background:rgba(255,107,157,0.4);border:2px solid var(--game-pink-light);color:var(--game-pink-light);padding:8px 12px;font-size:10px;border-radius:8px;cursor:pointer;">?? SELECT TARGET</button>
+                        <button id="cart-costim" style="background:rgba(157,0,255,0.4);border:2px solid var(--game-violet);color:var(--game-violet);padding:8px 12px;font-size:10px;border-radius:8px;cursor:pointer;">? COSTIM DOMAIN</button>
+                        <button id="cart-infuse" style="background:rgba(0,255,136,0.4);border:2px solid var(--game-green);color:var(--game-green);padding:8px 12px;font-size:10px;border-radius:8px;cursor:pointer;">?? INFUSE CELLS</button>
+                        <button id="cart-manage" style="background:rgba(255,215,0,0.4);border:2px solid var(--game-gold);color:var(--game-gold);padding:8px 12px;font-size:10px;border-radius:8px;cursor:pointer;">?? MANAGE CRS</button>
+                        <button id="cart-next" style="background:rgba(0,212,255,0.4);border:2px solid var(--game-cyan);color:var(--game-cyan);padding:8px 12px;font-size:10px;border-radius:8px;cursor:pointer;">?? NEXT PATIENT</button>
+                    </div>
+                </div>`;
+
+            const canvas = document.getElementById('cart-game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('cart-score');
+
+            // FDA-approved CAR-T products and cancer types
+            const cancerTypes = [
+                {
+                    name: 'B-ALL (Pediatric)',
+                    target: 'CD19',
+                    product: 'Kymriah (tisagenlecleucel)',
+                    company: 'Novartis',
+                    approval: 'FDA 2017',
+                    response: '83% CR',
+                    costim: '4-1BB',
+                    persistence: 'High',
+                    crsRisk: 'Moderate'
+                },
+                {
+                    name: 'DLBCL',
+                    target: 'CD19',
+                    product: 'Yescarta (axicabtagene)',
+                    company: 'Kite/Gilead',
+                    approval: 'FDA 2017',
+                    response: '72% ORR',
+                    costim: 'CD28',
+                    persistence: 'Moderate',
+                    crsRisk: 'High'
+                },
+                {
+                    name: 'Mantle Cell Lymphoma',
+                    target: 'CD19',
+                    product: 'Tecartus (brexucabtagene)',
+                    company: 'Kite/Gilead',
+                    approval: 'FDA 2020',
+                    response: '87% ORR',
+                    costim: 'CD28',
+                    persistence: 'Moderate',
+                    crsRisk: 'High'
+                },
+                {
+                    name: 'Multiple Myeloma',
+                    target: 'BCMA',
+                    product: 'Abecma (idecabtagene)',
+                    company: 'Bristol Myers Squibb',
+                    approval: 'FDA 2021',
+                    response: '73% ORR',
+                    costim: '4-1BB',
+                    persistence: 'High',
+                    crsRisk: 'Moderate'
+                },
+                {
+                    name: 'Multiple Myeloma (2L+)',
+                    target: 'BCMA',
+                    product: 'Carvykti (ciltacabtagene)',
+                    company: 'J&J/Legend',
+                    approval: 'FDA 2022',
+                    response: '98% ORR',
+                    costim: '4-1BB',
+                    persistence: 'Very High',
+                    crsRisk: 'Moderate'
+                },
+                {
+                    name: 'Follicular Lymphoma',
+                    target: 'CD19',
+                    product: 'Breyanzi (lisocabtagene)',
+                    company: 'Bristol Myers Squibb',
+                    approval: 'FDA 2021',
+                    response: '73% CR',
+                    costim: '4-1BB',
+                    persistence: 'High',
+                    crsRisk: 'Low'
+                }
+            ];
+
+            // CAR construct domains
+            const domains = {
+                targets: ['CD19', 'BCMA', 'CD22', 'CD20', 'GD2', 'HER2'],
+                costims: ['4-1BB', 'CD28', 'ICOS', 'OX40'],
+                hinges: ['CD8a', 'IgG4', 'CD28'],
+                signaling: ['CD3?', 'CD3?-ITAM3']
+            };
+
+            let state = {
+                currentPatient: 0,
+                phase: 'design', // design, infusion, monitoring, complete
+                score: 0,
+                selectedTarget: null,
+                selectedCostim: null,
+                carConstructed: false,
+                cellsInfused: false,
+                crsLevel: 0,
+                tumorBurden: 100,
+                tCellExpansion: 0,
+                cytokines: { IL6: 0, IFNg: 0, TNFa: 0 },
+                cancerCells: [],
+                tCells: [],
+                particles: [],
+                time: 0,
+                patientsRemission: 0,
+                totalPatients: 0,
+                managedCRS: 0
+            };
+
+            function resizeCanvas() {
+                canvas.width = canvas.getBoundingClientRect().width;
+                canvas.height = canvas.getBoundingClientRect().height;
+            }
+            resizeCanvas();
+
+            // Initialize cancer cells
+            function initCancerCells() {
+                state.cancerCells = [];
+                for (let i = 0; i < 30; i++) {
+                    state.cancerCells.push({
+                        x: 100 + Math.random() * (canvas.width - 200),
+                        y: 150 + Math.random() * (canvas.height - 250),
+                        size: 8 + Math.random() * 6,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        health: 100,
+                        targeted: false
+                    });
+                }
+            }
+            initCancerCells();
+
+            // Target selection
+            document.getElementById('cart-target').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'design') {
+                    const cancer = cancerTypes[state.currentPatient];
+                    const correctTarget = cancer.target;
+
+                    // Cycle through targets
+                    const currentIdx = domains.targets.indexOf(state.selectedTarget);
+                    state.selectedTarget = domains.targets[(currentIdx + 1) % domains.targets.length];
+
+                    if (state.selectedTarget === correctTarget) {
+                        playSound('success');
+                        explosionEffect(canvas.width / 4, canvas.height / 2, 'var(--game-pink-light)', 10);
+                    } else {
+                        playSound('click');
+                    }
+                }
+            });
+
+            // Costimulatory domain selection
+            document.getElementById('cart-costim').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'design' && state.selectedTarget) {
+                    const cancer = cancerTypes[state.currentPatient];
+                    const optimalCostim = cancer.costim;
+
+                    const currentIdx = domains.costims.indexOf(state.selectedCostim);
+                    state.selectedCostim = domains.costims[(currentIdx + 1) % domains.costims.length];
+
+                    if (state.selectedCostim === optimalCostim) {
+                        playSound('success');
+                        explosionEffect(canvas.width / 2, canvas.height / 2, 'var(--game-violet)', 10);
+                    } else {
+                        playSound('click');
+                    }
+
+                    if (state.selectedTarget && state.selectedCostim) {
+                        state.carConstructed = true;
+                    }
+                }
+            });
+
+            // Infuse CAR-T cells
+            document.getElementById('cart-infuse').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'design' && state.carConstructed) {
+                    const cancer = cancerTypes[state.currentPatient];
+                    state.phase = 'monitoring';
+                    state.cellsInfused = true;
+                    state.totalPatients++;
+
+                    // Check if correct target was selected
+                    const correctTarget = state.selectedTarget === cancer.target;
+                    const optimalCostim = state.selectedCostim === cancer.costim;
+
+                    if (correctTarget) {
+                        state.score += 100;
+                        gameState.combo += 2;
+
+                        // Spawn T-cells
+                        for (let i = 0; i < 15; i++) {
+                            setTimeout(() => {
+                                state.tCells.push({
+                                    x: 50,
+                                    y: canvas.height / 2 + (Math.random() - 0.5) * 100,
+                                    size: 6,
+                                    vx: 1 + Math.random() * 2,
+                                    vy: (Math.random() - 0.5) * 2,
+                                    active: true,
+                                    target: null,
+                                    kills: 0
+                                });
+                            }, i * 100);
+                        }
+
+                        playSound('success');
+                        screenShake(15);
+                    } else {
+                        state.score += 20;
+                        playSound('danger');
+                    }
+
+                    // Set CRS risk based on costim choice
+                    if (state.selectedCostim === 'CD28') {
+                        state.crsLevel = 30 + Math.random() * 40; // Higher CRS with CD28
+                    } else {
+                        state.crsLevel = 10 + Math.random() * 30; // Lower with 4-1BB
+                    }
+                }
+            });
+
+            // Manage CRS
+            document.getElementById('cart-manage').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'monitoring' && state.crsLevel > 20) {
+                    state.crsLevel = Math.max(0, state.crsLevel - 25);
+                    state.cytokines.IL6 = Math.max(0, state.cytokines.IL6 - 30);
+                    state.managedCRS++;
+                    state.score += 30;
+                    playSound('success');
+                    createParticles(canvas.width - 100, 150, 'var(--game-green)', 15);
+
+                    if (state.managedCRS >= 5) {
+                        unlockAchievement('cart-safety', 'Safety Officer', 'Managed CRS 5 times!');
+                    }
+                }
+            });
+
+            // Next patient
+            document.getElementById('cart-next').addEventListener('click', () => {
+                startMusicIfNeeded();
+                if (state.phase === 'complete' || (state.phase === 'design' && state.currentPatient < cancerTypes.length - 1)) {
+                    state.currentPatient = (state.currentPatient + 1) % cancerTypes.length;
+                    state.phase = 'design';
+                    state.selectedTarget = null;
+                    state.selectedCostim = null;
+                    state.carConstructed = false;
+                    state.cellsInfused = false;
+                    state.crsLevel = 0;
+                    state.tumorBurden = 100;
+                    state.tCellExpansion = 0;
+                    state.cytokines = { IL6: 0, IFNg: 0, TNFa: 0 };
+                    state.tCells = [];
+                    initCancerCells();
+                    playSound('click');
+                }
+            });
+
+            function createParticles(x, y, color, count) {
+                for (let i = 0; i < count; i++) {
+                    state.particles.push({
+                        x, y,
+                        vx: (Math.random() - 0.5) * 6,
+                        vy: (Math.random() - 0.5) * 6,
+                        life: 1,
+                        color,
+                        size: 2 + Math.random() * 3
+                    });
+                }
+            }
+
+            function simulate() {
+                state.time += 0.016;
+
+                // Update particles
+                state.particles = state.particles.filter(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= 0.02;
+                    return p.life > 0;
+                });
+
+                if (state.phase === 'monitoring') {
+                    // T-cell behavior
+                    state.tCells.forEach(t => {
+                        if (!t.active) return;
+
+                        // Find nearest cancer cell
+                        let nearest = null;
+                        let nearestDist = Infinity;
+                        state.cancerCells.forEach(c => {
+                            if (c.health <= 0) return;
+                            const dist = Math.sqrt((c.x - t.x) ** 2 + (c.y - t.y) ** 2);
+                            if (dist < nearestDist) {
+                                nearestDist = dist;
+                                nearest = c;
+                            }
+                        });
+
+                        if (nearest) {
+                            // Move toward cancer cell
+                            const dx = nearest.x - t.x;
+                            const dy = nearest.y - t.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist > 0) {
+                                t.vx = (dx / dist) * 2;
+                                t.vy = (dy / dist) * 2;
+                            }
+
+                            // Kill cancer cell if close enough
+                            if (dist < 15) {
+                                nearest.health -= 5;
+                                nearest.targeted = true;
+                                if (nearest.health <= 0) {
+                                    t.kills++;
+                                    state.score += 10;
+                                    createParticles(nearest.x, nearest.y, 'var(--game-pink-light)', 8);
+                                }
+                            }
+                        }
+
+                        t.x += t.vx;
+                        t.y += t.vy;
+
+                        // Boundary check
+                        if (t.x < 50) t.x = 50;
+                        if (t.x > canvas.width - 50) t.x = canvas.width - 50;
+                        if (t.y < 100) t.y = 100;
+                        if (t.y > canvas.height - 80) t.y = canvas.height - 80;
+                    });
+
+                    // Update cancer cells
+                    state.cancerCells.forEach(c => {
+                        if (c.health > 0) {
+                            c.x += c.vx;
+                            c.y += c.vy;
+                            if (c.x < 100 || c.x > canvas.width - 100) c.vx *= -1;
+                            if (c.y < 150 || c.y > canvas.height - 100) c.vy *= -1;
+                        }
+                    });
+
+                    // Calculate tumor burden
+                    const aliveCancer = state.cancerCells.filter(c => c.health > 0).length;
+                    state.tumorBurden = (aliveCancer / 30) * 100;
+
+                    // T-cell expansion
+                    state.tCellExpansion = Math.min(100, state.tCells.length * 6);
+
+                    // Cytokine levels (correlate with T-cell activity)
+                    const activeKilling = state.tCells.filter(t => t.kills > 0).length;
+                    state.cytokines.IL6 = Math.min(100, activeKilling * 8 + state.crsLevel * 0.5);
+                    state.cytokines.IFNg = Math.min(100, activeKilling * 6);
+
+                    // Check for complete response
+                    if (state.tumorBurden < 5) {
+                        state.phase = 'complete';
+                        state.patientsRemission++;
+                        state.score += 200;
+                        playSound('success');
+                        screenShake(20);
+
+                        // Celebration
+                        for (let i = 0; i < 8; i++) {
+                            setTimeout(() => {
+                                createParticles(
+                                    Math.random() * canvas.width,
+                                    Math.random() * canvas.height,
+                                    ['var(--game-green)', 'var(--game-gold)', 'var(--game-pink-light)'][Math.floor(Math.random() * 3)],
+                                    20
+                                );
+                            }, i * 80);
+                        }
+
+                        // Achievements
+                        if (state.patientsRemission >= 3) {
+                            unlockAchievement('cart-healer', 'Cancer Fighter', '3 patients in remission!');
+                        }
+                        if (state.patientsRemission >= 6) {
+                            stopAllMusic();
+                            unlockAchievement('cart-master', 'CAR-T Pioneer', 'All 6 cancer types treated!');
+                        }
+                    }
+
+                    // CRS danger
+                    if (state.crsLevel > 70) {
+                        glitchEffect();
+                    }
+                }
+            }
+
+            function render() {
+                ctx.fillStyle = 'var(--game-bg-void)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const cancer = cancerTypes[state.currentPatient];
+
+                // Draw product info panel (top left)
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(10, 10, 260, 80);
+                ctx.strokeStyle = 'rgba(255,107,157,0.5)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(10, 10, 260, 80);
+
+                ctx.fillStyle = 'var(--game-pink-light)';
+                ctx.font = 'bold 12px "Space Mono"';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${cancer.name}`, 18, 26);
+
+                ctx.fillStyle = 'var(--game-cyan)';
+                ctx.font = '9px "Space Mono"';
+                ctx.fillText(`${cancer.product}`, 18, 40);
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.fillText(`${cancer.company} | ${cancer.approval}`, 18, 52);
+
+                ctx.fillStyle = 'var(--game-green)';
+                ctx.fillText(`Target: ${cancer.target} | Costim: ${cancer.costim}`, 18, 66);
+                ctx.fillStyle = 'var(--game-gold)';
+                ctx.fillText(`Response: ${cancer.response} | CRS: ${cancer.crsRisk}`, 18, 80);
+
+                // Draw CAR construct panel
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(canvas.width - 200, 10, 190, 70);
+                ctx.strokeStyle = 'rgba(157,0,255,0.5)';
+                ctx.strokeRect(canvas.width - 200, 10, 190, 70);
+
+                ctx.fillStyle = 'var(--game-violet)';
+                ctx.font = 'bold 11px "Space Mono"';
+                ctx.textAlign = 'right';
+                ctx.fillText('YOUR CAR CONSTRUCT', canvas.width - 18, 26);
+
+                ctx.font = '10px "Space Mono"';
+                ctx.fillStyle = state.selectedTarget === cancer.target ? 'var(--game-green)' : (state.selectedTarget ? 'var(--game-red)' : 'rgba(255,255,255,0.4)');
+                ctx.fillText(`scFv: ${state.selectedTarget || '???'}`, canvas.width - 18, 42);
+
+                ctx.fillStyle = state.selectedCostim === cancer.costim ? 'var(--game-green)' : (state.selectedCostim ? 'var(--game-gold)' : 'rgba(255,255,255,0.4)');
+                ctx.fillText(`Costim: ${state.selectedCostim || '???'}`, canvas.width - 18, 56);
+
+                ctx.fillStyle = state.carConstructed ? 'var(--game-green)' : 'rgba(255,255,255,0.4)';
+                ctx.fillText(`Status: ${state.carConstructed ? 'READY' : 'INCOMPLETE'}`, canvas.width - 18, 70);
+
+                // Draw monitoring stats (if infused)
+                if (state.phase === 'monitoring' || state.phase === 'complete') {
+                    // Tumor burden bar
+                    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                    ctx.fillRect(10, canvas.height - 70, 150, 20);
+                    ctx.fillStyle = state.tumorBurden > 50 ? 'var(--game-red)' : (state.tumorBurden > 20 ? 'var(--game-gold)' : 'var(--game-green)');
+                    ctx.fillRect(10, canvas.height - 70, state.tumorBurden * 1.5, 20);
+                    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                    ctx.strokeRect(10, canvas.height - 70, 150, 20);
+                    ctx.fillStyle = 'var(--game-white)';
+                    ctx.font = '9px "Space Mono"';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(`Tumor: ${state.tumorBurden.toFixed(0)}%`, 15, canvas.height - 56);
+
+                    // CRS level bar
+                    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                    ctx.fillRect(170, canvas.height - 70, 150, 20);
+                    ctx.fillStyle = state.crsLevel > 50 ? 'var(--game-red-bright)' : (state.crsLevel > 25 ? 'var(--game-orange-alt)' : 'var(--game-green)');
+                    ctx.fillRect(170, canvas.height - 70, state.crsLevel * 1.5, 20);
+                    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                    ctx.strokeRect(170, canvas.height - 70, 150, 20);
+                    ctx.fillText(`CRS: ${state.crsLevel.toFixed(0)}%`, 175, canvas.height - 56);
+
+                    // Cytokines
+                    ctx.fillStyle = 'var(--game-pink-light)';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(`IL-6: ${state.cytokines.IL6.toFixed(0)} | IFN-?: ${state.cytokines.IFNg.toFixed(0)}`, canvas.width - 15, canvas.height - 56);
+                }
+
+                // Draw battle area border
+                ctx.strokeStyle = 'rgba(255,107,157,0.3)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(80, 100, canvas.width - 160, canvas.height - 180);
+                ctx.setLineDash([]);
+
+                // Draw cancer cells
+                state.cancerCells.forEach(c => {
+                    if (c.health <= 0) return;
+                    const alpha = c.health / 100;
+                    ctx.globalAlpha = alpha;
+
+                    // Glow
+                    ctx.fillStyle = c.targeted ? 'rgba(255,100,100,0.3)' : 'rgba(100,0,150,0.3)';
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.size + 4, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Cell body
+                    ctx.fillStyle = c.targeted ? 'var(--game-red-dark)' : 'var(--game-purple-dark)';
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Nucleus
+                    ctx.fillStyle = 'var(--game-purple-deep)';
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.size * 0.4, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.globalAlpha = 1;
+                });
+
+                // Draw T-cells
+                state.tCells.forEach(t => {
+                    // Glow
+                    ctx.fillStyle = 'rgba(0,255,136,0.3)';
+                    ctx.beginPath();
+                    ctx.arc(t.x, t.y, t.size + 4, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Cell body
+                    ctx.fillStyle = 'var(--game-green)';
+                    ctx.beginPath();
+                    ctx.arc(t.x, t.y, t.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // CAR receptor visualization
+                    ctx.strokeStyle = 'var(--game-pink-light)';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 3; i++) {
+                        const angle = (state.time * 2 + i * 2.1) % (Math.PI * 2);
+                        ctx.beginPath();
+                        ctx.moveTo(t.x + Math.cos(angle) * t.size, t.y + Math.sin(angle) * t.size);
+                        ctx.lineTo(t.x + Math.cos(angle) * (t.size + 5), t.y + Math.sin(angle) * (t.size + 5));
+                        ctx.stroke();
+                    }
+
+                    // Kill count
+                    if (t.kills > 0) {
+                        ctx.fillStyle = 'var(--game-gold)';
+                        ctx.font = 'bold 8px "Space Mono"';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(t.kills.toString(), t.x, t.y - t.size - 5);
+                    }
+                });
+
+                // Draw particles
+                state.particles.forEach(p => {
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.globalAlpha = 1;
+
+                // Phase indicator
+                const phaseText = {
+                    'design': '?? DESIGN CAR CONSTRUCT',
+                    'monitoring': '?? MONITORING RESPONSE',
+                    'complete': '? COMPLETE RESPONSE!'
+                };
+                ctx.fillStyle = state.phase === 'complete' ? 'var(--game-green)' : 'var(--game-gold)';
+                ctx.font = 'bold 12px "Space Mono"';
+                ctx.textAlign = 'center';
+                ctx.fillText(phaseText[state.phase], canvas.width / 2, 105);
+
+                // Patient counter
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '10px "Space Mono"';
+                ctx.fillText(`Patient ${state.currentPatient + 1}/6 | Remissions: ${state.patientsRemission}`, canvas.width / 2, canvas.height - 15);
+
+                // Update score
+                if (scoreEl) scoreEl.textContent = Math.round(state.score).toLocaleString();
+            }
+
+            function gameLoop() {
+                simulate();
+                render();
+                currentAnimationId = requestAnimationFrame(gameLoop);
+            }
+            gameLoop();
+        }
+
+        function loadModule(moduleName) {
+            document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.module-btn').classList.add('active');
+            
+            const container = document.getElementById('current-module');
+            container.innerHTML = '';
+            
+            if (moduleName === 'lung') initLungGame('current-module');
+            else if (moduleName === 'pk') initPKGame('current-module');
+            else if (moduleName === 'quantum') initQuantumGame('current-module');
+            else if (moduleName === 'kidney') initKidneyGame('current-module');
+            else if (moduleName === 'organoid') initOrganoidGame('current-module');
+            else if (moduleName === 'rna') initRNAGame('current-module');
+            else if (moduleName === 'crispr') initCRISPRGame('current-module');
+            else if (moduleName === 'cart') initCARTGame('current-module');
+        }
+
+        document.querySelectorAll('.module-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                loadModule(this.getAttribute('data-module'));
+            });
+        });
+
+        document.getElementById('stop-btn').addEventListener('click', () => {
+            cancelCurrentGame();
+            document.getElementById('current-module').innerHTML = '';
+            document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+            gameState.combo = 0;
+            updateStats();
+            playSound('click');
+        });
+
+        document.getElementById('challenge-btn').addEventListener('click', function() {
+            gameState.challengeMode = !gameState.challengeMode;
+            this.textContent = gameState.challengeMode ? '? CHALLENGE: ON' : '? CHALLENGE: OFF';
+            screenShake(15);
+            playSound('success');
+        });
+
+        // Hash navigation - load module based on URL hash
+        function handleHashNavigation() {
+            const hash = window.location.hash.substring(1); // Remove #
+            const validModules = ['lung', 'pk', 'quantum', 'kidney', 'organoid', 'rna', 'crispr', 'cart'];
+
+            if (hash && validModules.includes(hash)) {
+                // Clear any existing active state
+                document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+
+                // Find and click the matching module button
+                const targetBtn = document.querySelector('[data-module="' + hash + '"]');
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                    // Load the appropriate game
+                    switch(hash) {
+                        case 'lung': initLungGame('current-module'); break;
+                        case 'pk': initPKGame('current-module'); break;
+                        case 'quantum': initQuantumGame('current-module'); break;
+                        case 'kidney': initKidneyGame('current-module'); break;
+                        case 'organoid': initOrganoidGame('current-module'); break;
+                        case 'rna': initRNAGame('current-module'); break;
+                        case 'crispr': initCRISPRGame('current-module'); break;
+                        case 'cart': initCARTGame('current-module'); break;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Check for hash on page load
+        if (!handleHashNavigation()) {
+            // Default to lung if no valid hash
+            initLungGame('current-module');
+            document.querySelector('[data-module="lung"]').classList.add('active');
+        }
+
+        // Handle hash changes (back/forward buttons)
+        window.addEventListener('hashchange', handleHashNavigation);
+
+        updateStats();
+    </script>
+</body>
+</html>

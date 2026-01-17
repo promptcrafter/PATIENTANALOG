@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Cell Activation Battle | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 500px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+    .stat-value { font-size: 1.5rem; font-weight: bold; }
+    .stat-label { font-size: 11px; color: #666; }
+    .battle-zone {
+      width: 100%; height: 300px; background: rgba(0,20,40,0.8);
+      border: 2px solid rgba(0,85,255,0.3); border-radius: 12px;
+      position: relative; overflow: hidden; margin-bottom: 20px;
+    }
+    .pathogen {
+      position: absolute; width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(255,51,102,0.5); border: 2px solid var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; cursor: pointer; transition: transform 0.1s;
+      animation: float 2s ease-in-out infinite;
+    }
+    .pathogen:hover { transform: scale(1.2); }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .pathogen.destroyed { animation: destroy 0.3s forwards; }
+    @keyframes destroy { to { transform: scale(0); opacity: 0; } }
+    .activation-window {
+      height: 30px; background: linear-gradient(90deg, transparent, rgba(0,204,102,0.3), transparent);
+      margin-bottom: 20px; border-radius: 8px; position: relative;
+    }
+    .window-marker {
+      position: absolute; top: 0; bottom: 0; width: 60px;
+      background: rgba(0,204,102,0.5); border: 2px solid var(--emerald);
+      border-radius: 8px; animation: slide 3s ease-in-out infinite;
+    }
+    @keyframes slide { 0%, 100% { left: 0; } 50% { left: calc(100% - 60px); } }
+    .activate-btn {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: linear-gradient(145deg, #003399, #0055ff);
+      border: 4px solid rgba(255,255,255,0.2);
+      color: white; font-size: 1rem; font-weight: bold;
+      cursor: pointer; transition: all 0.1s;
+    }
+    .activate-btn:active { transform: scale(0.95); box-shadow: 0 0 30px rgba(0,85,255,0.5); }
+    .message { min-height: 24px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ T-Cell Activation Battle</h1>
+    <p class="subtitle">Time your activation to destroy pathogens!</p>
+
+    <div class="stats">
+      <div><div class="stat-value" id="kills">0</div><div class="stat-label">Kills</div></div>
+      <div><div class="stat-value" id="wave">1</div><div class="stat-label">Wave</div></div>
+      <div><div class="stat-value" id="health">100</div><div class="stat-label">Health</div></div>
+    </div>
+
+    <div class="battle-zone" id="battleZone"></div>
+
+    <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Activation Window:</p>
+    <div class="activation-window">
+      <div class="window-marker" id="marker"></div>
+    </div>
+
+    <button class="activate-btn" onclick="activate()">⚡ ACTIVATE<br>T-CELLS</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    let kills = 0;
+    let wave = 1;
+    let health = 100;
+    const battleZone = document.getElementById('battleZone');
+
+    function spawnPathogen() {
+      const p = document.createElement('div');
+      p.className = 'pathogen';
+      p.textContent = ['🦠', '🧫', '👾'][Math.floor(Math.random() * 3)];
+      p.style.left = Math.random() * 400 + 'px';
+      p.style.top = Math.random() * 230 + 'px';
+      p.onclick = () => {
+        p.classList.add('destroyed');
+        setTimeout(() => p.remove(), 300);
+        kills++;
+        document.getElementById('kills').textContent = kills;
+      };
+      battleZone.appendChild(p);
+
+      // Damage if not killed
+      setTimeout(() => {
+        if (p.parentNode && !p.classList.contains('destroyed')) {
+          health = Math.max(0, health - 10);
+          document.getElementById('health').textContent = health;
+          p.remove();
+          if (health <= 0) {
+            document.getElementById('message').textContent = 'Game Over! Immune system overwhelmed.';
+            document.getElementById('message').style.color = '#ff3366';
+          }
+        }
+      }, 5000);
+    }
+
+    function activate() {
+      const marker = document.getElementById('marker');
+      const rect = marker.getBoundingClientRect();
+      const parent = marker.parentElement.getBoundingClientRect();
+      const pos = (rect.left - parent.left) / parent.width;
+
+      const msg = document.getElementById('message');
+      if (pos > 0.35 && pos < 0.65) {
+        // Perfect timing - destroy all
+        document.querySelectorAll('.pathogen').forEach(p => {
+          p.classList.add('destroyed');
+          setTimeout(() => p.remove(), 300);
+          kills++;
+        });
+        document.getElementById('kills').textContent = kills;
+        msg.textContent = '⚡ PERFECT! All pathogens destroyed!';
+        msg.style.color = '#00cc66';
+        wave++;
+        document.getElementById('wave').textContent = wave;
+      } else {
+        msg.textContent = 'Timing off! Wait for the green window.';
+        msg.style.color = '#ffaa00';
+      }
+    }
+
+    // Spawn pathogens
+    setInterval(() => { if (health > 0) spawnPathogen(); }, 2000);
+    spawnPathogen();
+  </script>
+</body>
+</html>

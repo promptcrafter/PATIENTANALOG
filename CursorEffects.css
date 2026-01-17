@@ -1,0 +1,64 @@
+/* CursorEffects.css - Custom cursor and hover effects */
+
+/* Glow cursor trail effect */
+.cursor-glow {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 200, 255, 0.6) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  mix-blend-mode: screen;
+}
+
+/* Cursor ring effect */
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(0, 200, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease-out;
+}
+
+.cursor-ring.hover {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(0, 255, 200, 0.5);
+}
+
+/* Interactive element hover enhancement */
+a:hover, button:hover, .clickable:hover {
+  cursor: pointer;
+}
+
+/* Card hover glow effects */
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 200, 255, 0.4), 0 0 60px rgba(0, 200, 255, 0.2);
+}
+
+/* Link trail effect */
+a {
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-shadow: 0 0 20px currentColor;
+}
+
+/* Button press effect */
+button:active, .btn:active {
+  transform: scale(0.98);
+}
+
+/* Focus ring for accessibility */
+*:focus-visible {
+  outline: 2px solid rgba(0, 200, 255, 0.8);
+  outline-offset: 2px;
+}

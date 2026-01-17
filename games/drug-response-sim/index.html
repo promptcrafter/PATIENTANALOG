@@ -1,0 +1,644 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drug Response Simulator | Patient Analog</title>
+  <link rel="stylesheet" href="../../engine/GameStyles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Pharma Theme - Unique color palette */
+    :root {
+      --pharma-bg: #030a14;
+      --pharma-panel: #081525;
+      --pharma-teal: #00d4aa;
+      --pharma-cyan: #00bcd4;
+      --pharma-lime: #76ff03;
+      --pharma-gold: #ffd740;
+      --pharma-coral: #ff6e40;
+      --pharma-rose: #ff4081;
+      --pharma-text: #e0f7fa;
+      --pharma-dim: #607d8b;
+      --pharma-border: #1a3a5c;
+    }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: linear-gradient(145deg, var(--pharma-bg) 0%, #051020 100%);
+    }
+
+    .game-container {
+      background: transparent;
+    }
+    .simulator-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .control-panel {
+      background: var(--pharma-panel);
+      border: 1px solid var(--pharma-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .panel-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--pharma-teal);
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .drug-selector {
+      margin-bottom: 20px;
+    }
+
+    .drug-selector label {
+      display: block;
+      font-size: 12px;
+      color: var(--pharma-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .drug-selector select {
+      width: 100%;
+      padding: 10px;
+      background: var(--pharma-bg);
+      border: 1px solid var(--pharma-border);
+      border-radius: 8px;
+      color: var(--pharma-text);
+      font-size: 14px;
+    }
+
+    .dosage-control {
+      margin-bottom: 20px;
+    }
+
+    .dosage-control label {
+      display: block;
+      font-size: 12px;
+      color: var(--pharma-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .dosage-slider {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .dosage-value {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--pharma-cyan);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .administer-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--pharma-teal), #00a88a);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .administer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+    }
+
+    .administer-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .body-display {
+      background: var(--pharma-panel);
+      border: 1px solid var(--pharma-border);
+      border-radius: 12px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .body-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--pharma-text);
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .organs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .organ-card {
+      background: var(--pharma-bg);
+      border: 2px solid var(--pharma-border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .organ-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .organ-card.active::before {
+      opacity: 1;
+      background: radial-gradient(circle at center, rgba(0, 212, 170, 0.2) 0%, transparent 70%);
+    }
+
+    .organ-card.warning {
+      border-color: var(--pharma-gold);
+      box-shadow: 0 0 20px rgba(255, 215, 64, 0.3);
+    }
+
+    .organ-card.danger {
+      border-color: var(--pharma-rose);
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+      animation: dangerPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes dangerPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 64, 129, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(255, 64, 129, 0.6); }
+    }
+
+    .organ-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+            aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .organ-icon.heart { background: linear-gradient(135deg, var(--pharma-rose), #c51162); color: #fff; }
+    .organ-icon.liver { background: linear-gradient(135deg, var(--pharma-coral), #bf360c); color: #fff; }
+    .organ-icon.kidney { background: linear-gradient(135deg, var(--pharma-gold), #ff8f00); color: #000; }
+    .organ-icon.brain { background: linear-gradient(135deg, var(--pharma-cyan), #0097a7); color: #fff; }
+    .organ-icon.intestine { background: linear-gradient(135deg, var(--pharma-lime), #64dd17); color: #000; }
+    .organ-icon.lung { background: linear-gradient(135deg, var(--pharma-teal), #00897b); color: #fff; }
+
+    .organ-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--pharma-text);
+      margin-bottom: 10px;
+    }
+
+    .organ-health {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .organ-health-fill {
+      height: 100%;
+      background: var(--pharma-teal);
+      transition: all 0.5s ease;
+    }
+
+    .organ-health-fill.warning {
+      background: var(--pharma-gold);
+    }
+
+    .organ-health-fill.danger {
+      background: var(--pharma-rose);
+    }
+
+    .organ-status {
+      font-size: 11px;
+      color: var(--pharma-dim);
+    }
+
+    .concentration-display {
+      font-size: 12px;
+      color: var(--pharma-cyan);
+      margin-top: 5px;
+    }
+
+    .time-display {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--pharma-dim);
+    }
+
+    .time-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--pharma-gold);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .log-panel {
+      margin-top: 20px;
+      width: 100%;
+      max-height: 150px;
+      overflow-y: auto;
+      background: var(--pharma-bg);
+      border: 1px solid var(--pharma-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .log-entry {
+      font-size: 11px;
+      color: var(--pharma-dim);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .log-entry.warning {
+      color: var(--pharma-gold);
+    }
+
+    .log-entry.danger {
+      color: var(--pharma-rose);
+    }
+
+    .log-entry.success {
+      color: var(--pharma-teal);
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--pharma-panel);
+      border: 1px solid var(--pharma-border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--pharma-text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      border-color: var(--pharma-teal);
+      background: rgba(0, 212, 170, 0.2);
+    }
+
+    @media (max-width: 900px) {
+      .simulator-container {
+        grid-template-columns: 1fr;
+      }
+
+      .organs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+  <div class="game-container">
+    <a href="/games" class="back-btn">← Back to Games</a>
+
+    <div class="simulator-container">
+      <div class="control-panel">
+        <div class="panel-title">Drug Administration</div>
+
+        <div class="drug-selector">
+          <label>Select Compound</label>
+          <select id="drug-select">
+            <option value="aspirin">Aspirin (Anti-inflammatory)</option>
+            <option value="metformin">Metformin (Diabetes)</option>
+            <option value="lisinopril">Lisinopril (Blood Pressure)</option>
+            <option value="atorvastatin">Atorvastatin (Cholesterol)</option>
+            <option value="experimental">Experimental Compound X</option>
+          </select>
+        </div>
+
+        <div class="dosage-control">
+          <label>Dosage (mg)</label>
+          <input type="range" id="dosage-slider" class="dosage-slider" min="10" max="500" value="100">
+          <div class="dosage-value"><span id="dosage-display">100</span> mg</div>
+        </div>
+
+        <button id="administer-btn" class="administer-btn">
+          Administer Drug
+        </button>
+
+        <div class="log-panel" id="log-panel">
+          <div class="log-entry">System initialized. Ready for simulation.</div>
+        </div>
+      </div>
+
+      <div class="body-display">
+        <div class="body-title">Multi-Organ Response Monitor</div>
+
+        <div class="organs-grid">
+          <div class="organ-card" id="organ-heart">
+            <div class="organ-icon heart">HRT</div>
+            <div class="organ-name">Heart</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="heart-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="heart-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="heart-conc">0.0</span> µg/mL</div>
+          </div>
+
+          <div class="organ-card" id="organ-liver">
+            <div class="organ-icon liver">LVR</div>
+            <div class="organ-name">Liver</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="liver-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="liver-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="liver-conc">0.0</span> µg/mL</div>
+          </div>
+
+          <div class="organ-card" id="organ-kidney">
+            <div class="organ-icon kidney">KDN</div>
+            <div class="organ-name">Kidneys</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="kidney-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="kidney-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="kidney-conc">0.0</span> µg/mL</div>
+          </div>
+
+          <div class="organ-card" id="organ-brain">
+            <div class="organ-icon brain">BRN</div>
+            <div class="organ-name">Brain</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="brain-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="brain-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="brain-conc">0.0</span> µg/mL</div>
+          </div>
+
+          <div class="organ-card" id="organ-intestine">
+            <div class="organ-icon intestine">GUT</div>
+            <div class="organ-name">Intestines</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="intestine-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="intestine-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="intestine-conc">0.0</span> µg/mL</div>
+          </div>
+
+          <div class="organ-card" id="organ-lung">
+            <div class="organ-icon lung">LNG</div>
+            <div class="organ-name">Lungs</div>
+            <div class="organ-health">
+              <div class="organ-health-fill" id="lung-health" style="width: 100%"></div>
+            </div>
+            <div class="organ-status" id="lung-status">Healthy</div>
+            <div class="concentration-display">Conc: <span id="lung-conc">0.0</span> µg/mL</div>
+          </div>
+        </div>
+
+        <div class="time-display">
+          Simulation Time: <span class="time-value" id="sim-time">0:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Drug Response Simulator
+    const organs = {
+      heart: { health: 100, concentration: 0, sensitivity: { aspirin: 0.8, metformin: 0.5, lisinopril: 1.2, atorvastatin: 0.6, experimental: 1.5 }},
+      liver: { health: 100, concentration: 0, sensitivity: { aspirin: 1.0, metformin: 1.5, lisinopril: 0.8, atorvastatin: 1.3, experimental: 2.0 }},
+      kidney: { health: 100, concentration: 0, sensitivity: { aspirin: 1.2, metformin: 0.9, lisinopril: 1.0, atorvastatin: 0.7, experimental: 1.8 }},
+      brain: { health: 100, concentration: 0, sensitivity: { aspirin: 0.6, metformin: 0.4, lisinopril: 0.5, atorvastatin: 0.3, experimental: 1.2 }},
+      intestine: { health: 100, concentration: 0, sensitivity: { aspirin: 1.5, metformin: 1.0, lisinopril: 0.6, atorvastatin: 0.8, experimental: 1.4 }},
+      lung: { health: 100, concentration: 0, sensitivity: { aspirin: 0.5, metformin: 0.6, lisinopril: 0.9, atorvastatin: 0.5, experimental: 1.1 }}
+    };
+
+    let simTime = 0;
+    let simInterval = null;
+    let currentDrug = 'aspirin';
+
+    const drugSelect = document.getElementById('drug-select');
+    const dosageSlider = document.getElementById('dosage-slider');
+    const dosageDisplay = document.getElementById('dosage-display');
+    const administerBtn = document.getElementById('administer-btn');
+    const logPanel = document.getElementById('log-panel');
+    const simTimeDisplay = document.getElementById('sim-time');
+
+    // Update dosage display
+    dosageSlider.addEventListener('input', () => {
+      dosageDisplay.textContent = dosageSlider.value;
+    });
+
+    // Drug selection
+    drugSelect.addEventListener('change', () => {
+      currentDrug = drugSelect.value;
+      addLog(`Selected: ${drugSelect.options[drugSelect.selectedIndex].text}`, 'info');
+    });
+
+    // Administer drug
+    administerBtn.addEventListener('click', () => {
+      const dosage = parseInt(dosageSlider.value);
+      administerDrug(currentDrug, dosage);
+    });
+
+    function administerDrug(drug, dosage) {
+      addLog(`Administering ${dosage}mg of ${drug}...`, 'success');
+
+      // Calculate initial absorption (intestine gets highest concentration first)
+      const absorptionRate = dosage / 100;
+
+      // Distribute drug to organs over time
+      Object.keys(organs).forEach(organ => {
+        const sensitivity = organs[organ].sensitivity[drug];
+        const peakConc = absorptionRate * sensitivity * (Math.random() * 0.3 + 0.85);
+
+        // Animate concentration increase
+        animateConcentration(organ, peakConc);
+      });
+
+      // Start simulation if not running
+      if (!simInterval) {
+        startSimulation();
+      }
+    }
+
+    function animateConcentration(organ, targetConc) {
+      const startConc = organs[organ].concentration;
+      const duration = 2000;
+      const startTime = Date.now();
+
+      function update() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        organs[organ].concentration = startConc + (targetConc - startConc) * eased;
+        updateOrganDisplay(organ);
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    function startSimulation() {
+      simInterval = setInterval(() => {
+        simTime++;
+        updateSimTime();
+        metabolizeDrugs();
+        checkOrganHealth();
+      }, 1000);
+    }
+
+    function metabolizeDrugs() {
+      Object.keys(organs).forEach(organ => {
+        // Decay concentration over time
+        organs[organ].concentration *= 0.95;
+
+        // Health effects based on concentration
+        if (organs[organ].concentration > 3) {
+          organs[organ].health -= 0.5;
+        } else if (organs[organ].concentration > 2) {
+          organs[organ].health -= 0.2;
+        } else if (organs[organ].concentration < 0.5 && organs[organ].health < 100) {
+          organs[organ].health += 0.1; // Recovery
+        }
+
+        organs[organ].health = Math.max(0, Math.min(100, organs[organ].health));
+        updateOrganDisplay(organ);
+      });
+    }
+
+    function checkOrganHealth() {
+      Object.keys(organs).forEach(organ => {
+        const health = organs[organ].health;
+        const card = document.getElementById(`organ-${organ}`);
+
+        card.classList.remove('warning', 'danger', 'active');
+
+        if (health < 30) {
+          card.classList.add('danger');
+          if (health < 25 && Math.random() < 0.1) {
+            addLog(`WARNING: ${organ.charAt(0).toUpperCase() + organ.slice(1)} function critically low!`, 'danger');
+          }
+        } else if (health < 60) {
+          card.classList.add('warning');
+        } else if (organs[organ].concentration > 0.5) {
+          card.classList.add('active');
+        }
+      });
+    }
+
+    function updateOrganDisplay(organ) {
+      const healthBar = document.getElementById(`${organ}-health`);
+      const statusText = document.getElementById(`${organ}-status`);
+      const concText = document.getElementById(`${organ}-conc`);
+
+      const health = organs[organ].health;
+      const conc = organs[organ].concentration;
+
+      healthBar.style.width = `${health}%`;
+      healthBar.classList.remove('warning', 'danger');
+
+      if (health < 30) {
+        healthBar.classList.add('danger');
+        statusText.textContent = 'Critical';
+      } else if (health < 60) {
+        healthBar.classList.add('warning');
+        statusText.textContent = 'Stressed';
+      } else {
+        statusText.textContent = 'Healthy';
+      }
+
+      concText.textContent = conc.toFixed(1);
+    }
+
+    function updateSimTime() {
+      const mins = Math.floor(simTime / 60);
+      const secs = simTime % 60;
+      simTimeDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function addLog(message, type = 'info') {
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logPanel.insertBefore(entry, logPanel.firstChild);
+
+      // Keep log manageable
+      while (logPanel.children.length > 50) {
+        logPanel.removeChild(logPanel.lastChild);
+      }
+    }
+
+    // Initialize displays
+    Object.keys(organs).forEach(updateOrganDisplay);
+  </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

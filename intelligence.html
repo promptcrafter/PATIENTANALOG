@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#000814">
+  <title>Intelligence Hub | 500+ Research Links | Patient Analog</title>
+  <meta name="description" content="Comprehensive database of 500+ curated research links covering organ-on-chip, organoids, digital twins, FDA regulations, and biotech companies.">
+  <link rel="canonical" href="https://patientanalog.com/intelligence">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Intelligence Hub | 500+ Research Links | Patient Analog">
+  <meta property="og:description" content="Comprehensive database of 500+ curated research links covering organ-on-chip, organoids, digital twins, FDA regulations, and biotech companies.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://patientanalog.com/intelligence">
+  <meta property="og:site_name" content="Patient Analog">
+  <meta property="og:image" content="https://patientanalog.com/assets/og-intelligence.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Intelligence Hub | 500+ Research Links">
+  <meta name="twitter:description" content="Comprehensive database of 500+ curated research links for biotech and pharmaceutical research.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+  <link rel="stylesheet" href="/assets/inline-extracted.css">
+
+  <style>
+    .intel-hero {
+      background: linear-gradient(135deg, rgba(0,200,255,0.1) 0%, rgba(139,92,246,0.1) 100%);
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,200,255,0.2);
+    }
+    .intel-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 16px 0;
+    }
+    .intel-hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #00c8ff;
+    }
+    .stat-item .label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .intel-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .category-section {
+      margin-bottom: 60px;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .category-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+    .category-header .count {
+      background: rgba(0,200,255,0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #00c8ff;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 16px;
+    }
+    .link-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    .link-card:hover {
+      background: rgba(0,200,255,0.08);
+      border-color: rgba(0,200,255,0.3);
+      transform: translateY(-2px);
+    }
+    .link-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 6px 0;
+    }
+    .link-card p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0 0 8px 0;
+      line-height: 1.5;
+    }
+    .link-card .source {
+      font-size: 0.75rem;
+      color: #00c8ff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto 40px auto;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .search-box input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Intelligence Hub | 500+ Research Links | Patient Analog",
+    "description": "Comprehensive database of 500+ curated research links covering organ-on-chip, organoids, digital twins, FDA regulations, and biotech companies.",
+    "url": "https://patientanalog.com/intelligence",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Patient Analog"
+    }
+  }
+  </script>
+
+  <!-- Hreflang Tags for International SEO -->
+  <link rel="alternate" hreflang="en" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="en-US" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="en-GB" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="es" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="fr" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="de" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="it" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="pt" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="ja" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="ko" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="zh" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="ar" href="https://patientanalog.com/intelligence">
+  <link rel="alternate" hreflang="x-default" href="https://patientanalog.com/intelligence">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <nav class="nav-bar" id="main-nav"></nav>
+
+  <div class="intel-hero">
+    <div style="font-size: 0.8rem; color: #00c8ff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Research Database</div>
+    <h1>Intelligence Hub</h1>
+    <p>500+ curated research links covering regulatory frameworks, scientific advances, industry developments, and emerging technologies</p>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="value">500+</div>
+        <div class="label">Research Links</div>
+      </div>
+      <div class="stat-item">
+        <div class="value">8</div>
+        <div class="label">Categories</div>
+      </div>
+      <div class="stat-item">
+        <div class="value">Daily</div>
+        <div class="label">Updates</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intel-content">
+    <div class="search-box">
+      <input type="text" placeholder="Search research links..." id="search-input">
+    </div>
+
+    <!-- Regulatory -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" stroke-width="2"><path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+        <h2>Regulatory</h2>
+        <span class="count">45+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.fda.gov/science-research/about-science-research-fda/advancing-alternative-methods-fda" class="link-card" target="_blank">
+          <h3>FDA Alternative Methods Program</h3>
+          <p>Official FDA guidance on New Approach Methodologies (NAMs) for drug testing</p>
+          <span class="source">FDA.gov</span>
+        </a>
+        <a href="https://www.congress.gov/bill/117th-congress/senate-bill/5002" class="link-card" target="_blank">
+          <h3>FDA Modernization Act 2.0 Full Text</h3>
+          <p>Complete legislation text removing animal testing requirements</p>
+          <span class="source">Congress.gov</span>
+        </a>
+        <a href="https://www.ema.europa.eu/en/human-regulatory-overview/research-development/compliance-research-development/guidelines-quality-non-clinical-clinical" class="link-card" target="_blank">
+          <h3>EMA Guidelines on Non-Clinical Development</h3>
+          <p>European regulatory guidance on alternative testing methods</p>
+          <span class="source">EMA.europa.eu</span>
+        </a>
+        <a href="https://ncats.nih.gov/tissuechip" class="link-card" target="_blank">
+          <h3>NIH NCATS Tissue Chip Program</h3>
+          <p>Federal funding and research initiative for organ-on-chip development</p>
+          <span class="source">NIH.gov</span>
+        </a>
+        <a href="https://www.ich.org/page/quality-guidelines" class="link-card" target="_blank">
+          <h3>ICH Quality Guidelines</h3>
+          <p>International harmonization for pharmaceutical development and testing</p>
+          <span class="source">ICH.org</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Organ-on-Chip -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h2M10 10h2M14 10h2"/></svg>
+        <h2>Organ-on-Chip</h2>
+        <span class="count">85+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.nature.com/articles/s41578-021-00298-3" class="link-card" target="_blank">
+          <h3>Organ-on-Chip Review - Nature</h3>
+          <p>Comprehensive review of OoC technology, applications, and future directions</p>
+          <span class="source">Nature Reviews Materials</span>
+        </a>
+        <a href="https://emulatebio.com/" class="link-card" target="_blank">
+          <h3>Emulate Bio</h3>
+          <p>Leading organ-on-chip company with FDA-validated platforms</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.tissuse.com/" class="link-card" target="_blank">
+          <h3>TissUse Multi-Organ Chips</h3>
+          <p>German company pioneering multi-organ microphysiological systems</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/?term=organ+on+chip" class="link-card" target="_blank">
+          <h3>PubMed: Organ-on-Chip Research</h3>
+          <p>Searchable database of all peer-reviewed OoC publications</p>
+          <span class="source">PubMed</span>
+        </a>
+        <a href="https://wyss.harvard.edu/technology/human-organs-on-chips/" class="link-card" target="_blank">
+          <h3>Harvard Wyss Institute OoC</h3>
+          <p>Pioneer research group that developed lung-on-chip technology</p>
+          <span class="source">Harvard.edu</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Organoids -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg>
+        <h2>Organoids</h2>
+        <span class="count">70+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.nature.com/articles/s41586-022-05279-8" class="link-card" target="_blank">
+          <h3>Brain Organoids Model Human Development</h3>
+          <p>Groundbreaking research on cerebral organoids and neural development</p>
+          <span class="source">Nature</span>
+        </a>
+        <a href="https://huborganoids.nl/" class="link-card" target="_blank">
+          <h3>HUB Organoids Foundation</h3>
+          <p>Hans Clevers laboratory - pioneers of intestinal organoid technology</p>
+          <span class="source">Research</span>
+        </a>
+        <a href="https://www.science.org/doi/10.1126/science.aaf8094" class="link-card" target="_blank">
+          <h3>Patient-Derived Tumor Organoids</h3>
+          <p>Using organoids for personalized cancer treatment prediction</p>
+          <span class="source">Science</span>
+        </a>
+        <a href="https://stemcell.org/organoid-protocols" class="link-card" target="_blank">
+          <h3>Organoid Culture Protocols</h3>
+          <p>Step-by-step methods for growing various organoid types</p>
+          <span class="source">ISSCR</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Digital Twins -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        <h2>Digital Twins</h2>
+        <span class="count">50+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.fda.gov/medical-devices/digital-health-center-excellence" class="link-card" target="_blank">
+          <h3>FDA Digital Health Center</h3>
+          <p>Regulatory framework for digital twins and computational models</p>
+          <span class="source">FDA.gov</span>
+        </a>
+        <a href="https://www.heartflow.com/" class="link-card" target="_blank">
+          <h3>HeartFlow</h3>
+          <p>FDA-approved cardiac digital twin for coronary artery analysis</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.siemens-healthineers.com/digital-twin" class="link-card" target="_blank">
+          <h3>Siemens Digital Twin Technology</h3>
+          <p>Enterprise-scale virtual patient modeling platform</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.philips.com/a-w/about/news/archive/blogs/innovation-matters/2022/20220920-digital-twin-revolutionizing-healthcare.html" class="link-card" target="_blank">
+          <h3>Philips Healthcare Digital Twins</h3>
+          <p>Digital twin applications in hospital and patient monitoring</p>
+          <span class="source">Philips</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI & ML -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><path d="M4 4c0 6 6 6 8 12 2 6 8 6 8 0"/><path d="M4 20c0-6 6-6 8-12 2-6 8-6 8 0"/></svg>
+        <h2>AI & Machine Learning</h2>
+        <span class="count">60+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://alphafold.ebi.ac.uk/" class="link-card" target="_blank">
+          <h3>AlphaFold Protein Database</h3>
+          <p>DeepMind's AI-predicted protein structures - 200M+ proteins</p>
+          <span class="source">DeepMind/EMBL</span>
+        </a>
+        <a href="https://www.recursion.com/" class="link-card" target="_blank">
+          <h3>Recursion Pharmaceuticals</h3>
+          <p>AI-powered drug discovery with massive biological datasets</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://insilico.com/" class="link-card" target="_blank">
+          <h3>Insilico Medicine</h3>
+          <p>First AI-designed drug in Phase 2 clinical trials</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.exscientia.ai/" class="link-card" target="_blank">
+          <h3>Exscientia</h3>
+          <p>AI-driven precision medicine and drug design</p>
+          <span class="source">Industry</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Industry -->
+    <section class="category-section">
+      <div class="category-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>
+        <h2>Industry & Companies</h2>
+        <span class="count">100+ sources</span>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.insitro.com/" class="link-card" target="_blank">
+          <h3>Insitro</h3>
+          <p>Machine learning platform for drug discovery, $2.4B valuation</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.tempus.com/" class="link-card" target="_blank">
+          <h3>Tempus</h3>
+          <p>AI-enabled precision medicine company, $8.1B valuation</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://www.cn-bio.com/" class="link-card" target="_blank">
+          <h3>CN Bio</h3>
+          <p>Multi-organ-on-chip platforms for ADME and toxicity</p>
+          <span class="source">Industry</span>
+        </a>
+        <a href="https://mimetas.com/" class="link-card" target="_blank">
+          <h3>Mimetas</h3>
+          <p>OrganoPlate platform for high-throughput organ-on-chip</p>
+          <span class="source">Industry</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer" id="main-footer"></footer>
+
+  <script>
+    // Simple search filter
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.link-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+  <!-- Living Effects -->
+  <script src="/assets/living-effects.js"></script>
+  <script>LivingEffects.init('cyan');</script>
+<script src="/js/ticker-fix.js"></script>
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav && !nav.innerHTML.trim()) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Home</a><a href="/platform" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Platform</a><a href="/science" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Science</a><a href="/research" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Research</a><a href="/games" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">BioLab</a><a href="/news" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">News</a><a href="/technology" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Technology</a><a href="/companies" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Companies</a><a href="/regulatory" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Regulatory</a><a href="/market" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Market</a><a href="/glossary" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Glossary</a><a href="/portfolio" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Portfolio</a><a href="/legal/" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Legal</a><a href="/haptic" style="color:#fff;text-decoration:none;font-size:10px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;">Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

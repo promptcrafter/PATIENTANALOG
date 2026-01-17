@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/assets/nav-force.css">
+  <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Systems | Discovery Zone | Patient Analog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard', sans-serif;
+      background: linear-gradient(135deg, #00c8ff 0%, #0891b2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: #fff; font-size: 2.2rem; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); margin-bottom: 10px; }
+    .subtitle { color: #cffafe; font-size: 1.1rem; }
+    .game-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .system-card {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-radius: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 3px solid transparent;
+    }
+    .system-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .system-card.active {
+      border-color: #0891b2;
+      background: linear-gradient(135deg, #cffafe, #a5f3fc);
+    }
+    .system-icon { font-size: 3rem; text-align: center; margin-bottom: 10px; }
+    .system-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0e7490;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .system-tagline {
+      font-size: 0.9rem;
+      color: #8899aa;
+      text-align: center;
+    }
+    .detail-panel {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #ecfeff, #cffafe);
+      border-radius: 15px;
+      display: none;
+      animation: slideIn 0.3s;
+    }
+    .detail-panel.show { display: block; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .detail-icon { font-size: 4rem; }
+    .detail-title { font-size: 1.8rem; color: #0e7490; }
+    .detail-content { color: #151d28; line-height: 1.8; font-size: 1.1rem; }
+    .fun-facts {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fef3c7;
+      border-radius: 10px;
+    }
+    .fun-facts h4 { color: #92400e; margin-bottom: 10px; }
+    .fun-facts ul { margin-left: 20px; color: #78350f; }
+    .fun-facts li { margin-bottom: 8px; }
+    .organs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .organ-tag {
+      padding: 8px 15px;
+      background: #0891b2;
+      color: #fff;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #fff;
+      color: #0891b2;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .close-btn {
+      float: right;
+      background: #f1f5f9;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #8899aa;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+  <div class="container">
+    <header>
+      <h1>Body Systems</h1>
+      <p class="subtitle">Explore how your amazing body works!</p>
+    </header>
+
+    <div class="game-area">
+      <div class="systems-grid">
+        <div class="system-card" data-system="circulatory">
+          <div class="system-icon">❤️</div>
+          <div class="system-name">Circulatory System</div>
+          <div class="system-tagline">Your heart pumps blood!</div>
+        </div>
+        <div class="system-card" data-system="respiratory">
+          <div class="system-icon">🫁</div>
+          <div class="system-name">Respiratory System</div>
+          <div class="system-tagline">Your lungs help you breathe!</div>
+        </div>
+        <div class="system-card" data-system="nervous">
+          <div class="system-icon">🧠</div>
+          <div class="system-name">Nervous System</div>
+          <div class="system-tagline">Your brain controls everything!</div>
+        </div>
+        <div class="system-card" data-system="digestive">
+          <div class="system-icon">🍽️</div>
+          <div class="system-name">Digestive System</div>
+          <div class="system-tagline">Your body processes food!</div>
+        </div>
+        <div class="system-card" data-system="skeletal">
+          <div class="system-icon">🦴</div>
+          <div class="system-name">Skeletal System</div>
+          <div class="system-tagline">Your bones hold you up!</div>
+        </div>
+        <div class="system-card" data-system="muscular">
+          <div class="system-icon">💪</div>
+          <div class="system-name">Muscular System</div>
+          <div class="system-tagline">Your muscles help you move!</div>
+        </div>
+      </div>
+
+      <div class="detail-panel" id="detail-panel">
+        <button class="close-btn" onclick="closeDetail()">×</button>
+        <div class="detail-header">
+          <div class="detail-icon" id="detail-icon"></div>
+          <h3 class="detail-title" id="detail-title"></h3>
+        </div>
+        <div class="detail-content" id="detail-content"></div>
+        <div class="organs-list" id="organs-list"></div>
+        <div class="fun-facts">
+          <h4>Fun Facts!</h4>
+          <ul id="fun-facts"></ul>
+        </div>
+      </div>
+    </div>
+
+    <center><a href="index.html" class="back-btn">Back to Discovery Zone</a></center>
+  </div>
+
+  <script>
+    const systems = {
+      circulatory: {
+        icon: '❤️',
+        title: 'Circulatory System',
+        content: 'The circulatory system is like a highway system in your body! Your heart is the pump that pushes blood through tubes called blood vessels. Blood carries oxygen and nutrients to every part of your body and takes away waste.',
+        organs: ['Heart', 'Blood Vessels', 'Blood'],
+        facts: [
+          'Your heart beats about 100,000 times every day!',
+          'If you laid out all your blood vessels, they would stretch 60,000 miles!',
+          'Your heart is about the size of your fist.',
+          'Blood travels through your entire body in about 20 seconds!'
+        ]
+      },
+      respiratory: {
+        icon: '🫁',
+        title: 'Respiratory System',
+        content: 'The respiratory system helps you breathe! When you breathe in, air goes into your lungs. Your lungs take the oxygen from the air and put it into your blood. When you breathe out, you get rid of carbon dioxide - a gas your body doesn\'t need.',
+        organs: ['Lungs', 'Nose', 'Mouth', 'Windpipe (Trachea)'],
+        facts: [
+          'You breathe about 20,000 times a day!',
+          'Your right lung is slightly bigger than your left.',
+          'You can hold about 6 liters of air in your lungs!',
+          'Sneezes can travel up to 100 miles per hour!'
+        ]
+      },
+      nervous: {
+        icon: '🧠',
+        title: 'Nervous System',
+        content: 'The nervous system is your body\'s control center! Your brain is the boss that tells every part of your body what to do. Nerves are like telephone wires that carry messages between your brain and body.',
+        organs: ['Brain', 'Spinal Cord', 'Nerves'],
+        facts: [
+          'Your brain has about 86 billion nerve cells!',
+          'Messages travel through nerves at 250 mph!',
+          'Your brain uses 20% of your body\'s energy.',
+          'The brain itself can\'t feel pain!'
+        ]
+      },
+      digestive: {
+        icon: '🍽️',
+        title: 'Digestive System',
+        content: 'The digestive system breaks down the food you eat into tiny pieces your body can use for energy! Food travels through a long tube from your mouth, to your stomach, through your intestines.',
+        organs: ['Mouth', 'Stomach', 'Small Intestine', 'Large Intestine', 'Liver'],
+        facts: [
+          'Your small intestine is about 20 feet long!',
+          'Your stomach makes a new layer of mucus every two weeks.',
+          'It takes about 24-72 hours to digest food completely.',
+          'Your stomach can stretch to hold about 1 liter of food!'
+        ]
+      },
+      skeletal: {
+        icon: '🦴',
+        title: 'Skeletal System',
+        content: 'The skeletal system gives your body its shape and protects your organs! Babies are born with about 300 bones, but adults only have 206 because some bones fuse together as you grow.',
+        organs: ['Bones', 'Cartilage', 'Joints'],
+        facts: [
+          'The smallest bone is in your ear - it\'s called the stirrup!',
+          'Your thigh bone (femur) is the longest bone in your body.',
+          'Bones are 4 times stronger than concrete!',
+          'Half of your bones are in your hands and feet!'
+        ]
+      },
+      muscular: {
+        icon: '💪',
+        title: 'Muscular System',
+        content: 'The muscular system helps you move! You have over 600 muscles in your body. Muscles work by getting shorter (contracting) to pull on your bones. Even smiling uses muscles!',
+        organs: ['Skeletal Muscles', 'Heart Muscle', 'Smooth Muscles'],
+        facts: [
+          'It takes 17 muscles to smile and 43 to frown!',
+          'The strongest muscle is your jaw muscle (masseter).',
+          'Your tongue is made of 8 different muscles!',
+          'Muscles make up about 40% of your body weight.'
+        ]
+      }
+    };
+
+    const cards = document.querySelectorAll('.system-card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const system = card.dataset.system;
+        const data = systems[system];
+
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        document.getElementById('detail-icon').textContent = data.icon;
+        document.getElementById('detail-title').textContent = data.title;
+        document.getElementById('detail-content').textContent = data.content;
+
+        const organsList = document.getElementById('organs-list');
+        organsList.innerHTML = data.organs.map(o => `<span class="organ-tag">${o}</span>`).join('');
+
+        const factsList = document.getElementById('fun-facts');
+        factsList.innerHTML = data.facts.map(f => `<li>${f}</li>`).join('');
+
+        document.getElementById('detail-panel').classList.add('show');
+      });
+    });
+
+    function closeDetail() {
+      document.getElementById('detail-panel').classList.remove('show');
+      document.querySelectorAll('.system-card').forEach(c => c.classList.remove('active'));
+    }
+  </script>
+<!-- Restore nav after main JS runs -->
+<script>
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483646!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;border-bottom:1px solid rgba(0,255,255,0.2)!important;padding:8px 16px!important;min-height:44px!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 2px 10px rgba(0,0,0,0.5)!important;backdrop-filter:blur(10px)!important;';
+      nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex!important;font-size:16px!important;font-weight:700!important;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3)!important;text-decoration:none!important;">Patient Analog</a><div class="nav-links" style="display:flex!important;gap:8px!important;margin-left:auto!important;"><a href="/portfolio" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Portfolio</a><a href="/research" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Research</a><a href="/haptic" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Haptic</a><a href="/games" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Games</a><a href="/legal" class="nav-link" style="padding:8px 14px!important;font-size:13px!important;color:#fff!important;background:rgba(0,200,255,0.12)!important;border:1px solid rgba(0,200,255,0.25)!important;border-radius:6px!important;text-decoration:none!important;">Legal</a></div>';
+    }
+  });
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

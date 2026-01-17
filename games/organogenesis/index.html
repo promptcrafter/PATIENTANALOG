@@ -1,0 +1,662 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+  <link rel="stylesheet" href="/assets/nav-force.css">
+    <meta charset="UTF-8">
+  <meta name="google-adsense-account" content="ca-pub-2494888434613702">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORGANOGENESIS - Cellular Defense | Patient Analog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            overflow: hidden;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #startScreen.hidden { display: none; }
+
+        .title {
+            font-size: 48px;
+            color: #0f0;
+            text-shadow: 4px 4px #030;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #0a0;
+            margin-bottom: 40px;
+        }
+
+        .startBtn {
+            padding: 20px 50px;
+            font-size: 20px;
+            color: #000;
+            background: #0f0;
+            border: 4px solid #0a0;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+
+        .startBtn:hover {
+            background: #0a0;
+            color: #0f0;
+        }
+
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #0f0;
+            font-size: 14px;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        #hud div { margin: 5px 0; }
+
+        .bar {
+            width: 150px;
+            height: 12px;
+            background: #030;
+            border: 2px solid #0f0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .barFill {
+            height: 100%;
+            background: #0f0;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #ff0;
+            font-size: 18px;
+            z-index: 100;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/main-qZqwn-yL.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DUnor6o6.css">
+<script src="/js/cookie-consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2494888434613702" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="nav-bar" id="main-nav"></nav>
+<div class="page-wrapper" style="max-width:1000px;margin:0 auto;padding:70px 20px 20px 20px;position:relative;z-index:1;">
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="startScreen">
+            <div class="title">ORGANOGENESIS</div>
+            <div class="subtitle">DEFEND YOUR CELLS</div>
+            <button class="startBtn">START GAME</button>
+            <div class="subtitle" style="margin-top: 40px; font-size: 12px;">
+                CLICK VIRUSES TO DESTROY THEM<br>
+                PROTECT YOUR ORGANOIDS
+            </div>
+        </div>
+
+        <div id="hud">
+            <div>HEALTH <span class="bar"><span class="barFill" id="healthBar" style="width:100%"></span></span></div>
+            <div>SHIELD <span class="bar"><span class="barFill" id="shieldBar" style="width:100%;background:#0ff"></span></span></div>
+            <div>WAVE: <span id="wave">0</span>/15</div>
+            <div>ENEMIES: <span id="enemies">0</span></div>
+        </div>
+
+        <div id="score">SCORE: <span id="scoreVal">0</span></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Retro pixelated rendering
+        ctx.imageSmoothingEnabled = false;
+
+        // Game state
+        const game = {
+            running: false,
+            health: 100,
+            shield: 100,
+            score: 0,
+            wave: 0,
+            spawnTimer: 0,
+            spawnRate: 3000,
+            organoids: [],
+            viruses: [],
+            particles: [],
+            boss: null
+        };
+
+        // Simple particle
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = (Math.random() - 0.5) * 6;
+                this.color = color;
+                this.life = 30;
+                this.size = 4;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+            }
+
+            draw() {
+                if (this.life <= 0) return;
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - 2, this.y - 2, this.size, this.size);
+            }
+        }
+
+        // Simple organoid (your cells)
+        class Organoid {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 30;
+                this.health = 100;
+                this.angle = 0;
+            }
+
+            update() {
+                this.angle += 0.02;
+            }
+
+            draw() {
+                // Outer ring
+                ctx.strokeStyle = '#0f0';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Inner cell
+                ctx.fillStyle = '#030';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius - 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Nucleus
+                ctx.fillStyle = '#0ff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Simple organelles (dots)
+                ctx.fillStyle = '#f80';
+                for (let i = 0; i < 6; i++) {
+                    const a = (i / 6) * Math.PI * 2 + this.angle;
+                    const ox = this.x + Math.cos(a) * 18;
+                    const oy = this.y + Math.sin(a) * 18;
+                    ctx.fillRect(ox - 3, oy - 3, 6, 6);
+                }
+            }
+        }
+
+        // Simple virus
+        class Virus {
+            constructor(x, y, elite = false) {
+                this.x = x;
+                this.y = y;
+                // Scale size by wave - BIGGER in early rounds (wave 1-5 get 2x size)
+                const sizeMultiplier = game.wave <= 5 ? 2.0 : (game.wave <= 10 ? 1.5 : 1.0);
+                this.radius = (elite ? 20 : 14) * sizeMultiplier;
+                this.health = elite ? 60 : 30;
+                this.elite = elite;
+                // Scale speed by wave - SLOWER in early rounds (wave 1-5 are 40% speed)
+                const speedMultiplier = game.wave <= 5 ? 0.4 : (game.wave <= 10 ? 0.7 : 1.0);
+                this.vx = (Math.random() - 0.5) * 2 * speedMultiplier;
+                this.vy = (Math.random() - 0.5) * 2 * speedMultiplier;
+                this.speedMultiplier = speedMultiplier;
+                this.angle = 0;
+            }
+
+            update() {
+                this.angle += 0.1;
+
+                // Move toward nearest organoid (acceleration also scaled by speed)
+                if (game.organoids.length > 0) {
+                    const target = game.organoids[0];
+                    const dx = target.x - this.x;
+                    const dy = target.y - this.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist > 0) {
+                        this.vx += (dx / dist) * 0.1 * this.speedMultiplier;
+                        this.vy += (dy / dist) * 0.1 * this.speedMultiplier;
+                    }
+                }
+
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off walls
+                if (this.x < 20 || this.x > canvas.width - 20) this.vx *= -1;
+                if (this.y < 20 || this.y > canvas.height - 20) this.vy *= -1;
+            }
+
+            draw() {
+                const color = this.elite ? '#f0f' : '#f00';
+
+                // Body
+                ctx.fillStyle = '#400';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Spikes
+                const spikes = this.elite ? 10 : 6;
+                for (let i = 0; i < spikes; i++) {
+                    const a = (i / spikes) * Math.PI * 2 + this.angle;
+                    const x1 = this.x + Math.cos(a) * this.radius;
+                    const y1 = this.y + Math.sin(a) * this.radius;
+                    const x2 = this.x + Math.cos(a) * (this.radius + 8);
+                    const y2 = this.y + Math.sin(a) * (this.radius + 8);
+
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+
+                    // Spike tip
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x2 - 2, y2 - 2, 4, 4);
+                }
+
+                // Core
+                ctx.fillStyle = '#faa';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Boss virus
+        class Boss {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.radius = 50;
+                this.health = 300;
+                this.maxHealth = 300;
+                this.angle = 0;
+                this.attackTimer = 0;
+            }
+
+            update() {
+                this.angle += 0.03;
+                this.x = canvas.width / 2 + Math.cos(this.angle * 0.5) * 150;
+                this.y = canvas.height / 2 + Math.sin(this.angle * 0.7) * 100;
+
+                this.attackTimer++;
+                if (this.attackTimer > 90) {
+                    this.attack();
+                    this.attackTimer = 0;
+                }
+            }
+
+            attack() {
+                // Spawn particles as attack
+                for (let i = 0; i < 12; i++) {
+                    const a = (i / 12) * Math.PI * 2;
+                    const px = this.x + Math.cos(a) * 60;
+                    const py = this.y + Math.sin(a) * 60;
+                    for (let j = 0; j < 3; j++) {
+                        game.particles.push(new Particle(px, py, '#f0f'));
+                    }
+                }
+            }
+
+            draw() {
+                // Body
+                ctx.fillStyle = '#402';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = '#f0f';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Spikes
+                for (let i = 0; i < 16; i++) {
+                    const a = (i / 16) * Math.PI * 2 + this.angle;
+                    const x1 = this.x + Math.cos(a) * this.radius;
+                    const y1 = this.y + Math.sin(a) * this.radius;
+                    const x2 = this.x + Math.cos(a) * (this.radius + 20);
+                    const y2 = this.y + Math.sin(a) * (this.radius + 20);
+
+                    ctx.strokeStyle = '#f0f';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#faf';
+                    ctx.fillRect(x2 - 3, y2 - 3, 6, 6);
+                }
+
+                // Core
+                ctx.fillStyle = '#faf';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 15, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Health bar
+                const barW = 80;
+                const barH = 8;
+                const barX = this.x - barW/2;
+                const barY = this.y - this.radius - 25;
+                ctx.fillStyle = '#400';
+                ctx.fillRect(barX, barY, barW, barH);
+                ctx.fillStyle = '#f0f';
+                ctx.fillRect(barX, barY, barW * (this.health / this.maxHealth), barH);
+                ctx.strokeStyle = '#f0f';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(barX, barY, barW, barH);
+            }
+        }
+
+        function burst(x, y, color, count = 8) {
+            for (let i = 0; i < count; i++) {
+                game.particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function startGame() {
+            document.getElementById('startScreen').classList.add('hidden');
+            game.running = true;
+            game.health = 150;  // Increased from 100 - more starting health
+            game.shield = 150;  // Increased from 100 - more starting shield
+            game.score = 0;
+            game.wave = 0;
+            game.organoids = [];
+            game.viruses = [];
+            game.particles = [];
+            game.boss = null;
+
+            // Create organoids
+            for (let i = 0; i < 3; i++) {
+                game.organoids.push(new Organoid(
+                    canvas.width * 0.3 + Math.random() * canvas.width * 0.4,
+                    canvas.height * 0.3 + Math.random() * canvas.height * 0.4
+                ));
+            }
+        }
+
+        function spawnVirus() {
+            const edge = Math.floor(Math.random() * 4);
+            let x, y;
+            switch(edge) {
+                case 0: x = Math.random() * canvas.width; y = -30; break;
+                case 1: x = canvas.width + 30; y = Math.random() * canvas.height; break;
+                case 2: x = Math.random() * canvas.width; y = canvas.height + 30; break;
+                case 3: x = -30; y = Math.random() * canvas.height; break;
+            }
+            const elite = Math.random() < 0.2;
+            game.viruses.push(new Virus(x, y, elite));
+            game.wave++;
+        }
+
+        function update() {
+            if (!game.running) return;
+
+            // Spawn viruses
+            game.spawnTimer += 16;
+            if (game.spawnTimer >= game.spawnRate && game.wave < 15) {
+                spawnVirus();
+                game.spawnTimer = 0;
+                game.spawnRate = Math.max(1500, game.spawnRate - 100);
+            }
+
+            // Spawn boss after wave 15
+            if (game.wave >= 15 && !game.boss && game.viruses.length === 0) {
+                game.boss = new Boss();
+            }
+
+            // Update organoids
+            game.organoids.forEach(org => org.update());
+
+            // Update viruses
+            game.viruses.forEach(virus => {
+                virus.update();
+
+                // Check collision with organoids
+                game.organoids.forEach(org => {
+                    const dx = org.x - virus.x;
+                    const dy = org.y - virus.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < org.radius + virus.radius) {
+                        // Scale damage by wave - LESS damage in early rounds
+                        const damageMultiplier = game.wave <= 5 ? 0.3 : (game.wave <= 10 ? 0.6 : 1.0);
+                        if (game.shield > 0) {
+                            game.shield -= 5 * damageMultiplier;
+                        } else {
+                            game.health -= 3 * damageMultiplier;
+                        }
+                        burst(virus.x, virus.y, '#f00', 5);
+                    }
+                });
+            });
+
+            // Remove dead viruses
+            game.viruses = game.viruses.filter(v => v.health > 0);
+
+            // Update boss
+            if (game.boss) {
+                game.boss.update();
+            }
+
+            // Update particles
+            game.particles.forEach(p => p.update());
+            game.particles = game.particles.filter(p => p.life > 0);
+
+            // Check game over
+            if (game.health <= 0) {
+                alert('GAME OVER!\nScore: ' + game.score);
+                location.reload();
+            }
+
+            // Check win
+            if (game.boss && game.boss.health <= 0) {
+                game.score += 10000;
+                alert('VICTORY!\nFinal Score: ' + game.score);
+                location.reload();
+            }
+
+            // Update HUD
+            document.getElementById('healthBar').style.width = game.health + '%';
+            document.getElementById('shieldBar').style.width = game.shield + '%';
+            document.getElementById('wave').textContent = Math.min(game.wave, 15);
+            document.getElementById('enemies').textContent = game.viruses.length + (game.boss ? 1 : 0);
+            document.getElementById('scoreVal').textContent = game.score;
+        }
+
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Simple grid
+            ctx.strokeStyle = '#020';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Draw organoids
+            game.organoids.forEach(org => org.draw());
+
+            // Draw viruses
+            game.viruses.forEach(virus => virus.draw());
+
+            // Draw boss
+            if (game.boss) game.boss.draw();
+
+            // Draw particles
+            game.particles.forEach(p => p.draw());
+
+            // Simple crosshair
+            ctx.strokeStyle = '#0f0';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(mouseX - 15, mouseY);
+            ctx.lineTo(mouseX + 15, mouseY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(mouseX, mouseY - 15);
+            ctx.lineTo(mouseX, mouseY + 15);
+            ctx.stroke();
+        }
+
+        let mouseX = 0, mouseY = 0;
+
+        function getCanvasCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            return {
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY
+            };
+        }
+
+        canvas.addEventListener('mousemove', e => {
+            const coords = getCanvasCoords(e);
+            mouseX = coords.x;
+            mouseY = coords.y;
+        });
+
+        canvas.addEventListener('click', e => {
+            if (!game.running) return;
+
+            const coords = getCanvasCoords(e);
+            const cx = coords.x;
+            const cy = coords.y;
+
+            // Check virus hits
+            game.viruses.forEach(virus => {
+                const dx = cx - virus.x;
+                const dy = cy - virus.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < virus.radius + 15) {
+                    virus.health -= 20;
+                    game.score += virus.elite ? 200 : 100;
+                    burst(cx, cy, '#ff0', 10);
+                    if (virus.health <= 0) {
+                        burst(virus.x, virus.y, '#f80', 15);
+                    }
+                }
+            });
+
+            // Check boss hit
+            if (game.boss) {
+                const dx = cx - game.boss.x;
+                const dy = cy - game.boss.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < game.boss.radius + 20) {
+                    game.boss.health -= 15;
+                    game.score += 500;
+                    burst(cx, cy, '#f0f', 12);
+                }
+            }
+        });
+
+        document.querySelector('.startBtn').addEventListener('click', startGame);
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        gameLoop();
+    </script>
+</div><!-- end page-wrapper -->
+<!-- RESTORE NAV AFTER MAIN.JS - FULL 14 BUTTON NAV -->
+<script>
+window.addEventListener('load', function() {
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    nav.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483647!important;display:flex!important;visibility:visible!important;opacity:1!important;background:rgba(5,10,15,0.98)!important;min-height:44px!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;border-bottom:1px solid rgba(0,255,255,0.15)!important;';
+    nav.innerHTML = '<a href="/" class="nav-logo" style="display:flex;align-items:center;gap:8px;color:#ffffff;text-shadow:0 0 10px rgba(0,212,255,0.9),0 0 20px rgba(138,43,226,0.5),0 0 30px rgba(0,153,255,0.3);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;"><span style="font-size:1rem;">&#8962;</span><span>Patient Analog</span></a><div class="nav-links" id="nav-links" style="display:flex!important;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-left:auto!important;"><a href="/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="/platform" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>Platform</a><a href="/science" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Science</a><a href="/research" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Research</a><a href="/games" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 3h6l3 6-6 12-6-12 3-6z"/><circle cx="12" cy="10" r="2"/></svg>BioLab</a><a href="/news" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>News</a><a href="/technology" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Technology</a><a href="/companies" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>Companies</a><a href="/regulatory" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2l9 4v6c0 5.25-3.75 9.75-9 11-5.25-1.25-9-5.75-9-11V6l9-4z"/></svg>Regulatory</a><a href="/market" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></svg>Market</a><a href="/glossary" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Glossary</a><a href="/portfolio" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Portfolio</a><a href="/legal/" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Legal</a><a href="/haptic" class="nav-link" style="color:#fff;text-decoration:none;font-size:10px;display:flex;align-items:center;gap:3px;padding:6px 10px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:4px;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Haptic</a></div>';
+  }
+});
+</script>
+</body>
+</html>
+<!-- v20260116073238 -->

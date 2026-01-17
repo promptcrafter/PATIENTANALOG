@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <!-- News Hub -->
+  <url>
+    <loc>https://patientanalog.com/news</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Patient Analog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-01-15</news:publication_date>
+      <news:title>NAMs and Organ-on-Chip News - FDA Modernization Act Updates</news:title>
+    </news:news>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Regulatory News -->
+  <url>
+    <loc>https://patientanalog.com/regulatory</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Market News -->
+  <url>
+    <loc>https://patientanalog.com/market</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Industry News -->
+  <url>
+    <loc>https://patientanalog.com/companies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Intelligence Updates -->
+  <url>
+    <loc>https://patientanalog.com/intelligence</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

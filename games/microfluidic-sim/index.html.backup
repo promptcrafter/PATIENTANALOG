@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microfluidic Chip Simulator | Patient Analog</title>
+  <style>
+    :root { --bg: #000814; --sapphire: #0055ff; --emerald: #00cc66; --crimson: #ff3366; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; text-align: center; }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 20px; font-size: 14px; }
+    .score { font-size: 1.2rem; margin-bottom: 20px; color: var(--emerald); }
+    .chip-visual {
+      width: 400px; height: 200px; margin: 0 auto 30px;
+      background: linear-gradient(90deg, rgba(0,85,255,0.1), rgba(0,85,255,0.2));
+      border: 2px solid rgba(0,85,255,0.4); border-radius: 12px;
+      position: relative; overflow: hidden;
+    }
+    .channel { position: absolute; height: 8px; background: rgba(0,150,255,0.3); border-radius: 4px; }
+    .flow { position: absolute; height: 6px; background: var(--sapphire); border-radius: 3px; animation: flow 2s linear infinite; }
+    @keyframes flow { from { left: 0; } to { left: calc(100% - 20px); } }
+    .organ-chamber {
+      position: absolute; width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(0,204,102,0.3); border: 2px solid var(--emerald);
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .controls { margin-bottom: 20px; }
+    .control-group { margin-bottom: 15px; }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
+    input[type="range"] { width: 100%; max-width: 300px; }
+    .status { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+    .status-item { text-align: center; }
+    .status-value { font-size: 1.5rem; font-weight: bold; }
+    .status-label { font-size: 11px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💧 Microfluidic Chip Simulator</h1>
+    <p class="subtitle">Adjust flow rates to deliver perfect drug concentration!</p>
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <div class="chip-visual">
+      <div class="channel" style="top: 40px; left: 20px; width: 360px;"></div>
+      <div class="channel" style="top: 80px; left: 50px; width: 300px;"></div>
+      <div class="channel" style="top: 120px; left: 20px; width: 360px;"></div>
+      <div class="flow" style="top: 41px; width: 20px;"></div>
+      <div class="flow" style="top: 81px; width: 20px; animation-delay: 0.5s;"></div>
+      <div class="flow" style="top: 121px; width: 20px; animation-delay: 1s;"></div>
+      <div class="organ-chamber" style="right: 30px; top: 30px;">❤️</div>
+      <div class="organ-chamber" style="right: 30px; top: 75px;">🫁</div>
+      <div class="organ-chamber" style="right: 30px; top: 120px;">🫘</div>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <div class="control-label"><span>Flow Rate (μL/min)</span><span id="flowVal">50</span></div>
+        <input type="range" id="flowRate" min="10" max="100" value="50" oninput="updateSim()">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Drug Concentration (μM)</span><span id="concVal">25</span></div>
+        <input type="range" id="concentration" min="5" max="100" value="25" oninput="updateSim()">
+      </div>
+    </div>
+
+    <div class="status">
+      <div class="status-item"><div class="status-value" id="delivery">50%</div><div class="status-label">Drug Delivery</div></div>
+      <div class="status-item"><div class="status-value" id="viability">95%</div><div class="status-label">Cell Viability</div></div>
+      <div class="status-item"><div class="status-value" id="efficiency">72%</div><div class="status-label">Efficiency</div></div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    function updateSim() {
+      const flow = document.getElementById('flowRate').value;
+      const conc = document.getElementById('concentration').value;
+      document.getElementById('flowVal').textContent = flow;
+      document.getElementById('concVal').textContent = conc;
+
+      // Optimal: flow=60, conc=40
+      const flowScore = 100 - Math.abs(flow - 60) * 1.5;
+      const concScore = 100 - Math.abs(conc - 40) * 1.2;
+      const delivery = Math.max(0, Math.min(100, (flowScore + concScore) / 2));
+      const viability = conc > 70 ? Math.max(50, 100 - (conc - 70) * 2) : 95;
+      const efficiency = Math.round((delivery * viability) / 100);
+
+      document.getElementById('delivery').textContent = Math.round(delivery) + '%';
+      document.getElementById('viability').textContent = Math.round(viability) + '%';
+      document.getElementById('efficiency').textContent = efficiency + '%';
+      document.getElementById('efficiency').style.color = efficiency > 80 ? '#00cc66' : efficiency > 50 ? '#ffaa00' : '#ff3366';
+
+      if (efficiency > 85) { score += 1; document.getElementById('score').textContent = score; }
+    }
+    updateSim();
+  </script>
+</body>
+</html>
