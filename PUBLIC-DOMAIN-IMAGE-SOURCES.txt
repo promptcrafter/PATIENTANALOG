@@ -1,0 +1,369 @@
+PUBLIC DOMAIN IMAGE SOURCES - NIH, NASA, DARPA, FDA
+====================================================
+Date: January 17, 2026
+For: Patient Analog Site Image Enhancement
+
+
+GOVERNMENT PUBLIC DOMAIN SOURCES
+==================================
+
+1. NIH - NATIONAL INSTITUTES OF HEALTH
+---------------------------------------
+
+A. PubMed Central (PMC) - CC BY 4.0 Licensed
+https://www.ncbi.nlm.nih.gov/pmc/
+
+Search Strategy:
+- "brain organoid microscopy" + filter by CC BY license
+- "liver organoid culture" + filter by CC BY license
+- "organ-on-chip microfluidic" + filter by CC BY license
+- "cardiac organoid" + filter by CC BY license
+- "kidney organoid nephron" + filter by CC BY license
+
+HOW TO FIND NEWEST IMAGES:
+1. Go to https://pubmed.ncbi.nlm.nih.gov/
+2. Search: "(brain organoid) AND (2024[PDAT] OR 2025[PDAT] OR 2026[PDAT])"
+3. Filter: "Free full text" + "Full text links"
+4. Click articles → Find figures
+5. Check license: CC BY 4.0 = FREE TO USE WITH ATTRIBUTION
+
+VERIFIED 2025-2026 SOURCES:
+- Brain Organoids: PMC11106320 (2024)
+- Organ-Chips: PMC9966054 (2023)
+- Multi-organ systems: Search "multi-organ chip 2025"
+
+
+B. National Cancer Institute (NCI) Image Gallery
+https://visualsonline.cancer.gov/
+
+Public Domain: YES
+Best for: Cancer research, tumor organoids, microscopy
+License: Government work - no attribution required
+
+
+C. National Eye Institute (NEI)
+https://www.nei.nih.gov/about/photos-and-images
+
+Public Domain: YES
+Best for: Retinal organoids, eye development
+License: Public domain
+
+
+D. NHLBI (Heart, Lung, Blood)
+https://www.nhlbi.nih.gov/news/media
+
+Public Domain: YES
+Best for: Cardiac organoids, lung models
+License: Public domain
+
+
+
+2. NASA - SPACE & LIFE SCIENCES
+---------------------------------
+
+A. NASA Image and Video Library
+https://images.nasa.gov/
+
+Public Domain: YES
+License: Public domain (no attribution required)
+
+RELEVANT FOR BIOTECH:
+- ISS biological experiments
+- Tissue engineering in microgravity
+- Cell culture research on space station
+- Microscopy from space biology
+
+Search Terms:
+- "organoid space"
+- "cell culture ISS"
+- "tissue engineering space"
+- "biological research microscopy"
+
+NEWEST IMAGES:
+- Filter by date: 2024-2026
+- ISS Expedition 70-71 (current)
+
+
+
+3. FDA - FOOD AND DRUG ADMINISTRATION
+--------------------------------------
+
+A. FDA Multimedia
+https://www.fda.gov/media/
+
+Public Domain: YES
+License: Government work
+
+RELEVANT IMAGES:
+- Regulatory science microscopy
+- Drug safety testing images
+- Medical device testing
+- Laboratory standards
+
+B. FDA Modernization Act 2.0 Resources
+https://www.fda.gov/science-research/about-science-research-fda/fda-modernization-act-20
+
+Best for: Alternative testing method illustrations
+Note: Limited imagery, mostly documents
+
+
+
+4. DARPA - DEFENSE ADVANCED RESEARCH
+--------------------------------------
+
+A. DARPA Image Archive
+https://www.darpa.mil/news-events/image-archive
+
+Public Domain: YES (government work)
+License: No attribution required
+
+RELEVANT PROGRAMS:
+- Tissue Chips for Drug Screening (2012-2021)
+- Biological Technologies Office imagery
+- Human-relevant models
+
+LIMITATION:
+- Less frequently updated than NIH
+- More program-focused than scientific imagery
+- Best used for conceptual/technology images
+
+
+
+5. ADDITIONAL GOVERNMENT SOURCES
+---------------------------------
+
+A. NIH 3D Print Exchange
+https://3dprint.nih.gov/
+
+Public Domain: YES
+Best for: 3D molecular structures, protein models
+File types: STL, OBJ (can be rendered to images)
+
+
+B. Protein Data Bank (PDB)
+https://www.rcsb.org/
+
+Public Domain: YES
+Best for: Molecular structures, protein visualization
+Use: Download structures, render with PyMOL/ChimeraX
+
+
+C. CDC Public Health Image Library (PHIL)
+https://phil.cdc.gov/
+
+Public Domain: YES
+Best for: Pathogen images, cellular biology
+License: Public domain
+
+
+D. NCBI Bookshelf Medical Images
+https://www.ncbi.nlm.nih.gov/books/
+
+Public Domain: Many available
+Best for: Educational medical imagery
+Check license: Some CC BY, some public domain
+
+
+
+SPECIFIC SEARCHES FOR YOUR SCIENCE PAGES
+==========================================
+
+BRAIN ORGANOIDS:
+----------------
+Search: "cerebral organoid 2025" site:pmc.ncbi.nlm.nih.gov
+Filter: CC BY 4.0
+Keywords: "cerebral organoid microscopy", "brain organoid development"
+
+
+LIVER ORGANOIDS:
+----------------
+Search: "hepatic organoid" OR "liver organoid" 2024-2026
+PMC Filter: CC BY
+Keywords: "hepatocyte culture", "liver spheroid", "DILI model"
+
+
+KIDNEY ORGANOIDS:
+-----------------
+Search: "kidney organoid" OR "renal organoid" 2025
+Keywords: "nephron organoid", "kidney development", "renal tubule"
+
+
+HEART/CARDIAC:
+--------------
+Search: "cardiac organoid" OR "heart organoid" 2024-2026
+Keywords: "cardiomyocyte", "cardiac tissue engineering", "heart development"
+
+
+LUNG ORGANOIDS:
+---------------
+Search: "lung organoid" OR "alveolar organoid" 2025
+Keywords: "pulmonary organoid", "airway organoid", "lung development"
+
+
+ORGAN-ON-CHIP:
+--------------
+Search: "organ-on-chip" OR "microfluidic organ" 2024-2026
+Keywords: "microphysiological system", "organ chip device", "multi-organ chip"
+
+
+TUMOR/CANCER ORGANOIDS:
+-----------------------
+NCI Visuals Online: Search "tumor organoid"
+PMC: "patient-derived organoid" + CC BY
+Keywords: "cancer organoid", "tumoroid", "PDO model"
+
+
+PANCREATIC ORGANOIDS:
+---------------------
+Search: "pancreatic organoid" OR "pancreas organoid" 2025
+Keywords: "islet organoid", "pancreatic development", "beta cell"
+
+
+GUT/INTESTINAL:
+---------------
+Search: "intestinal organoid" OR "gut organoid" 2024-2026
+Keywords: "enteroid", "colon organoid", "gut epithelium"
+
+
+RETINAL ORGANOIDS:
+------------------
+NEI Image Gallery: "retinal organoid"
+PMC: "retinal organoid development" + CC BY
+
+
+VASCULARIZATION:
+----------------
+Search: "organoid vascularization" OR "blood vessel organoid" 2025
+Keywords: "angiogenesis organoid", "vascular network", "perfused organoid"
+
+
+
+HOW TO VERIFY LICENSE
+======================
+
+PubMed Central (PMC):
+1. Open article
+2. Scroll to bottom
+3. Look for "License" or "Copyright"
+4. CC BY 4.0 = ✅ FREE TO USE
+5. CC BY-NC = ❌ No commercial use (avoid)
+6. "All rights reserved" = ❌ No use
+
+NASA Images:
+- All public domain unless stated otherwise
+- No attribution required (but recommended)
+
+FDA/NIH/CDC/DARPA:
+- Government work = public domain
+- No permission needed
+- No attribution required (but recommended)
+
+
+IMAGE ATTRIBUTION FORMAT
+=========================
+
+For CC BY 4.0 (PMC):
+<!-- Image source: PMC11106320, Author et al. (2024), CC BY 4.0 -->
+
+For NASA:
+<!-- Image source: NASA Image Library, [Mission/ID], Public Domain -->
+
+For FDA/NIH:
+<!-- Image source: NIH/FDA, Public Domain -->
+
+
+
+AUTOMATED SEARCH COMMANDS
+==========================
+
+Google Advanced Search:
+site:pmc.ncbi.nlm.nih.gov "brain organoid" filetype:jpg OR filetype:png
+
+PubMed Search String:
+(brain organoid[Title/Abstract]) AND ("2024"[Date - Publication] : "2026"[Date - Publication]) AND "CC BY"[Filter]
+
+NASA API Search:
+https://images-api.nasa.gov/search?q=tissue%20engineering&year_start=2024
+
+
+
+NEXT STEPS FOR YOU
+==================
+
+1. IMMEDIATE (Use existing assets):
+   - I'll add your existing organoid1.png, organoid2.png to appropriate pages
+   - Use existing organ-chip images for device pages
+   - Enhance visibility of existing images
+
+2. DOWNLOAD NEW IMAGES (When ready):
+   - Use searches above to find 2025-2026 images
+   - Prioritize PMC articles with CC BY 4.0
+   - Download highest resolution available
+   - Save with descriptive names (brain-organoid-2025-pmc.png)
+
+3. VERIFY & ATTRIBUTE:
+   - Check license on every image
+   - Add HTML comment with source
+   - Keep license info in file metadata
+
+4. OPTIMIZE:
+   - Use TinyPNG.com to compress
+   - Target: Under 500KB per image
+   - Format: PNG for organoids (transparency), JPG for photos
+
+
+
+RECOMMENDED PRIORITY ORDER
+===========================
+
+Phase 1: Use Existing Assets (NOW)
+- organoid1.png → brain/general organoid pages
+- organoid2.png → liver/kidney pages
+- organ-chip-*.png → organ-chip pages
+- multi-organ-chips.png → multi-organ pages
+
+Phase 2: Download from PMC (2025-2026 papers)
+- Brain organoid: Latest cerebral organoid papers
+- Liver: Latest hepatic organoid DILI studies
+- Kidney: Latest renal organoid papers
+- Heart: Latest cardiac organoid papers
+
+Phase 3: NASA/FDA Supplementary
+- NASA: Microgravity tissue engineering
+- FDA: Regulatory validation images
+- CDC: Pathogen/cellular biology
+
+
+ESTIMATED IMAGE NEEDS
+======================
+
+Main Pages (6): 6 hero images
+Science Pages (35): 35 inline images
+Technology Pages: 10 inline images
+Total New Images Needed: ~51
+
+Available NOW (your assets): 8 organoid/chip images
+Need to Download: ~43 images from public sources
+
+Time to complete (with downloads):
+- Finding images: 3-4 hours
+- Downloading/optimizing: 1-2 hours
+- Adding to pages: 2-3 hours
+- Total: 6-9 hours of work
+
+
+LEGAL SAFETY CHECKLIST
+=======================
+
+✅ CC BY 4.0 from PMC - Safe, requires attribution
+✅ NASA public domain - Safe, no attribution required
+✅ FDA/NIH/CDC government work - Safe, public domain
+✅ Your existing images - Safe, your assets
+❌ Google Images (random) - NOT SAFE, copyright issues
+❌ Stock photos without license - NOT SAFE
+❌ CC BY-NC (non-commercial) - AVOID for AdSense site
+
+
+Last Updated: January 17, 2026
+Maintained by: Claude Code Agent
+Purpose: Complete image transformation with 100% legal, newest available public domain images

@@ -132,10 +132,16 @@
 <div id="live-ticker"></div>
 
   <main class="main-content">
-    <header class="page-header">
-      <div class="container">
-        <h1>About Patient Analog</h1>
-        <p>The infrastructure layer for human-relevant medicine</p>
+    <header class="page-header" style="position: relative; overflow: hidden; background: transparent !important; min-height: 650px;">
+      <!-- Background Image Layer -->
+      <div style="position: absolute; inset: 0; z-index: 0;">
+        <img src="/assets/images/hero/microscopy-hero.jpg" alt="Advanced microscopy and research laboratory" loading="eager" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; filter: brightness(0.9);">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,39,0.2) 0%, rgba(10,14,39,0.75) 100%);"></div>
+      </div>
+      <!-- Content Layer -->
+      <div class="container" style="position: relative; z-index: 1; padding: 200px 0 100px;">
+        <h1 style="font-size: 3.5rem; font-weight: 900; color: #00ffff; text-shadow: 0 0 40px rgba(0,255,255,0.5), 0 2px 8px rgba(0,0,0,0.8); margin-bottom: 20px;">About Patient Analog</h1>
+        <p style="font-size: 1.3rem; color: rgba(255,255,255,0.95); max-width: 700px; line-height: 1.6; text-shadow: 0 2px 4px rgba(0,0,0,0.6);">The infrastructure layer for human-relevant medicine</p>
       </div>
     </header>
 
