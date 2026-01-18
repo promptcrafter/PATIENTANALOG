@@ -723,3 +723,4 @@ KennethGame.Levels = (function() {
 })();
 
 console.log(`🗺️ Kenneth's Levels loaded: ${KennethGame.Levels.getTotalLevelCount()} levels across ${KennethGame.Levels.getAllEras().length} eras!`);
+// v20260117-FULL

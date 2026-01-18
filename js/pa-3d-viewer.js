@@ -615,3 +615,4 @@ console.log('[PA-3D] Lightweight 3D Viewer loading...');
 })();
 
 console.log('[PA-3D] Lightweight 3D Viewer module ready');
+// v20260117-FULL

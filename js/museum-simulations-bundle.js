@@ -1730,3 +1730,4 @@
     console.log('[MuseumSims] v4.0.0 loaded - ✅ 4/15 complete (27%), 11 placeholders remaining');
 
 })();
+// v20260117-FULL

@@ -219,3 +219,4 @@ window.KennethGame = window.KennethGame || {};
 })();
 
 console.log('🚀 Main module loaded!');
+// v20260117-FULL

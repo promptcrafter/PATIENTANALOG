@@ -26,3 +26,4 @@ function initHeroAnimations() {
     heroContent.style.transform = 'translateY(0)';
   });
 }
+// v20260117-FULL

@@ -473,3 +473,4 @@ function showOrganismInfo(ageDays, stage) {
   document.body.appendChild(backdrop);
   document.body.appendChild(modal);
 }
+// v20260117-FULL

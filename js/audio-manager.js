@@ -382,3 +382,4 @@ if (document.readyState === 'loading') {
 window.AudioManager = AudioManager;
 
 console.log('[AudioManager] Module loaded');
+// v20260117-FULL

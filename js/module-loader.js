@@ -161,3 +161,4 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 console.log('[PAModuleLoader] Initialized', PAModuleLoader.config);
+// v20260117-FULL

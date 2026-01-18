@@ -571,3 +571,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initChipViewer();
   initGalleryCards();
 });
+// v20260117-FULL

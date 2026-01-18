@@ -139,3 +139,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 console.log('[SITE-SEARCH] Script finished');
+// v20260117-FULL

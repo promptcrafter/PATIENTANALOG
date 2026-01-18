@@ -1015,3 +1015,4 @@
 
     console.log('[RNAStructureLab] Module loaded');
 })();
+// v20260117-FULL

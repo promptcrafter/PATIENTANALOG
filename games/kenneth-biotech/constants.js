@@ -487,3 +487,4 @@ KennethGame.CONSTANTS = {
 })(KennethGame.CONSTANTS);
 
 console.log('🧬 Constants loaded with all fixes!');
+// v20260117-FULL

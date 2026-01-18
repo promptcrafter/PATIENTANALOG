@@ -412,3 +412,4 @@ window.addEventListener('beforeunload', function() {
 window.addEventListener('pagehide', function() {
   LivingEffects.destroy();
 });
+// v20260117-FULL

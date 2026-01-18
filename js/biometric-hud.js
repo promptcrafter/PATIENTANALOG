@@ -570,3 +570,4 @@
  * BiometricHUD.destroy()  - Remove the HUD completely
  * 
  */
+// v20260117-FULL

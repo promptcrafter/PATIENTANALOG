@@ -97,3 +97,4 @@ import"./main-qZqwn-yL.js";/* empty css             *//* empty css              
         <button class="btn btn-primary" id="save-settings">Save Settings</button>
       </div>
     `,document.getElementById("back").addEventListener("click",()=>this.render()),document.getElementById("save-settings").addEventListener("click",()=>{this.accessibility={highContrast:document.getElementById("contrast").checked,largeText:document.getElementById("largetext").checked,reducedMotion:document.getElementById("motion").checked,colorblind:document.getElementById("colorblind").value},this.saveA11y(),this.applyA11y(),this.render()})}}document.addEventListener("DOMContentLoaded",()=>{const i=document.getElementById("kenneth-game-container");if(i){i.innerHTML="";const t=new c(i);window.kennethGame=t}});
+// v20260117-FULL

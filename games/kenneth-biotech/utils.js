@@ -269,3 +269,4 @@ KennethGame.Utils = (function() {
 })();
 
 console.log('🛠️ Utils loaded!');
+// v20260117-FULL

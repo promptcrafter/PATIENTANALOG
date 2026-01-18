@@ -298,3 +298,4 @@ if (typeof module !== 'undefined' && module.exports) {
 if (typeof window !== 'undefined') {
   window.GameEngine = GameEngine;
 }
+// v20260117-FULL

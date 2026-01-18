@@ -240,3 +240,4 @@ KennethGame.Particles = (function() {
 })();
 
 console.log('✨ Particles system loaded!');
+// v20260117-FULL

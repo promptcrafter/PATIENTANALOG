@@ -519,3 +519,4 @@ function escapeHtml(text) {
 window.openInquiryModal = openInquiryModal;
 window.closeInquiryModal = closeInquiryModal;
 window.handleDomainKeypress = handleDomainKeypress;
+// v20260117-FULL

@@ -484,3 +484,4 @@
     window.initTCellSimulator = (containerId) => { const s = new TCellSimulator(containerId); s.init(); return s; };
     console.log('[TCellSimulator] Module loaded');
 })();
+// v20260117-FULL

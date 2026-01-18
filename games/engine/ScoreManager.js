@@ -152,3 +152,4 @@ if (typeof module !== 'undefined' && module.exports) {
 if (typeof window !== 'undefined') {
   window.ScoreManager = ScoreManager;
 }
+// v20260117-FULL

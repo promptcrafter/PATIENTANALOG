@@ -982,3 +982,4 @@ canvas[id*="canvas-"] {
   max-width: min(90vw, 320px);
   font-size: clamp(0.75rem, 1.5vw, 0.95rem);
 }
+/* v20260117-FULL */

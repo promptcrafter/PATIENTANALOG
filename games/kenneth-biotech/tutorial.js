@@ -273,3 +273,4 @@ KennethGame.Tutorial = (function() {
 })();
 
 console.log('📖 Tutorial system loaded!');
+// v20260117-FULL

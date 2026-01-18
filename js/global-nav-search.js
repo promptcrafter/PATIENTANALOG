@@ -136,3 +136,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 console.log('[GLOBAL-NAV-SEARCH] Script finished');
+// v20260117-FULL

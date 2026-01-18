@@ -359,3 +359,4 @@ KennethGame.UI = (function() {
 })();
 
 console.log('🎨 UI Controller loaded!');
+// v20260117-FULL
