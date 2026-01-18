@@ -9,7 +9,7 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
+Disallow: /*.json
 Crawl-delay: 1
 
 # ===========================================

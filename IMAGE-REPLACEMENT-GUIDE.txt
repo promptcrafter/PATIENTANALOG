@@ -1,0 +1,599 @@
+================================================================================
+SCIENTIFIC IMAGE REPLACEMENT GUIDE
+Patient Analog Website - Brain Organoid Image
+================================================================================
+
+This guide provides EXACT STEPS to replace the brain-organoid.jpg image if
+verification determines it does not show actual brain organoid tissue culture.
+
+================================================================================
+PART 1: IMAGE VERIFICATION
+================================================================================
+
+STEP 1: Locate and Open the Current Image
+------------------------------------------
+File Location: C:\Users\josep\Desktop\COMPLETE-FINAL-JAN17-2026\assets\images\sections\brain-organoid.jpg
+
+Action: Open this file in an image viewer
+
+STEP 2: Visual Inspection Checklist
+------------------------------------
+Look at the image and answer these questions:
+
+Q1: Does it show 3D spheroid/blob-like structures?
+    □ YES - Proceed to Q2
+    □ NO - Image needs replacement (go to PART 2)
+
+Q2: Are these structures in culture (media, gel, or culture dish visible)?
+    □ YES - Proceed to Q3
+    □ NO - Image needs replacement (go to PART 2)
+
+Q3: Is this microscopy/photography of actual tissue?
+    □ YES - Proceed to Q4
+    □ NO (it's a diagram/illustration) - Image needs replacement (go to PART 2)
+
+Q4: Does it show brain anatomy (cross-sections, labeled brain regions)?
+    □ YES - Image needs replacement (go to PART 2)
+    □ NO - Image is likely CORRECT (proceed to VERDICT)
+
+VERDICT:
+If you answered:
+- YES, YES, YES, NO → Image is SCIENTIFICALLY ACCURATE ✓
+- Any other combination → Image needs REPLACEMENT (go to PART 2)
+
+================================================================================
+PART 2: FINDING A REPLACEMENT IMAGE
+================================================================================
+
+METHOD 1: PubMed Central (RECOMMENDED)
+---------------------------------------
+
+STEP 1: Navigate to PMC
+https://www.ncbi.nlm.nih.gov/pmc/
+
+STEP 2: Search for Images
+Search Query: "brain organoid microscopy"
+
+Filters to Apply:
+- Free full text: YES
+- Article type: Research Article
+- Look for: Images/Figures
+
+STEP 3: Browse Results for Suitable Images
+Look for papers with titles containing:
+- "cerebral organoid"
+- "brain organoid culture"
+- "neural organoid"
+
+STEP 4: Recommended High-Quality Papers
+----------------------------------------
+
+OPTION A: Lancaster et al. (2013) - CLASSIC PAPER
+Title: "Cerebral organoids model human brain development and microcephaly"
+Journal: Nature
+Search: "Lancaster cerebral organoid Nature 2013 PMC"
+Images to Look For: Figure 1 (whole organoid images), Figure 2 (microscopy)
+License: Check article for permissions
+Quality: ★★★★★ (Original organoid paper, widely cited)
+
+OPTION B: Recent Reviews with Microscopy
+Search: "brain organoid review 2024 2025 PMC"
+Filter: Open Access, Free full text
+Look For: Review articles with comprehensive image galleries
+Quality: ★★★★ (Recent, high-quality microscopy)
+
+OPTION C: Immunofluorescence Images
+Search: "cerebral organoid immunofluorescence PMC"
+Look For: Colorful stained organoid cross-sections
+Quality: ★★★★★ (Visually striking, clearly shows 3D structure)
+
+STEP 5: Download and Verify License
+------------------------------------
+
+For Each Potential Image:
+
+1. Check License Information:
+   - Look for: "CC-BY" (Creative Commons Attribution)
+   - Look for: "Open Access" badge
+   - Read: "Copyright and License information" section
+   - Acceptable: CC-BY, CC-BY-SA, CC0, Public Domain
+   - NOT acceptable: "All rights reserved", "© Publisher", no license stated
+
+2. Required Attribution:
+   - Note: Author names, year, journal, DOI
+   - Example: "Lancaster et al., Nature 2013, DOI: 10.1038/nature12517"
+
+3. Download Full-Resolution Image:
+   - Click on figure
+   - Select: "Download high-resolution image"
+   - Save as: brain-organoid-NEW.jpg (temporary filename)
+
+METHOD 2: Wikimedia Commons (ALTERNATIVE)
+------------------------------------------
+
+STEP 1: Navigate to Wikimedia Commons
+https://commons.wikimedia.org/
+
+STEP 2: Search
+Search Query: "cerebral organoid" OR "brain organoid"
+
+STEP 3: Filter Results
+- Look for: Actual photographs/microscopy
+- Avoid: Diagrams, cartoons, illustrations
+- Check: License (must be CC-BY, CC0, or Public Domain)
+
+STEP 4: Verify Image Quality
+- Resolution: At least 1920px wide
+- Clarity: High-quality microscopy
+- Content: Clear 3D spheroid structures
+
+STEP 5: Download
+- Click image → "Use this file" → "Download full resolution"
+- Note attribution requirements shown on page
+
+METHOD 3: Research Institution Press Resources
+-----------------------------------------------
+
+OPTION A: Hubrecht Institute
+Website: https://www.hubrecht.eu/
+Navigate to: Press / Media Resources
+Look for: Brain/cerebral organoid images
+Contact: press@hubrecht.eu (if images not publicly available)
+
+OPTION B: Wyss Institute
+Website: https://wyss.harvard.edu/
+Navigate to: Media Gallery / Press Kit
+Look for: Organoid-related images
+Note: May have organ-on-chip images as well
+
+OPTION C: STEMCELL Technologies
+Website: https://www.stemcell.com/
+Navigate to: Products → STEMdiff Cerebral Organoid Kit
+Look for: Product images, application images
+Contact: For permission to use product images
+
+================================================================================
+PART 3: IMAGE PREPARATION
+================================================================================
+
+STEP 1: Optimize for Web Use
+-----------------------------
+
+Tool Options:
+- Online: TinyPNG (https://tinypng.com/)
+- Desktop: Adobe Photoshop, GIMP (free), Squoosh
+- Command line: ImageMagick, JPEGoptim
+
+Optimization Settings:
+- Format: JPEG (maintain consistency with existing images)
+- Resolution: 1920 x 1080 pixels (or 1920 x 1280)
+- Quality: 80-85% (balance quality vs file size)
+- Target File Size: < 500 KB (ideally 200-400 KB)
+- Color Profile: sRGB
+
+STEP 2: Test Appearance with Filters
+-------------------------------------
+
+Your website applies heavy filtering to background images:
+- Opacity: 0.20 to 0.80
+- Saturate: 0.5
+- Brightness: 0.7
+
+Test Command (using browser dev tools):
+img { opacity: 0.2; filter: saturate(0.5) brightness(0.7); }
+
+Ensure image still looks good when heavily filtered.
+
+STEP 3: Crop and Aspect Ratio
+------------------------------
+
+Preferred Aspect Ratio: 16:9 (landscape)
+Dimensions: 1920 x 1080 pixels (minimum)
+
+Cropping Guidelines:
+- Center the most interesting organoid structures
+- Leave some negative space for text overlay
+- Ensure key features visible even when heavily filtered
+
+================================================================================
+PART 4: FILE REPLACEMENT
+================================================================================
+
+STEP 1: Backup Original Image
+------------------------------
+
+Action:
+1. Navigate to: C:\Users\josep\Desktop\COMPLETE-FINAL-JAN17-2026\assets\images\sections\
+2. Locate: brain-organoid.jpg
+3. Rename to: brain-organoid-ORIGINAL-BACKUP.jpg
+4. Keep backup in same folder (for rollback if needed)
+
+STEP 2: Replace Image File
+---------------------------
+
+Action:
+1. Rename your optimized new image to: brain-organoid.jpg
+2. Move it to: C:\Users\josep\Desktop\COMPLETE-FINAL-JAN17-2026\assets\images\sections\
+3. Verify file size (should be < 500 KB)
+4. Verify filename exactly matches: brain-organoid.jpg (case-sensitive on some systems)
+
+STEP 3: Verify Replacement
+---------------------------
+
+Check:
+□ New file is in correct location
+□ Filename is exactly: brain-organoid.jpg
+□ File size is reasonable (< 500 KB)
+□ Original backup exists as brain-organoid-ORIGINAL-BACKUP.jpg
+
+================================================================================
+PART 5: TESTING
+================================================================================
+
+STEP 1: Local Testing (if running local server)
+------------------------------------------------
+
+If you have a local development server:
+1. Start server
+2. Navigate to: http://localhost:[port]/science.html
+3. Inspect header background image
+4. Verify new image appears
+5. Check appearance at different screen sizes
+
+STEP 2: Production Testing
+---------------------------
+
+After deploying to production:
+
+Test Pages:
+1. https://patientanalog.com/science
+2. https://patientanalog.com/science.html
+
+Test Checklist:
+□ Image loads successfully
+□ Image looks good at 20% opacity (science.html)
+□ Image looks good at 80% opacity (science/index.html)
+□ Image works with gradient overlay
+□ Text remains readable over image
+□ Mobile version displays correctly
+□ All 76 language versions update (they share same image file)
+
+Browser Testing:
+□ Chrome/Edge
+□ Firefox
+□ Safari (if available)
+□ Mobile browsers (responsive design)
+
+STEP 3: Performance Testing
+----------------------------
+
+Check:
+□ Page load time not significantly increased
+□ Image file size optimized (< 500 KB)
+□ No lazy-loading issues
+□ No CORS errors in console
+
+Tools:
+- Google PageSpeed Insights: https://pagespeed.web.dev/
+- GTmetrix: https://gtmetrix.com/
+- Browser DevTools → Network tab
+
+================================================================================
+PART 6: DOCUMENTATION
+================================================================================
+
+STEP 1: Create Attribution Record
+----------------------------------
+
+Create file: IMAGE-SOURCES.txt (in project root)
+
+Add Entry:
+---
+File: /assets/images/sections/brain-organoid.jpg
+Source: [Full citation]
+  Example: Lancaster MA, et al. Nature. 2013;501(7467):373-379.
+  DOI: [DOI number]
+License: CC-BY 4.0 (or applicable license)
+Downloaded: [Date]
+Downloaded From: PubMed Central / Wikimedia Commons / [Source]
+Attribution Required: Yes/No
+Attribution Text: [If required, exact text to use]
+Verified By: [Your name]
+Verification Date: [Date]
+Scientific Accuracy: ✓ Shows actual brain organoid tissue culture
+---
+
+STEP 2: Update Website Attribution (if required)
+-------------------------------------------------
+
+If license requires attribution on page:
+
+Option A: Add to Footer
+Add invisible attribution in HTML:
+<!-- Image attribution: [Citation] -->
+
+Option B: Create Credits Page
+Add to /legal/image-credits.html or similar
+
+Option C: Add to About Page
+Include in "Resources" or "Credits" section
+
+STEP 3: Version Control
+------------------------
+
+If using Git:
+git add assets/images/sections/brain-organoid.jpg
+git add IMAGE-SOURCES.txt
+git commit -m "Replace brain-organoid.jpg with verified microscopy image
+
+- Source: [Citation]
+- License: [License type]
+- Shows actual brain organoid tissue culture (verified)
+- Replaces previous image (backed up as brain-organoid-ORIGINAL-BACKUP.jpg)
+"
+git push
+
+================================================================================
+PART 7: QUALITY ASSURANCE CHECKLIST
+================================================================================
+
+BEFORE DECLARING COMPLETE:
+
+Scientific Accuracy:
+□ Image shows actual brain organoid tissue culture
+□ Image depicts 3D spheroid structures (not flat tissue)
+□ Image is microscopy/photography (not diagram)
+□ Image does NOT show brain anatomy/cross-sections
+
+Technical Quality:
+□ File format: JPEG
+□ Resolution: ≥1920 x 1080 pixels
+□ File size: <500 KB
+□ Aspect ratio: 16:9 or similar landscape
+□ Color profile: sRGB
+
+Legal Compliance:
+□ License verified (CC-BY, CC0, Public Domain, or permission granted)
+□ Attribution requirements documented
+□ Copyright holder identified
+□ Commercial use explicitly allowed
+
+Testing Complete:
+□ Image displays correctly on /science.html
+□ Image displays correctly on /science/index.html
+□ Appearance acceptable at 20% opacity
+□ Appearance acceptable at 80% opacity
+□ Mobile responsive design works
+□ Page load performance acceptable
+
+Documentation:
+□ IMAGE-SOURCES.txt created/updated
+□ Original image backed up
+□ Attribution added (if required)
+□ Commit message descriptive
+
+================================================================================
+PART 8: TROUBLESHOOTING
+================================================================================
+
+ISSUE: New image doesn't appear after replacement
+--------------------------------------------------
+Solution:
+1. Hard refresh browser (Ctrl+Shift+R / Cmd+Shift+R)
+2. Clear browser cache
+3. Check filename exactly matches (case-sensitive)
+4. Verify file path is correct
+5. Check file permissions (should be readable)
+
+ISSUE: Image looks pixelated/blurry
+------------------------------------
+Solution:
+1. Check source image resolution (needs to be high-res)
+2. Verify optimization didn't over-compress (try 90% quality)
+3. Ensure aspect ratio wasn't distorted during cropping
+4. Use higher resolution source (at least 1920px wide)
+
+ISSUE: Image file size too large (>500 KB)
+-------------------------------------------
+Solution:
+1. Re-optimize with lower quality (try 75-80%)
+2. Reduce resolution slightly (try 1600 x 900)
+3. Use online compression tool (TinyPNG, Squoosh)
+4. Crop to remove excess negative space
+
+ISSUE: Attribution requirements unclear
+----------------------------------------
+Solution:
+1. Email image source for clarification
+2. Default to including attribution (safer)
+3. Use different image with clear CC0/Public Domain
+4. Contact publisher/author directly
+
+ISSUE: Image doesn't work with site's color scheme
+---------------------------------------------------
+Solution:
+1. Adjust image brightness/contrast before upload
+2. Choose image with complementary colors
+3. Test with site's filter effects before committing
+4. Try different source image
+
+================================================================================
+PART 9: ALTERNATIVE SOLUTIONS
+================================================================================
+
+If Finding a Suitable Replacement is Difficult:
+------------------------------------------------
+
+OPTION 1: Commission Custom Illustration
+- Hire scientific illustrator
+- Specify: Brain organoid microscopy style
+- Cost: $100-500 depending on complexity
+- Benefit: Full control, no licensing issues
+
+OPTION 2: Contact Research Labs Directly
+- Email: Hubrecht Institute, Wyss Institute
+- Request: Permission to use press/publication images
+- Provide: Context (educational website)
+- Often granted for non-commercial educational use
+
+OPTION 3: Use Generic "Organoid" Image
+- Rename to: "organoid-culture.jpg" (more generic)
+- Use any high-quality organoid microscopy
+- Don't specify "brain" if uncertain
+- Update usage context to be more general
+
+OPTION 4: Remove Image Entirely
+- Delete image file
+- Update HTML to use solid color background
+- Or use different generic laboratory image
+- Safest option if replacement too difficult
+
+================================================================================
+PART 10: LONG-TERM IMAGE STRATEGY
+================================================================================
+
+Recommendations for Future:
+
+1. Build Image Library:
+   - Create curated collection of verified scientific images
+   - Document source and license for each
+   - Organize by topic (brain, liver, kidney, etc.)
+   - Update regularly with new high-quality images
+
+2. Establish Verification Protocol:
+   - All scientific images reviewed by scientific advisor
+   - Checklist for accuracy before upload
+   - License verification required
+   - Source documentation mandatory
+
+3. Improve Inline Scientific Content:
+   - Add more microscopy images to content pages
+   - Include figure captions with citations
+   - Link images to source papers
+   - Educational enhancement while maintaining accuracy
+
+4. Partner with Research Institutions:
+   - Establish relationships for image sharing
+   - Request permission for press kit images
+   - Collaborate on educational content
+   - Mutual benefit (publicity for them, content for you)
+
+================================================================================
+APPENDIX A: VISUAL EXAMPLES OF CORRECT vs INCORRECT
+================================================================================
+
+CORRECT Brain Organoid Images Show:
+✓ Round, spheroid blob-like structures
+✓ 3D appearance (not flat)
+✓ Size reference: 2-5mm diameter typical
+✓ Culture context: In media, Matrigel, or culture dish
+✓ Microscopy: Brightfield, phase contrast, or fluorescence
+✓ Multiple organoids in field of view (often)
+✓ Cross-sections: Reveal layered neural tissue structure
+✓ Staining: May show red/green/blue immunofluorescence
+
+INCORRECT Brain Images Show:
+✗ Brain anatomy diagrams (labeled lobes, regions)
+✗ Brain cross-sections (clinical/anatomical)
+✗ Neuron illustrations or cartoons
+✗ MRI/CT scan images
+✗ Flat 2D cell culture
+✗ Single neurons under microscope
+✗ Brain surface imagery
+✗ Clinical/medical imaging
+
+Keywords That Indicate CORRECT Images:
+- "organoid culture"
+- "spheroid"
+- "3D culture"
+- "Matrigel"
+- "immunofluorescence"
+- "iPSC-derived"
+- "self-organizing"
+
+Keywords That Indicate INCORRECT Images:
+- "anatomy"
+- "cross-section" (unless organoid cross-section)
+- "clinical imaging"
+- "diagnostic"
+- "patient scan"
+- "neuroanatomy"
+- "brain regions"
+
+================================================================================
+APPENDIX B: CONTACT INFORMATION
+================================================================================
+
+For Questions or Assistance:
+
+PubMed Central Help:
+Email: pubmedcentral@ncbi.nlm.nih.gov
+Help Desk: https://www.ncbi.nlm.nih.gov/pmc/about/help/
+
+Wikimedia Commons Help:
+Help Desk: https://commons.wikimedia.org/wiki/Commons:Help_desk
+Email: commons-help@wikimedia.org (for licensing questions)
+
+Research Institution Contacts:
+
+Hubrecht Institute:
+Press Office: press@hubrecht.eu
+Website: https://www.hubrecht.eu/
+(Original organoid pioneers - Hans Clevers lab)
+
+Wyss Institute:
+Media Contact: communications@wyss.harvard.edu
+Website: https://wyss.harvard.edu/
+(Organ-on-chip pioneers - Don Ingber lab)
+
+STEMCELL Technologies:
+Technical Support: techsupport@stemcell.com
+Website: https://www.stemcell.com/
+(Organoid culture products and resources)
+
+Creative Commons:
+License Help: https://creativecommons.org/faq/
+Email: info@creativecommons.org
+
+================================================================================
+APPENDIX C: RECOMMENDED SEARCH QUERIES
+================================================================================
+
+PubMed Central Searches:
+1. "brain organoid microscopy" [Title/Abstract]
+2. "cerebral organoid immunofluorescence" [All Fields]
+3. "neural organoid culture brightfield" [All Fields]
+4. "3D brain organoid imaging" [Title/Abstract]
+5. ("brain organoid"[Title] AND "microscopy"[Abstract])
+6. "organoid Lancaster" (original author)
+7. "organoid confocal microscopy" [Title/Abstract]
+
+Google Scholar Searches:
+1. brain organoid microscopy site:pmc.ncbi.nlm.nih.gov
+2. "cerebral organoid" "immunofluorescence" filetype:pdf
+3. Lancaster "cerebral organoid" Nature 2013
+
+Wikimedia Commons Searches:
+1. "cerebral organoid"
+2. "brain organoid culture"
+3. "neural organoid stem cell"
+4. "organoid microscopy"
+
+Image-Specific Searches (Google Images with filter):
+1. brain organoid microscopy site:pmc.ncbi.nlm.nih.gov
+2. cerebral organoid immunostaining site:nature.com
+3. neural organoid culture site:cell.com
+
+================================================================================
+END OF IMAGE REPLACEMENT GUIDE
+================================================================================
+
+This guide provides comprehensive step-by-step instructions for verifying and
+replacing the brain-organoid.jpg image file to ensure 100% scientific accuracy
+across the Patient Analog website.
+
+For additional assistance, refer to:
+- IMAGE-ACCURACY-AUDIT-FULL.txt (comprehensive audit report)
+- IMAGE-AUDIT-QUICK-REFERENCE.txt (quick reference summary)
+
+Good luck with your image replacement!

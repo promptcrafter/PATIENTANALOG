@@ -140,7 +140,7 @@
                 background: linear-gradient(180deg, rgba(10, 22, 40, 0.98) 0%, rgba(10, 22, 40, 0.99) 100%);
                 border-top: 1px solid rgba(0, 85, 255, 0.3);
                 padding: 20px;
-                z-index: 999999;
+                z-index: 2147483647;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
                 animation: slideUp 0.4s ease-out;

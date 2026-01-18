@@ -1,0 +1,171 @@
+IMAGES THAT NEED REPLACEMENT - SCIENTIFIC ACCURACY ISSUES
+==========================================================
+
+VISIBILITY UPDATE:
+------------------
+✅ Increased opacity: 0.55 → 0.80 (30 more pages updated)
+✅ Hero images now visible
+⚠️ Section images should be more visible now - refresh and check
+
+
+CONFIRMED WRONG IMAGES:
+========================
+
+1. BRAIN-ORGANOID.JPG (CRITICAL - MUST REPLACE)
+------------------------------------------------
+Location: /assets/images/sections/brain-organoid.jpg
+Used on: science/index.html (line 128)
+
+PROBLEM:
+❌ Shows brain anatomy (generic brain illustration)
+✓ Should show actual brain organoid (3D cell cluster)
+
+WHAT A REAL BRAIN ORGANOID LOOKS LIKE:
+- Small spheroid/blob (looks like a pinkish/white ball)
+- 3D cell cluster suspended in medium
+- NOT brain anatomy diagram
+- NOT neuron illustrations
+- Should look like microscopy image of tissue culture
+
+WHERE TO FIND REPLACEMENT:
+1. PubMed Central - Search "brain organoid microscopy"
+   https://www.ncbi.nlm.nih.gov/pmc/
+   Filter: "Free full text" + "CC BY" license
+
+2. Wikimedia Commons - Search "cerebral organoid"
+   https://commons.wikimedia.org/
+   All images are Creative Commons licensed
+
+3. Unsplash - Search "organoid" or "cell culture"
+   https://unsplash.com/
+   Free for commercial use
+
+EXAMPLE SEARCH TERMS:
+- "brain organoid bright field microscopy"
+- "cerebral organoid culture"
+- "neural organoid spheroid"
+- "3D brain tissue culture"
+
+
+2. BIOTECH.JPG (NEEDS VERIFICATION)
+------------------------------------
+Location: /assets/images/sections/biotech.jpg
+Used on: technology/index.html
+
+QUESTION: Does this look like actual biotech equipment or generic stock?
+
+If generic stock photo:
+✓ Should show: Lab equipment, organ chips, microfluidic devices, bioreactors
+❌ Should NOT show: Generic lab beaker, random test tubes
+
+
+3. MICROSCOPY.JPG (NEEDS VERIFICATION)
+---------------------------------------
+Location: /assets/images/sections/microscopy.jpg
+
+QUESTION: Is this actual microscopy or just a microscope photo?
+
+✓ Should show: Actual microscopy images (cells, tissue)
+❌ Should NOT show: Just a microscope (the equipment itself)
+
+
+4. LABORATORY.JPG (PROBABLY OK)
+--------------------------------
+Generic lab photos are fine for general pages
+Only needs replacement if on specialized science pages
+
+
+5. RESEARCHER.JPG (PROBABLY OK)
+--------------------------------
+Generic researcher photos are fine for about/team pages
+
+
+SECTION IMAGES THAT SHOULD EXIST BUT MIGHT NOT:
+================================================
+
+For organ-specific pages, you should have:
+- liver-organoid.jpg
+- kidney-organoid.jpg
+- heart-organoid.jpg
+- lung-organoid.jpg
+- organ-chip-device.jpg (microfluidic chip)
+- digital-twin-visualization.jpg (computer model)
+
+If these don't exist, pages might be reusing generic images.
+
+
+HOW TO GET SCIENTIFICALLY ACCURATE IMAGES:
+===========================================
+
+METHOD 1: PubMed Central (Best for accuracy)
+---------------------------------------------
+1. Go to: https://www.ncbi.nlm.nih.gov/pmc/
+2. Search: "brain organoid" + "microscopy"
+3. Filter: "Free full text" + "CC BY license"
+4. Find articles with clear organoid images
+5. Download high-res versions
+6. Credit: Add source in HTML comment
+
+Example citation:
+<!-- Image source: PubMed Central PMC12345678, CC BY 4.0 -->
+
+
+METHOD 2: Wikimedia Commons (Good variety)
+-------------------------------------------
+1. Go to: https://commons.wikimedia.org/
+2. Search: "cerebral organoid" or specific organ type
+3. Check license (must be CC BY or CC0)
+4. Download original resolution
+5. Add attribution if required
+
+
+METHOD 3: Unsplash/Pexels (Generic lab only)
+---------------------------------------------
+Use ONLY for:
+- Generic lab equipment
+- Researchers working
+- General biotech scenes
+
+DO NOT use for:
+- Specific organoid types
+- Organ-on-chip devices
+- Scientific accuracy matters
+
+
+VERIFICATION CHECKLIST:
+=======================
+
+Before replacing an image, verify:
+✓ Image shows the correct biological structure
+✓ Image is properly licensed (CC BY, CC0, or commercial use)
+✓ Image is high resolution (at least 1200px wide)
+✓ Image matches the page topic exactly
+✓ Alt text will accurately describe the image
+
+
+NEXT STEPS:
+===========
+
+1. IMMEDIATE: Replace brain-organoid.jpg
+   - Find actual brain organoid microscopy image
+   - Download and save as /assets/images/sections/brain-organoid.jpg
+   - Refresh science page to verify
+
+2. CHECK: Other section images
+   - Look at each section image on the site
+   - Verify it matches the content
+   - Replace if generic/wrong
+
+3. ADD: Organ-specific images
+   - Create liver-organoid.jpg, kidney-organoid.jpg, etc.
+   - Use on specific science pages
+   - Much more scientifically accurate
+
+
+DO YOU WANT ME TO:
+==================
+1. Find specific brain organoid images for you? (I can search and provide URLs)
+2. Create a script to check all section images across the site?
+3. List every page and what image it should have?
+
+Tell me what you need next!

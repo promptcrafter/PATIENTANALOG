@@ -1,0 +1,196 @@
+QUICK START: ADD PREMIUM IMAGES TO YOUR SITE
+=============================================
+
+STEP-BY-STEP: 15 MINUTES TO TRANSFORM YOUR SITE
+
+STEP 1: DOWNLOAD FREE IMAGES (5 minutes)
+==========================================
+
+BRAIN ORGANOID IMAGES (For Science Page):
+------------------------------------------
+1. Go to: https://pmc.ncbi.nlm.nih.gov/articles/PMC11106320/
+2. Scroll to figures section
+3. Right-click on brain organoid microscopy images
+4. Save as: brain-organoid-hero.jpg
+5. License: CC BY 4.0 (FREE TO USE)
+
+ORGAN-ON-CHIP IMAGES (For Technology Page):
+--------------------------------------------
+1. Go to: https://pubmed.ncbi.nlm.nih.gov/38790343/
+2. Click "Full text links" → "PMC"
+3. Find microfluidic device figures
+4. Save as: organ-chip-hero.jpg
+5. License: CC BY 4.0 (FREE TO USE)
+
+GENERAL LAB IMAGES (For Homepage):
+-----------------------------------
+1. Go to: https://unsplash.com/s/photos/biotech
+2. Find professional lab equipment photos
+3. Click image → Download free
+4. Save as: biotech-lab-hero.jpg
+5. License: Free (NO ATTRIBUTION REQUIRED)
+
+
+STEP 2: OPTIMIZE IMAGES (3 minutes)
+====================================
+
+Option A - Online (Easiest):
+-----------------------------
+1. Go to: https://tinypng.com/
+2. Drag your downloaded images
+3. Download compressed versions
+4. Target size: Under 500KB per image
+
+Option B - Skip optimization:
+------------------------------
+Just use images as-is (they'll work fine)
+
+
+STEP 3: ADD TO YOUR PROJECT (2 minutes)
+========================================
+
+FOLDER STRUCTURE:
+C:\Users\josep\Desktop\COMPLETE-FINAL-JAN17-2026\assets\images\
+├── hero\
+│   ├── brain-organoid-hero.jpg        ← ADD THIS
+│   ├── organ-chip-hero.jpg            ← ADD THIS
+│   └── biotech-lab-hero.jpg           ← ADD THIS
+
+1. Create folder: \assets\images\hero\
+2. Copy your 3 downloaded images there
+3. Done!
+
+
+STEP 4: ADD IMAGES TO PAGES (5 minutes)
+========================================
+
+SCIENCE PAGE - Add Hero Image:
+-------------------------------
+
+File: science/index.html
+Find line: <header class="page-header"
+Replace the entire <header> section with this:
+
+<header class="page-header" style="position: relative; height: 600px; overflow: hidden;">
+  <!-- Hero Image -->
+  <img src="/assets/images/hero/brain-organoid-hero.jpg"
+       alt="Brain organoid microscopy"
+       style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.90;">
+
+  <!-- Gradient Overlay -->
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,39,0.2) 0%, rgba(10,14,39,0.85) 100%);"></div>
+
+  <!-- Title -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
+    <h1 style="font-size: 3.5rem; font-weight: 900; color: #00ffff; text-shadow: 0 0 40px rgba(0,255,255,0.5);">
+      Science & Research
+    </h1>
+    <p style="font-size: 1.3rem; color: rgba(255,255,255,0.95); max-width: 700px; margin: 20px auto;">
+      Brain organoids and advanced tissue engineering for personalized medicine
+    </p>
+  </div>
+</header>
+<!-- Image: PMC11106320, CC BY 4.0 -->
+
+
+TECHNOLOGY PAGE - Add Hero Image:
+----------------------------------
+
+File: technology/index.html
+Find line: <header class="page-header"
+Replace with:
+
+<header class="page-header" style="position: relative; height: 600px; overflow: hidden;">
+  <img src="/assets/images/hero/organ-chip-hero.jpg"
+       alt="Organ-on-chip microfluidic device"
+       style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.90;">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,39,0.2) 0%, rgba(10,14,39,0.85) 100%);"></div>
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
+    <h1 style="font-size: 3.5rem; font-weight: 900; color: #00ffff; text-shadow: 0 0 40px rgba(0,255,255,0.5);">
+      Technology & Innovation
+    </h1>
+    <p style="font-size: 1.3rem; color: rgba(255,255,255,0.95); max-width: 700px; margin: 20px auto;">
+      Organ-on-chip systems revolutionizing drug development and disease modeling
+    </p>
+  </div>
+</header>
+<!-- Image: PubMed 38790343, CC BY 4.0 -->
+
+
+HOMEPAGE - Add Inline Image:
+-----------------------------
+
+File: index.html
+Find a section where you want to add an image (after some text)
+Add this code:
+
+<div style="width: 100%; height: 400px; margin: 60px 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,255,255,0.2);">
+  <img src="/assets/images/hero/biotech-lab-hero.jpg"
+       alt="Modern biotechnology laboratory"
+       style="width: 100%; height: 100%; object-fit: cover; opacity: 1.0;">
+</div>
+
+
+DONE! ✓
+=======
+
+Your site now has:
+✓ Premium hero images on key pages
+✓ 100% legal, free images
+✓ Scientifically accurate content
+✓ Professional mega-million dollar look
+
+
+NEXT LEVEL (Optional):
+=======================
+
+Want to add MORE images?
+
+1. UNSPLASH - Get 20 more images:
+   → https://unsplash.com/s/photos/microscopy (microscope images)
+   → https://unsplash.com/s/photos/laboratory (lab scenes)
+   → https://unsplash.com/s/photos/biotechnology (biotech equipment)
+
+2. PMC - Get specific organ images:
+   → Search "liver organoid microscopy" on PMC
+   → Search "kidney organoid culture" on PMC
+   → Search "heart organoid" on PMC
+
+3. ADD INLINE IMAGES to content sections:
+   - Float right within paragraphs
+   - Add between sections as dividers
+   - Create image galleries
+
+
+TROUBLESHOOTING:
+================
+
+Image doesn't show?
+→ Check file path: /assets/images/hero/brain-organoid-hero.jpg
+→ File name must match exactly (case-sensitive)
+→ Image must be in the correct folder
+
+Image too bright/dark?
+→ Adjust opacity: change 0.90 to 0.75 (darker) or 0.95 (brighter)
+
+Want different size?
+→ Change height: 600px to 800px (taller) or 400px (shorter)
+
+Need help?
+→ Read PREMIUM-IMAGE-PLACEMENT-STRATEGY.txt for full details
+
+
+SOURCES:
+========
+
+Brain Organoid Images:
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11106320/
+
+Organ-on-Chip Images:
+- https://pubmed.ncbi.nlm.nih.gov/38790343/
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9966054/
+
+General Lab Images:
+- https://unsplash.com/s/photos/biotech
+- https://unsplash.com/s/photos/microscopy
+- https://unsplash.com/s/photos/laboratory
