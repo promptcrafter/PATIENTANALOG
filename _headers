@@ -16,8 +16,14 @@
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/*
+/assets/*.js
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/images/*
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /*.mp4
   Cache-Control: public, max-age=31536000, immutable
